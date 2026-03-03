@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>prompty — obrazy do „Jądro Popiołu” (ChatGPT Premium)</title>
+  <style>
+    :root{
+      --bg:#0b0d10; --panel:#11151b; --text:#e6e6e6; --muted:#a9b0bb;
+      --accent:#7dd3fc; --accent2:#c084fc; --line:#263041;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+    }
+    html,body{background:radial-gradient(1200px 800px at 15% 0%, #111827 0%, var(--bg) 55%, #07080a 100%); color:var(--text); margin:0; font-family:var(--sans)}
+    .wrap{max-width:1100px; margin:0 auto; padding:26px 16px 60px}
+    header{border:1px solid var(--line); background:rgba(255,255,255,.03); border-radius:16px; padding:14px 16px}
+    h1{margin:0 0 6px; font-size:24px}
+    .sub{color:var(--muted); line-height:1.45}
+    section{margin-top:14px; border:1px solid var(--line); border-radius:16px; overflow:hidden; background:rgba(17,21,27,.72)}
+    .hd{padding:12px 14px; border-bottom:1px solid var(--line); background:linear-gradient(180deg, rgba(192,132,252,.12), transparent)}
+    .bd{padding:12px 14px}
+    h2{margin:0; font-size:16px}
+    .prompt{font-family:var(--mono); font-size:12.8px; line-height:1.55; color:#dbeafe; white-space:pre-wrap; background:rgba(0,0,0,.25); border:1px solid var(--line); border-radius:14px; padding:12px}
+    .meta{font-family:var(--mono); font-size:12px; color:#b7c3d6; margin-top:8px}
+    details{border:1px solid var(--line); border-radius:14px; background:rgba(0,0,0,.22); padding:10px 12px; margin-top:10px}
+    summary{cursor:pointer; font-weight:750; color:#e9e9ff}
+    .tag{display:inline-block; font-family:var(--mono); font-size:12px; padding:2px 8px; border-radius:999px; border:1px solid var(--line); background:rgba(255,255,255,.03); color:#cbd5e1}
+    .tag.blue{border-color:rgba(125,211,252,.35); background:rgba(125,211,252,.08)}
+    .tag.violet{border-color:rgba(192,132,252,.35); background:rgba(192,132,252,.08)}
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+  <header>
+    <h1>Prompty do generowania obrazów (ChatGPT Premium) — „Jądro Popiołu”</h1>
+    <div class="sub">
+      Zasada: <span class="tag blue">jeden prompt = jeden blok tekstu</span>, z tagami i <span class="tag violet">tagami negatywnymi</span>.
+      W promptach <b>nie używam zastrzeżonych nazw typu „Aquila”</b> — wszystko opisowo (dwugłowy drapieżny orzeł itd.).
+      Dla Rico: używam formuł „postać z załącznika” (kiedy dołączysz obraz).
+    </div>
+  </header>
+
+  <section>
+    <div class="hd"><h2>P-01 — Rico Williams („Kurtz”) — portret w pustkowiu (na bazie załączonego zdjęcia)</h2></div>
+    <div class="bd">
+      <div class="prompt">[USE THE ATTACHED REFERENCE IMAGE OF RICO AS THE FACE AND IDENTITY ANCHOR. Keep the same person.]
+
+Create a cinematic, gritty post-apocalyptic portrait of the man from the reference image as an Imperial-style officer turned renegade idealist: calm, charismatic, controlled. He stands in toxic ash wasteland under a stormy sky, faint greenish lightning far away, industrial smog haze, wind-blown dust. Outfit: dark, worn officer coat with reinforced collar, utilitarian combat webbing, battered chest insignia plate (no readable text), subtle ceremonial details like brass buttons and gothic stitching, but practical and field-worn. Add a weathered scarf/cloth around neck, filter mask hanging unused at the belt (he is not wearing it), gloves, and a sidearm holster. Expression: gentle but unsettling certainty, eyes reflecting “a plan”.
+
+Lighting: dramatic rim light from one side, low-key moody shadows, realistic skin texture, dust on face and fabric, micro-scratches on metal. Color palette: charcoal blacks, dirty olive, rust, desaturated gold accents, cold cyan highlights from distant storm. Background: ruined industrial silhouettes and broken pipelines, ground covered in ash and cracked chemical mud. Composition: medium close-up (waist to head), shallow depth of field, 35mm cinematic look, high detail, sharp focus on face, film grain.
+
+[TAGS: cinematic portrait, gritty realism, post-apocalyptic wasteland, gothic industrial, ash storm atmosphere, dramatic rim lighting, shallow depth of field, film grain, high detail textures, weathered officer uniform, calm charismatic expression]
+
+[NEGATIVE TAGS: text, logos, brand names, modern clothing, clean pristine uniform, neon cyberpunk, cartoon, anime, low resolution, blurry, over-smoothed skin, exaggerated muscles, gore, blood splatter, smiling, goofy expression, futuristic HUD overlays, readable insignia text, watermark]</div>
+      <div class="meta">Użycie: wklej prompt + dołącz zdjęcie Rico. Jeśli chcesz wariant „wewnątrz kopalni”, patrz P-02.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="hd"><h2>P-02 — Rico w „sanktuarium” odkrywki (amfiteatr, tłum, przemowa)</h2></div>
+    <div class="bd">
+      <div class="prompt">[USE THE ATTACHED REFERENCE IMAGE OF RICO AS THE FACE AND IDENTITY ANCHOR. Keep the same person.]
+
+Wide cinematic scene in an enormous open-pit mine shaped like an ancient amphitheater. The man from the reference image stands on a rough metal platform at the bottom, addressing a large crowd of wasteland refugees and mutants. The crowd is organized: makeshift tents, scaffolds, tarps, and half-built roofing structures on the rim; patrols with lanterns; a field kitchen with steam; a small medical station. Atmosphere: dusty haze, ash falling like snow, toxic wind. The mood is “Apocalypse Now”: hypnotic, uneasy calm, people watching with devotion, not mindless frenzy.
+
+Rico’s outfit: field-worn officer coat, practical harness, subtle brass and gothic stitching; no readable text. He holds no weapon up—hands open in controlled, confident gesture. His expression is serene certainty. Add banners on the rim: crude cloth standards showing a double-headed predatory eagle front-view, perfectly symmetrical at first glance, but one side subtly transforms into fractal feather geometry and eye/flame motifs (no words).
+
+Lighting: late dusk, low sun rays cutting through dust, strong silhouettes, volumetric light beams, high contrast. Color palette: soot black, rust, desaturated gold, cold turquoise-violet highlights in the “changed” motifs. Composition: epic wide shot, 21:9 feel, strong leading lines of the amphitheater terraces, sharp detail, realistic texture, cinematic film grain.
+
+[TAGS: epic wide shot, cinematic, open-pit mine amphitheater, post-apocalyptic refugees, grim gothic industrial, dust haze, volumetric light, high contrast, organized camp, ominous calm, high detail, realistic textures]
+
+[NEGATIVE TAGS: text, readable symbols text, modern city skyline, clean futuristic utopia, cyberpunk neon, cartoon, anime, gore, excessive blood, low-poly, blurry, watermark, oversaturated colors]</div>
+      <div class="meta">Użycie: idealne jako „kluczowy kadr” na finał, tło do przemowy.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="hd"><h2>P-03 — Przerobiony symbol Imperium (opisowo: dwugłowy orzeł + motywy Zmiany)</h2></div>
+    <div class="bd">
+      <div class="prompt">Design a highly detailed heraldic emblem: a double-headed predatory eagle in frontal view, perfectly centered, perfectly symmetrical silhouette at first glance, like a heavy metal engraving used as an imperial insignia. The right half is traditional: sharp geometric feathers, strict straight lines, antique gold metal with patina, small dents, scratches, soot. The left half gradually transforms into “change” motifs: fractal feather geometry, flowing curves, subtle eye shapes hidden inside feather patterns, and an arcane flame/spiral symbol between the two heads (no text). Keep the emblem readable as a stamp and as a banner icon.
+
+Style: ornate gothic metal engraving, crisp contour, high micro-detail, worn but clean edges, suitable as a military insignia. Materials: aged gold, tarnished brass, hints of oxidized copper. Color palette: antique gold and brass with cold turquoise-violet iridescence only on the transformed side; subtle emissive glow along the fractal edges (very restrained). Background: plain dark neutral, no text.
+
+Provide 3 variants in one image: (1) clean engraved metal version, (2) worn stamp version on cloth (like a banner), (3) flat vector-like simplified version, all consistent.
+
+[TAGS: heraldic emblem, gothic engraving, symmetrical insignia, aged gold patina, fractal feathers, hidden eye motifs, arcane flame spiral, crisp silhouette, high detail]
+
+[NEGATIVE TAGS: words, letters, numbers, modern logos, corporate branding, broken symmetry, messy composition, blurry edges, pastel colors, neon cyberpunk, people, weapons, gore, watermark]</div>
+      <div class="meta">Użycie: do proporców, graffiti, pieczęci, tokenów. Bez zastrzeżonych nazw — czysto opisowo.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="hd"><h2>P-04 — Quad z przyczepką na toksycznym pustkowiu (ETAP I)</h2></div>
+    <div class="bd">
+      <div class="prompt">Cinematic post-apocalyptic vehicle shot: a rugged two-person quad bike with a small trailer, heavily weathered, dust-caked, improvised repairs with welded plates and cables. The quad is driving across toxic ash wasteland: cracked ground, chemical mud, rusted industrial debris, broken pipelines in the distance, faint greenish lightning from a radioactive storm on the horizon. Add practical survival gear: jerrycans, filter canisters, tarps, ropes, sealed crates with hazard markings (no readable text). The air is thick with dust; ash particles in the light.
+
+Camera: low angle 3/4 front view, dynamic motion blur only in the wheels and dust, sharp vehicle detail. Lighting: overcast storm light with a cold rim highlight, cinematic contrast, film grain. Color palette: charcoal, rust, dirty olive, muted steel; subtle toxic green glow only in distant lightning.
+
+[TAGS: cinematic vehicle shot, post-apocalyptic wasteland, rugged quad bike, trailer, dust storm, toxic industrial ruins, gritty realism, high detail textures, film grain]
+
+[NEGATIVE TAGS: text, logos, modern clean motorcycle branding, futuristic hover vehicle, cyberpunk neon, cartoon, anime, low resolution, blurry vehicle, glossy showroom lighting, watermark]</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="hd"><h2>P-05 — Porzucony posterunek i ciała oddziału (bez epatowania gore)</h2></div>
+    <div class="bd">
+      <div class="prompt">Gritty post-apocalyptic scene: an abandoned military outpost made of corrugated metal and concrete, half-buried in ash. The environment is toxic and bleak: wind-blown dust, cracked walls, faded warning symbols (no readable text), empty sandbags, rusted barbed wire. Show evidence of a past firefight without graphic gore: spent casings, scorched marks, a broken vox device, torn uniforms, and covered bodies under tarps or cloaks (no exposed gore). The mood is tragic and quiet.
+
+Lighting: cold diffused daylight with slight greenish haze, high contrast shadows under overhangs, realistic textures: rust, soot, grime. Composition: wide establishing shot with strong leading lines to the outpost door, cinematic 35mm feel, film grain, high detail.
+
+[TAGS: abandoned outpost, post-apocalyptic military ruins, ash wasteland, tragic quiet mood, environmental storytelling, gritty realism, high detail textures, film grain]
+
+[NEGATIVE TAGS: gore, blood pools, dismemberment, text, logos, modern signage, cartoon, anime, low resolution, oversaturated colors, watermark]</div>
+      <div class="meta">Bezpieczeństwo/ton: tarpy i sugestia tragedii robią klimat „Apocalypse Now” lepiej niż krew.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="hd"><h2>P-06 — Osada mutantów (post-apo slums, ale „żyjące”)</h2></div>
+    <div class="bd">
+      <div class="prompt">Post-apocalyptic settlement in a toxic industrial wasteland: a cluster of shacks built from corrugated metal, tarps, scrap wood, and machine parts. Add watchtowers made from skeletal industrial frames, hanging lanterns, and a makeshift water distiller. Show signs of life: cooking steam from a field kitchen, people silhouettes in masks and patched clothing, children playing with spent casings like coins (no explicit violence). The residents look wary and tired, not monstrous—mutations are subtle and varied (extra scars, uneven features, protective goggles, makeshift prosthetics), treated with dignity.
+
+Atmosphere: ash haze, dirty wind, distant factory silhouettes, chemical puddles reflecting a sickly sky. Lighting: late afternoon, warm light struggling through gray smog, cinematic contrast, rich textures: rust, grime, cloth fibers. Composition: wide shot with a foreground barricade, inviting but tense.
+
+[TAGS: post-apocalyptic settlement, scrap-built shacks, industrial ruins, ash haze, human dignity, wary atmosphere, cinematic lighting, high detail textures, film grain]
+
+[NEGATIVE TAGS: gore, horror monsters, clownish mutations, neon cyberpunk, modern city clean buildings, text, logos, cartoon, anime, blurry, watermark]</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="hd"><h2>P-07 — Nieznany Adeptus Mechanicus (opisowo: kapłan-techno, bomba w plecaku)</h2></div>
+    <div class="bd">
+      <div class="prompt">Create a grimdark techno-priest figure (do not use any franchise names): a robed cybernetic priest-engineer standing on a starship bridge in low light. He carries a heavy backpack device covered in cables, switches, and sanctified metal housings—looks like a sacred demolition charge. The robe is dark red-brown, oil-stained, with brass trim and gothic stitching; exposed augmetics: metal jaw plate, multiple lenses, mechadendrite-like cables coiled at the waist, servo-skull style assistant drone hovering nearby (optional). His posture is precise and ritualistic, as if explaining a sacred procedure.
+
+Environment: dim bridge interior, gothic industrial architecture, pipes, cog-like motifs, flickering instrument lights (no readable text on screens). Lighting: dramatic spot light on the device and hands, deep shadows, strong metallic specular highlights, film grain, high realism.
+
+[TAGS: grimdark techno-priest, gothic industrial starship bridge, sacred machinery, cable-packed backpack device, ritualistic posture, dramatic lighting, high detail, realistic textures]
+
+[NEGATIVE TAGS: franchise logos, readable text, modern lab coat, sleek clean sci-fi, cyberpunk neon, cartoon, anime, gore, low resolution, watermark]</div>
+      <div class="meta">Jeśli chcesz, mogę zrobić wariant „z rękami na przełącznikach” do sceny instruktażu.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="hd"><h2>P-08 — Zwiadowca Astartes (opisowo: superżołnierz w zwiadowczym rynsztunku)</h2></div>
+    <div class="bd">
+      <div class="prompt">Create a tall, imposing super-soldier scout (do not use franchise names): enhanced human in rugged scout armor, matte black and dark olive, with a cloak/poncho coated in ash. He stands on a ridge overlooking the open-pit mine camp at dusk. His armor is functional, not ornate: reinforced plates, combat harness, helmet with minimal visor (optional), a long rifle slung low (not aimed). His body language is calm and non-threatening—like an emissary, not an executioner.
+
+Background: the amphitheater-shaped open-pit mine with tents and scaffolds on the rim, lanterns, dust haze, faint distant storm lightning. Lighting: dusk rim light outlining the scout, cool shadows, cinematic atmosphere, film grain, high detail.
+
+[TAGS: super-soldier scout, calm emissary, rugged armor, ash cloak, dusk rim lighting, open-pit mine camp background, cinematic, gritty realism, high detail]
+
+[NEGATIVE TAGS: readable insignia text, franchise logos, heroic superhero pose, neon cyberpunk, cartoon, anime, gore, overexposed, watermark]</div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
