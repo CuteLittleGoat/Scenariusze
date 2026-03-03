@@ -1,0 +1,235 @@
+
+# Warhammer 40k – Kampania Rogue Trader
+## Rico Veritus i „Jądro Popiołu”
+### Inspiracja: *Apocalypse Now* / *Heart of Darkness*
+### System: Wrath & Glory
+### Lokacja: Gilead Prime
+
+---
+
+# POCZĄTEK KONCEPCJI
+
+## Założenia kampanii
+
+Szykuję się do prowadzenia sesji TTRPG w uniwersum Warhammera 40k.
+
+Gracze są załogą Rogue Tradera.  
+Flota została uwięziona w małym układzie słonecznym i nie może go opuścić.
+
+Gracze mają rywala — NPC o imieniu **Rico**.
+
+Rico:
+- jest wojskowym o dużych ambicjach
+- zawsze działa zgodnie z regulaminem
+- nie otrzymuje zasłużonych nagród
+- całą sławę i zaszczyty zdobywają gracze poprzez swoje nieszablonowe działania
+- jest zazdrosny i „salty”
+- czuje głębokie poczucie niesprawiedliwości
+
+Cel:
+- Rico przechodzi na stronę Chaosu
+- scenariusz inspirowany *Apocalypse Now* oraz *Heart of Darkness*
+
+---
+
+# DO KTÓREGO BOGA CHAOSU PASUJE RICO?
+
+## Najlepszy wybór: **TZEENTCH**
+
+### Dlaczego?
+
+- Ambicja
+- Urażona duma
+- Poczucie niesprawiedliwości
+- Pragnienie zmiany
+- Wiara, że „widzi prawdziwy porządek”
+
+Rico nie przechodzi w Chaos przez brutalność.
+
+On przechodzi przez:
+> „Reformę. Poprawę. Nową strukturę.”
+
+---
+
+# ŁUK POSTACI RICO
+
+### Etap 1 – Rozczarowanie
+Rico zostaje wysłany na marginalną misję.
+
+### Etap 2 – Objawienie
+Znajduje artefakt / tekst / wzór Tzeentcha.
+
+### Etap 3 – Nowy Regulamin
+Pisze własny kodeks wojskowy.
+
+### Etap 4 – Kult-garnizon
+Tworzy zdyscyplinowaną społeczność wyrzutków.
+
+---
+
+# STAT BLOCK – WRATH & GLORY
+
+## RICO „KURTZ” VERITUS
+**Role:** Nemesis (Tier 3–4)  
+**Keywords:** Chaos, Tzeentch, Human, Psyker, Officer  
+
+### Atrybuty
+
+| Atrybut | Wartość |
+|---------|---------|
+| Strength | 3 |
+| Agility | 4 |
+| Toughness | 4 |
+| Intellect | 5 |
+| Willpower | 6 |
+| Fellowship | 5 |
+
+### Obrona
+- Defence: 5  
+- Resilience: 9  
+- Shock: 12  
+- Wounds: 9  
+
+### Cechy
+- Fanatic Discipline  
+- Cold Strategic Mind  
+- Aura Kontroli  
+- Tzeentch’s Oath  
+
+### Moce
+- Precognitive Precision  
+- Warp Mandate  
+- Flames of Reformation  
+- Tzeentch’s Shield  
+
+---
+
+# SYMBOL – AQUILA TZEENTCHA (GROK PROMPT)
+
+Create a highly detailed heraldic emblem: a double-headed Imperial Aquila, front view, symmetrical, one side pure Imperial gold, the other mutating into Tzeentchian fractal patterns with glowing warp-blue lightning and hidden stylized eyes. Between the heads place a spiraling Tzeentch eye/flame symbol with engraved runes. Color palette: ultramarine, turquoise, violet iridescence, aged gold with patina. Dramatic rim lighting, metallic engraving style, clean silhouette, emblem-ready. Avoid text, gore, humanoid figures.
+
+---
+
+# CYTATY RICO
+
+- „Imperium potrzebuje nowej drogi. Ja ją widzę.”
+- „Zasady są po to, by prowadzić do zwycięstwa. Jeśli nie prowadzą — należy je zmienić.”
+- „Wy macie zaszczyty. Ja mam rację.”
+- „Nie buntuję się. Ja poprawiam błędy.”
+- „Zmiana jest najczystszą formą rozkazu.”
+
+---
+
+# VOX-LOGI
+
+## VOX-LOG 01 – Rozkaz 17-B
+„Otrzymałem rozkaz. Jak zawsze. Może tym razem ktoś zauważy.”
+
+## VOX-LOG 04 – Wzór w Chaosie
+„Myślałem, że to herezja. Ale dostrzegłem porządek.”
+
+## VOX-LOG 11 – Nowy Regulamin
+„Żołnierz nie służy rozkazowi — żołnierz służy celowi.”
+
+## VOX-LOG 21 – Decyzja
+„Zmiana jest rozkazem, który wreszcie rozumiem.”
+
+---
+
+# PAMIĘTNIK
+
+„Regulamin musi być żywy.”  
+„Jeśli porządek jest niewidoczny dla większości, czy jest mniej prawdziwy?”  
+„Zmiana jest nauczycielem.”
+
+---
+
+# SCENARIUSZ: JĄDRO POPIOŁU
+
+## Lokacja: Gilead Prime
+
+Toksyczne pustkowie. Gigantyczne Hive Cities. Post-apo klimat.
+
+---
+
+# TAJNA MISJA
+
+Rogue Trader Varonius:
+- Rico zaginął
+- Zwiadowca Astartes zaginął
+- sprawa musi zostać zamknięta po cichu
+
+---
+
+# ŁADUNEK WYBUCHOWY
+
+## Tectonic Plasma Device (TPD-IX “Ashmaker”)
+
+- Archeotech
+- Topi skałę
+- Zapada teren
+- Tworzy martwą strefę
+- Broń do wymazywania problemów
+
+---
+
+# STRUKTURA PODRÓŻY (APOCALYPSE NOW W WERSJI POST-APO)
+
+## ETAP I – Desant
+- Opustoszałe lądowisko
+- Ciała ustawione regulaminowo
+
+## ETAP II – Pustkowia
+- Burze toksyczne
+- Wraki konwojów
+- Dzienniki chwalące Rico
+
+## ETAP III – Ludzie Rico
+- Zorganizowani mutanci
+- „Nowy Regulamin”
+- Dyscyplina
+
+## ETAP IV – Zwiadowca Astartes
+- Dołącza do Rico
+- Nie walczy
+- Wierzy w jego wizję
+
+## ETAP V – Sanktuarium (Kopalnia odkrywkowa)
+- Gigantyczna odkrywka
+- Platformy mieszkalne
+- Przerobiona Aquila
+- Spokój
+
+---
+
+# FINAŁ
+
+Rico:
+- Bez broni
+- Spokojny
+- Gotowy umrzeć
+
+Mówi:
+„Zanieście moją głowę Varoniusowi.”  
+„Zróbcie to dobrze.”
+
+Wskazuje miejsce detonacji.
+
+Gracze:
+- Zabijają go
+- Detonują ładunek
+- Kopalnia zapada się w plazmowym kataklizmie
+
+---
+
+# MOTYW PRZEWODNI
+
+- Tajna misja
+- Podróż w głąb moralnej ciemności
+- Charyzmatyczny zdrajca
+- Finał bez walki
+- Pytanie: kto jest potworem?
+
+---
+
+# KONIEC ROZMOWY (DO MOMENTU PROŚBY O ZAPIS W .MD)
