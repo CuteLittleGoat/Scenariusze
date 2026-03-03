@@ -1,0 +1,526 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Backup rozmowy – Rico / Warhammer 40k (Wrath & Glory)</title>
+  <style>
+    :root{
+      --bg:#0b0f14; --panel:#0f1620; --panel2:#0c131b;
+      --text:#e7eef8; --muted:#a9b7c9; --accent:#7cc6ff;
+      --user:#2a8cff; --assistant:#7bffb0; --border:#1f2a38;
+      --code:#0a0f15;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; background:linear-gradient(180deg,var(--bg),#070a0e);
+      color:var(--text); font:15px/1.45 ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+    }
+    header{
+      padding:18px 16px; border-bottom:1px solid var(--border);
+      background:rgba(15,22,32,.75); backdrop-filter: blur(8px);
+      position:sticky; top:0; z-index:10;
+    }
+    header h1{margin:0; font-size:16px; font-weight:700}
+    header p{margin:6px 0 0; color:var(--muted); font-size:13px}
+    main{max-width:980px; margin:0 auto; padding:16px}
+    .meta{
+      display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 16px;
+      color:var(--muted); font-size:12px;
+    }
+    .chip{
+      border:1px solid var(--border); padding:6px 10px; border-radius:999px;
+      background:rgba(15,22,32,.55);
+    }
+    .thread{display:flex; flex-direction:column; gap:12px}
+    .msg{
+      border:1px solid var(--border); border-radius:14px; overflow:hidden;
+      background:rgba(15,22,32,.55);
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .msg .bar{
+      padding:10px 12px; display:flex; justify-content:space-between; align-items:center;
+      border-bottom:1px solid var(--border);
+      background:linear-gradient(180deg,rgba(12,19,27,.9),rgba(12,19,27,.55));
+    }
+    .role{font-weight:800; letter-spacing:.2px}
+    .role.user{color:var(--user)}
+    .role.assistant{color:var(--assistant)}
+    .idx{color:var(--muted); font-size:12px}
+    .content{padding:12px}
+    pre{
+      margin:0; padding:12px;
+      white-space:pre-wrap; word-break:break-word;
+      background:var(--code); border:1px solid var(--border);
+      border-radius:12px; color:var(--text);
+      font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono",monospace;
+      font-size:13px; line-height:1.45;
+    }
+    .content p{margin:0 0 10px}
+    .note{color:var(--muted); font-size:12px; margin-top:8px}
+    a{color:var(--accent)}
+  </style>
+</head>
+<body>
+<header>
+  <h1>Pełna konwersacja – od pierwszego promptu do „Zapisz to w bloku kodu…”</h1>
+  <p>Format: prosty podgląd HTML (bez zewnętrznych zależności). Skopiuj ten plik jako <code>.html</code> i otwórz w przeglądarce.</p>
+</header>
+
+<main>
+  <div class="meta">
+    <span class="chip">Uniwersum: Warhammer 40k</span>
+    <span class="chip">System: Wrath &amp; Glory</span>
+    <span class="chip">Wątek: Rico → Tzeentch</span>
+    <span class="chip">Inspiracje: Apocalypse Now / Heart of Darkness</span>
+  </div>
+
+  <section class="thread">
+
+    <!-- 1 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role user">Użytkownik</div>
+        <div class="idx">#1</div>
+      </div>
+      <div class="content">
+        <pre>Szykuję się do prowadzenia sesji TTRPG w uniwersum Warhammera 40k.
+Gracze są załogą Rouge Tradera. Flota została uwięziona w małym układzie słonecznym i nie może go opuścić.
+Gracze mają rywala. Npc o imieniu Rico.
+Rico jest wojskowym o dużych ambicjach. Rico zawsze działa zgodnie z regulaminem i nie otrzymuje za to zasłużonych nagród. Całą sławę i zaszczyty zdobywają gracze poprzez swoje nieszablonowe działanie.
+Rico jest zazdrosny i "salty" z tego powodu. Czuje głębokie poczucie niesprawiedliwości.
+Chcę, żeby Rico przeszedł na stronę Chaosu. Do którego z bogów by pasował?
+Do tego chciałbym , żeby scenariusz z nim w roli głównej był wyraźnie inspirowany filmem "Apocalypse Now" oraz książką "Heart of Darkness".
+Czy możesz mi coś doradzić?</pre>
+      </div>
+    </article>
+
+    <!-- 2 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role assistant">Asystent</div>
+        <div class="idx">#2</div>
+      </div>
+      <div class="content">
+        <pre>Oczywiście! Poniżej znajdziesz propozycje dopasowania Rico do konkretnego boga Chaosu oraz szkic scenariusza inspirowanego „Czasem Apokalipsy” i „Jądrem ciemności”, skrojony pod kampanię o Rogue Traderach.
+
+▶ 1. Do którego boga Chaosu pasuje Rico?
+
+Najlepiej pasuje: TZEENTCH – bóg zmian, manipulacji, ambicji i urażonej dumy.
+
+Dlaczego Tzeentch?
+- Rico jest ambitny → Tzeentch uwielbia ambicję.
+- Czuje, że świat blokuje mu awans → paliwo dla knowań.
+- Jego obsesja na punkcie regulaminów może wypaczyć się w paranoję „ukrytych wzorów”.
+- Tzeentch kusi tych, którzy są pewni, że ZASŁUGUJĄ.
+
+Efekt:
+Rico nie staje się potworem od razu. Najpierw „oświecony”, który widzi większy porządek. Z czasem jego logika staje się spaczoną mozaiką ideałów, przeznaczenia i kontroli.
+
+▶ 2. Łuk postaci
+Etap 1 – Rozczarowanie
+Etap 2 – Objawienie (artefakt / księga / szyfr)
+Etap 3 – Nowe zasady (własny kodeks)
+Etap 4 – Kult-garnizon (militarna utopia)
+
+▶ 3. „Kurtz 40k” – pomysł scenariusza (Apocalypse Now / Heart of Darkness)
+
+„Operacja: Deep Void”
+FAZA 1: Zniknięcie Rico
+FAZA 2: Podróż w głąb układu (kolejne placówki coraz bardziej spaczone)
+FAZA 3: Sanktuarium Rico (finał)
+Rico jest spokojny, charyzmatyczny, racjonalny. Wierzy, że Imperium jest zepsute, a on stworzył doskonalszą strukturę.
+
+Finałowe opcje:
+1) Konfrontacja
+2) Dyskusja i zdrada (próba przeciągnięcia PC)
+3) Tragedia (prośba o „uwolnienie”)
+4) Objawienie (portal / większa intryga)
+
+Smaczki:
+- vox-logi Rico
+- żołnierze mówią o nim z czcią
+- symbole Imperium przerobione na tzeentchiańskie
+- narastająca nierealność otoczenia
+- echo „The horror…” jako „Porządek… prawdziwy porządek…”</pre>
+      </div>
+    </article>
+
+    <!-- 3 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role user">Użytkownik</div>
+        <div class="idx">#3</div>
+      </div>
+      <div class="content">
+        <pre>Zrób mi stat block do Wrath and Glory</pre>
+      </div>
+    </article>
+
+    <!-- 4 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role assistant">Asystent</div>
+        <div class="idx">#4</div>
+      </div>
+      <div class="content">
+        <pre>Pewnie! Poniżej dostajesz kompletny stat block do Wrath &amp; Glory dla Rico – już po jego przejściu na stronę Tzeentcha.
+
+RICO „KURTZ” VERITUS, TZEENTCHIAŃSKI KOMANDANT
+Archetype: Imperial Officer (Renegade)
+Keywords: Chaos, Human, Psyker, Tzeentch, Officer
+Role: Nemesis / Final Boss (Tier 3–4)
+
+Atrybuty:
+Strength 3, Agility 4, Toughness 4, Intellect 5, Willpower 6, Fellowship 5
+
+Umiejętności (kości):
+Awareness 5
+Ballistic Skill 4
+Weapon Skill 5
+Insight 6
+Leadership 7
+Persuasion 5
+Stealth 4
+Tech 4
+Scholar 5
+Psychic Mastery 5
+
+Obrona i żywotność:
+Defence 5
+Resilience 9
+Shock 12
+Wounds 9
+
+Cechy:
+- Fanatic Discipline (Unnatural Willpower 2)
+- Cold Strategic Mind (darmowe Reposition na początku rundy)
+- Aura Kontroli (buff dla sojuszników, utrudnienie wrogom)
+- Tzeentch’s Oath (po spadku Shock/Wounds: +1 Defence, +1 ikona do mocy)
+
+Broń:
+- Karczoł Rozkazów (mutated power sabre): DMG 8, AP -2, Power Field, Warp Touched
+- Laspistol (artefakt): DMG 7, Reliable, Infernal Ammunition
+- Cursed Rosarius: redukcja obrażeń, jednorazowe zignorowanie trafienia kosztem Shock
+
+Moce:
+- Precognitive Precision (DN 5)
+- Warp Mandate (DN 6)
+- Flames of Reformation (DN 6, stożek)
+- Tzeentch’s Shield (DN 5)
+
+Uwagi balansu:
+Bardzo groźny dla Tier 2–3, wyrównany Tier 3–4, mini-boss Tier 4+.</pre>
+      </div>
+    </article>
+
+    <!-- 5 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role user">Użytkownik</div>
+        <div class="idx">#5</div>
+      </div>
+      <div class="content">
+        <pre>Napisz mi promt dla AI do wygenerowania nowego symbolu. Tej Aquilli zamieszanej z Tzeentchem. Zrób bardzo dokładny opis.</pre>
+      </div>
+    </article>
+
+    <!-- 6 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role assistant">Asystent</div>
+        <div class="idx">#6</div>
+      </div>
+      <div class="content">
+        <pre>Prompt (PL) — symbol: Aquila spleciona z motywami Tzeentcha
+
+Cel: heraldyczna, symetryczna Aquila (dwugłowy orzeł Imperium) subtelnie przemieniona wpływem Tzeentcha: pióra przechodzą w fraktale i runy, motywy oka/płomienia, falujące warpowe linie. Ma działać jako herb i jako sygnet.
+
+Pełny prompt (PL, high-detail):
+Utwórz herb w stylu heraldycznym: symetryczna dwugłowa Aquila, ale jedno skrzydło i jedna głowa stopniowo przekształcone przez Tzeentcha. Kompozycja centralna, front view, 1:1. Prawa strona klasyczna imperialna (geometria, ciężkie pióra, postarzone złoto). Lewa strona tzeentchiańska: fraktalne pióra, warpowe błękity, pioruny, małe stylizowane oka. Między głowami centralne oko/płomień Tzeentcha ze spiralą i runami. Kolory: ultramaryna, turkus, fiolet, miedź, złoto z patyną; delikatny glow na elementach warp. Tekstury: szczotkowane złoto, grawer, pęknięcia, osmalenie. Styl: photoreal metallic engraving + fantasy heraldry, dramatyczny rim light, wysoki kontrast, czysta sylwetka. Poproś też o wariant „worn stamp” oraz wersję flat/vector.
+
+English version (dla kompatybilności) + warianty (flat logo / worn metal / emissive warp) + negatywny prompt:
+no text, no people, no gore, no modern fonts, no broken symmetry, no blurry edges.
+
+(Asystent podał w rozmowie pełne, rozbudowane wersje PL i EN oraz krótkie warianty.)</pre>
+      </div>
+    </article>
+
+    <!-- 7 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role user">Użytkownik</div>
+        <div class="idx">#7</div>
+      </div>
+      <div class="content">
+        <pre>Poproszę o promt po angielsku dostosowany do Groka.</pre>
+      </div>
+    </article>
+
+    <!-- 8 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role assistant">Asystent</div>
+        <div class="idx">#8</div>
+      </div>
+      <div class="content">
+        <pre>GROK-OPTIMIZED PROMPT — “Aquila of Tzeentch”
+
+Create a highly detailed heraldic emblem: a double-headed Imperial Aquila, front view, perfectly centered, symmetrical at first glance — but one side slowly mutates into Tzeentchian corruption. The right side looks like a classic Warhammer 40k Imperial eagle: heavy metallic feathers, sharp geometric lines, antique gold finish, worn and scratched. The left side transforms into flowing Tzeentch motifs: fractal feather shapes, twisting curves, glowing warp energy, tiny stylized eyes hidden in the patterns, and filament-like blue lightning along the feather edges. Between the two heads place a central Tzeentch eye/flame symbol — spiraling, arcane, almost hypnotic, with subtle runes etched into the metal.
+
+Color palette: deep ultramarine, turquoise, violet iridescence, aged gold, and soft blue glow where the warp touches the metal. Lighting: dramatic rim lighting, subtle fog, metallic reflections. Style: fantasy heraldry mixed with ornate metallic engraving, ultra-detailed, clean silhouette, suitable for emblem or insignia design. Include both clean edges and light weathering. High resolution, crisp detail.
+
+What to avoid: no text, no humanoid figures, no gore, no soft pastel colors, avoid asymmetry that breaks the silhouette, no sci-fi weapons, no tech interfaces.</pre>
+      </div>
+    </article>
+
+    <!-- 9 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role user">Użytkownik</div>
+        <div class="idx">#9</div>
+      </div>
+      <div class="content">
+        <pre>Przygotuj mi teraz kilka krótkich wypowiedzi Rico.
+Coś w stylu
+"Imperium potrzebuje nowej drogi. Widzę ją"
+"Udowodniliście mi, że skostniałe prawa i regulaminy nie działają. Pora je zmienić"</pre>
+      </div>
+    </article>
+
+    <!-- 10 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role assistant">Asystent</div>
+        <div class="idx">#10</div>
+      </div>
+      <div class="content">
+        <pre>Krótki zestaw wypowiedzi Rico (chłodny, wojskowy, fanatycznie logiczny):
+
+1) „Imperium potrzebuje nowej drogi. Ja ją widzę. Wy wciąż patrzycie tylko przed siebie.”
+2) „Udowodniliście mi, że skostniałe prawa i regulaminy nie działają. Dlatego napiszę nowe.”
+3) „Zasady są po to, by prowadzić do zwycięstwa. Jeśli do niego nie prowadzą… należy zmienić zasady.”
+4) „Wy działacie z impulsu. Ja działam z przeznaczenia.”
+5) „Każdy rozkaz jest cieniem większego planu. Wreszcie widzę cały obraz.”
+6) „Nie zdezerterowałem. Podniosłem standard, którego Imperium już nie potrafi utrzymać.”
+7) „Kto odrzuca zmianę, odrzuca zwycięstwo. A ja nie zamierzam przegrywać.”
+8) „Kiedyś byłem oficerem Imperium. Teraz jestem jego korektą.”
+9) „Nie buntuję się. Ja… poprawiam błędy.”
+10) „Wy macie zaszczyty. Ja mam rację.”
+
+Bardziej tzeentchiańskie:
+11) „Porządek to iluzja. Prawdziwa dyscyplina zaczyna się dopiero tam, gdzie zmienia się wszystko.”
+12) „Zmiana jest najczystszą formą rozkazu.”
+13) „Otworzyły mi się oczy. Teraz widzę wzory w każdym twoim błędzie.”
+14) „Wojna to równanie. Ja po prostu znalazłem brakującą zmienną.”
+15) „Nie ma chaosu. Jest tylko źle zrozumiana strategia.”
+
+„Kurtzowe” na finał:
+16) „Dlaczego zawsze jesteście o krok przede mną? Czy naprawdę wierzycie, że to przypadek?”
+17) „Zobaczcie, czego dokonałem bez waszych honorów. Czysta dyscyplina.”
+18) „Wy nazywacie mnie zdrajcą. Ja was nazywam… opóźnionymi.”
+19) „Miałem nadzieję, że zrozumiecie.”
+20) „Nie przybyliście mnie zatrzymać. Przybyliście zobaczyć, jak wygląda prawdziwa lojalność bez strachu.”</pre>
+      </div>
+    </article>
+
+    <!-- 11 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role user">Użytkownik</div>
+        <div class="idx">#11</div>
+      </div>
+      <div class="content">
+        <pre>Napisz mi dłuższe vox logi oraz pamiętniki</pre>
+      </div>
+    </article>
+
+    <!-- 12 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role assistant">Asystent</div>
+        <div class="idx">#12</div>
+      </div>
+      <div class="content">
+        <pre>VOX-LOGI RICO VERITUSA (narastająca przemiana)
+
+VOX-LOG 01 — „Rozkaz 17-B”
+„Oficer Veritus, raport wstępny. Otrzymałem rozkaz 17-B… To kolejny z tych rozkazów, które dostaje się, gdy jest się zbyt poprawnym… Ale wykonam go. Jak zawsze. Może tym razem ktoś zauważy.”
+
+VOX-LOG 04 — „Wzór w chaosie”
+„Dotarłem do bunkra 6-Delta. Zwiadowcy nie żyją… Znalazłem tam coś… symbole, kształty. Myślałem, że to herezja. Ale kiedy czytałem, zaczynałem dostrzegać porządek.”
+
+VOX-LOG 07 — „Obowiązek”
+„Moi ludzie pytają, czy mają wracać. Nie mają do czego wracać… Tutaj mogę działać logicznie, konsekwentnie… bez idiotów nade mną.”
+
+VOX-LOG 11 — „Nowy Regulamin”
+„Spisałem go. Nowy Regulamin… Punkt trzeci: ‘Żołnierz nie służy rozkazowi — żołnierz służy celowi.’ Punkt siódmy: ‘Lęk przed zmianą jest największą zdradą.’”
+
+VOX-LOG 15 — „Wy i ja”
+„Jak zwykle: improwizacja, łamanie protokołów… i nagrody dla nich. A ja? Ja robiłem wszystko tak, jak trzeba. Może to, co trzeba, już dawno przestało działać.”
+
+VOX-LOG 21 — „Decyzja”
+„Nie wrócę. Moje oczy są otwarte… Zmiana jest rozkazem. Rozkazem, który wreszcie rozumiem.”
+
+FRAGMENTY PAMIĘTNIKA
+Wpis 3: „Służba stała się grą, w której zwyciężają ci, którzy najmniej się stosują do zasad.”
+Wpis 6: „Widziałem wzór w ruinach… jeśli porządek jest niewidoczny, czy jest mniej prawdziwy?”
+Wpis 12: „Regulamin musi być żywy. Jeśli jest martwy — służy martwym.”
+Wpis 23: „Zmiana nie jest wrogiem. Zmiana jest nauczycielem.”</pre>
+      </div>
+    </article>
+
+    <!-- 13 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role user">Użytkownik</div>
+        <div class="idx">#13</div>
+      </div>
+      <div class="content">
+        <pre>Akcja będzie się działa na planecie Gilead Prime. Jeżeli masz dostęp to przeszukaj o niej informacje. To planeta stworzona dla systemu RPG Wrath&amp;Glory. 
+Generalnie jest to toksyczne pustkowie z kilkoma ogromnymi Hive City. Jeden z moich graczy jest fanem post-apo i chciałbym, żeby ten scenariusz był w takich klimatach (a nie dżungla wietnamska czy rzeka Afryki jak w pierwowzorach).
+
+Do tego chciałbym, żeby scenariusz miał kilka elementów.
+Chcę, żeby misja graczy była tajna. Rico zaginął. Rouge Trader Varonius wysyła graczy, żeby rozwiązać problem zanim wyjdzie na jaw, że nie kontroluje nawet własnej załogi.
+Chcę, żeby gracze dostali plecak z potężnym ładunkiem wybuchowym (nuklearny? Zaproponuj jakiś rodzaj materiału wybuchowego, który pasuje do uniwersum).
+Chcę, żeby przed wysłaniem graczy do tej misji został wysłany pojedynczy Zwiadowca Astartes, ale kontakt się urwał.
+Chcę, żeby ten zaginiony Astartes ostatecznie dołączył do Rico i jego "rodziny" mutantów i wyrzutków.
+Chcę, żeby Rico ostatecznie dał się zabić bez walki. Chcę, żeby nakłaniał graczy do zaniesienia jego głowy Varoniusowi i detonacją ładunku wybuchowego.
+
+Skrótowo napisz mi kilka scen. Co gracze mogą spotkać na toksycznych pustkowiach, żeby podróż była dla nich ciekawa. Jak stopniowo mają odkrywać tajemnice?
+Może spotkają obóz wyrzutków\szumowim\mutantów, z którego Rico wcześniej zwerbował większość mieszkańców? Mogą żyć w jakieś porzuconej kopalni odkrywkowej.
+
+Pamiętaj o mocnej inspiracji filmem Apocalypse Now.</pre>
+      </div>
+    </article>
+
+    <!-- 14 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role assistant">Asystent</div>
+        <div class="idx">#14</div>
+      </div>
+      <div class="content">
+        <pre>Propozycja scenariusza post-apo na Gilead Prime: „JĄDRO POPIOŁU”
+
+PROLOG — Tajny rozkaz
+Varonius wzywa graczy bez świadków. Rico zaginął. Wysłano jednego Zwiadowcę Astartes — kontakt się urwał. Sprawę trzeba załatwić, zanim wyjdzie na jaw, że Varonius nie kontroluje załogi.
+
+Ładunek:
+Tectonic Plasma Device (TPD-IX „Ashmaker”) — archeotech. Nie atomówka, ale plazmowy ładunek do „wymazywania” lokacji: topi skałę, zapada teren, tworzy martwą strefę.
+
+AKT I — Toksyczne pustkowia
+- Morze Popiołu (burze, halucynacje, vox-echo)
+- Kolumna Pielgrzymów (przerobione symbole Imperium)
+- Ruiny posterunku Arbites (porządek bez walki, cytaty Rico)
+
+AKT II — Obóz wyrzutków (kopalnia odkrywkowa)
+„Sanktuarium 17”: zorganizowana społeczność mutantów, byłych górników i dezerterów. Działają wg „Nowego Regulaminu”.
+
+AKT III — Zaginiony Astartes
+W kopalni: Zwiadowca Astartes, subtelnie zmutowany, ale świadomy. Dołączył do Rico.
+
+AKT IV — Rico (Kurtz)
+Komora geotermalna, symbole Tzeentcha stopione z Aquilą. Rico spokojny, bez broni. Nie walczy. Prosi: zanieść jego głowę Varoniusowi i zdetonować ładunek, by „zamknąć” miejsce.
+
+AKT V — „The Horror”
+Ewakuacja, detonacja, martwa strefa. Plotki i „Nowy Regulamin” zostają — zmiana już się zaczęła.
+
+Motywy Apocalypse Now:
+tajna misja, podróż w głąb ciemności, charyzmatyczny zdrajca, finał bez walki, moralny dylemat.</pre>
+      </div>
+    </article>
+
+    <!-- 15 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role user">Użytkownik</div>
+        <div class="idx">#15</div>
+      </div>
+      <div class="content">
+        <pre>Przygotuj mi jakie encountery gracze mogą spotkać na drodze od miejsca desantu do siedzimy Rico. Żeby sama podróż nie była nudna tylko stopniowo budowała napięcie.</pre>
+      </div>
+    </article>
+
+    <!-- 16 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role assistant">Asystent</div>
+        <div class="idx">#16</div>
+      </div>
+      <div class="content">
+        <pre>DROGA DO JĄDRA POPIOŁU — ENCOUNTERY PODRÓŻNE (post-apo „rzeka”)
+
+ETAP 0 — DESANT: „Zbyt Cicho”
+- idealny porządek, brak walki
+- ciała ustawione jak do inspekcji
+Trop: „Nie zostali zabici. Zostali zwolnieni z obowiązku.”
+
+ETAP I — PUSTKOWIE
+1) Burza Toksycznego Pyłu (survival, halucynacje, serwitor powtarza: „Zgłosiłem się do niego dobrowolnie.”)
+2) Wrak Konwoju (zapasy + dziennik: „Rico obiecał sens. Imperium obiecało ciszę.”)
+
+ETAP II — LUDZIE RICO
+3) Strażnicy Drogi (mutanci zdyscyplinowani; „Macie pozwolenie dowódcy?”)
+4) Obozowisko Oczyszczonych (porządek, opieka, dziecko recytuje Regulamin)
+
+ETAP III — IMPERIUM PRZEGRYWA
+5) Posterunek Arbites (broń złożona; vox: „Prawo nadal obowiązuje. Tylko gdzie indziej.”)
+6) Widmo Astartes (sylwetka na horyzoncie, nie atakuje, odchodzi)
+
+ETAP IV — KOPALNIA SANKTUARIUM
+7) Wejście: przerobiona Aquila, spokój, wszyscy patrzą
+8) Zwiadowca Astartes (rozmowa/konflikt, ale wola dialogu)
+
+ETAP V — CISZA
+9) Ostatnia Droga (brak straży, echo, vox-szept: „Nie przyszedłem tu, by rządzić. Przyszedłem, by zrozumieć.”)
+
+Struktura napięcia:
+„Co tu się stało?” → „Kim on jest?” → „Dlaczego go wybrali?” → „Może ma rację?” → „Co my mamy zrobić?”</pre>
+      </div>
+    </article>
+
+    <!-- 17 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role user">Użytkownik</div>
+        <div class="idx">#17</div>
+      </div>
+      <div class="content">
+        <pre>Zapisz mi całą treść tej rozmowy w jednym pliku *.md</pre>
+      </div>
+    </article>
+
+    <!-- 18 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role assistant">Asystent</div>
+        <div class="idx">#18</div>
+      </div>
+      <div class="content">
+        <pre>Oto cała treść rozmowy zapisana w formacie Markdown (.md). Możesz skopiować do pliku `jadro_popiolu_scenariusz.md`.
+
+[Asystent przygotował zredagowany dokument .md obejmujący: założenia, Tzeentch jako wybór, stat block, prompt Grok, cytaty, vox-logi, pamiętniki, scenariusz i encountery.]</pre>
+      </div>
+    </article>
+
+    <!-- 19 -->
+    <article class="msg">
+      <div class="bar">
+        <div class="role user">Użytkownik</div>
+        <div class="idx">#19</div>
+      </div>
+      <div class="content">
+        <pre>Zapisz to w bloku kodu, żebym mógł skopiować i wkleić.</pre>
+      </div>
+    </article>
+
+  </section>
+
+  <p class="note">
+    Uwaga: to jest backup „do czytania” w HTML. Jeśli chcesz, mogę też przygotować wersję, która renderuje Markdown na stronie (np. poprzez wbudowany parser JS),
+    ale ta wersja działa offline bez bibliotek.
+  </p>
+</main>
+</body>
+</html>
