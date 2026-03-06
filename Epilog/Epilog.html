@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Epilog kampanii – Cichy Dryf</title>
+  <style>
+    :root{
+      --bg:#0b0d10;
+      --panel:#12161b;
+      --panel2:#171d24;
+      --border:#38424d;
+      --text:#d7dce2;
+      --muted:#9ca8b3;
+      --accent:#b64040;
+      --accent2:#6d879d;
+      --gold:#8b7750;
+    }
+    *{box-sizing:border-box;}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top, rgba(120,20,20,0.08), transparent 30%),
+        linear-gradient(180deg, #090b0d 0%, #0d1014 100%);
+      color:var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height:1.65;
+    }
+    .wrapper{
+      max-width:1600px;
+      margin:0 auto;
+      padding:24px;
+    }
+    .title{
+      border:1px solid var(--border);
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:24px;
+      margin-bottom:20px;
+      box-shadow:0 0 30px rgba(0,0,0,0.35);
+    }
+    .title h1{
+      margin:0 0 8px 0;
+      font-size:34px;
+      letter-spacing:1px;
+      color:#e3e8ed;
+      text-transform:uppercase;
+    }
+    .title p{
+      margin:6px 0;
+      color:var(--muted);
+    }
+    .columns{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+      align-items:start;
+    }
+    .panel{
+      background:linear-gradient(180deg, var(--panel), var(--panel2));
+      border:1px solid var(--border);
+      padding:22px;
+      box-shadow:0 0 24px rgba(0,0,0,0.32);
+      min-height:400px;
+    }
+    .mg{
+      border-left:4px solid var(--accent);
+    }
+    .players{
+      border-left:4px solid var(--accent2);
+    }
+    h2{
+      margin-top:0;
+      font-size:28px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+    h3{
+      margin-top:28px;
+      margin-bottom:10px;
+      font-size:20px;
+      color:#f0d8d8;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+      padding-bottom:6px;
+    }
+    .players h3{
+      color:#d9e5ef;
+    }
+    p{
+      margin:10px 0;
+      text-align:justify;
+    }
+    .box{
+      border:1px solid rgba(255,255,255,0.08);
+      background:rgba(255,255,255,0.02);
+      padding:14px;
+      margin:14px 0;
+    }
+    .quote{
+      font-style:italic;
+      color:#e8d4d4;
+      border-left:3px solid var(--accent);
+      padding-left:12px;
+      margin:14px 0;
+    }
+    .players .quote{
+      border-left-color:var(--accent2);
+      color:#dbe8f4;
+    }
+    .note{
+      color:#bfc7cf;
+      font-size:0.95em;
+    }
+    ul{
+      margin:8px 0 14px 24px;
+    }
+    li{
+      margin:6px 0;
+    }
+    .blood{
+      color:#d36666;
+      font-weight:bold;
+      letter-spacing:1px;
+    }
+    .small{
+      font-size:0.94em;
+      color:var(--muted);
+    }
+    @media (max-width: 1100px){
+      .columns{grid-template-columns:1fr;}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <!--
+    DOKŁADNY OPIS PANCERZA VARONIUSA – REFERENCJA DO ILUSTRACJI
+
+    Jakel Varonius ma na sobie ekskluzywny, relikwiarny pancerz ekspedycyjny Rogue Tradera,
+    będący zmodyfikowaną, arystokratyczną odmianą pancerza wspomaganego dla człowieka,
+    a nie Space Marine. Sylwetka wysoka, dostojna, szlachecka, ale cięższa i masywniejsza
+    niż zwykły człowiek w zbroi. Pancerz nie ma wyglądać jak Astartes, tylko jak bogaty,
+    indywidualnie wykonany, stary i kosztowny artefakt dynastii kupieckiej z warstwą
+    wojskowo-próżniową.
+
+    KOLORYSTYKA:
+    - dominujący kolor: bardzo ciemny grafit, niemal czarny metal
+    - wtórny kolor: głębokie bordo / ciemna czerwień rodowa
+    - wykończenia: matowe złoto, mosiądz, miejscami srebrne okucia techniczne
+    - powierzchnie lekko zużyte, z drobnymi rysami, śladami eksploatacji i przypaleń,
+      ale nadal niezwykle prestiżowe i zadbane
+
+    HEŁM:
+    - pełny, szczelny hełm próżniowy z wąskim wizjerem lub dwiema świecącymi soczewkami
+    - wizjer / optyka może emitować chłodne, blade światło
+    - twarz nie musi być widoczna; hełm powinien sprawiać wrażenie zamkniętego systemu
+      podtrzymywania życia
+    - z tyłu i po bokach hełmu przewody, sensory, miniaturowe anteny, moduły vox
+    - sylwetka hełmu bardziej arystokratyczna niż brutalna: elegancka, wydłużona, ozdobna,
+      ale funkcjonalna
+
+    NARAMIENNIKI:
+    - duże, warstwowe, bogato zdobione, ale nie przesadnie wielkie jak u Marines
+    - na jednym naramienniku herb dynastii Varonius, na drugim symbol kupiecki /
+      heraldyczny znak rodu albo motyw gwiazdy / kompasu nawigacyjnego
+    - krawędzie naramienników obite złotem lub mosiądzem
+
+    NAPERSNIK I TORS:
+    - ciężki napierśnik z segmentów pancerza wspomaganego, z widocznymi ryglami
+      i uszczelnieniami próżniowymi
+    - centralnie może znajdować się relikwiarz, pieczęć wosku, rodowy medalion,
+      święte napisy w High Gothic, mały panel statusowy lub generator pola ochronnego
+    - z tyłu niewielki moduł zasilania / system podtrzymywania życia, z przewodami
+      biegnącymi do hełmu i pasa
+    - pancerz ma sugerować odporność na próżnię, ogień, odłamki i rozszczelnienie statku
+
+    RĘKAWICE I RAMIONA:
+    - rękawice ciężkie, szczelne, z mechanicznie wspomaganymi stawami
+    - przedramiona z dodatkowymi płytami ochronnymi, małymi lampkami roboczymi,
+      zaczepami magnetycznymi lub interfejsem do śluz i terminali okrętowych
+    - całość ma wyglądać jak wyposażenie do wejścia na wrak lub w skażone środowisko
+
+    PAS I WYPOSAŻENIE:
+    - szeroki pas z hermetycznymi zasobnikami, przewodem awaryjnego tlenu,
+      sakwami danych, pieczęciami, może krótką bronią boczną w luksusowej kaburze
+    - brak ciężkiego uzbrojenia; to ma być pancerz ochronny i ekspedycyjny
+    - można dodać ozdobny, ciężki płaszcz lub poły materiału rodowego tylko częściowo,
+      postrzępione i odchylone, ale raczej tak, by nie psuły funkcjonalności próżniowej
+
+    NOGI I BUTY:
+    - ciężkie, segmentowe nagolenniki i buty mag-lock / magnetyczne
+    - buty powinny wyglądać jak zdolne do chodzenia po kadłubie lub pokładzie przy
+      obniżonej grawitacji
+    - widoczne techniczne detale: blokady, zawory, przewody, mechanizmy stabilizujące
+
+    OGÓLNE WRAŻENIE:
+    - "arystokratyczny pan pustki, który ubrał relikwiarną zbroję, by wejść do piekła"
+    - ma wyglądać jak ktoś bardzo bogaty, bardzo ważny i świadomy, że za chwilę może
+      wejść w miejsce, z którego nie wracają nawet bohaterowie
+    - klimat: gothic void suit, relic power armour, rogue trader nobility, void-hardened,
+      ceremonial yet practical, dark baroque sci-fi horror
+
+    OTOCZENIE SCENY:
+    - hangar okrętu flagowego
+    - przy Varoniusie stoją Skitarii / adepci Mechanicus, elitarni żołnierze i kilku
+      Astartes w pancerzach Terminatorów
+    - zimne światło, dym, czerwona sygnalizacja alarmowa, gotowe transportowce w tle
+    -->
+
+    <div class="title">
+      <h1>Cichy Dryf</h1>
+      <p><strong>Epilog kampanii</strong> rozgrywający się po wydarzeniach związanych z Rico.</p>
+      <p>Scenariusz narracyjny w konwencji horroru kosmicznego i stopniowo odsłanianej grozy. Lewa kolumna zawiera informacje dla MG, prawa gotowe opisy i sceny dla graczy.</p>
+    </div>
+
+    <div class="columns">
+      <section class="panel mg">
+        <h2>Dla MG</h2>
+
+        <h3>Założenie scenariusza</h3>
+        <p>
+          Ten epilog ma być powolnym zejściem w grozę. Nie chodzi o dynamiczną walkę, lecz o narastające poczucie,
+          że bohaterowie weszli w przestrzeń, w której normalne prawa rzeczywistości nie są już w pełni pewne.
+          Okręt Aurelii nie powinien sprawiać wrażenia miejsca po zwykłej masakrze. Najpierw ma być niemal sterylnie,
+          nienaturalnie spokojnie. Dopiero później bohaterowie odkryją, że cisza nie oznacza bezpieczeństwa, a brak ludzi
+          nie jest ulgą, tylko najgorszą możliwą odpowiedzią.
+        </p>
+        <p>
+          Scenariusz zakłada, że gracze byli emocjonalnie związani z Aurelią i że jej zdrada nigdy nie została przez nich
+          odczytana jako akt wrogości wobec nich. Dzięki temu odnalezienie jej statku nie będzie zwykłą misją porządkową,
+          ale wejściem na pokład miejsca, które może zawierać odpowiedź na pytanie, czy naprawdę próbowała otworzyć drogę
+          ku wolności, czy też przez własną pychę rozchyliła zasłonę nad czymś, czego żaden śmiertelnik nie powinien szukać.
+        </p>
+
+        <h3>Rola Varoniusa</h3>
+        <p>
+          Varonius jest tutaj kluczowy. Nie stoi z tyłu. Nie wysyła tylko ludzi. Pojawia się osobiście, bo rozumie wagę
+          odkrycia. Jeśli Aurelia rzeczywiście odnalazła coś, co może przełamać ograniczenia żeglugi przez Osnowę, wtedy
+          stawką jest przyszłość całego systemu Gilead, a może nawet przyszłość jego dynastii. Jeśli zaś zamiast szlaku
+          odkryła tylko otchłań, trzeba to zobaczyć i zamknąć, zanim wiedza rozleje się dalej.
+        </p>
+        <div class="box">
+          <p><strong>Jak prowadzić Varoniusa:</strong> mówi krótko, konkretnie, bez ozdobników. Nie podnosi głosu.
+          Im bardziej potworna staje się sytuacja, tym bardziej on robi się spokojny. To nie spokój człowieka bez strachu,
+          ale człowieka, który dawno nauczył się działać pomimo strachu.</p>
+        </div>
+
+        <h3>Otwarcie: wezwanie do hangaru</h3>
+        <p>
+          Bohaterowie zostają wezwani w trybie natychmiastowym do jednego z hangarów okrętu flagowego. Samo wezwanie może
+          przyjść przez służbowe kanały, z chłodnym komunikatem o rozkazie osobistego stawiennictwa. Już na korytarzach
+          widzą wzmożony ruch, uzbrojone posterunki, zamknięte grodzie i ludzi, którzy milkną, gdy tylko drużyna przechodzi obok.
+        </p>
+        <p>
+          W hangarze czeka Varonius w relikwiarnym pancerzu ekspedycyjnym. Obok niego stoją wierni żołnierze z jego okrętu,
+          wysocy rangą przedstawiciele Adeptus Mechanicus oraz kilku Astartes w pancerzach Terminatorów. Sama kompozycja sceny
+          ma uderzyć graczy jak młot: jeśli do zbadania jednego dryfującego okrętu potrzeba takiej obstawy, to znaczy, że to
+          nie jest abordaż, ale wejście do czegoś, czego nikt nie umie jeszcze nazwać.
+        </p>
+
+        <h3>Co mówi Varonius</h3>
+        <p>
+          Varonius przekazuje bohaterom podstawowe informacje. Okręt Aurelii został odnaleziony. Dryfuje. Odczyty są chwiejne,
+          niespójne, miejscami niemożliwe. Sygnały z pokładu pojawiają się i znikają. Maszynowe auspexy wykazują obecność życia,
+          a chwilę później absolutny brak biosygnatur. Mechanicus nie chce interpretować tych odczytów bez bezpośredniej inspekcji.
+          On sam nie ufa automatyce na tyle, by podjąć decyzję z mostka.
+        </p>
+        <div class="quote">
+          „Znaleźliśmy statek waszej przyjaciółki. Obyśmy znaleźli również odpowiedź, dlaczego nie wróciła.”
+        </div>
+
+        <h3>Kombinezony dla drużyny</h3>
+        <p>
+          Przed odlotem bohaterowie otrzymują ciężkie kombinezony abordażowe lub pancerze próżniowe, zależnie od ich statusu.
+          Ważne jest, by wybrzmiało, że nie są to zwykłe skafandry. Są szczelne, mają zewnętrzne zaczepy, lampy robocze,
+          zasilanie awaryjne i magnetyczne buty. Żołnierze techniczni albo adepci Mechanicus mogą pomagać im w dopinaniu
+          segmentów, ryglowaniu hełmów, testowaniu pieczęci ciśnieniowych i aktywacji mag-locków w podeszwach.
+        </p>
+        <p>
+          Ta scena jest ważna, bo od razu wprowadza fizyczność wyprawy. Bohaterowie nie idą po prostu sprawdzić wraku.
+          Oni zakładają na siebie warstwę metalu i uszczelek, jakby przygotowywali się do wejścia na dno morza albo do grobowca
+          bez powietrza. Warto opisać ciężar butów, głuche kliknięcia zamków, szorstki oddech w systemie filtrów oraz krótki
+          moment, gdy głos każdego z bohaterów zaczyna brzmieć obco wewnątrz hełmu.
+        </p>
+
+        <h3>Lot do wraku</h3>
+        <p>
+          Transport odbywa się w kilku promach lub okrętach transportowych, w eskorcie myśliwców. Nie przeciągaj tej sceny
+          za długo, ale zbuduj napięcie: kadłub wibruje, czerwone lampy pulsują, nikt nie prowadzi zbędnych rozmów,
+          Terminatorzy siedzą nieruchomo jak posągi wykute z ciemnej stali. W pewnym momencie przez iluminator albo ekran
+          taktyczny można pokazać pierwszy widok jednostki Aurelii: niewielkiej, samotnej, pozornie nieuszkodzonej,
+          dryfującej w sposób zbyt spokojny.
+        </p>
+
+        <h3>Struktura horroru na pokładzie</h3>
+        <p>
+          To najważniejsza część scenariusza. Prowadź ją warstwowo.
+        </p>
+        <ul>
+          <li><strong>Faza pierwsza:</strong> cisza, przygaszone światła, obniżona grawitacja, brak załogi.</li>
+          <li><strong>Faza druga:</strong> drobne anomalie, ślady pośpiechu, odruchowo przerwane czynności, rzeczy zostawione tak, jakby ludzie po prostu... przestali istnieć.</li>
+          <li><strong>Faza trzecia:</strong> pierwsze fragmenty ciał, smugi krwi dryfujące w słabej grawitacji, ściany dotknięte czymś nieludzkim.</li>
+          <li><strong>Faza czwarta:</strong> mostek, dziennik Aurelii, trzecie oko, napis, świadomość, że zagrożenie nie skończyło się wraz ze śmiercią załogi.</li>
+        </ul>
+
+        <h3>Jak opisywać pusty statek</h3>
+        <p>
+          Nie mów od razu „to straszne miejsce”. Opisuj konkret. Światła awaryjne, które nie mrugają regularnie, tylko jakby
+          gubiły rytm. Wentylatory systemu podtrzymywania życia, które obracają się wolno, z dźwiękiem przypominającym odległy
+          oddech starca. Obniżoną grawitację, przez którą każdy krok nie kończy się pełnym ciężarem, lecz lekkim, niezdrowym
+          uniesieniem i szarpnięciem magnetycznych butów, gdy chwytają podłogę. Krople kondensacji przy przewodach. Delikatny
+          stukot odkształcającego się kadłuba. Szum w voxie, który brzmi prawie jak szept, dopóki ktoś nie przyzna, że też go słyszał.
+        </p>
+        <p>
+          Dopiero później wprowadź krew i szczątki. Dzięki temu horror będzie dojrzewał, zamiast eksplodować od razu.
+          Najpierw bohaterowie mają mieć wrażenie, że weszli do opuszczonego domu. Potem, że weszli do grobowca.
+          Na końcu, że weszli do miejsca, które nie chce być odkryte.
+        </p>
+
+        <h3>Sceny po drodze</h3>
+        <p>
+          Możesz rozegrać kilka krótkich, narastających odsłon:
+        </p>
+        <ul>
+          <li>Korytarz z porzuconym wózkiem technicznym i narzędziami unoszącymi się kilka centymetrów nad podłogą.</li>
+          <li>Kaplica okrętowa z niedopalonymi świecami i pękniętą ikoną Imperatora, jakby spękała od środka.</li>
+          <li>Ambulatorium lub punkt medyczny, gdzie pasy na kozetce są zerwane, ale nie ma ciała.</li>
+          <li>Śluza z zaryglowanym włazem od środka i śladem zakrwawionych palców na wizjerze.</li>
+          <li>Przewód wentylacyjny, w którym dryfuje pojedynczy palec z sygnetem jednego z oficerów.</li>
+        </ul>
+
+        <h3>Pierwsze szczątki</h3>
+        <p>
+          Gdy uznasz, że cisza trwa już wystarczająco długo, daj bohaterom pierwsze potwierdzenie, że na statku doszło do czegoś
+          znacznie gorszego niż bunt czy dekompresja. Niech w jednym z szerzej otwartych korytarzy, może w pobliżu zejścia ku mostkowi,
+          w obniżonej grawitacji dryfują ciemne, wolno obracające się smugi krwi oraz kilka fragmentów ludzkiego ciała.
+          Nie cała zwłoka. Nie czytelna scena zbrodni. Raczej oderwana dłoń, kawałek munduru, pas z narzędziami, coś,
+          co kiedyś było twarzą, ale teraz przypomina tylko krwawy strzęp zębów i kości.
+        </p>
+        <p>
+          To powinno wyglądać tak, jakby ludzkie ciała nie zostały po prostu zabite, ale rozszarpane przez coś,
+          czego nie widziano w pełni. Jeszcze lepiej, jeśli szczątki wydają się rozproszone nierównomiernie,
+          jakby część ludzi zniknęła bez śladu, a tylko niektórzy zostali potraktowani brutalnie.
+        </p>
+
+        <h3>Mostek</h3>
+        <p>
+          Mostek jest finałem i powinien być miejscem niemal ceremonialnym. Drzwi mogą być uchylone, systemy wygaszone,
+          część ekranów martwa, część wciąż rzucająca bladoniebieskie, poszarpane światło. Fotele oficerów mogą być puste,
+          odwrócone pod dziwnymi kątami. Szkło obserwacyjne może być całe lub częściowo pęknięte, ale nie rozszczelnione.
+          Najważniejsze elementy to:
+        </p>
+        <ul>
+          <li>dziennik pokładowy Aurelii;</li>
+          <li>jej wydłubane trzecie oko;</li>
+          <li>krwawy napis na ścianie: <span class="blood">„Nie mogę na to patrzeć”</span>.</li>
+        </ul>
+        <p>
+          To trzecie oko nie powinno być zwykłym rekwizytem grozy. To świętokradztwo, samookaleczenie, gest ostatecznej rozpaczy.
+          Aurelia była kimś, kto patrzył głębiej niż inni. Jeśli sama pozbawiła się oka, oznacza to, że zobaczyła coś,
+          przed czym ślepota była łaską.
+        </p>
+
+        <h3>Dziennik Aurelii</h3>
+        <p>
+          Nie musisz teraz pisać pełnej treści, ale zadbaj o ton. Zapis powinien przechodzić od naukowej fascynacji,
+          przez zachwyt, potem napięcie, potem obsesję, aż po rozpad. Początkowo Aurelia opisuje „spokojną warstwę pod falami”.
+          Później wspomina, że prądy Osnowy zaczęły ustępować przed czymś głębszym. Na końcu już nie próbuje tego wyjaśniać.
+          Notatki stają się krótsze, bardziej urywane. Być może pojawia się motyw, że coś nie było martwe, tylko czekało.
+        </p>
+
+        <h3>Co naprawdę się stało</h3>
+        <p>
+          Nie dawaj ostatecznej odpowiedzi. To klucz do klimatu. Najlepiej, jeśli MG zna tylko zarys:
+          Aurelia dotknęła warstwy istnienia głębszej lub bardziej pierwotnej niż ta, po której zwykle suną statki w Osnowie.
+          Coś odpowiedziało. Może nie weszło jeszcze w pełni do realspace, ale zrozumiało, że istnieje droga.
+          Załoga statku została częściowo zabita, częściowo zabrana, częściowo pozbawiona sensu istnienia w sposób,
+          którego ludzki umysł nie potrafi ubrać w pojęcia.
+        </p>
+        <div class="box">
+          <p><strong>Najważniejsze:</strong> nie pokazuj potwora. Nie nazywaj go. Nie tłumacz go do końca.
+          Niech najgorszą rzeczą w scenariuszu będzie świadomość, że coś istnieje i już wie o świecie graczy.</p>
+        </div>
+
+        <h3>Zakończenie</h3>
+        <p>
+          Po odczytaniu dziennika i odkryciu mostka możesz dać jeden ostatni znak, że to nie jest zamknięta sprawa.
+          Na przykład wszystkie vox-kanały w tym samym momencie szumią. Jedna z lamp gaśnie. Auspex Mechanicus pokazuje
+          przez sekundę dodatkowy sygnał na pokładzie, tam gdzie nikogo nie ma. Albo któryś z bohaterów, patrząc w ciemny
+          refleks wizjera, ma wrażenie, że przez ułamek chwili widzi nie własną twarz, ale coś patrzącego z drugiej strony.
+        </p>
+        <p>
+          Potem zakończ scenę odwrotem. Varonius nie jest głupcem. Jeśli zrozumie, że dotknęli granicy czegoś nienazwanego,
+          nakaże odwrót i izolację wraku. To pozostawia kampanię z doskonałym finałem: nie zwycięstwem, nie klęską,
+          ale odkryciem, że wszechświat jest jeszcze ciemniejszy, niż sądzili.
+        </p>
+
+        <h3>Opcjonalne zdania dla MG</h3>
+        <div class="box">
+          <p><strong>Varonius przed wejściem:</strong><br>
+          „Jeżeli znajdziemy ją żywą, sprowadzimy ją do domu. Jeżeli znajdziemy tylko prawdę, zabierzemy przynajmniej ją.”</p>
+
+          <p><strong>Mechanicus po pierwszych anomaliach:</strong><br>
+          „Auspex wskazuje obecność mas biologicznych. Auspex wskazuje brak obecności mas biologicznych. Obie odpowiedzi są jednocześnie prawidłowe.”</p>
+
+          <p><strong>Astartes przy pierwszych szczątkach:</strong><br>
+          „To nie jest dzieło zwykłego drapieżcy. To jest ślad wtargnięcia.”</p>
+
+          <p><strong>Varonius na mostku:</strong><br>
+          „Nie czytać tego na głos, dopóki nie będziemy gotowi usłyszeć odpowiedzi.”</p>
+        </div>
+
+        <p class="small">
+          Koniec sekcji MG.
+        </p>
+      </section>
+
+      <section class="panel players">
+        <h2>Dla Graczy</h2>
+
+        <h3>Wezwanie</h3>
+        <p>
+          Rozkaz przyszedł bez ostrzeżenia. Krótki, chłodny, pozbawiony wyjaśnień. Macie natychmiast stawić się
+          w hangarze numer siedem na pokładzie flagowej jednostki Varoniusa. Nie „gdy znajdziecie czas”. Nie „na rozkaz przełożonego”.
+          Natychmiast. Już samo to sprawia, że korytarze, którymi idziecie, wydają się inne niż zwykle. Więcej w nich
+          uzbrojonych posterunków. Więcej zamkniętych grodzi. Więcej twarzy, które odwracają wzrok lub udają, że nie widzą.
+        </p>
+        <p>
+          Im bliżej hangaru, tym mniej słychać zwyczajnego zgiełku okrętu. Rozmowy są urywane. Ktoś przestaje pisać na terminalu,
+          kiedy przechodzicie obok. Ktoś inny milknie w pół zdania. W powietrzu unosi się ciężki zapach smaru, ozonu
+          i metalu rozgrzanego od nieustannej pracy maszyn. Gdzieś bardzo daleko dudni pracujący reaktor. A jednak wszystko wydaje się
+          wstrzymane, jakby cały okręt nabrał powietrza i czekał.
+        </p>
+
+        <h3>Hangar</h3>
+        <p>
+          Gdy wchodzicie do wnętrza hangaru, od razu rozumiecie, że nie jest to zwykła odprawa. Nad ogromną przestrzenią
+          unoszą się ciężkie snopy zimnego światła. Czerwone lampy ostrzegawcze pulsują powoli wśród stalowych żeber stropu.
+          W cieniu stoją przygotowane transportowce, ich rampy są opuszczone, a silniki pracują na niskim ciągu, warcząc
+          głucho jak bestie na uwięzi. Wokół nich czekają uzbrojeni żołnierze, służba techniczna i kapłani Mechanicusa,
+          których maski oddechowe syczą cicho przy każdym mechanicznym oddechu.
+        </p>
+        <p>
+          Pośrodku tego wszystkiego stoi Jakel Varonius. Nie w paradnym stroju. Nie w szatach władcy. Ma na sobie relikwiarny,
+          ciężki pancerz ekspedycyjny, szczelny i ciemny, o matowych bordowych płytach i złotych wykończeniach, jak gdyby
+          sam ród Varonius ubrał się w metal i ruszał na wojnę z pustką. Hełm trzyma jeszcze pod pachą, ale sama zbroja
+          wystarcza, by zmienić go z człowieka w figurę niemal pomnikową. Obok niego stoi oddział wiernych żołnierzy,
+          kilku wysokich rangą adeptów Mechanicusa oraz paru Astartes w pancerzach Terminatorów. Ci ostatni nie poruszają się prawie wcale.
+          Trwają jak rzeźby z ciemnej stali, gotowe wejść tam, gdzie normalny człowiek nie powinien postawić stopy.
+        </p>
+        <div class="quote">
+          „Odnaleźliśmy statek Aurelii.”<br>
+          Varonius nie podnosi głosu. Nie musi.<br>
+          „Lecimy natychmiast.”
+        </div>
+
+        <h3>Przygotowanie do wejścia</h3>
+        <p>
+          Nie otrzymujecie wielu odpowiedzi. Zamiast tego podchodzą do was technicy i służba pokładowa, niosąc ciężkie,
+          szczelne kombinezony abordażowe. Materiał pod palcami jest gruby, szorstki, wielowarstwowy. Metalowe rygle
+          klikają głucho, gdy kolejne segmenty zostają przypinane do torsu, ramion i nóg. Każdy z was dostaje hełm,
+          moduł oddechowy i pas z awaryjnym zasilaniem. Na końcu przychodzi kolej na buty z magnetycznymi blokadami.
+        </p>
+        <p>
+          Technik klęka przy jednym z was i mocuje ciężki mechanizm przy podeszwie. Potem uderza w obudowę kluczem serwisowym,
+          aż rozlega się twarde <em>klik</em>. Gdy każe wam zrobić próbny krok, czujecie, jak but na moment przywiera do pokładu
+          z brutalną siłą, po czym odrywa się z lekkim szarpnięciem. W obniżonej grawitacji ma to uratować wam życie.
+          W próżni ma nie pozwolić odpłynąć. W ciemności ma dać choć złudzenie oparcia.
+        </p>
+        <p>
+          Kiedy zamykacie hełmy, cały świat staje się bardziej odległy. Dźwięki tłumią się i spłaszczają. Własny oddech
+          staje się za głośny. Vox sprawia, że głosy towarzyszy brzmią sztucznie, jak gdyby byli bliżej i dalej jednocześnie.
+          Każdy ruch jest cięższy. Każde spojrzenie w wizjerze odbija na moment waszą twarz, zniekształconą przez szkło i zimne światło.
+        </p>
+
+        <h3>Lot</h3>
+        <p>
+          Rampy transportowców zamykają się z przeciągłym, metalicznym jękiem. Wnętrze drży, kiedy silniki zwiększają moc.
+          Siadacie lub stoicie wzdłuż ścian kadłuba, przypięci pasami albo trzymając się uchwytów. Nikt nie mówi wiele.
+          Czerwone lampy awaryjne kołyszą się leniwie z rytmem lotu. Kapłani Mechanicusa mamroczą coś cicho do swoich modułów danych.
+          Jeden z Terminatorów odwraca głowę w waszą stronę tak powoli, że przez moment macie wrażenie, jakby poruszył się posąg.
+        </p>
+        <p>
+          Potem pojawia się obraz celu. Najpierw na ekranie taktycznym. Później przez mały iluminator. Smukły okręt klasy Viper,
+          niewielki na tle bezdennej czerni, dryfuje samotnie w pustce. Nie widać na nim większych uszkodzeń. Kadłub nie jest rozerwany.
+          Napęd nie płonie. Nie ma śladów eksplozji. A jednak coś w sposobie, w jaki jednostka zawisła w ciemności, wydaje się niewłaściwe.
+          Jest zbyt spokojna. Zbyt nieruchoma. Jak martwe ciało unoszące się na wodzie, której nie porusza żaden wiatr.
+        </p>
+
+        <h3>Wejście na pokład</h3>
+        <p>
+          Gdy śluzy transportowca i Vipera sprzęgają się ze sobą, słychać tylko serię ciężkich uderzeń zacisków,
+          syk wyrównywanego ciśnienia i potem ciszę. Prawdziwą ciszę, przytłumioną przez hełm, ale przez to jeszcze bardziej obecną.
+          Drzwi otwierają się powoli, a za nimi rozciąga się pierwszy korytarz opuszczonego statku.
+        </p>
+        <p>
+          Światła działają, ale ledwie. Niektóre lampy świecą stałym, trupio bladym blaskiem. Inne mrugają nieregularnie,
+          jakby gubiły rytm. Cienie są długie, poszarpane i nieruchome. W powietrzu unosi się delikatna mgiełka pyłu,
+          skroplonej wilgoci i czegoś, czego nie potraficie od razu nazwać. Systemy podtrzymywania życia nadal funkcjonują,
+          lecz najwyraźniej tylko częściowo. Temperatura jest odrobinę za niska. Wentylacja zbyt słaba. Gdzieś z głębi statku
+          dociera jednostajny pomruk maszyn pracujących na granicy wydolności.
+        </p>
+        <p>
+          Kiedy stawiacie pierwsze kroki w głąb korytarza, od razu czujecie różnicę. Grawitacja jest obniżona. Każdy ruch
+          kończy się lekkim uniesieniem ciała, zaraz gaszonym przez magnetyczne buty, które z krótkim szarpnięciem przywierają
+          do metalowej podłogi. Chód staje się nienaturalny. Zbyt lekki, a jednak zbyt ciężki. Jakby statek nie pamiętał już,
+          jak powinno się na nim chodzić.
+        </p>
+        <p>
+          Nie ma nikogo. Nie słychać kroków za grodziami. Nie słychać kłótni załogi, stukotu narzędzi, szczęku obsługiwanych terminali,
+          pokrzykiwań bosmanów ani litanii techników. Statek żyje tylko o tyle, o ile pracują w nim jeszcze ostatnie, uporczywe
+          odruchy maszyn. To nie jest cisza snu. To cisza po czymś.
+        </p>
+
+        <h3>Puste korytarze</h3>
+        <p>
+          Idziecie przez kolejne pokłady, a pustka staje się coraz bardziej nienaturalna. Przy jednym z terminali wciąż unosi się
+          zapalona lampka stanu. Na podłodze leży data-slate, jakby ktoś odłożył go tylko na moment. W bocznym przejściu
+          stoi porzucony wózek serwisowy, a kilka narzędzi oderwało się od jego powierzchni i dryfuje powoli w słabej grawitacji,
+          obracając się niemal niezauważalnie. Przy jednej ze ścian migocze panel modlitewny, na którym wyświetla się urwany
+          fragment litanii ochronnej. Dalej, za kolejną grodzią, dostrzegacie niewielką kapliczkę okrętową. Świeca wypaliła się
+          do końca i zastygła w dziwnym, skrzywionym kształcie. Wizerunek Imperatora pękł przez środek.
+        </p>
+        <p>
+          Nie widać ciał. Nie ma śladów walki. Nie ma nawet chaosu, którego można by się spodziewać po ewakuacji.
+          Właśnie to jest najgorsze. Wszystko wygląda tak, jakby ludzie zniknęli pomiędzy jednym uderzeniem serca a następnym.
+        </p>
+
+        <h3>Pierwsza krew</h3>
+        <p>
+          Dopiero dalej, gdy schodzicie ku centralnym sekcjom statku, coś się zmienia. Najpierw widzicie ciemną smugę
+          na ścianie, rozciągniętą cienko, niemal delikatnie, jakby ktoś przesunął po metalu zakrwawioną dłonią.
+          Potem następną. I jeszcze jedną, wyżej, nienaturalnie wysoko, tam gdzie człowiek normalnie nie sięgnąłby ręką.
+        </p>
+        <p>
+          Za kolejnym zakrętem czeka już coś więcej. W obniżonej grawitacji, w martwym powietrzu korytarza, dryfują wolno
+          ciemne krople krwi. Nie spadają. Nie wsiąkają. Obracają się leniwie jak małe, ciężkie planety. Między nimi unoszą się
+          fragmenty czegoś, co wasz umysł rozpoznaje z opóźnieniem, jakby nie chciał przyznać sam przed sobą, że patrzy właśnie
+          na ludzkie szczątki. Oderwana dłoń. Strzęp munduru. Kawałek twarzy z zębami odsłoniętymi przez rozdarte mięso.
+          Pas narzędziowy, który nadal ma przypięty identyfikator załogi.
+        </p>
+        <p>
+          Magnetyczne buty przywierają wam do podłogi z ciężkim kliknięciem, kiedy zatrzymujecie się pośród tej rzezi.
+          Ale to nie wygląda jak zwykła rzeź. Nie jak potyczka. Nie jak eksplozja. Nie jak dekompresja. To wygląda tak,
+          jakby coś weszło między ludzi, a potem zostawiło po nich tylko te fragmenty, których nie chciało lub nie zdołało zabrać.
+        </p>
+
+        <h3>Droga na mostek</h3>
+        <p>
+          Im bliżej mostka, tym bardziej statek wydaje się odrealniony. Część drzwi jest otwarta. Część zaryglowana.
+          Jedne ekrany zgasły całkowicie, inne pokazują linie błędów, martwe piktogramy albo urwane serie danych.
+          Wasze oddechy odbijają się w hełmach matowym echem. Czasem w voxie pojawia się krótki trzask, odległy szum,
+          coś tak podobnego do szeptu, że przez chwilę każdy z was może pomyśleć, że to tylko wyobraźnia.
+        </p>
+        <p>
+          Korytarz prowadzący do mostka jest szeroki, ale wydaje się za ciasny. Światła tu niemal nie działają.
+          Gdzieś z ciemności migocze tylko jeden uszkodzony lumen. Na ścianie widnieją długie, cienkie smugi krwi,
+          ciągnące się aż ku samym drzwiom. Nie ma tu już dryfujących szczątków. Jest tylko przeczucie,
+          że wszystko, co miało się wydarzyć, wydarzyło się właśnie dalej.
+        </p>
+
+        <h3>Mostek</h3>
+        <p>
+          Drzwi do mostka stoją uchylone. Gdy wchodzicie do środka, otwiera się przed wami przestrzeń, która kiedyś była sercem tego statku.
+          Teraz przypomina świątynię po końcu świata. Część ekranów wciąż świeci bladym, poszarpanym światłem. Fotele oficerów są puste,
+          niektóre odwrócone pod dziwnymi kątami, jakby ludzie zrywali się z nich nagle i bez sensu. Na podłodze unoszą się luźne karty danych,
+          porzucone pióra zapisujące, fragmenty szkła i cienkie strużki zaschniętej krwi, które w słabej grawitacji nie opadły tam,
+          gdzie powinny.
+        </p>
+        <p>
+          Na jednej z konsol leży dziennik pokładowy. Nie w sejfie. Nie schowany. Pozostawiony tak, jakby ktoś chciał, żeby został odnaleziony.
+          Tuż obok spoczywa coś małego, ciemnego, obrzmiałego, wciąż rozpoznawalnego. Trzecie oko Navigatora.
+          Wydłubane. Odrzucone. Porzucone obok zapisów, jak ofiara, jak cena, jak rozpaczliwa próba ratunku przed czymś,
+          czego nie można już było znieść.
+        </p>
+        <p>
+          A na ścianie, nierównymi literami napisanymi krwią, widnieje jedno zdanie:
+        </p>
+        <div class="quote" style="font-size:1.2em;">
+          <span class="blood">„Nie mogę na to patrzeć”</span>
+        </div>
+
+        <h3>Ostatni obraz</h3>
+        <p>
+          Przez długą chwilę nic się nie dzieje. Nie ma wrzasku. Nie ma nagłego ataku. Nie ma wybuchu przemocy.
+          Jest tylko mostek, martwy i otwarty przed wami, z dziennikiem czekającym na odczytanie i z tym jednym zdaniem,
+          które nie brzmi jak ostrzeżenie dla innych, lecz jak spóźnione wyznanie kogoś, kto zobaczył więcej,
+          niż wolno zobaczyć śmiertelnikowi.
+        </p>
+        <p>
+          W ciszy mostka słyszycie własny oddech, pracę filtrów, odległe tykanie uszkodzonego terminala.
+          A potem, może naprawdę, a może tylko przez ułamek sekundy, przez vox przechodzi krótki szum,
+          tak miękki i tak nieludzki, że nie da się powiedzieć, czy był tylko zakłóceniem,
+          czy też czymś, co z drugiej strony pustki właśnie was usłyszało.
+        </p>
+
+        <h3>Zamknięcie sceny</h3>
+        <p>
+          Niezależnie od tego, kto pierwszy sięgnie po dziennik Aurelii, wszyscy już rozumiecie jedno:
+          ona nie uciekła po prostu w nieznane. Ona znalazła coś w ciemności pomiędzy gwiazdami. Coś,
+          co nie należy ani do zwykłej przestrzeni, ani do tego, jak ludzkość rozumie Osnowę.
+          I cokolwiek to było, pozostawiło po sobie nie tylko śmierć, ale ślad świadomości. Ślad spojrzenia.
+        </p>
+        <p>
+          Statek nie jest już tylko wrakiem. Jest dowodem. Drzwiami. Raną w rzeczywistości, która jeszcze się nie zamknęła.
+        </p>
+
+        <p class="small">
+          Koniec sekcji dla graczy.
+        </p>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
