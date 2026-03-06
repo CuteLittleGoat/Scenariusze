@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warhammer 40,000 – Oko Płomiennej Pomsty</title>
+  <style>
+    :root{
+      --bg:#0c0b0f;
+      --panel:#17141c;
+      --panel-2:#211b29;
+      --ink:#e8dfd1;
+      --muted:#b6aa97;
+      --gold:#b08a4a;
+      --blood:#7b1f1f;
+      --steel:#7f8a94;
+      --aqua:#507c86;
+      --line:#3a313d;
+      --mg:#3d1b1b;
+      --players:#14222b;
+      --accent:#d9b66f;
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      background:
+        radial-gradient(circle at top, rgba(176,138,74,0.08), transparent 35%),
+        linear-gradient(180deg, #100e13 0%, #0c0b0f 100%);
+      color:var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height:1.65;
+    }
+
+    .container{
+      width:min(1100px, 92%);
+      margin:0 auto;
+      padding:28px 0 80px;
+    }
+
+    header{
+      border:1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(176,138,74,0.08), rgba(0,0,0,0)),
+        var(--panel);
+      border-radius:18px;
+      padding:34px 30px;
+      box-shadow:var(--shadow);
+      margin-bottom:24px;
+    }
+
+    h1,h2,h3,h4{
+      line-height:1.2;
+      margin:0 0 14px;
+      font-weight:700;
+      letter-spacing:0.02em;
+    }
+
+    h1{
+      font-size:2.2rem;
+      color:var(--accent);
+      text-transform:uppercase;
+    }
+
+    h2{
+      font-size:1.65rem;
+      color:var(--accent);
+      padding-bottom:8px;
+      border-bottom:1px solid var(--line);
+      margin-top:12px;
+    }
+
+    h3{
+      font-size:1.2rem;
+      color:#f1d7a1;
+      margin-top:24px;
+    }
+
+    h4{
+      font-size:1rem;
+      color:#eac98c;
+      margin-top:18px;
+    }
+
+    p{margin:0 0 14px}
+    ul, ol{margin:0 0 14px 24px}
+    li{margin:0 0 8px}
+    strong{color:#f3dfb4}
+    em{color:#d6c5aa}
+
+    .subtitle{
+      color:var(--muted);
+      font-size:1.05rem;
+      max-width:900px;
+    }
+
+    .quote{
+      margin-top:18px;
+      padding:18px 20px;
+      border-left:4px solid var(--gold);
+      background:rgba(255,255,255,0.025);
+      color:#d7c7ad;
+      font-style:italic;
+    }
+
+    .toc{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:12px;
+      margin:24px 0 0;
+    }
+
+    .toc a{
+      display:block;
+      padding:12px 14px;
+      color:var(--ink);
+      text-decoration:none;
+      background:var(--panel-2);
+      border:1px solid var(--line);
+      border-radius:12px;
+      transition:0.2s ease;
+    }
+
+    .toc a:hover{
+      transform:translateY(-1px);
+      border-color:var(--gold);
+      color:#fff;
+    }
+
+    section{
+      margin-top:22px;
+      border:1px solid var(--line);
+      background:var(--panel);
+      border-radius:18px;
+      padding:26px 24px;
+      box-shadow:var(--shadow);
+    }
+
+    .meta{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .card{
+      background:var(--panel-2);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:16px 16px;
+    }
+
+    .label{
+      display:inline-block;
+      font-size:0.78rem;
+      text-transform:uppercase;
+      letter-spacing:0.09em;
+      color:var(--gold);
+      margin-bottom:8px;
+    }
+
+    .act-title{
+      margin-top:0;
+      font-size:1.8rem;
+      text-transform:uppercase;
+      color:var(--accent);
+    }
+
+    .scene{
+      margin-top:20px;
+      padding:18px;
+      background:rgba(255,255,255,0.02);
+      border:1px solid var(--line);
+      border-radius:14px;
+    }
+
+    .gm, .players{
+      padding:16px 16px 14px;
+      border-radius:14px;
+      margin:16px 0 0;
+      border:1px solid transparent;
+    }
+
+    .gm{
+      background:linear-gradient(180deg, rgba(123,31,31,0.18), rgba(61,27,27,0.33));
+      border-color:rgba(176,82,82,0.35);
+    }
+
+    .players{
+      background:linear-gradient(180deg, rgba(80,124,134,0.18), rgba(20,34,43,0.4));
+      border-color:rgba(105,163,176,0.35);
+    }
+
+    .gm h4::before{
+      content:"☩ ";
+      color:#ffb3b3;
+    }
+
+    .players h4::before{
+      content:"◈ ";
+      color:#a8d6e1;
+    }
+
+    .boxed{
+      margin:14px 0;
+      padding:14px 16px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(0,0,0,0.18);
+    }
+
+    .readaloud{
+      font-style:italic;
+      color:#e6ded0;
+      border-left:3px solid var(--aqua);
+      padding-left:14px;
+    }
+
+    .small{
+      color:var(--muted);
+      font-size:0.95rem;
+    }
+
+    .twocol{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:16px;
+    }
+
+    .divider{
+      height:1px;
+      background:linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin:28px 0;
+      opacity:0.55;
+    }
+
+    .tag{
+      display:inline-block;
+      padding:4px 9px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      margin:4px 6px 0 0;
+      font-size:0.82rem;
+      color:#d8c39a;
+      background:rgba(255,255,255,0.03);
+    }
+
+    .footer-note{
+      color:var(--muted);
+      font-size:0.92rem;
+      margin-top:16px;
+    }
+
+    @media print{
+      body{background:#fff;color:#000}
+      header, section, .card, .scene, .gm, .players{
+        box-shadow:none;
+        background:#fff;
+        color:#000;
+      }
+      .toc{display:none}
+      a{color:#000}
+      h1,h2,h3,h4,strong{color:#000}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Oko Płomiennej Pomsty</h1>
+      <p class="subtitle">
+        Krótki scenariusz do sesji TTRPG w uniwersum Warhammer 40,000, rozgrywający się
+        <strong>przed wydarzeniami ze scenariusza Rico</strong>. Przygoda domyka wcześniejszy wątek
+        zmiennokształtnego zabójcy, prowadzi bohaterów do sekretnego archiwum inkwizytora Fyodora,
+        a następnie na skażone oceany Charybdionu — ku klasztorowi wzniesionemu wewnątrz
+        martwego, rozprutego lewiatana.
+      </p>
+      <div class="quote">
+        „W Imperium rzadko istnieje czysta świętość. Relikwie krwawią. Modlitwy gniją.
+        Fanatyzm, który wczoraj był cnotą, jutro może okazać się bramą.”
+      </div>
+
+      <div class="toc">
+        <a href="#zalozenia">Założenia i klimat</a>
+        <a href="#lore">Uwagi lore</a>
+        <a href="#bohaterowie">Rola bohaterów i Rico</a>
+        <a href="#akt1">Akt I – Archiwum Fyodora</a>
+        <a href="#akt2">Akt II – Droga na Charybdion</a>
+        <a href="#akt3">Akt III – Miasto w Truchle</a>
+        <a href="#final">Finał i oczyszczenie</a>
+        <a href="#tropy">Tropy i wskazówki</a>
+        <a href="#npc">NPC i dialogi</a>
+      </div>
+    </header>
+
+    <section id="zalozenia">
+      <h2>Założenia i klimat</h2>
+      <p>
+        Scenariusz jest pomyślany jako <strong>krótka, ale gęsta fabularnie przygoda</strong>,
+        będąca domknięciem wcześniejszej historii o zabójcy posługującym się chemiczną zmianą wyglądu.
+        Ma jednocześnie:
+      </p>
+      <ul>
+        <li>wyjaśnić znaczenie notatki znalezionej przy ciele zabójcy,</li>
+        <li>dać bohaterom śledztwo z nutą herezji i paranoi,</li>
+        <li>zbudować emocjonalną więź z Rico,</li>
+        <li>pokazać, że w Gileadzie nawet „świętość” może być skażona,</li>
+        <li>pozostawić cień niepewności, czy Alpha Legion próbował zaszkodzić, czy pomóc.</li>
+      </ul>
+
+      <div class="meta">
+        <div class="card">
+          <span class="label">Forma</span>
+          <p>Śledztwo → podróż → konfrontacja religijno-moralna → finał w miejscu o mocnym, zapamiętywalnym obrazie.</p>
+        </div>
+        <div class="card">
+          <span class="label">Ton</span>
+          <p>Grimdark, sakralna zgnilizna, fanatyzm, niejednoznaczność, wilgoć, sól, dym kadzideł i zapach tłuszczu z lewiatana.</p>
+        </div>
+        <div class="card">
+          <span class="label">Czas gry</span>
+          <p>Około 1–2 sesje, zależnie od tempa odgrywania scen z Rico i eksploracji Charybdionu.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="lore">
+      <h2>Uwagi lore i korekty względem pomysłu</h2>
+
+      <div class="gm">
+        <h4>Tylko dla MG</h4>
+        <p>
+          Twój pomysł jest <strong>bardzo dobry i zgodny z duchem Warhammera 40,000</strong>,
+          ale najlepiej działa po jednej ważnej korekcie:
+        </p>
+        <div class="boxed">
+          <p>
+            <strong>Nie rób z relikwii „jawnie opętanego artefaktu”, o którym każdy rozsądny egzorcysta
+            od razu by wiedział.</strong>
+          </p>
+          <p>
+            Znacznie bardziej wiarygodne będzie, jeśli „Oko Płomiennej Pomsty” jest
+            <strong>autentyczną relikwią lub relikwiarzem, który został sprofanowany</strong>:
+            na przykład przez domieszkę spaczonego materiału, rytualne naruszenie pieczęci,
+            kontakt z bytem Osnowy albo przez uwięziony „odłamek” demonicznej obecności.
+          </p>
+          <p>
+            Dzięki temu wpływ relikwii jest subtelny. Nie sprawia, że siostry zaczynają warczeć,
+            mutować i śpiewać w językach piekieł. Zamiast tego:
+          </p>
+          <ul>
+            <li>wzmacnia gniew,</li>
+            <li>zaostrza potrzebę oczyszczenia ogniem,</li>
+            <li>osłabia współczucie,</li>
+            <li>usprawiedliwia brutalność jako świętą gorliwość.</li>
+          </ul>
+        </div>
+        <p>
+          To pasuje do 40k, bo Imperium bardzo długo potrafi nie zauważyć, że coś jest skażone,
+          jeśli skażenie przybiera kształt <em>większego fanatyzmu</em>, a nie oczywistej herezji.
+        </p>
+        <p>
+          Alpha Legion pozostaw jako <strong>celowo niejednoznaczny</strong>. Zabójca mógł:
+        </p>
+        <ul>
+          <li>próbować zatrzeć ślady kultu / sabotażu i chronić skażenie,</li>
+          <li>albo przeciwnie — tak ustawić pionki, by ktoś inny wykonał za niego oczyszczenie.</li>
+        </ul>
+        <p>
+          Obie interpretacje powinny być możliwe. Nie rozstrzygaj tego na 100%.
+        </p>
+      </div>
+
+      <div class="players">
+        <h4>Dla graczy</h4>
+        <p class="readaloud">
+          W Gileadzie świętość i przemoc są od siebie oddzielone cieńszą granicą, niż chciałby przyznać
+          jakikolwiek kapłan. Nie każda relikwia jest kłamstwem. Nie każda relikwia jest też czysta.
+        </p>
+      </div>
+    </section>
+
+    <section id="bohaterowie">
+      <h2>Rola bohaterów i Rico</h2>
+
+      <div class="twocol">
+        <div class="card">
+          <span class="label">Strix</span>
+          <p>
+            Sankcjonowany psionik i agent Inkwizycji. Idealny do wyczuwania subtelnych zakłóceń,
+            anomalii duchowych, śladów strachu oraz niepokojącej „niewłaściwości”, której nikt
+            inny nie umie nazwać.
+          </p>
+        </div>
+        <div class="card">
+          <span class="label">Toudi</span>
+          <p>
+            Adepta Sororitas z zakonu szpitalniczego. Idealna do skonfrontowania własnej wiary
+            z tym, że narzędzie kultu może stać się źródłem wypaczenia. Ten scenariusz powinien
+            uderzać właśnie w jej sumienie i lojalność.
+          </p>
+        </div>
+        <div class="card">
+          <span class="label">Rico</span>
+          <p>
+            Towarzysz, przewodnik, człowiek czynu. W tym scenariuszu ma być <strong>pomocny, odważny,
+            serdeczny i praktyczny</strong>. Niech osłania ludzi, niech wchodzi pierwszy tam, gdzie jest
+            niebezpiecznie, niech wyciąga bohaterów z tarapatów i mówi rzeczy, które budują zaufanie.
+          </p>
+        </div>
+      </div>
+
+      <div class="gm">
+        <h4>Tylko dla MG</h4>
+        <p>Rico powinien tu zyskać trzy wyraźne rysy:</p>
+        <ul>
+          <li><strong>szacunek do bohaterów</strong> — nie traktuje ich jak pionków,</li>
+          <li><strong>współczucie wobec zwykłych ludzi</strong> — rybaków, służby, rannych, biednych,</li>
+          <li><strong>gniew wobec elit, które poświęcają innych „dla procedury”</strong>.</li>
+        </ul>
+        <p>
+          To nie ma jeszcze wyglądać jak zapowiedź zdrady. To ma wyglądać jak ludzkość.
+          Dopiero później ten sam rdzeń charakteru stanie się czymś niebezpiecznym.
+        </p>
+      </div>
+    </section>
+
+    <section id="akt1">
+      <h2 class="act-title">Akt I – Archiwum Fyodora</h2>
+      <p class="small">
+        Punkt wyjścia: po śmierci zabójcy bohaterowie mają notatkę:
+        <em>„Usunąć wszelkie ślady — Archiwum Fyodora. Temat: Oko Płomiennej Pomsty”</em>
+        oraz piktogram trójgłowej hydry.
+      </p>
+
+      <div class="scene">
+        <h3>Scena 1. Po nitce do archiwum</h3>
+
+        <div class="players">
+          <h4>Dla graczy</h4>
+          <p class="readaloud">
+            Notatka jest krótka, niemal urzędowa, jakby oderwano ją z większego raportu.
+            Atrament spłowiał od potu i wilgoci. Na odwrocie widnieje tylko kilka cyfr,
+            fragment sygnatury magazynowej i znak, który wydaje się aż nazbyt starannie narysowany:
+            trójgłowa hydra.
+          </p>
+          <p class="readaloud">
+            Im dłużej wpatrujecie się w skrawek pergaminu, tym bardziej wygląda on nie jak wiadomość
+            dla zabójcy, ale jak przynęta zostawiona komuś, kto miał przyjść po nim.
+          </p>
+        </div>
+
+        <div class="gm">
+          <h4>Tylko dla MG</h4>
+          <p>
+            Bohaterowie wiedzą już lub szybko ustalają, że <strong>Fyodor</strong> to inkwizytor
+            o reputacji człowieka obsesyjnie gromadzącego dane, zeznania, rekonstrukcje rytuałów,
+            dowody herezji, profile sekt i skatalogowane relikwie wątpliwego pochodzenia.
+          </p>
+          <p>
+            Sam Fyodor może być:
+          </p>
+          <ul>
+            <li>zaginiony,</li>
+            <li>martwy,</li>
+            <li>odwołany,</li>
+            <li>albo fizycznie nieobecny, lecz jego archiwum pozostaje zapieczętowane.</li>
+          </ul>
+          <p>
+            Najwygodniej fabularnie: <strong>archiwum istnieje, ale jest oficjalnie zamknięte</strong>,
+            ponieważ zawiera „materiały niebezpieczne dla stabilności systemu”.
+          </p>
+          <p>
+            Rico pomaga zdobyć dostęp. Nie przez wielką politykę, tylko przez spryt, upór i znajomości
+            ludzi niższego szczebla. To ważne: bohaterowie mają poczuć, że bez Rico ugrzęźliby
+            w papierach i pieczęciach.
+          </p>
+        </div>
+      </div>
+
+      <div class="scene">
+        <h3>Scena 2. Martwe archiwum</h3>
+
+        <div class="players">
+          <h4>Dla graczy</h4>
+          <p class="readaloud">
+            Archiwum Fyodora nie przypomina biblioteki. Bardziej mauzoleum.
+            Długie korytarze uginają się od metalowych szaf, relikwiarzy zamkniętych w ołowianych skrzyniach
+            i półek obciążonych datakryptami. Powietrze pachnie kurzem, olejem maszynowym, woskiem
+            i czymś jeszcze — ledwie wyczuwalnym odorem starych bandaży położonych na ropiejącej ranie.
+          </p>
+          <p class="readaloud">
+            Czerwone lampki lumenów drżą nierówno, jakby samo archiwum oddychało przez zaciśnięte zęby.
+            Każdy krok brzmi tu zbyt głośno.
+          </p>
+        </div>
+
+        <div class="gm">
+          <h4>Tylko dla MG</h4>
+          <p>
+            To scena śledcza. Bohaterowie znajdują materiały o „Oku Płomiennej Pomsty”.
+            Nie dawaj wszystkiego od razu. Niech składają obraz z wielu części.
+          </p>
+
+          <h4>Co można znaleźć</h4>
+          <ul>
+            <li>
+              <strong>Rejestr translacji relikwii</strong> — monstrancja była przenoszona
+              między klasztorami i sanktuariami w obrębie Gileadu.
+            </li>
+            <li>
+              <strong>Uwagi o wzorcu zachowań</strong> — w miejscach, gdzie relikwia przebywała długo,
+              rosła liczba „słusznych, lecz skrajnie okrutnych” egzekucji, pokut zakończonych śmiercią,
+              podpaleń całych domostw i „nadgorliwości oczyszczającej”.
+            </li>
+            <li>
+              <strong>Raport przesłuchania jednej nowicjuszki</strong> — twierdziła, że podczas modlitwy
+              słyszała „szelest płomienia, który mówił, że miłosierdzie jest tchórzostwem”.
+            </li>
+            <li>
+              <strong>Analiza teologiczna</strong> — oficjalnie uznano to za dopuszczalny margines
+              religijnej żarliwości.
+            </li>
+            <li>
+              <strong>Tajna notatka Fyodora</strong> — tylko w niej pojawia się właściwy problem:
+              relikwiarz wykazuje <em>powtarzalne odchylenia osnowowe</em>, zbyt subtelne,
+              by wzbudzić alarm u osób już zanurzonych w kulcie.
+            </li>
+          </ul>
+
+          <div class="boxed">
+            <p><strong>Najważniejszy wniosek:</strong></p>
+            <p>
+              Fyodor podejrzewał, że „Oko Płomiennej Pomsty” zostało <strong>sprofanowane wiele lat temu</strong>,
+              prawdopodobnie podczas jednego z transportów lub w czasie oblężenia / ataku herezji.
+              Od tamtej pory relikwia nie deprawuje przez kuszenie do jawnego kultu Chaosu.
+              Ona <strong>radykalizuje to, co już istnieje</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="scene">
+        <h3>Scena 3. Pierwsza poszlaka prawdy</h3>
+
+        <div class="players">
+          <h4>Dla graczy</h4>
+          <p class="readaloud">
+            Wśród setek stron, nagrań i pieczęci znajduje się jeden dokument, który nie pasuje do reszty.
+            Nie jest raportem. Nie jest oskarżeniem. Jest ostrzeżeniem.
+          </p>
+          <p class="readaloud">
+            Pismo jest nerwowe, miejscami niemal wbite w pergamin:
+            <br><br>
+            <em>
+              „Nie badać wyłącznie owoców. Owocem jest fanatyzm, a fanatyzm łatwo usprawiedliwić.
+              Badać źródło. Relikwiarz nie osłabia wiary. On ją zaostrza, aż pęknie.
+              Jeśli to skażenie, jest to skażenie, które nauczyło się mówić głosem pobożności.”
+            </em>
+          </p>
+        </div>
+
+        <div class="gm">
+          <h4>Tylko dla MG</h4>
+          <p>
+            To moment, w którym Strix może poczuć subtelny psychiczny dyskomfort,
+            nawet w miejscu oddalonym od relikwii. Nie wizję wprost, tylko przebłysk:
+          </p>
+          <ul>
+            <li>zapach spalonego kadzidła i krwi,</li>
+            <li>skrawek modlitwy brzmiącej jak rozkaz egzekucji,</li>
+            <li>krótkie wrażenie, że ktoś patrzy przez szkło relikwiarza od środka.</li>
+          </ul>
+          <p>
+            Toudi może rozpoznać, że niektóre opisane praktyki pokutne i „próby czystości”
+            są formalnie poprawne, ale zastosowane z niepokojącą bezwzględnością.
+          </p>
+          <p>
+            Bohaterowie ustalają, że relikwia znajduje się obecnie na <strong>Charybdionie</strong>,
+            w klasztorze zbudowanym przy osadzie rybackiej rozlokowanej wewnątrz zwłok ogromnego
+            morskiego lewiatana.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="akt2">
+      <h2 class="act-title">Akt II – Droga na Charybdion</h2>
+
+      <div class="scene">
+        <h3>Scena 4. Rozmowa z Astartes</h3>
+
+        <div class="players">
+          <h4>Dla graczy</h4>
+          <p class="readaloud">
+            Astartes spogląda na znak hydry długo i bez słowa.
+            W jego milczeniu nie ma wahania. Jest coś gorszego — rozpoznanie.
+          </p>
+          <p class="readaloud">
+            — <em>Alpha Legion</em> — mówi w końcu głosem, który brzmi jak przesuwanie kamienia po stali.
+            — <em>Jeśli zostawili ten trop, to albo chcieli, żeby ktoś go znalazł… albo chcieli, żeby ktoś
+            był pewny, że go znalazł.</em>
+          </p>
+        </div>
+
+        <div class="gm">
+          <h4>Tylko dla MG</h4>
+          <p>
+            Ta scena ma potwierdzić symbol, ale nie wyjaśniać wszystkiego. Astartes może powiedzieć:
+          </p>
+          <ul>
+            <li>że Alpha Legion lubi wojny prowadzone cudzymi rękami,</li>
+            <li>że ceni operacje, w których prawda i kłamstwo są równie użyteczne,</li>
+            <li>że czasem niszczy zagrożenia, których inni nie rozumieją, ale robi to w sposób, który sam tworzy nowe zagrożenia.</li>
+          </ul>
+          <p>
+            Niech to będzie krótka, mocna scena. Ma zostawić niepewność, nie odpowiedź.
+          </p>
+        </div>
+      </div>
+
+      <div class="scene">
+        <h3>Scena 5. Lot nad martwym oceanem</h3>
+
+        <div class="players">
+          <h4>Dla graczy</h4>
+          <p class="readaloud">
+            Charybdion widać najpierw jako kolor choroby.
+            Nie błękit planety, lecz zielonoszary połysk trucizny, rozlany pod grubą warstwą chmur.
+            Kiedy transportowiec schodzi niżej, ocean wygląda jak gnijąca stal:
+            ciężki, tłusty, poprzecinany smugami chemicznych pian i czarnych wycieków.
+          </p>
+          <p class="readaloud">
+            Potem widzicie go.
+            Lewiatan.
+          </p>
+          <p class="readaloud">
+            Leży na boku przy skalistym wybrzeżu niczym przewrócona góra mięsa, kości i pancerza.
+            Jego rozdarte ciało otwiera się ku niebu kaskadą żeber, pomostów, wind, rusztowań i domów
+            przybitych do kości. Wewnątrz truchła migoczą światła. Dym snuje się z kominów.
+            Ludzie zbudowali miasto w martwym ciele stworzenia tak wielkiego, że wygląda,
+            jakby ktoś wydrążył katedrę w zwłokach boga morza.
+          </p>
+        </div>
+
+        <div class="gm">
+          <h4>Tylko dla MG</h4>
+          <p>
+            To jeden z najważniejszych obrazów całego scenariusza. Opisz:
+          </p>
+          <ul>
+            <li>zapach soli, tłuszczu, zgnilizny i kadzidła,</li>
+            <li>robotników wycinających pasy sadła,</li>
+            <li>dzieci wspinające się po rusztowaniach między żebrami,</li>
+            <li>kościane wieże i pomosty,</li>
+            <li>klasztor ulokowany głęboko w jamie piersiowej lub w pobliżu dawnej czaszki lewiatana.</li>
+          </ul>
+          <p>
+            Rico powinien tu mieć moment zachwytu pomieszanego ze współczuciem:
+            niech powie coś w rodzaju:
+          </p>
+          <div class="boxed">
+            <p><em>„Imperium potrafi zrobić fortecę ze wszystkiego. Nawet z padliny.
+            Najgorsze, że ludzie nauczą się w niej żyć.”</em></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="akt3">
+      <h2 class="act-title">Akt III – Miasto w Truchle</h2>
+
+      <div class="scene">
+        <h3>Scena 6. Osada rybacka w ciele lewiatana</h3>
+
+        <div class="players">
+          <h4>Dla graczy</h4>
+          <p class="readaloud">
+            Gdy schodzicie w głąb osady, dźwięk fal stopniowo ginie pod innym rytmem:
+            uderzeniami haków, pił, młotów i modlitw odmawianych przez ludzi, którzy pracują
+            po kolana w tłuszczu i krwi. Niektóre ulice biegną po deskach wbitych między żebra.
+            Inne wykuto w wyschniętym mięsie, utwardzonym solą, popiołem i czasem.
+          </p>
+          <p class="readaloud">
+            Nad wszystkim unosi się smród tranu. W szczelinach kości wiszą lampy.
+            W dawnych komorach organów zbudowano spichlerze, warsztaty, kaplice, izby chorych i domostwa.
+            To nie jest osada przy truchle. To osada <strong>w</strong> truchle.
+          </p>
+        </div>
+
+        <div class="gm">
+          <h4>Tylko dla MG</h4>
+          <p>
+            Daj graczom chwilę na eksplorację i interakcje z ludźmi. Ważne, by osada nie była tylko makabryczną dekoracją.
+            To ma być miejsce pełne życia, biedy, pracy i przywiązania.
+          </p>
+          <p>
+            Możliwe sceny poboczne:
+          </p>
+          <ul>
+            <li>Rico pomaga rannemu robotnikowi przywalonemu kością lub belką.</li>
+            <li>Toudi opatruje dzieci z poparzeniami od lamp tranowych.</li>
+            <li>Strix wyczuwa, że im bliżej klasztoru, tym bardziej „modlitwa” w tym miejscu brzmi jak rozkaz wymierzania kary.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="scene">
+        <h3>Scena 7. Klasztor i siostry</h3>
+
+        <div class="players">
+          <h4>Dla graczy</h4>
+          <p class="readaloud">
+            Klasztor nie jest wielki, ale sprawia wrażenie cięższego niż cała osada.
+            Wyrasta z kości i żelaza, oblepiony wotami, świecami i płytkami z wyrytymi nazwiskami
+            tych, którzy „umarli oczyszczeni”. W głównej nawie wisi ogromna monstrancja,
+            której złote ramiona przypominają płomienie lub szpony.
+          </p>
+          <p class="readaloud">
+            Siostry są uprzejme. Zdyscyplinowane. Pobożne.
+            I jest w nich coś, co sprawia, że każde ich spojrzenie wydaje się o krok bliższe wyrokowi niż rozmowie.
+          </p>
+        </div>
+
+        <div class="gm">
+          <h4>Tylko dla MG</h4>
+          <p>
+            Siostry nie są „potajemnym kultem”. To bardzo ważne.
+            One wierzą, że służą Imperatorowi. Są po prostu <strong>podkręcone</strong> przez wpływ relikwii.
+          </p>
+          <p>
+            Ich przeorysza może być:
+          </p>
+          <ul>
+            <li>szlachetna, ale twarda,</li>
+            <li>autentycznie pobożna,</li>
+            <li>przerażająco spokojna, gdy mówi o spaleniu całej rodziny za podejrzenie skażenia.</li>
+          </ul>
+          <p>
+            Toudi powinna odczuć moralny dysonans:
+            nic, co widzi, nie jest formalnie herezją — a jednak wszystko jest jakby przesunięte o jeden krok za daleko.
+          </p>
+        </div>
+      </div>
+
+      <div class="scene">
+        <h3>Scena 8. Dowód skażenia</h3>
+
+        <div class="players">
+          <h4>Dla graczy</h4>
+          <p class="readaloud">
+            Kiedy zbliżacie się do relikwiarza, świat wydaje się na moment zbyt ostry.
+            Złoto monstrancji lśni jak rozżarzony metal. Płomienie świec są nieruchome, jak namalowane.
+            Każdy szept brzmi jak oskarżenie.
+          </p>
+          <p class="readaloud">
+            A potem przychodzi to wrażenie — nie głos, nie wizja, lecz myśl, która nie jest wasza:
+            <em>miłosierdzie przedłuża winę</em>.
+          </p>
+        </div>
+
+        <div class="gm">
+          <h4>Tylko dla MG</h4>
+          <p>
+            Tu bohaterowie mogą zdobyć ostateczny dowód. Wybierz jedną lub połącz kilka metod:
+          </p>
+          <ul>
+            <li><strong>Psioniczne rozpoznanie Strixa</strong> — wyczuwa, że obiekt jest „nieczysty”, ale zamaskowany aurą świętości.</li>
+            <li><strong>Religijna intuicja Toudi</strong> — liturgiczne detale przy monstrancji są subtelnie wypaczone, jakby ktoś kiedyś odtworzył święty wzór z błędem.</li>
+            <li><strong>Tajna komora</strong> — w podstawie relikwiarza ukryto późniejszy dodatek: czarny fragment materiału, pieczęć, kolec, szczątki kości lub metalu użyte do skażenia obiektu.</li>
+            <li><strong>Świadek</strong> — stara nowicjuszka lub zamknięta pokutnica od lat słyszy „płomień”, który każe karać bez końca.</li>
+          </ul>
+          <p>
+            Ważne: dowód musi wystarczyć, by gracze podjęli działanie, ale nie musi przekonać wszystkich obecnych sióstr.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="final">
+      <h2 class="act-title">Finał – Oczyszczenie, zniszczenie albo egzorcyzm</h2>
+
+      <div class="scene">
+        <h3>Scena 9. Wybór metody</h3>
+
+        <div class="gm">
+          <h4>Tylko dla MG</h4>
+          <p>Masz trzy dobre warianty finału. Wszystkie są lore’owo sensowne:</p>
+
+          <h4>Wariant A – Egzorcyzm i ryt oczyszczenia</h4>
+          <p>
+            Najbardziej dramatyczny dla Toudi. Wymaga utrzymania miejsca, modlitw, relikwii pomocniczych,
+            być może krwi męczennika lub udziału przeoryszy, która musi uznać choć cień możliwości skażenia.
+          </p>
+
+          <h4>Wariant B – Zniszczenie relikwiarza</h4>
+          <p>
+            Brutalne, skuteczne, ale politycznie niebezpieczne. Bohaterowie mogą zostać oskarżeni o świętokradztwo,
+            nawet jeśli mieli rację. To bardzo 40k.
+          </p>
+
+          <h4>Wariant C – Doprowadzenie do przejęcia przez wyższą władzę</h4>
+          <p>
+            Bohaterowie nie niszczą relikwii sami, lecz zdobywają dowody i wymuszają izolację obiektu,
+            zabezpieczenie oraz formalny egzorcyzm przez uprawnione instancje. Mniej widowiskowe,
+            ale daje dużo napięcia politycznego.
+          </p>
+        </div>
+
+        <div class="players">
+          <h4>Dla graczy</h4>
+          <p class="readaloud">
+            Zbliżając się do monstrancji, czujecie, że cała kaplica napina się wokół was jak mięsień.
+            Świece migoczą. Kościane sklepienie jęczy pod naporem wiatru i fal.
+            Z zewnątrz dobiega głuchy łoskot narzędzi rybaków, jakby całe martwe ciało lewiatana
+            nasłuchiwało, co uczynicie z ogniem zamkniętym w jego wnętrzu.
+          </p>
+        </div>
+      </div>
+
+      <div class="scene">
+        <h3>Scena 10. Konfrontacja</h3>
+
+        <div class="gm">
+          <h4>Tylko dla MG</h4>
+          <p>
+            Niech konfrontacja nie będzie prostą walką z „demonem wyskakującym z relikwiarza”.
+            Lepiej, żeby zagrożenie było półwidzialne, bardziej duchowe niż materialne.
+          </p>
+          <p>
+            Przykładowe zjawiska:
+          </p>
+          <ul>
+            <li>siostry stają się coraz bardziej agresywne i pewne, że bohaterowie są bluźniercami,</li>
+            <li>Strix słyszy modlitwy przemieniające się w litanię potępienia,</li>
+            <li>Toudi czuje, że własny gniew zaczyna brzmieć „słusznie”,</li>
+            <li>płomień świec układa się w kształt oka,</li>
+            <li>ściany z kości i wyschniętego mięsa drżą od odległego sztormu.</li>
+          </ul>
+          <p>
+            Rico powinien tu zagrać ważną rolę:
+          </p>
+          <ul>
+            <li>osłania bohaterów,</li>
+            <li>ratuje niewinnych cywilów z kaplicy lub z osady,</li>
+            <li>podejmuje ryzyko bez wahania,</li>
+            <li>na moment staje przeciw autorytetowi, bo ważniejsi są dla niego ludzie niż procedura.</li>
+          </ul>
+          <p>
+            To bardzo ważna cegła pod jego późniejszą zdradę: gracze mają pamiętać, że kiedyś stanął z nimi ramię w ramię.
+          </p>
+        </div>
+
+        <div class="players">
+          <h4>Dla graczy</h4>
+          <p class="readaloud">
+            Przez jedno uderzenie serca wydaje się, że płomień wewnątrz monstrancji patrzy na was.
+            Nie jak bestia. Nie jak człowiek.
+            Jak osąd, który zapomniał już, po co został wydany, ale wciąż domaga się nowych ofiar.
+          </p>
+        </div>
+      </div>
+
+      <div class="scene">
+        <h3>Scena 11. Po wszystkim</h3>
+
+        <div class="gm">
+          <h4>Tylko dla MG</h4>
+          <p>
+            Niezależnie od wybranego wariantu:
+          </p>
+          <ul>
+            <li>część sióstr może doznać szoku i wstydu,</li>
+            <li>część nigdy nie uzna, że relikwia była skażona,</li>
+            <li>osada ocaleje, ale będzie nosić ślad wydarzenia,</li>
+            <li>bohaterowie zyskają prawdę, lecz nie pełne oczyszczenie polityczne.</li>
+          </ul>
+          <p>
+            Zostaw też ostatni cień Alpha Legionu. Na przykład:
+          </p>
+          <ul>
+            <li>w ukrytej komorze relikwiarza znajduje się ślad sabotażu powiązany z hydra,</li>
+            <li>albo przeciwnie — ślad wskazuje, że ktoś już kiedyś próbował skażenie ograniczyć, ale metodami nie do przyjęcia dla Imperium.</li>
+          </ul>
+          <p>
+            Dzięki temu bohaterowie nie będą wiedzieli, czy zabójca prowadził ich ku prawdzie, czy w pułapkę.
+          </p>
+        </div>
+
+        <div class="players">
+          <h4>Dla graczy</h4>
+          <p class="readaloud">
+            Gdy wszystko się kończy, klasztor wydaje się mniejszy.
+            Jakby wraz z ogniem uleciało z niego coś więcej niż tylko moc.
+            Na zewnątrz wiatr niesie od oceanu smak soli i chemii. W dole, w trzewiach martwego lewiatana,
+            ludzie wracają do pracy. Piły znów wgryzają się w kość. Lampy tranowe rozpalają się jedna po drugiej.
+          </p>
+          <p class="readaloud">
+            Imperium trwa dalej.
+            Nawet po cudzie.
+            Nawet po herezji.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tropy">
+      <h2>Tropy, wskazówki i prowadzenie śledztwa</h2>
+
+      <div class="twocol">
+        <div class="card">
+          <span class="label">Trop twardy</span>
+          <p>Dokumenty Fyodora pokazują korelację między obecnością relikwii a wzrostem brutalnych „oczyszczeń”.</p>
+        </div>
+        <div class="card">
+          <span class="label">Trop miękki</span>
+          <p>Świadectwa nowicjuszek mówiących o „świętym płomieniu”, który gardzi litością.</p>
+        </div>
+        <div class="card">
+          <span class="label">Trop duchowy</span>
+          <p>Strix wyczuwa zafałszowaną aurę: świętość, pod którą kryje się obca nuta.</p>
+        </div>
+        <div class="card">
+          <span class="label">Trop religijny</span>
+          <p>Toudi dostrzega, że coś w kulcie wokół relikwii jest formalnie poprawne, ale wypaczone w intencji.</p>
+        </div>
+      </div>
+
+      <div class="gm">
+        <h4>Tylko dla MG</h4>
+        <p>
+          Jeżeli śledztwo zacznie zwalniać, użyj jednego z przyspieszaczy:
+        </p>
+        <ul>
+          <li>ktoś próbuje ukraść lub zniszczyć część archiwum,</li>
+          <li>Rico zdobywa ważny trop od pracownika portowego lub adepta administratum,</li>
+          <li>bohaterowie trafiają na przesłuchiwaną siostrę / pokutnicę, która była przy translacji relikwii,</li>
+          <li>Strix ma krótki, bardzo nieprzyjemny przebłysk związany z Charybdionem.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="npc">
+      <h2>NPC i gotowe nuty dialogowe</h2>
+
+      <h3>Rico</h3>
+      <div class="boxed">
+        <p><em>„Nie ufam rzeczom, które każą ludziom cierpieć bardziej, niż trzeba. Nawet kiedy są złote i święte.”</em></p>
+        <p><em>„Papier zawsze znajdzie powód. Ktoś musi jeszcze znaleźć sumienie.”</em></p>
+        <p><em>„Jak trzeba będzie wejść tam pierwszym, to wejdę. Tylko nie każcie mi udawać, że to normalne miejsce.”</em></p>
+      </div>
+
+      <h3>Astartes</h3>
+      <div class="boxed">
+        <p><em>„Hydra rzadko kłamie wprost. Woli, by człowiek sam wybrał to kłamstwo, które najbardziej mu odpowiada.”</em></p>
+        <p><em>„Jeśli to ich znak, to nie pytajcie, co chcieli powiedzieć. Pytajcie, kto skorzysta na tym, że go zobaczyliście.”</em></p>
+      </div>
+
+      <h3>Przeorysza klasztoru</h3>
+      <div class="boxed">
+        <p><em>„Miłosierdzie jest cenne tylko wobec tych, którzy jeszcze mogą być zbawieni.”</em></p>
+        <p><em>„Jeżeli płoniemy jaśniej niż inni, to dlatego, że ciemność wokół nas jest głębsza.”</em></p>
+      </div>
+
+      <div class="gm">
+        <h4>Tylko dla MG</h4>
+        <p>
+          Przeorysza nie powinna być karykaturą. Najlepiej działa jako osoba godna szacunku,
+          która została wypchnięta za daleko przez wpływ relikwii. Dzięki temu finał ma ciężar moralny.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Jak spiąć to ze scenariuszem Rico</h2>
+      <div class="gm">
+        <h4>Tylko dla MG</h4>
+        <p>
+          Po tej przygodzie bohaterowie powinni pamiętać Rico jako kogoś, kto:
+        </p>
+        <ul>
+          <li>pomógł odkryć prawdę,</li>
+          <li>ratował ludzi bez kalkulacji,</li>
+          <li>umiał sprzeciwić się zimnej procedurze,</li>
+          <li>nie był cynicznym zdrajcą, tylko człowiekiem z własnym kodeksem.</li>
+        </ul>
+        <p>
+          Dzięki temu jego późniejsza zdrada nie będzie „zwrotem akcji”, ale tragedią:
+          gracze zrozumieją, że zdradził nie dlatego, że był pusty lub zły, lecz dlatego,
+          że poszedł za logiką, która kiedyś wydawała się im właśnie najbardziej ludzka.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Skrót scenariusza w 8 punktach</h2>
+      <ol>
+        <li>Bohaterowie analizują notatkę przy ciele zabójcy i trafiają na trop Archiwum Fyodora.</li>
+        <li>Rico pomaga im dostać się do zapieczętowanego archiwum.</li>
+        <li>W dokumentach odkrywają związek relikwii „Oko Płomiennej Pomsty” z narastającą brutalnością Sororitas.</li>
+        <li>Ustalają, że relikwia została najpewniej sprofanowana i obecnie znajduje się na Charybdionie.</li>
+        <li>Potwierdzają znaczenie symbolu hydry u zaprzyjaźnionego Astartes, który nie wyjaśnia motywów Alpha Legionu.</li>
+        <li>Wyruszają na Charybdion i docierają do osady zbudowanej wewnątrz martwego lewiatana.</li>
+        <li>W klasztorze odkrywają, że relikwia wzmacnia fanatyzm i podsyca „świętą” brutalność.</li>
+        <li>Decydują, czy relikwię oczyścić, zniszczyć, czy zabezpieczyć — a Rico staje przy nich w chwili próby.</li>
+      </ol>
+
+      <p class="footer-note">
+        Ten scenariusz celowo zostawia kilka rzeczy niejednoznacznych. Właśnie to najlepiej pasuje
+        do Warhammera 40,000: prawda istnieje, ale rzadko przychodzi bez kosztu, bez krwi i bez cienia wątpliwości.
+      </p>
+    </section>
+  </div>
+</body>
+</html>
