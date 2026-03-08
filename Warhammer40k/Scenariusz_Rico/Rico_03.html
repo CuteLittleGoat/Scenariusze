@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scenariusz_01_2026-03-03 — „Jądro Popiołu” (wersja szlifowana)</title>
+  <style>
+    :root {
+      --bg: #070b12;
+      --bg-2: #0d1420;
+      --panel: rgba(18, 24, 35, 0.88);
+      --panel-2: rgba(26, 22, 18, 0.88);
+      --line: rgba(214, 173, 96, 0.22);
+      --line-strong: rgba(214, 173, 96, 0.45);
+      --gold: #d9b166;
+      --gold-soft: #c99a4d;
+      --text: #e8dfd2;
+      --muted: #bfb5a7;
+      --shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --radius-sm: 16px;
+      --sidebar-width: 320px;
+
+      /* bazowa skala fontów */
+      --font-scale: 1;
+
+      --font-base: calc(15px * var(--font-scale));
+      --font-small: calc(0.95rem * var(--font-scale));
+      --font-h1: calc(2.2rem * var(--font-scale));
+      --font-h2: calc(1.8rem * var(--font-scale));
+      --font-h3: calc(1.2rem * var(--font-scale));
+      --font-h4: calc(1.05rem * var(--font-scale));
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top, rgba(80, 100, 140, 0.12), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(140, 100, 50, 0.1), transparent 30%),
+        linear-gradient(180deg, #05080d 0%, #08111d 100%);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: var(--font-base);
+      line-height: 1.7;
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 18px;
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      background:
+        linear-gradient(180deg, rgba(9, 14, 22, 0.96) 0%, rgba(7, 11, 18, 0.96) 100%);
+      box-shadow: inset -1px 0 0 rgba(214, 173, 96, 0.08);
+      overflow-y: auto;
+    }
+
+    .sidebar h2 {
+      margin: 0 0 18px 0;
+      color: var(--gold);
+      font-size: 1.1rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      line-height: 1.35;
+    }
+
+    .font-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 24px 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(217,177,102,0.04));
+      box-shadow: var(--shadow);
+    }
+
+    .font-controls-label {
+      color: var(--muted);
+      font-size: 0.88rem;
+      flex: 1;
+    }
+
+    .font-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(217,177,102,0.12), rgba(255,255,255,0.03));
+      color: var(--gold);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .font-btn:hover {
+      transform: translateY(-1px);
+      background: linear-gradient(180deg, rgba(217,177,102,0.2), rgba(255,255,255,0.05));
+      color: #fff0cf;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .nav-links a {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid transparent;
+      border-radius: 18px;
+      padding: 16px 18px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: 0.25s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      transform: translateX(4px);
+      color: #fff3dc;
+      border-color: var(--line-strong);
+      background: linear-gradient(90deg, rgba(217,177,102,0.12), rgba(255,255,255,0.02));
+      outline: none;
+    }
+
+    .content {
+      padding: 34px 40px 60px;
+      max-width: 1500px;
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.04), rgba(217,177,102,0.03)),
+        rgba(17, 23, 34, 0.85);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 30px 34px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px 0;
+      color: var(--gold);
+      font-size: var(--font-h1);
+      line-height: 1.15;
+    }
+
+    .hero .lead {
+      margin: 0 0 18px 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .hero .summary-box {
+      background: linear-gradient(90deg, rgba(18,24,35,0.85), rgba(35,27,18,0.72));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+    }
+
+    .hero .summary-box h3 {
+      margin: 0 0 10px 0;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 1.05rem;
+    }
+
+    .stage {
+      margin-bottom: 26px;
+      background:
+        linear-gradient(180deg, rgba(22, 28, 40, 0.9), rgba(13, 18, 28, 0.92));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .stage-header {
+      width: 100%;
+      border: none;
+      background:
+        linear-gradient(90deg, rgba(217,177,102,0.08), rgba(255,255,255,0.01));
+      color: inherit;
+      padding: 24px 28px 18px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      transition: background 0.25s ease;
+    }
+
+    .stage-header:hover {
+      background:
+        linear-gradient(90deg, rgba(217,177,102,0.12), rgba(255,255,255,0.02));
+    }
+
+    .stage-header-text h2 {
+      margin: 0 0 4px 0;
+      color: var(--gold);
+      font-size: var(--font-h2);
+      line-height: 1.2;
+    }
+
+    .stage-header-text p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .arrow {
+      flex-shrink: 0;
+      font-size: 1.35rem;
+      color: var(--gold);
+      transition: transform 0.25s ease;
+      margin-top: 2px;
+    }
+
+    .stage.collapsed .arrow {
+      transform: rotate(-90deg);
+    }
+
+    .stage-content {
+      padding: 0 26px 28px;
+    }
+
+    .stage.collapsed .stage-content {
+      display: none;
+    }
+
+    .mini-summary {
+      margin: 0 0 22px 0;
+      background: linear-gradient(90deg, rgba(19,26,37,0.92), rgba(29,34,42,0.8));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 20px 22px;
+    }
+
+    .mini-summary h3 {
+      margin: 0 0 10px 0;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 1rem;
+    }
+
+    .mini-summary p {
+      margin: 0;
+      font-size: 0.98rem;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      border-radius: 22px;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(17,24,35,0.95), rgba(29,24,18,0.78));
+      min-height: 230px;
+    }
+
+    .card.mg {
+      background: linear-gradient(135deg, rgba(41,31,20,0.88), rgba(21,24,31,0.95));
+    }
+
+    .card.players {
+      background: linear-gradient(135deg, rgba(17,24,35,0.95), rgba(18,32,40,0.85));
+    }
+
+    .card h3 {
+      margin: 0 0 14px 0;
+      color: #f0bd69;
+      font-size: var(--font-h3);
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .footer-space {
+      height: 20px;
+    }
+
+    @media (max-width: 1100px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+
+      .content {
+        padding: 24px 20px 50px;
+      }
+
+      .columns {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero h1 {
+        font-size: calc(1.8rem * var(--font-scale));
+      }
+
+      .stage-header-text h2 {
+        font-size: calc(1.45rem * var(--font-scale));
+      }
+
+      .stage-header,
+      .stage-content,
+      .hero {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .stage-content {
+        padding-bottom: 22px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Nawigacja scenariusza</h2>
+
+      <div class="font-controls">
+        <span class="font-controls-label">Rozmiar tekstu</span>
+        <button class="font-btn" id="font-up" type="button" aria-label="Powiększ tekst">▲</button>
+        <button class="font-btn" id="font-down" type="button" aria-label="Pomniejsz tekst">▼</button>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#wprowadzenie">Wprowadzenie</a> <a href="#streszczenie">Streszczenie</a> <a href="#postacie-bez-statystyk">Postacie (bez statystyk)</a> <a href="#tajna-misja-scena-na-mostku-rozbudowana-sekwencja">Tajna misja — scena na mostku (rozbudowana sekwencja)</a> <a href="#ladunek-atomowy-propozycja-lore-owo-spojna">Ładunek „atomowy” — propozycja lore-owo spójna</a> <a href="#etapy-i-v">Etapy I–V</a> <a href="#zwiadowca-astartes-fragment-wypowiedzi-by-przekonac-bg">Zwiadowca Astartes — fragment wypowiedzi, by przekonać BG</a> <a href="#final-koniec-scenariusza-monolog-rico-propozycja">Finał (koniec scenariusza): monolog Rico + propozycja</a> <a href="#uwagi-mg-krotko-bez-mechaniki">Uwagi MG (krótko, bez mechaniki)</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section class="hero" id="wprowadzenie">
+        <h1>„Jądro Popiołu” — finał kampanii (Gilead Primus, post-apo, vibe „Apocalypse Now”)</h1>
+        <p class="lead">„Jądro Popiołu” — finał kampanii (Gilead Primus, post-apo, vibe „Apocalypse Now”) Tone duszne pustkowia, toksyczne burze pyłowe i chemiczne fronty, moralna erozja, charyzmatyczny „Kurtz” w mundurze Imperium. Motyw „Pamiętaj komu służysz” → lojalność wobec idei...</p>
+
+        <div class="summary-box">
+          <h3>Skrót scenariusza</h3>
+          <p>„Jądro Popiołu” — finał kampanii (Gilead Primus, post-apo, vibe „Apocalypse Now”) Tone duszne pustkowia, toksyczne burze pyłowe i chemiczne fronty, moralna erozja, charyzmatyczny „Kurtz” w mundurze Imperium. Motyw „Pamiętaj komu służysz” → lojalność wobec idei Imperium vs lojalność wobec ludzi (i podszepty Zmiany). Stawka ładunek „atomowy” zdolny unicestwić fundamenty miasta-ula / wymazać region z mapy. Uwaga lore promieniowanie jest „punktowe” (stare strefy skażenia, relikty, ruiny), a nie domyślnym opisem całego klimatu. Streszczenie Postacie Tajna misja — mostek Ładunek „atomowy” Etapy I–V Zwiadowca Astartes — dialog Finał (koniec scenariusza) Uwagi MG</p>
+        </div>
+      </section>
+
+      <section class="stage" id="streszczenie">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Streszczenie</h2>
+            <p>BG dostają od Rogue Tradera Varoniusa misję „po cichu”: odnaleźć Rico Williamsa, który porzucił rozkazy, zebrał wygnanych mutantów i prowadzi ich przez skażone pustkowia ku „Nowemu Imperium”. Varonius przejął fragmenty transmisji vox: „Imperium was odrzuciło. ...</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>BG dostają od Rogue Tradera Varoniusa misję „po cichu”: odnaleźć Rico Williamsa, który porzucił rozkazy, zebrał wygnanych mutantów i prowadzi ich przez skażone pustkowia ku „Nowemu Imperium”. Varonius przejął fragmenty transmisji vox: „Imperium was odrzuciło. ...</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              </div>
+    <div class="bd">
+      <div class="callout">
+        BG dostają od Rogue Tradera Varoniusa misję „po cichu”: odnaleźć Rico Williamsa, który porzucił rozkazy, zebrał wygnanych mutantów i prowadzi ich przez skażone pustkowia ku „Nowemu Imperium”.
+        Varonius przejął fragmenty transmisji vox: <span class="quote">„Imperium was odrzuciło. Ja dam wam nowy cel.”</span>
+        Żeby sprawa nie wypłynęła, BG mają działać lądem — z ładunkiem, który w praktyce jest „bombą atomową” dla fundamentów i infrastruktury ula.
+      </div>
+
+      <div class="grid two" style="margin-top:12px">
+        <div class="box">
+          <div class="k">Konstrukcja „Heart of Darkness”</div>
+          <ul class="bullets">
+            <li>Każdy etap = kolejna warstwa prawdy o Rico (żołnierz → prawodawca → prorok).</li>
+            <li>Coraz mniej Imperium, coraz więcej pustkowia, improwizacji i wiary w „cel”.</li>
+            <li>Tzeentch nie jest „czarami” — jest praktycznym wzorem, który zaczyna działać.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <div class="k">Punkt ciężkości</div>
+          <ul class="bullets">
+            <li>Finał to rozmowa i propozycja Rico.</li>
+            <li>Scenariusz celowo nie rozpisuje konsekwencji — zostawione na improwizację MG.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="npc">
+    <div class="hd">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <p>Brak osobnego opisu dla graczy — wykorzystaj opis MG i dopasuj na sesji.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="postacie-bez-statystyk">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Postacie (bez statystyk)</h2>
+            <p>Rico Williams („Kurtz”) Dawniej służbista; dziś spokojny reformator. Wierzy, że ratuje Imperium — i nie widzi, że jest pionkiem Zmiany. Mówi o „celu”, „korekcie”, „porządku”, „drodze”. Nie mówi „Chaos”. Podszepty to dla niego „sumienie” i „wzór”. Relacja z BG:...</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Rico Williams („Kurtz”) Dawniej służbista; dziś spokojny reformator. Wierzy, że ratuje Imperium — i nie widzi, że jest pionkiem Zmiany. Mówi o „celu”, „korekcie”, „porządku”, „drodze”. Nie mówi „Chaos”. Podszepty to dla niego „sumienie” i „wzór”. Relacja z BG:...</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              </div>
+    <div class="bd">
+      <div class="grid three">
+        <div class="box">
+          <h3>Rico Williams („Kurtz”)</h3>
+          <div class="muted">Dawniej służbista; dziś spokojny reformator. Wierzy, że ratuje Imperium — i nie widzi, że jest pionkiem Zmiany.</div>
+          <ul class="bullets">
+            <li>Mówi o „celu”, „korekcie”, „porządku”, „drodze”.</li>
+            <li>Nie mówi „Chaos”. Podszepty to dla niego „sumienie” i „wzór”.</li>
+            <li>Relacja z BG: od konfliktu do szacunku (ważne w finale).</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <h3>Rogue Trader Varonius</h3>
+          <div class="muted">Polityk i gracz frakcyjny. Misja musi być dyskretna; Varonius chce „wyciąć problem” i zachować kontrolę narracji.</div>
+          <ul class="bullets">
+            <li>Wydaje rozkaz jak transakcję: bez emocji, z kalkulacją ryzyka.</li>
+            <li>Wie, że BG są skuteczni — i że mogą być trudni do kontroli.</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <h3>Lady Taleria Fylamon (Astra Militarum)</h3>
+          <div class="muted">Rywalka Varoniusa. Obserwuje rejon. Zrzut orbitalny zwróciłby uwagę i zostawiłby podpis polityczny.</div>
+          <ul class="bullets">
+            <li>Jej obecność wymusza „podróż lądem”.</li>
+            <li>Jest cieniem w tle: nie musi wejść na scenę, by była groźna.</li>
+          </ul>
+        </div>
+      </div>
+
+      <details style="margin-top:12px">
+        <summary>Postacie wspierające</summary>
+        <div class="grid two" style="margin-top:10px">
+          <div class="box">
+            <h3>Nieznany tech-kapłan Mechanicusa („Konwojent Reliktu”)</h3>
+            <ul class="bullets">
+              <li>Wnosi ładunek i uczy rytuału uzbrojenia.</li>
+              <li>Mówi chłodno i liturgicznie: „procedura jest wiarą”.</li>
+              <li><b>Bezpiecznik lore:</b> ładunek nie jest „prezentem” — to <b>opieczętowany depozyt</b> wydany w trybie kryzysowym. Tech-kapłan ma <b>mechaniczny klucz/znacznik autoryzacji</b> i nadzoruje procedurę.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>Zwiadowca Astartes</h3>
+            <ul class="bullets">
+              <li>Dobrowolnie dołączył do Rico.</li>
+              <li>Motywacja: „logika celu” + twardy detal z jego doświadczenia (opis niżej).</li>
+              <li><b>Bezpiecznik lore:</b> to nie nagła „zmiana strony” — to misja, która zaczęła się jako <b>infiltracja</b> (lub doktryna zakonu stawiająca „cel” ponad papierem), a potem weszła w strefę, gdzie Rico trafia w jego prawdę.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section id="mostek">
+    <div class="hd">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <p>Brak osobnego opisu dla graczy — wykorzystaj opis MG i dopasuj na sesji.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="tajna-misja-scena-na-mostku-rozbudowana-sekwencja">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Tajna misja — scena na mostku (rozbudowana sekwencja)</h2>
+            <p>Beat po beacie BG przychodzą na mostek. Varonius głośno: „Każdy kto nie jest niezbędny — WYJŚĆ.” Zostaje szkieletowa załoga potrzebna do funkcjonowania okrętu. Przyboczny Varoniusa (znany BG) również wychodzi — sygnał, że sprawa jest poważna. W cieniu stoi prz...</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Beat po beacie BG przychodzą na mostek. Varonius głośno: „Każdy kto nie jest niezbędny — WYJŚĆ.” Zostaje szkieletowa załoga potrzebna do funkcjonowania okrętu. Przyboczny Varoniusa (znany BG) również wychodzi — sygnał, że sprawa jest poważna. W cieniu stoi prz...</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              </div>
+    <div class="bd">
+      <div class="grid two">
+        <div class="box">
+          <h3>Beat po beacie</h3>
+          <ol class="bullets">
+            <li>BG przychodzą na mostek.</li>
+            <li>Varonius głośno: <span class="quote">„Każdy kto nie jest niezbędny — WYJŚĆ.”</span></li>
+            <li>Zostaje szkieletowa załoga potrzebna do funkcjonowania okrętu.</li>
+            <li>Przyboczny Varoniusa (znany BG) również wychodzi — sygnał, że sprawa jest poważna.</li>
+            <li>W cieniu stoi przedstawiciel Adeptus Mechanicus: bez emocji, bez „zaufania” — tylko procedura.</li>
+            <li>Varonius: Rico zdradził — przejęli część transmisji VOX.</li>
+            <li>Odtwarza fragment: <span class="quote">„Imperium was odrzuciło. Ja dam wam nowy cel.”</span></li>
+            <li>Varonius: flota zakłóciła sygnał, żeby zdrada nie wyszła na jaw.</li>
+            <li>Varonius: wysłano zwiadowcę Astartes. Nie wrócił.</li>
+            <li>Mechanicus kładzie na stół ciężki „plecak relikwiarz” przewodów i przełączników.</li>
+            <li>Varonius: to ładunek zdolny unicestwić fundamenty miasta-ula (w praktyce: „bomba atomowa”).</li>
+            <li><b>Mechanicus (krótko):</b> „Depozyt wydany w trybie zagrożenia. Autoryzacja pozostaje przy mnie. Wy — niesiecie.”</li>
+            <li>Mechanicus demonstruje uzbrojenie, zabezpieczenia, detonację; uczy krótkiej „modlitwy do maszyny”.</li>
+            <li>Varonius: nie mogą wykonać zrzutu (Fylamon obserwuje). BG jadą lądem przez pustkowia.</li>
+            <li>Pojazd czeka w hangarze. Mechanicus sugeruje filtry.</li>
+          </ol>
+        </div>
+
+        <div class="box">
+          <h3>Jak to zagrać (klimat)</h3>
+          <ul class="bullets">
+            <li><b>Varonius</b> mówi jak ktoś, kto porządkuje chaos w tabelce strat.</li>
+            <li><b>Mechanicus</b> traktuje ładunek jak relikwię — sacrum zagłady (ale też: własność, kontrola, klucze).</li>
+            <li><b>Jedna linia, która ma zaboleć:</b> Varonius może na chwilę przywołać słowa BG: <span class="quote">„Pamiętaj komu służysz.”</span> i dodać: „Rico wziął to zbyt dosłownie.”</li>
+          </ul>
+          <div class="callout warn">
+            Ważne: nie rozpisuj testów i mechaniki — tylko obrazy, procedury, ciężar decyzji.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ladunek">
+    <div class="hd">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <p>Brak osobnego opisu dla graczy — wykorzystaj opis MG i dopasuj na sesji.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="ladunek-atomowy-propozycja-lore-owo-spojna">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Ładunek „atomowy” — propozycja lore-owo spójna</h2>
+            <p>Cel: gracze mają to rozumieć jako „bomba atomowa” i ostateczna zagłada, ale w lore 40k wiarygodna jako relikwia Mechanicusa. Propozycja: Thermonuclear Demolition Relic (archeotech, „walizkowy atom”) Nazwa w świecie (przykłady do wyboru): „Relikt Słońca” / „Sar...</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Cel: gracze mają to rozumieć jako „bomba atomowa” i ostateczna zagłada, ale w lore 40k wiarygodna jako relikwia Mechanicusa. Propozycja: Thermonuclear Demolition Relic (archeotech, „walizkowy atom”) Nazwa w świecie (przykłady do wyboru): „Relikt Słońca” / „Sar...</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              </div>
+    <div class="bd">
+      <div class="callout">
+        Cel: gracze mają to rozumieć jako „bomba atomowa” i ostateczna zagłada, ale w lore 40k wiarygodna jako relikwia Mechanicusa.
+      </div>
+
+      <div class="grid two" style="margin-top:12px">
+        <div class="box">
+          <h3>Propozycja: <span class="mono">Thermonuclear Demolition Relic</span> (archeotech, „walizkowy atom”)</h3>
+          <ul class="bullets">
+            <li><b>Nazwa w świecie (przykłady do wyboru):</b> „Relikt Słońca” / „Sarkofag Helio-IX” / „Cinder-Sun Pattern” / „Ładunek Termojądrowy typu ‘Ashmaker’”.</li>
+            <li><b>Opis:</b> przenośny ładunek termojądrowy (fuzja), zamknięty w ołowiano-ceramicznym relikwiarzu, z pękiem kabli, przełączników i blokad rytualnych.</li>
+            <li><b>Skala skutków (fabularnie):</b> nie „Exterminatus planety”, ale <b>lokalny kataklizm</b> — zdmuchnięcie dzielnic, stopienie podłoża, zapadnięcie fundamentów ula, długotrwały opad (toksyczny i radiologiczny) w promieniu „mapowego wymazania”. Dla ludzi: „to atom”.</li>
+            <li><b>Dlaczego plecak?</b> bo to <b>ładunek saperski/abordażowy</b> z czasów wojen, gdy „miasta-ule” obalało się od środka; Mechanicus przechowuje takie rzeczy jako zakazane relikwie.</li>
+            <li><b>Dlaczego Mechanicus się zgadza?</b> bo to nie „zgoda”, tylko <b>procedura kryzysowa</b>: depozyt wychodzi tylko z konwojentem i tylko na podpis Varoniusa. Jeśli misja padnie — relikt ma wrócić albo zostać „zapieczętowany w wieczności”.</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <h3>Jak go pokazać na scenie</h3>
+          <ul class="bullets">
+            <li>Jest ciężki, nienaturalnie „gęsty”; wydaje cichy dźwięk chłodzenia / pracy osłon.</li>
+            <li>Mechanicus mówi o nim jak o świętości: „to nie broń, to oświadczenie wobec rzeczywistości”.</li>
+            <li>Uzbrojenie to rytuał: blokady, sekwencje, „katechizm”.</li>
+            <li>Jeden detal, który sprzedaje „atom”: tabliczka z piktogramem „promieniowania” i ostrzeżeniem w formie run/ikon, bez czytelnego tekstu.</li>
+          </ul>
+          <div class="callout ok">
+            Efekt lore: zachowujesz „nuklearną ostateczność” bez wchodzenia w dyskusję „czy cyclonic to plecak”.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="etapy">
+    <div class="hd">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <p>Brak osobnego opisu dla graczy — wykorzystaj opis MG i dopasuj na sesji.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="etapy-i-v">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Etapy I–V</h2>
+            <p>ETAP I — Desant (pustkowie, quad, posterunek, ciała) Założenia BG zostają wysadzeni/zrzuceni na pustkowiu i jadą ku rejonowi ostatniego sygnału Rico (sygnał był rozproszony). Pojazd: quad z przyczepką (2-osobowy). Środowisko: toksyczny pył, chemiczne błota, da...</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>ETAP I — Desant (pustkowie, quad, posterunek, ciała) Założenia BG zostają wysadzeni/zrzuceni na pustkowiu i jadą ku rejonowi ostatniego sygnału Rico (sygnał był rozproszony). Pojazd: quad z przyczepką (2-osobowy). Środowisko: toksyczny pył, chemiczne błota, da...</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              </div>
+    <div class="bd">
+
+      <details open>
+        <summary>ETAP I — Desant (pustkowie, quad, posterunek, ciała)</summary>
+        <div class="grid two" style="margin-top:10px">
+          <div class="box">
+            <h3>Założenia</h3>
+            <ul class="bullets">
+              <li>BG zostają wysadzeni/zrzuceni na pustkowiu i jadą ku rejonowi ostatniego sygnału Rico (sygnał był rozproszony).</li>
+              <li>Pojazd: quad z przyczepką (2-osobowy).</li>
+              <li>Środowisko: toksyczny pył, chemiczne błota, dalekie błyski burz pyłowych; „gorące” strefy promieniowania tylko punktowo (stare ruiny, kratery, relikty).</li>
+            </ul>
+            <div class="callout">
+              Prowadź to jak „rzekę” z Apocalypse Now: monotonia drogi + nagłe wyspy grozy.
+            </div>
+          </div>
+          <div class="box">
+            <h3>Posterunek i martwi towarzysze Rico</h3>
+            <ul class="bullets">
+              <li>Po czasie BG docierają do porzuconego posterunku i do ciał dawnych towarzyszy Rico.</li>
+              <li>To część oddziału, która sprzeciwiła się: oni chcieli „wybić mutantów”; Rico zobaczył porzuconych ludzi.</li>
+              <li>BG znajdują fragment vox-logu rejestrujący urwaną przemowę Rico do podwładnych (handout).</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>ETAP II — Pustkowia (ślady exodusu, Nowy Regulamin, wraki konwojów)</summary>
+        <div class="grid two" style="margin-top:10px">
+          <div class="box">
+            <h3>Ślady działalności Rico</h3>
+            <ul class="bullets">
+              <li>Widać, że prowadził tłum: wiele śladów, obozowiska, puszki, racje, improwizowane punkty postoju.</li>
+              <li>Znajdowane kartki „Nowego Regulaminu” (handout).</li>
+              <li>W tle (subtelnie): znaki, które „działają” lepiej niż powinny (podszept Zmiany jako praktyka).</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>Wraki konwojów</h3>
+            <ul class="bullets">
+              <li>Splądrowane konwoje z bronią, lekami i żywnością — zrobione „zorganizowanie”, nie chaotycznie.</li>
+              <li>Graffiti: <span class="quote">„Ten cud jest dowodem na słuszność naszej drogi!”</span></li>
+              <li>Pojawiają się proporce z przerobionym symbolem Imperium (opisowo: dwugłowy orzeł + fraktalne „pióra” Zmiany).</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>ETAP III — Ludzie Rico (osada mutantów, strach przed czystką)</summary>
+        <div class="grid two" style="margin-top:10px">
+          <div class="box">
+            <h3>Osada</h3>
+            <ul class="bullets">
+              <li>Post-apo slumsy: blacha, plandeki, szkielety maszyn, destylatory, barykady.</li>
+              <li>Rico przechodził tędy; część mieszkańców porzuciła domy i ruszyła za nim.</li>
+              <li>Nie był agresywny — obiecywał lepsze życie i „cel”.</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>Interakcja</h3>
+            <ul class="bullets">
+              <li>Mutanci nie chcą wpuścić BG. Boją się czystki.</li>
+              <li>Mogą zaoferować zasoby, by szybciej się pozbyć BG (filtry, paliwo, wskazówki).</li>
+              <li>Podszept Zmiany w tle: Rico zostawia „znaki drogi”, które realnie pomagają przeżyć.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>ETAP IV — Zwiadowca Astartes (infiltracja, „logika celu”, zaproszenie)</summary>
+        <div class="bd">
+          <ul class="bullets">
+            <li>Zwiadowca dołączył do Rico — ale zaczęło się to jako <b>infiltracja/rozpoznanie</b> (rozkaz: odnaleźć, zrozumieć, wskazać punkt uderzenia).</li>
+            <li>W pewnym momencie uznał, że „papier” zjada „cel”. Rico uderzył w jego doświadczenie jak ostrze.</li>
+            <li>Odnajdzie BG i spróbuje ich przekonać, by przyszli na spotkanie i wysłuchali Rico.</li>
+            <li>Koordynaty: baza w opuszczonej kopalni odkrywkowej.</li>
+          </ul>
+          <div class="callout ok">
+            Klucz: Astartes nie mówi jak kultysta. Mówi jak ktoś, kto zderzył „cel” z administracją — i wygrał w nim odruch wojownika.
+          </div>
+        </div>
+      </details>
+
+      <details>
+        <summary>ETAP V — Sanktuarium (kopalnia odkrywkowa, amfiteatr, obóz)</summary>
+        <div class="grid two" style="margin-top:10px">
+          <div class="box">
+            <h3>Miejsce</h3>
+            <ul class="bullets">
+              <li>Gigantyczna odkrywka, jak amfiteatr.</li>
+              <li>Na brzegach mutanci stawiają namioty i prowizoryczne budynki, zadaszenia w budowie.</li>
+              <li>Wszyscy zdają się dobrze zorganizowani (warty, kuchnie, medycy, magazyny).</li>
+            </ul>
+          </div>
+          <div class="box">
+            <h3>Atmosfera</h3>
+            <ul class="bullets">
+              <li>Nie ma tu histerii — jest niepokojący spokój i poczucie sensu.</li>
+              <li>Symbole Imperium są „poprawione” (opisowo) i noszone jak obietnica.</li>
+              <li>Podszept Zmiany objawia się jako „działający porządek” — nie czary.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <section id="astartes">
+    <div class="hd">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <p>Brak osobnego opisu dla graczy — wykorzystaj opis MG i dopasuj na sesji.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="zwiadowca-astartes-fragment-wypowiedzi-by-przekonac-bg">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Zwiadowca Astartes — fragment wypowiedzi, by przekonać BG</h2>
+            <p>Motywacja: „logika celu”. Twardy detal: zwiadowca widział, jak imperialna administracja poświęciła ludzi „dla papieru” — i Rico jako pierwszy nazwał to zdradą celu. Bezpiecznik lore: zaczęło się jako infiltracja/rozpoznanie. „Nie wrócił”, bo przestał ufać temu...</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Motywacja: „logika celu”. Twardy detal: zwiadowca widział, jak imperialna administracja poświęciła ludzi „dla papieru” — i Rico jako pierwszy nazwał to zdradą celu. Bezpiecznik lore: zaczęło się jako infiltracja/rozpoznanie. „Nie wrócił”, bo przestał ufać temu...</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              </div>
+    <div class="bd">
+      <div class="callout">
+        Motywacja: „logika celu”. Twardy detal: zwiadowca widział, jak imperialna administracja poświęciła ludzi „dla papieru” — i Rico jako pierwszy nazwał to zdradą celu.
+        <br><span class="muted">Bezpiecznik lore: zaczęło się jako infiltracja/rozpoznanie. „Nie wrócił”, bo przestał ufać temu, kto liczy trupy w rubrykach.</span>
+      </div>
+
+      <div class="box" style="margin-top:12px">
+        <div class="k">Monolog / rozmowa (do odegrania; mów spokojnie, bez patosu)</div>
+        <div class="hr"></div>
+        <div class="quote">
+          „Nie przyszedłem po was, żeby was zabić. Gdybym miał taki rozkaz — już byście nie stali.”
+          <br><br>
+          „Wysłano mnie, bo ktoś uznał, że to sprawa honoru. Ja widzę w tym rachunek.”
+          <br><br>
+          „Widziałem tu ludzi umierających w kolejkach po filtry, bo formularz miał złą pieczęć. Widziałem transport leków cofnięty, bo brakowało jednego podpisu. Widziałem oddział, który kazał wrócić na skażony szlak, bo ‘tak było w rozkazie’, choć każdy z nich wiedział, że to ich zabije.”
+          <br><br>
+          „To nie była dyscyplina. To była ślepota.”
+          <br><br>
+          „Rico powiedział wtedy jedno zdanie: <span class="mono">żołnierz nie służy rozkazowi — żołnierz służy celowi</span>.”
+          <br><br>
+          „Nie mówię wam, żebyście go poparli. Mówię wam, żebyście go wysłuchali.”
+          <br><br>
+          „On wie, co macie w plecaku. I mimo to kazał mi was przyprowadzić. Bo uważa, że jesteście lepsi niż cudzy strach.”
+        </div>
+        <div class="hr"></div>
+        <div class="muted sig">Wskazówka MG: Astartes nie negocjuje jak handlarz. On „stwierdza fakty”, a to ma brzmieć bardziej niepokojąco niż groźby.</div>
+      </div>
+
+      <details style="margin-top:12px">
+        <summary>Jedna krótka riposta, jeśli BG atakują go słownie</summary>
+        <ul class="bullets">
+          <li><span class="quote">„Jeśli nazywasz to zdradą, to nazwij też zdradą tych, którzy porzucili ludzi dla pieczęci.”</span></li>
+        </ul>
+      </details>
+    </div>
+  </section>
+
+  <section id="final">
+    <div class="hd">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <p>Brak osobnego opisu dla graczy — wykorzystaj opis MG i dopasuj na sesji.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="final-koniec-scenariusza-monolog-rico-propozycja">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Finał (koniec scenariusza): monolog Rico + propozycja</h2>
+            <p>Wejście Rico Rico jest spokojny. Wita BG jak dawnych przyjaciół. Nie robi teatru. Nie grozi. Nie prosi o litość. W jego spokoju jest coś „nieznośnie logicznego”. Cytaty (zostawione) „Imperium potrzebuje nowej drogi. Ja ją widzę.” „Zasady są po to, by prowadzić...</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Wejście Rico Rico jest spokojny. Wita BG jak dawnych przyjaciół. Nie robi teatru. Nie grozi. Nie prosi o litość. W jego spokoju jest coś „nieznośnie logicznego”. Cytaty (zostawione) „Imperium potrzebuje nowej drogi. Ja ją widzę.” „Zasady są po to, by prowadzić...</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              </div>
+    <div class="bd">
+      <div class="grid two">
+        <div class="box">
+          <h3>Wejście Rico</h3>
+          <ul class="bullets">
+            <li>Rico jest spokojny. Wita BG jak dawnych przyjaciół.</li>
+            <li>Nie robi teatru. Nie grozi. Nie prosi o litość.</li>
+            <li>W jego spokoju jest coś „nieznośnie logicznego”.</li>
+          </ul>
+
+          <h3>Cytaty (zostawione)</h3>
+          <ul class="bullets">
+            <li>„Imperium potrzebuje nowej drogi. Ja ją widzę.”</li>
+            <li>„Zasady są po to, by prowadzić do zwycięstwa. Jeśli nie prowadzą — należy je zmienić.”</li>
+            <li>„Pamiętaj komu służysz.” (Rico rozumie to jako służbę Imperium — nie dowódcom)</li>
+          </ul>
+        </div>
+
+        <div class="box">
+          <h3>Monolog (rdzeń)</h3>
+          <div class="callout">
+            Rico mówi o tym, że Imperium zapomniało, iż tworzą je ludzie. Że nie wolno nikogo porzucać — zwłaszcza tych, których zrodziły toksyny i polityka miasta-ula.
+            Mutanci nie są „potworami”; są rachunkiem, który Imperium wystawiło samo sobie.
+          </div>
+
+          <h3>„Iskra”</h3>
+          <ul class="bullets">
+            <li>Rico stanowczo odmawia stania na czele „Nowego Imperium”.</li>
+            <li>„Jestem iskrą, która wybuchnie płomieniem.”</li>
+          </ul>
+
+          <div class="hr"></div>
+          <h3>Propozycja Rico</h3>
+          <ul class="bullets">
+            <li>Rico wie doskonale o ładunku w plecaku.</li>
+            <li>Mówi, że BG mogą odciąć mu głowę i zanieść do Varoniusa jako dowód.</li>
+            <li>Ale żąda, by <b>zdetonowali ładunek na mostku Varoniusa</b>.</li>
+          </ul>
+
+          <div class="callout warn">
+            Scenariusz kończy się w tym miejscu: reakcje, decyzje i konsekwencje prowadź improwizacją na sesji.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="uwagi">
+    <div class="hd">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <p>Brak osobnego opisu dla graczy — wykorzystaj opis MG i dopasuj na sesji.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="uwagi-mg-krotko-bez-mechaniki">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Uwagi MG (krótko, bez mechaniki)</h2>
+            <p>Jak prowadzić „podszept Zmiany” (Tzeentch) bez fajerwerków Rico „przewiduje” burze i skażenie zbyt dobrze. Znaki drogi działają, jakby ktoś liczył wiatr za nich. Wzory pojawiają się w organizacji obozu, w układzie patroli, w symbolice (fraktalne pióra, „oczy” ...</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Jak prowadzić „podszept Zmiany” (Tzeentch) bez fajerwerków Rico „przewiduje” burze i skażenie zbyt dobrze. Znaki drogi działają, jakby ktoś liczył wiatr za nich. Wzory pojawiają się w organizacji obozu, w układzie patroli, w symbolice (fraktalne pióra, „oczy” ...</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              </div>
+    <div class="bd">
+      <div class="grid two">
+        <div class="box">
+          <h3>Jak prowadzić „podszept Zmiany” (Tzeentch) bez fajerwerków</h3>
+          <ul class="bullets">
+            <li>Rico „przewiduje” burze i skażenie zbyt dobrze.</li>
+            <li>Znaki drogi działają, jakby ktoś liczył wiatr za nich.</li>
+            <li>Wzory pojawiają się w organizacji obozu, w układzie patroli, w symbolice (fraktalne pióra, „oczy” w ornamentach).</li>
+            <li>Najgorsze jest to, że to jest użyteczne i ratuje życie — dlatego kusi.</li>
+          </ul>
+        </div>
+        <div class="box">
+          <h3>Jak prowadzić pustkowia (post-apo)</h3>
+          <ul class="bullets">
+            <li>Pył w zębach, filtry jak waluta, woda jak trucizna do oswojenia.</li>
+            <li>Ruiny są przemysłowe, nie romantyczne: rury, hałdy, szkielety maszyn.</li>
+            <li>W tle zawsze: horyzont burzy, metaliczny wiatr, chemiczne jeziora.</li>
+            <li><span class="muted">Promieniowanie pokazuj „punktowo”: przy ruinach, kraterach, starych zrzutach, reliktach. Reszta to toksyny i pył.</span></li>
+          </ul>
+        </div>
+      </div>
+      <details style="margin-top:12px">
+        <summary>Jedno zdanie, które spina całą przygodę</summary>
+        <div class="callout" style="margin-top:10px">
+          „Pamiętaj komu służysz.” — to zdanie jest zapalnikiem. Rico potraktował je jak objawienie.
+        </div>
+      </details>
+    </div>
+  </section>
+
+</div>
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <p>Brak osobnego opisu dla graczy — wykorzystaj opis MG i dopasuj na sesji.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="footer-space"></div>
+    </main>
+  </div>
+
+  <script>
+    const stages = document.querySelectorAll('.stage');
+
+    stages.forEach(stage => {
+      const button = stage.querySelector('.stage-header');
+
+      button.addEventListener('click', () => {
+        const isCollapsed = stage.classList.toggle('collapsed');
+        button.setAttribute('aria-expanded', String(!isCollapsed));
+      });
+    });
+
+    const root = document.documentElement;
+    const fontUp = document.getElementById('font-up');
+    const fontDown = document.getElementById('font-down');
+
+    let fontScale = 1;
+
+    function applyFontScale() {
+      root.style.setProperty('--font-scale', fontScale.toFixed(2));
+      localStorage.setItem('scenarioFontScale', fontScale.toFixed(2));
+    }
+
+    const savedScale = parseFloat(localStorage.getItem('scenarioFontScale'));
+    if (!isNaN(savedScale) && savedScale >= 0.8 && savedScale <= 1.4) {
+      fontScale = savedScale;
+      applyFontScale();
+    }
+
+    fontUp.addEventListener('click', () => {
+      if (fontScale < 1.4) {
+        fontScale += 0.1;
+        applyFontScale();
+      }
+    });
+
+    fontDown.addEventListener('click', () => {
+      if (fontScale > 0.8) {
+        fontScale -= 0.1;
+        applyFontScale();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Epilog kampanii – Cichy Dryf</title>
+  <style>
+    :root {
+      --bg: #070b12;
+      --bg-2: #0d1420;
+      --panel: rgba(18, 24, 35, 0.88);
+      --panel-2: rgba(26, 22, 18, 0.88);
+      --line: rgba(214, 173, 96, 0.22);
+      --line-strong: rgba(214, 173, 96, 0.45);
+      --gold: #d9b166;
+      --gold-soft: #c99a4d;
+      --text: #e8dfd2;
+      --muted: #bfb5a7;
+      --shadow: 0 0 30px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
+      --radius-sm: 16px;
+      --sidebar-width: 320px;
+
+      /* bazowa skala fontów */
+      --font-scale: 1;
+
+      --font-base: calc(15px * var(--font-scale));
+      --font-small: calc(0.95rem * var(--font-scale));
+      --font-h1: calc(2.2rem * var(--font-scale));
+      --font-h2: calc(1.8rem * var(--font-scale));
+      --font-h3: calc(1.2rem * var(--font-scale));
+      --font-h4: calc(1.05rem * var(--font-scale));
+    }
+
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background:
+        radial-gradient(circle at top, rgba(80, 100, 140, 0.12), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(140, 100, 50, 0.1), transparent 30%),
+        linear-gradient(180deg, #05080d 0%, #08111d 100%);
+      color: var(--text);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: var(--font-base);
+      line-height: 1.7;
+    }
+
+    body {
+      min-height: 100vh;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: var(--sidebar-width) 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 18px;
+      border-right: 1px solid rgba(255, 255, 255, 0.06);
+      background:
+        linear-gradient(180deg, rgba(9, 14, 22, 0.96) 0%, rgba(7, 11, 18, 0.96) 100%);
+      box-shadow: inset -1px 0 0 rgba(214, 173, 96, 0.08);
+      overflow-y: auto;
+    }
+
+    .sidebar h2 {
+      margin: 0 0 18px 0;
+      color: var(--gold);
+      font-size: 1.1rem;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      line-height: 1.35;
+    }
+
+    .font-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 24px 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(217,177,102,0.04));
+      box-shadow: var(--shadow);
+    }
+
+    .font-controls-label {
+      color: var(--muted);
+      font-size: 0.88rem;
+      flex: 1;
+    }
+
+    .font-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--line-strong);
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(217,177,102,0.12), rgba(255,255,255,0.03));
+      color: var(--gold);
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .font-btn:hover {
+      transform: translateY(-1px);
+      background: linear-gradient(180deg, rgba(217,177,102,0.2), rgba(255,255,255,0.05));
+      color: #fff0cf;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .nav-links a {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border: 1px solid transparent;
+      border-radius: 18px;
+      padding: 16px 18px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: 0.25s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      transform: translateX(4px);
+      color: #fff3dc;
+      border-color: var(--line-strong);
+      background: linear-gradient(90deg, rgba(217,177,102,0.12), rgba(255,255,255,0.02));
+      outline: none;
+    }
+
+    .content {
+      padding: 34px 40px 60px;
+      max-width: 1500px;
+    }
+
+    .hero {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.04), rgba(217,177,102,0.03)),
+        rgba(17, 23, 34, 0.85);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 30px 34px;
+      margin-bottom: 30px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px 0;
+      color: var(--gold);
+      font-size: var(--font-h1);
+      line-height: 1.15;
+    }
+
+    .hero .lead {
+      margin: 0 0 18px 0;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .hero .summary-box {
+      background: linear-gradient(90deg, rgba(18,24,35,0.85), rgba(35,27,18,0.72));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+    }
+
+    .hero .summary-box h3 {
+      margin: 0 0 10px 0;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 1.05rem;
+    }
+
+    .stage {
+      margin-bottom: 26px;
+      background:
+        linear-gradient(180deg, rgba(22, 28, 40, 0.9), rgba(13, 18, 28, 0.92));
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .stage-header {
+      width: 100%;
+      border: none;
+      background:
+        linear-gradient(90deg, rgba(217,177,102,0.08), rgba(255,255,255,0.01));
+      color: inherit;
+      padding: 24px 28px 18px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      transition: background 0.25s ease;
+    }
+
+    .stage-header:hover {
+      background:
+        linear-gradient(90deg, rgba(217,177,102,0.12), rgba(255,255,255,0.02));
+    }
+
+    .stage-header-text h2 {
+      margin: 0 0 4px 0;
+      color: var(--gold);
+      font-size: var(--font-h2);
+      line-height: 1.2;
+    }
+
+    .stage-header-text p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .arrow {
+      flex-shrink: 0;
+      font-size: 1.35rem;
+      color: var(--gold);
+      transition: transform 0.25s ease;
+      margin-top: 2px;
+    }
+
+    .stage.collapsed .arrow {
+      transform: rotate(-90deg);
+    }
+
+    .stage-content {
+      padding: 0 26px 28px;
+    }
+
+    .stage.collapsed .stage-content {
+      display: none;
+    }
+
+    .mini-summary {
+      margin: 0 0 22px 0;
+      background: linear-gradient(90deg, rgba(19,26,37,0.92), rgba(29,34,42,0.8));
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 20px 22px;
+    }
+
+    .mini-summary h3 {
+      margin: 0 0 10px 0;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 1rem;
+    }
+
+    .mini-summary p {
+      margin: 0;
+      font-size: 0.98rem;
+    }
+
+    .columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      border-radius: 22px;
+      padding: 22px 24px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(17,24,35,0.95), rgba(29,24,18,0.78));
+      min-height: 230px;
+    }
+
+    .card.mg {
+      background: linear-gradient(135deg, rgba(41,31,20,0.88), rgba(21,24,31,0.95));
+    }
+
+    .card.players {
+      background: linear-gradient(135deg, rgba(17,24,35,0.95), rgba(18,32,40,0.85));
+    }
+
+    .card h3 {
+      margin: 0 0 14px 0;
+      color: #f0bd69;
+      font-size: var(--font-h3);
+    }
+
+    .card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .section-note {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-style: italic;
+    }
+
+    .footer-space {
+      height: 20px;
+    }
+
+    @media (max-width: 1100px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: relative;
+        height: auto;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+      }
+
+      .content {
+        padding: 24px 20px 50px;
+      }
+
+      .columns {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .hero h1 {
+        font-size: calc(1.8rem * var(--font-scale));
+      }
+
+      .stage-header-text h2 {
+        font-size: calc(1.45rem * var(--font-scale));
+      }
+
+      .stage-header,
+      .stage-content,
+      .hero {
+        padding-left: 18px;
+        padding-right: 18px;
+      }
+
+      .stage-content {
+        padding-bottom: 22px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <h2>Nawigacja scenariusza</h2>
+
+      <div class="font-controls">
+        <span class="font-controls-label">Rozmiar tekstu</span>
+        <button class="font-btn" id="font-up" type="button" aria-label="Powiększ tekst">▲</button>
+        <button class="font-btn" id="font-down" type="button" aria-label="Pomniejsz tekst">▼</button>
+      </div>
+
+      <nav class="nav-links">
+        <a href="#wprowadzenie">Wprowadzenie</a> <a href="#zalozenie-scenariusza">Założenie scenariusza</a> <a href="#rola-varoniusa">Rola Varoniusa</a> <a href="#etap-i-wezwanie-i-hangar">Etap I – Wezwanie i hangar</a> <a href="#etap-ii-lot-do-wraku">Etap II – Lot do wraku</a> <a href="#etap-iii-wejscie-na-poklad">Etap III – Wejście na pokład</a> <a href="#etap-iv-puste-korytarze">Etap IV – Puste korytarze</a> <a href="#etap-v-pierwsza-krew">Etap V – Pierwsza krew</a> <a href="#etap-vi-droga-na-mostek">Etap VI – Droga na mostek</a> <a href="#final-mostek-i-ostatni-obraz">Finał – Mostek i ostatni obraz</a> <a href="#uwagi-dla-mg-i-zakonczenie">Uwagi dla MG i zakończenie</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section class="hero" id="wprowadzenie">
+        <h1>CICHY DRYF</h1>
+        <p class="lead">Epilog kampanii rozgrywający się po wydarzeniach związanych z Rico. To scenariusz narracyjny w konwencji horroru kosmicznego i stopniowo odsłanianej grozy — wejście na pokład opuszczonego okrętu, który nie wygląda na miejsce po zwykłej masakrze, lecz na przest...</p>
+
+        <div class="summary-box">
+          <h3>Skrót scenariusza</h3>
+          <p>CICHY DRYF Epilog kampanii rozgrywający się po wydarzeniach związanych z Rico. To scenariusz narracyjny w konwencji horroru kosmicznego i stopniowo odsłanianej grozy — wejście na pokład opuszczonego okrętu, który nie wygląda na miejsce po zwykłej masakrze, lecz na przestrzeń dotkniętą czymś gorszym niż śmierć. „Najgorsze w pustce nie jest to, że nic w niej nie ma. Najgorsze jest odkrycie, że coś patrzy z jej głębi — i już wie, jak wrócić.” Założenie scenariusza Rola Varoniusa Etap I – Wezwanie i hangar Etap II – Lot do wraku Etap III – Wejście na pokład Etap IV – Puste korytarze Etap V – Pierwsza krew Etap VI – Droga na mostek Finał – Mostek i ostatni obraz Uwagi dla MG i zakończenie</p>
+        </div>
+      </section>
+
+      <section class="stage" id="zalozenie-scenariusza">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Założenie scenariusza</h2>
+            <p>Powolne zejście w grozę, bez pośpiechu i bez łatwych odpowiedzi.</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Powolne zejście w grozę, bez pośpiechu i bez łatwych odpowiedzi.</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              <p class="section-subtitle">Powolne zejście w grozę, bez pośpiechu i bez łatwych odpowiedzi.</p>
+      </div>
+      <div class="cards">
+        <article class="card player">
+          <h3>✢ Tylko dla MG</h3>
+          <p>
+            Ten epilog ma być powolnym zejściem w grozę. Nie chodzi o dynamiczną walkę,
+            lecz o narastające poczucie, że bohaterowie weszli w przestrzeń, w której
+            normalne prawa rzeczywistości nie są już w pełni pewne.
+          </p>
+          <p>
+            Okręt Aurelii nie powinien sprawiać wrażenia miejsca po zwykłej masakrze.
+            Najpierw ma być niemal sterylnie, nienaturalnie spokojnie. Dopiero później
+            bohaterowie odkryją, że cisza nie oznacza bezpieczeństwa, a brak ludzi nie
+            jest ulgą, tylko najgorszą możliwą odpowiedzią.
+          </p>
+          <p>
+            Scenariusz zakłada, że gracze byli emocjonalnie związani z Aurelią i że jej
+            zdrada nigdy nie została przez nich odczytana jako akt wrogości wobec nich.
+            Dzięki temu odnalezienie jej statku nie będzie zwykłą misją porządkową, ale
+            wejściem na pokład miejsca, które może zawierać odpowiedź na pytanie, czy
+            naprawdę próbowała otworzyć drogę ku wolności, czy też przez własną pychę
+            rozchyliła zasłonę nad czymś, czego żaden śmiertelnik nie powinien szukać.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="varonius">
+      <div class="section-header">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <h3>◈ Dla graczy</h3>
+          <p>
+            Po wydarzeniach związanych z Rico trafia do was wiadomość o odnalezieniu
+            statku Aurelii. Nie jest to jednak triumfalne odkrycie ani szansa na
+            prostą odpowiedź. Zamiast tego dostajecie wezwanie do wejścia na pokład
+            jednostki, która dryfuje w pustce zbyt spokojnie, zbyt cicho i zbyt
+            nienaruszenie, jak na okręt, którego załoga po prostu przepadła.
+          </p>
+          <p>
+            To nie ma być misja oczyszczająca w zwykłym sensie. To ma być wejście w
+            miejsce, gdzie coś wydarzyło się poza zwykłą logiką buntu, awarii i
+            śmierci. Im dalej zajdziecie, tym wyraźniej poczujecie, że cisza tego
+            okrętu nie oznacza spokoju.
+          </p>
+        </article>
+
+        <article class="card gm">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="rola-varoniusa">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Rola Varoniusa</h2>
+            <p>Nie wysyła tylko ludzi. Pojawia się osobiście.</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Nie wysyła tylko ludzi. Pojawia się osobiście.</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              <p class="section-subtitle">Nie wysyła tylko ludzi. Pojawia się osobiście.</p>
+      </div>
+      <div class="cards">
+        <article class="card player">
+          <h3>✢ Tylko dla MG</h3>
+          <p>
+            Varonius jest tutaj kluczowy. Nie stoi z tyłu. Nie wysyła tylko ludzi.
+            Pojawia się osobiście, bo rozumie wagę odkrycia. Jeśli Aurelia rzeczywiście
+            odnalazła coś, co może przełamać ograniczenia żeglugi przez Osnowę, wtedy
+            stawką jest przyszłość całego systemu Gilead, a może nawet przyszłość jego dynastii.
+            Jeśli zaś zamiast szlaku odkryła tylko otchłań, trzeba to zobaczyć i zamknąć,
+            zanim wiedza rozleje się dalej.
+          </p>
+          <p>
+            Jak prowadzić Varoniusa: mówi krótko, konkretnie, bez ozdobników. Nie podnosi
+            głosu. Im bardziej potworna staje się sytuacja, tym bardziej on robi się spokojny.
+            To nie spokój człowieka bez strachu, ale człowieka, który dawno nauczył się działać
+            pomimo strachu.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="etap1">
+      <div class="section-header">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <h3>◈ Dla graczy</h3>
+          <p>
+            Już sam fakt, że Varonius bierze udział w tej operacji osobiście, mówi wam
+            więcej niż jakikolwiek raport. Jeżeli Aurelia rzeczywiście odkryła coś,
+            co może odmienić podróże przez Osnowę, stawką nie jest tylko los pojedynczego
+            statku, lecz przyszłość całego regionu i władzy tych, którzy próbują nim rządzić.
+          </p>
+        </article>
+
+        <article class="card gm">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="etap-i-wezwanie-i-hangar">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Etap I – Wezwanie i hangar</h2>
+            <p>Nagły rozkaz, wstrzymany oddech okrętu i odprawa bez zbędnych wyjaśnień.</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Nagły rozkaz, wstrzymany oddech okrętu i odprawa bez zbędnych wyjaśnień.</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              <p class="section-subtitle">Nagły rozkaz, wstrzymany oddech okrętu i odprawa bez zbędnych wyjaśnień.</p>
+      </div>
+      <div class="cards">
+        <article class="card player">
+          <h3>✢ Tylko dla MG</h3>
+
+          <p>
+            Otwarcie ma od razu uderzyć stawką. Samo wezwanie może przyjść przez służbowe
+            kanały, z chłodnym komunikatem o rozkazie osobistego stawiennictwa.
+          </p>
+          <p>
+            W hangarze czeka Varonius w relikwiarnym pancerzu ekspedycyjnym. Obok niego
+            stoją wierni żołnierze z jego okrętu, wysocy rangą przedstawiciele Adeptus
+            Mechanicus oraz kilku Astartes w pancerzach Terminatorów. Sama kompozycja sceny
+            ma uderzyć graczy jak młot: jeśli do zbadania jednego dryfującego okrętu potrzeba
+            takiej obstawy, to znaczy, że to nie jest abordaż, ale wejście do czegoś,
+            czego nikt nie umie jeszcze nazwać.
+          </p>
+          <p>
+            Nie udzielaj wielu odpowiedzi. Zamiast tego daj ciężar sytuacji, procedury,
+            uzbrojenia i ciszy.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="etap2">
+      <div class="section-header">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <h3>◈ Dla graczy</h3>
+          <p>
+            Rozkaz przyszedł bez ostrzeżenia. Krótki, chłodny, pozbawiony wyjaśnień.
+            Macie natychmiast stawić się w hangarze numer siedem na pokładzie flagowej
+            jednostki Varoniusa. Już sama droga tam sprawia, że korytarze wydają się
+            inne niż zwykle: więcej posterunków, więcej zamkniętych grodzi, więcej twarzy,
+            które odwracają wzrok albo milkną, kiedy przechodzicie obok.
+          </p>
+          <p>
+            Gdy wchodzicie do wnętrza hangaru, od razu rozumiecie, że nie jest to zwykła
+            odprawa. Nad ogromną przestrzenią unoszą się ciężkie snopy zimnego światła.
+            Czerwone lampy ostrzegawcze pulsują powoli wśród stalowych żeber stropu.
+            W cieniu stoją przygotowane transportowce, ich rampy są opuszczone, a silniki
+            pracują na niskim ciągu, warcząc głucho jak bestie na uwięzi.
+          </p>
+          <p>
+            Pośrodku tego wszystkiego stoi Jakel Varonius. W ciężkim, relikwiarnym pancerzu
+            ekspedycyjnym wygląda mniej jak człowiek, a bardziej jak pomnik rodu odziany w metal.
+            Obok niego czekają uzbrojeni żołnierze, adepci Mechanicusa i kilku Astartes w
+            pancerzach Terminatorów. To nie wygląda jak zwykły abordaż. To wygląda jak wejście
+            do miejsca, któremu nikt jeszcze nie potrafi nadać nazwy.
+          </p>
+          <p><em>„Odnaleźliśmy statek Aurelii. Lecimy natychmiast.”</em></p>
+        </article>
+
+        <article class="card gm">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="etap-ii-lot-do-wraku">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Etap II – Lot do wraku</h2>
+            <p>Napięcie w transporcie i pierwszy widok na jednostkę Aurelii.</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Napięcie w transporcie i pierwszy widok na jednostkę Aurelii.</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              <p class="section-subtitle">Napięcie w transporcie i pierwszy widok na jednostkę Aurelii.</p>
+      </div>
+      <div class="cards">
+        <article class="card player">
+          <h3>✢ Tylko dla MG</h3>
+          <p>
+            Nie przeciągaj tej sceny za długo, ale zbuduj napięcie: kadłub wibruje, czerwone
+            lampy pulsują, nikt nie prowadzi zbędnych rozmów, Terminatorzy siedzą nieruchomo
+            jak posągi wykute z ciemnej stali.
+          </p>
+          <p>
+            Pierwszy widok jednostki Aurelii ma być niepokojący właśnie dlatego, że wrak nie
+            wygląda jak wrak. To ma przypominać martwe ciało unoszące się na wodzie, której
+            nie porusza żaden wiatr.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="etap3">
+      <div class="section-header">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <h3>◈ Dla graczy</h3>
+          <p>
+            Nie otrzymujecie wielu odpowiedzi. Technicy i służba pokładowa ubierają was
+            w ciężkie, szczelne kombinezony abordażowe. Materiał jest gruby, szorstki,
+            wielowarstwowy. Metalowe rygle klikają głucho przy każdym kolejnym segmencie,
+            a na końcu dostajecie hełmy, moduły oddechowe i buty z magnetycznymi blokadami.
+          </p>
+          <p>
+            Transport odbywa się w kilku promach lub jednostkach transportowych, w eskorcie
+            myśliwców. Kadłub wibruje. Czerwone lampy pulsują. Nikt nie prowadzi zbędnych
+            rozmów. Terminatorzy siedzą nieruchomo jak posągi wykute z ciemnej stali.
+          </p>
+          <p>
+            W pewnym momencie przez iluminator albo ekran taktyczny pojawia się cel:
+            smukły okręt klasy Viper, niewielki na tle bezdennej czerni, dryfujący samotnie
+            w pustce. Nie widać na nim większych uszkodzeń. Nie ma śladów eksplozji.
+            A jednak coś w sposobie, w jaki zawisł w ciemności, wydaje się niewłaściwe.
+            Jest zbyt spokojny. Zbyt nieruchomy.
+          </p>
+        </article>
+
+        <article class="card gm">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="etap-iii-wejscie-na-poklad">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Etap III – Wejście na pokład</h2>
+            <p>Przygaszone światła, częściowo sprawne systemy i nienaturalna cisza.</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Przygaszone światła, częściowo sprawne systemy i nienaturalna cisza.</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              <p class="section-subtitle">Przygaszone światła, częściowo sprawne systemy i nienaturalna cisza.</p>
+      </div>
+      <div class="cards">
+        <article class="card player">
+          <h3>✢ Tylko dla MG</h3>
+          <p>
+            To najważniejsza część scenariusza. Prowadź ją warstwowo.
+          </p>
+          <ul>
+            <li>Faza pierwsza: cisza, przygaszone światła, obniżona grawitacja, brak załogi.</li>
+            <li>Faza druga: drobne anomalie, ślady pośpiechu, odruchowo przerwane czynności.</li>
+            <li>Faza trzecia: pierwsze fragmenty ciał, smugi krwi dryfujące w słabej grawitacji.</li>
+            <li>Faza czwarta: mostek, dziennik Aurelii, trzecie oko i świadomość, że to nie koniec.</li>
+          </ul>
+          <p>
+            Nie mów od razu „to straszne miejsce”. Opisuj konkret: światła awaryjne, które
+            gubią rytm, wentylatory przypominające oddech starca, stukot odkształcającego się
+            kadłuba i szum w voxie, który brzmi prawie jak szept.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="etap4">
+      <div class="section-header">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <h3>◈ Dla graczy</h3>
+          <p>
+            Gdy śluzy transportowca i Vipera sprzęgają się ze sobą, słychać tylko serię
+            ciężkich uderzeń zacisków, syk wyrównywanego ciśnienia i potem ciszę. Prawdziwą
+            ciszę, przytłumioną przez hełm, ale przez to jeszcze bardziej obecną.
+          </p>
+          <p>
+            Drzwi otwierają się powoli, a za nimi rozciąga się pierwszy korytarz opuszczonego
+            statku. Światła działają, ale ledwie. Niektóre lampy świecą stałym, trupio bladym
+            blaskiem. Inne mrugają nieregularnie, jakby gubiły rytm. W powietrzu unosi się
+            delikatna mgiełka pyłu, skroplonej wilgoci i czegoś, czego nie potraficie od razu
+            nazwać. Systemy podtrzymywania życia nadal funkcjonują, lecz najwyraźniej tylko
+            częściowo. Temperatura jest odrobinę za niska. Wentylacja zbyt słaba.
+          </p>
+          <p>
+            Grawitacja jest obniżona. Każdy ruch kończy się lekkim uniesieniem ciała, zaraz
+            gaszonym przez magnetyczne buty, które z krótkim szarpnięciem przywierają do
+            metalowej podłogi. Nie ma nikogo. Nie słychać kłótni załogi, stukotu narzędzi
+            ani odgłosów pracy. Statek żyje tylko o tyle, o ile pracują w nim jeszcze
+            ostatnie, uporczywe odruchy maszyn.
+          </p>
+        </article>
+
+        <article class="card gm">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="etap-iv-puste-korytarze">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Etap IV – Puste korytarze</h2>
+            <p>Najpierw opuszczony dom. Potem grobowiec.</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Najpierw opuszczony dom. Potem grobowiec.</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              <p class="section-subtitle">Najpierw opuszczony dom. Potem grobowiec.</p>
+      </div>
+      <div class="cards">
+        <article class="card player">
+          <h3>✢ Tylko dla MG</h3>
+          <p>
+            To etap narastającej niepewności. Najpierw bohaterowie mają mieć wrażenie,
+            że weszli do opuszczonego domu. Potem, że weszli do grobowca. Na końcu,
+            że weszli do miejsca, które nie chce być odkryte.
+          </p>
+          <p>Możesz rozegrać kilka krótkich odsłon:</p>
+          <ul>
+            <li>korytarz z porzuconym wózkiem technicznym i unoszącymi się narzędziami,</li>
+            <li>kaplicę z niedopalonymi świecami i pękniętą ikoną Imperatora,</li>
+            <li>ambulatorium z zerwanymi pasami na kozetce, ale bez ciała,</li>
+            <li>śluzy z zaryglowanym włazem i śladem zakrwawionych palców na wizjerze,</li>
+            <li>przewód wentylacyjny, w którym dryfuje pojedynczy palec z sygnetem oficera.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="etap5">
+      <div class="section-header">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <h3>◈ Dla graczy</h3>
+          <p>
+            Idziecie przez kolejne pokłady, a pustka staje się coraz bardziej nienaturalna.
+            Przy jednym z terminali wciąż unosi się zapalona lampka stanu. Na podłodze leży
+            data-slate, jakby ktoś odłożył go tylko na moment. W bocznym przejściu stoi
+            porzucony wózek serwisowy, a kilka narzędzi oderwało się od jego powierzchni i
+            dryfuje powoli w słabej grawitacji.
+          </p>
+          <p>
+            Przy jednej ze ścian migocze panel modlitewny, na którym wyświetla się urwany
+            fragment litanii ochronnej. Dalej dostrzegacie niewielką kapliczkę okrętową.
+            Świeca wypaliła się do końca i zastygła w dziwnym, skrzywionym kształcie.
+            Wizerunek Imperatora pękł przez środek.
+          </p>
+          <p>
+            Nie widać ciał. Nie ma śladów walki. Nie ma nawet chaosu, którego można by się
+            spodziewać po ewakuacji. Wszystko wygląda tak, jakby ludzie zniknęli pomiędzy
+            jednym uderzeniem serca a następnym.
+          </p>
+        </article>
+
+        <article class="card gm">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="etap-v-pierwsza-krew">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Etap V – Pierwsza krew</h2>
+            <p>Pierwszy niepodważalny znak, że nie doszło tu do zwykłej śmierci.</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Pierwszy niepodważalny znak, że nie doszło tu do zwykłej śmierci.</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              <p class="section-subtitle">Pierwszy niepodważalny znak, że nie doszło tu do zwykłej śmierci.</p>
+      </div>
+      <div class="cards">
+        <article class="card player">
+          <h3>✢ Tylko dla MG</h3>
+          <p>
+            Gdy uznasz, że cisza trwa już wystarczająco długo, daj bohaterom pierwsze
+            potwierdzenie, że na statku doszło do czegoś znacznie gorszego niż bunt czy
+            dekompresja.
+          </p>
+          <p>
+            Nie pokazuj całej sceny zbrodni. Nie dawaj jednego czytelnego trupa. Dużo lepiej
+            działa rozbicie obrazu na fragmenty: smugi, krople, pojedyncze elementy ciała,
+            urwane części mundurów. Horror ma tutaj wynikać nie z ilości krwi, lecz z poczucia,
+            że rzeczywistość nie chce ułożyć się w logiczną narrację.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="etap6">
+      <div class="section-header">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <h3>◈ Dla graczy</h3>
+          <p>
+            Dopiero dalej, gdy schodzicie ku centralnym sekcjom statku, coś się zmienia.
+            Najpierw widzicie ciemną smugę na ścianie, rozciągniętą cienko, niemal delikatnie,
+            jakby ktoś przesunął po metalu zakrwawioną dłonią. Potem następną. I jeszcze jedną,
+            wyżej, nienaturalnie wysoko, tam gdzie człowiek normalnie nie sięgnąłby ręką.
+          </p>
+          <p>
+            Za kolejnym zakrętem czeka już coś więcej. W obniżonej grawitacji, w martwym
+            powietrzu korytarza, dryfują wolno ciemne krople krwi. Między nimi unoszą się
+            fragmenty czegoś, co umysł rozpoznaje z opóźnieniem: oderwana dłoń, strzęp munduru,
+            kawałek twarzy z odsłoniętymi zębami, pas narzędziowy z identyfikatorem załogi.
+          </p>
+          <p>
+            To nie wygląda jak zwykła rzeź. Nie jak potyczka. Nie jak eksplozja. Nie jak
+            dekompresja. To wygląda tak, jakby coś weszło między ludzi, a potem zostawiło
+            po nich tylko te fragmenty, których nie chciało lub nie zdołało zabrać.
+          </p>
+        </article>
+
+        <article class="card gm">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="etap-vi-droga-na-mostek">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Etap VI – Droga na mostek</h2>
+            <p>Statek staje się coraz mniej realny, a korytarze zbyt ciasne dla własnego kształtu.</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Statek staje się coraz mniej realny, a korytarze zbyt ciasne dla własnego kształtu.</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              <p class="section-subtitle">Statek staje się coraz mniej realny, a korytarze zbyt ciasne dla własnego kształtu.</p>
+      </div>
+      <div class="cards">
+        <article class="card player">
+          <h3>✢ Tylko dla MG</h3>
+          <p>
+            To etap przejścia z horroru materialnego w horror niemal metafizyczny.
+            Nie przyspieszaj. Daj graczom czas, by sami zaczęli dopowiadać sobie najgorsze.
+          </p>
+          <p>
+            Najważniejsze: nie pokazuj potwora. Nie nazywaj go. Nie tłumacz go do końca.
+            Niech najgorszą rzeczą w scenariuszu będzie świadomość, że coś istnieje i już
+            wie o świecie graczy.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="final">
+      <div class="section-header">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <h3>◈ Dla graczy</h3>
+          <p>
+            Im bliżej mostka, tym bardziej statek wydaje się odrealniony. Część drzwi jest
+            otwarta. Część zaryglowana. Jedne ekrany zgasły całkowicie, inne pokazują linie
+            błędów, martwe piktogramy albo urwane serie danych. Wasze oddechy odbijają się
+            w hełmach matowym echem.
+          </p>
+          <p>
+            Czasem w voxie pojawia się krótki trzask, odległy szum, coś tak podobnego do
+            szeptu, że przez chwilę każdy z was może pomyśleć, że to tylko wyobraźnia.
+            Korytarz prowadzący do mostka jest szeroki, ale wydaje się za ciasny. Światła tu
+            niemal nie działają. Na ścianie widnieją długie, cienkie smugi krwi, ciągnące się
+            aż ku samym drzwiom.
+          </p>
+        </article>
+
+        <article class="card gm">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="final-mostek-i-ostatni-obraz">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Finał – Mostek i ostatni obraz</h2>
+            <p>Dziennik, trzecie oko i jedno zdanie zapisane krwią.</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Dziennik, trzecie oko i jedno zdanie zapisane krwią.</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              <p class="section-subtitle">Dziennik, trzecie oko i jedno zdanie zapisane krwią.</p>
+      </div>
+      <div class="cards">
+        <article class="card player">
+          <h3>✢ Tylko dla MG</h3>
+          <p>
+            Mostek jest finałem i powinien być miejscem niemal ceremonialnym. Najważniejsze
+            elementy to dziennik pokładowy Aurelii, jej wydłubane trzecie oko oraz krwawy
+            napis na ścianie.
+          </p>
+          <p>
+            To trzecie oko nie powinno być zwykłym rekwizytem grozy. To świętokradztwo,
+            samookaleczenie, gest ostatecznej rozpaczy. Aurelia była kimś, kto patrzył
+            głębiej niż inni. Jeśli sama pozbawiła się oka, oznacza to, że zobaczyła coś,
+            przed czym ślepota była łaską.
+          </p>
+          <p>
+            Dziennik powinien przechodzić od naukowej fascynacji, przez zachwyt i napięcie,
+            aż po obsesję i rozpad. Początkowo Aurelia opisuje „spokojną warstwę pod falami”.
+            Później wspomina, że prądy Osnowy zaczęły ustępować przed czymś głębszym.
+            Na końcu notatki stają się krótsze, urywane, jakby sama nie umiała już nadać
+            kształtu temu, co odkryła.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="uwagi">
+      <div class="section-header">
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <h3>◈ Dla graczy</h3>
+          <p>
+            Drzwi do mostka stoją uchylone. Gdy wchodzicie do środka, otwiera się przed wami
+            przestrzeń, która kiedyś była sercem tego statku. Teraz przypomina świątynię po
+            końcu świata. Część ekranów wciąż świeci bladym, poszarpanym światłem. Fotele
+            oficerów są puste, niektóre odwrócone pod dziwnymi kątami, jakby ludzie zrywali
+            się z nich nagle i bez sensu.
+          </p>
+          <p>
+            Na jednej z konsol leży dziennik pokładowy. Nie w sejfie. Nie schowany.
+            Pozostawiony tak, jakby ktoś chciał, żeby został odnaleziony. Tuż obok spoczywa
+            coś małego, ciemnego, obrzmiałego, wciąż rozpoznawalnego. Trzecie oko Navigatora.
+            Wydłubane. Odrzucone. Porzucone obok zapisów jak ofiara i jak cena.
+          </p>
+          <p>
+            A na ścianie, nierównymi literami napisanymi krwią, widnieje jedno zdanie:
+          </p>
+          <p><strong>„Nie mogę na to patrzeć”</strong></p>
+          <p>
+            Przez długą chwilę nic się nie dzieje. Nie ma wrzasku. Nie ma nagłego ataku.
+            Jest tylko mostek, martwy i otwarty przed wami, z dziennikiem czekającym na
+            odczytanie i z tym jednym zdaniem, które brzmi jak spóźnione wyznanie kogoś,
+            kto zobaczył więcej, niż wolno zobaczyć śmiertelnikowi.
+          </p>
+        </article>
+
+        <article class="card gm">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="stage" id="uwagi-dla-mg-i-zakonczenie">
+        <button class="stage-header" type="button" aria-expanded="true">
+          <div class="stage-header-text">
+            <h2>Uwagi dla MG i zakończenie</h2>
+            <p>Nie dawaj pełnej odpowiedzi. Zostaw echo czegoś, co nadal patrzy.</p>
+          </div>
+          <span class="arrow">▼</span>
+        </button>
+
+        <div class="stage-content">
+          <div class="mini-summary">
+            <h3>Streszczenie sekcji</h3>
+            <p>Nie dawaj pełnej odpowiedzi. Zostaw echo czegoś, co nadal patrzy.</p>
+          </div>
+
+          <div class="columns">
+            <div class="card mg">
+              <h3>✦ Tylko dla MG</h3>
+              <p class="section-subtitle">Nie dawaj pełnej odpowiedzi. Zostaw echo czegoś, co nadal patrzy.</p>
+      </div>
+      <div class="cards">
+        <article class="card player">
+          <h3>✢ Tylko dla MG</h3>
+          <p>
+            Nie dawaj ostatecznej odpowiedzi. Aurelia dotknęła warstwy istnienia głębszej
+            lub bardziej pierwotnej niż ta, po której zwykle suną statki w Osnowie.
+            Coś odpowiedziało. Może nie weszło jeszcze w pełni do realspace, ale zrozumiało,
+            że istnieje droga.
+          </p>
+          <p>
+            Po odczytaniu dziennika i odkryciu mostka możesz dać jeden ostatni znak,
+            że to nie jest zamknięta sprawa: wszystkie vox-kanały szumią naraz, jedna z lamp
+            gaśnie, auspex Mechanicus pokazuje przez sekundę dodatkowy sygnał na pokładzie
+            albo któryś z bohaterów widzi w ciemnym refleksie wizjera nie własną twarz,
+            lecz coś patrzącego z drugiej strony.
+          </p>
+          <p>
+            Potem zakończ scenę odwrotem. Varonius nie jest głupcem. Jeśli zrozumie, że
+            dotknęli granicy czegoś nienazwanego, nakaże odwrót i izolację wraku.
+          </p>
+          <p>Opcjonalne zdania:</p>
+          <ul>
+            <li><em>Varonius przed wejściem:</em> „Jeżeli znajdziemy ją żywą, sprowadzimy ją do domu. Jeżeli znajdziemy tylko prawdę, zabierzemy przynajmniej ją.”</li>
+            <li><em>Mechanicus po pierwszych anomaliach:</em> „Auspex wskazuje obecność mas biologicznych. Auspex wskazuje brak obecności mas biologicznych. Obie odpowiedzi są jednocześnie prawidłowe.”</li>
+            <li><em>Astartes przy pierwszych szczątkach:</em> „To nie jest dzieło zwykłego drapieżcy. To jest ślad wtargnięcia.”</li>
+          </ul>
+          <p class="small-note">
+            Najsilniejszy finał osiągniesz wtedy, gdy kampania zakończy się nie zwycięstwem
+            ani klęską, lecz odkryciem, że wszechświat jest jeszcze ciemniejszy, niż
+            bohaterowie sądzili.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <div class="footer-space"></div>
+  </div>
+            </div>
+
+            <div class="card players">
+              <h3>✦ Dla graczy</h3>
+              <h3>◈ Dla graczy</h3>
+          <p>
+            Kiedy już wydaje się, że to koniec, w ciszy mostka słychać własny oddech,
+            pracę filtrów i odległe tykanie uszkodzonego terminala. A potem, może naprawdę,
+            a może tylko przez ułamek sekundy, przez vox przechodzi krótki szum, tak miękki
+            i tak nieludzki, że nie da się powiedzieć, czy był tylko zakłóceniem, czy też
+            czymś, co z drugiej strony pustki właśnie was usłyszało.
+          </p>
+        </article>
+
+        <article class="card gm">
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="footer-space"></div>
+    </main>
+  </div>
+
+  <script>
+    const stages = document.querySelectorAll('.stage');
+
+    stages.forEach(stage => {
+      const button = stage.querySelector('.stage-header');
+
+      button.addEventListener('click', () => {
+        const isCollapsed = stage.classList.toggle('collapsed');
+        button.setAttribute('aria-expanded', String(!isCollapsed));
+      });
+    });
+
+    const root = document.documentElement;
+    const fontUp = document.getElementById('font-up');
+    const fontDown = document.getElementById('font-down');
+
+    let fontScale = 1;
+
+    function applyFontScale() {
+      root.style.setProperty('--font-scale', fontScale.toFixed(2));
+      localStorage.setItem('scenarioFontScale', fontScale.toFixed(2));
+    }
+
+    const savedScale = parseFloat(localStorage.getItem('scenarioFontScale'));
+    if (!isNaN(savedScale) && savedScale >= 0.8 && savedScale <= 1.4) {
+      fontScale = savedScale;
+      applyFontScale();
+    }
+
+    fontUp.addEventListener('click', () => {
+      if (fontScale < 1.4) {
+        fontScale += 0.1;
+        applyFontScale();
+      }
+    });
+
+    fontDown.addEventListener('click', () => {
+      if (fontScale > 0.8) {
+        fontScale -= 0.1;
+        applyFontScale();
+      }
+    });
+  </script>
+</body>
+</html>
