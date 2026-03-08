@@ -48,4 +48,6 @@
 35. Gracze odzyskali artefakt i zwrócili go Vakuul zgodnie z prośbą i w ten sposób, że Lokson oraz reszta inkwizycji o niczym się nie dowiedziała.
 36. Po powrocie na okręt gracze byli świadkami jak astropaci Varoniusa odczytali przekaz nadany w Osnowę. Było to apel od przebudzonego prymarchy Lion El'Johnson. Przebudzenie prymarchy, syna Imperatora, niesamowicie podbiło morale
 37. Okazał się też, że Aurelia korzytając z pomocy półświatka podrobiłą dokumenty i ukradła okręt zwiadowczy klasy Viper i wyruszyła na ekspedycję w Osnowę.
-38. Gracze zostali wysłani do zbadania problemów w Manofaktorium w Belaxii. Fabryka ta produkowała serwitory.
+38. Gracze odkryli zmiennokształtnego mordercę. Wziął jako zakładnika przyjaciela Toudi. Gracze, wraz z Rico, zabili mordercę.
+39. Przy ciele mordercy odkryli notatkę o "Oku Płomiennej Zemsty".
+40. Gracze zostali wysłani do zbadania problemów w Manofaktorium w Belaxii. Fabryka ta produkowała serwitory.
