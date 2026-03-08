@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Archiwum Scenariuszy • Warhammer 40k</title>
+  <style>
+    :root {
+      --bg-1: #06080f;
+      --bg-2: #101827;
+      --panel: rgba(17, 24, 39, 0.78);
+      --panel-strong: rgba(17, 24, 39, 0.95);
+      --line: rgba(250, 204, 21, 0.25);
+      --line-strong: rgba(250, 204, 21, 0.5);
+      --gold: #fbbf24;
+      --text: #f3f4f6;
+      --muted: #c9ced6;
+      --ok: #67e8f9;
+      --radius: 18px;
+      --shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background:
+        radial-gradient(circle at 15% -10%, rgba(251,191,36,0.16), transparent 35%),
+        radial-gradient(circle at 100% 0%, rgba(103,232,249,0.10), transparent 30%),
+        linear-gradient(180deg, var(--bg-1), var(--bg-2));
+      overflow-x: hidden;
+    }
+
+    .stars,
+    .stars::before,
+    .stars::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(2px 2px at 20% 20%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 80% 35%, rgba(255,255,255,0.45), transparent),
+        radial-gradient(1.5px 1.5px at 35% 75%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 60% 60%, rgba(255,255,255,0.35), transparent);
+      animation: drift 28s linear infinite;
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    .stars::before { animation-duration: 38s; opacity: 0.24; }
+    .stars::after { animation-duration: 52s; opacity: 0.16; }
+
+    @keyframes drift {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-90px); }
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: min(1100px, 92vw);
+      margin: 28px auto 48px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 22px 24px;
+      background: linear-gradient(130deg, rgba(30,41,59,0.85), rgba(17,24,39,0.95));
+      box-shadow: var(--shadow);
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0 0 8px;
+      font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+      color: var(--gold);
+      letter-spacing: 0.5px;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.6;
+    }
+
+    .aquila {
+      width: 90px;
+      height: 90px;
+      opacity: 0.85;
+      filter: drop-shadow(0 0 14px rgba(251,191,36,0.22));
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .legend {
+      margin: 0 0 18px;
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      backdrop-filter: blur(4px);
+    }
+
+    details.stage {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      backdrop-filter: blur(5px);
+      margin-bottom: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    details.stage[open] {
+      border-color: var(--line-strong);
+      background: var(--panel-strong);
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.2px;
+      background: linear-gradient(90deg, rgba(251,191,36,0.08), rgba(103,232,249,0.04));
+    }
+
+    summary::after {
+      content: "▾";
+      transition: transform 0.25s ease;
+      color: var(--ok);
+      font-size: 1rem;
+    }
+
+    details[open] summary::after { transform: rotate(180deg); }
+    summary::-webkit-details-marker { display: none; }
+
+    .table-wrap { padding: 12px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      overflow: hidden;
+      background: rgba(2, 6, 23, 0.45);
+    }
+
+    th, td {
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 10px 12px;
+      text-align: left;
+      font-size: 0.95rem;
+    }
+
+    th {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.78rem;
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    .path {
+      color: #dbe3ee;
+      word-break: break-word;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.86rem;
+      color: #101827;
+      background: linear-gradient(180deg, #fcd34d, #f59e0b);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      padding: 7px 12px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35);
+    }
+
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; }
+      .aquila { width: 62px; height: 62px; }
+      th:nth-child(1), td:nth-child(1) { width: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stars"></div>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <h1>Archiwum Scenariuszy TTRPG</h1>
+        <p>
+          Szybka nawigacja po materiałach kampanii. Każdy etap rozwija listę wszystkich plików
+          z wybranego folderu. Kliknięcie przycisku <strong>Otwórz</strong> uruchamia plik w nowym oknie.
+        </p>
+      </div>
+      <svg class="aquila" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M64 10l12 16 20 2-13 14 4 20-23-10-23 10 4-20-13-14 20-2 12-16z" fill="#FBBF24"/>
+        <path d="M16 80l22-8 8 14-18 16-12-22zm96 0l-22-8-8 14 18 16 12-22z" fill="#F59E0B"/>
+        <path d="M54 56h20v52H54z" fill="#FDE68A"/>
+      </svg>
+    </section>
+
+    <p class="legend">Sekcje: Analizy, Notatki, Gilead, Oko, Rico, Epilog.</p>
+
+    <details class="stage" open>
+      <summary>Etap 1 — Analizy</summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="path">Analiza_lore_Oko_Rico_Epilog_2026-03-08.md</td>
+              <td><a class="btn" href="../Analizy/Analiza_lore_Oko_Rico_Epilog_2026-03-08.md" target="_blank" rel="noopener noreferrer">Otwórz</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="stage">
+      <summary>Etap 2 — Warhammer40k/Notatki</summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="path">Notatki.md</td>
+              <td><a class="btn" href="../Warhammer40k/Notatki/Notatki.md" target="_blank" rel="noopener noreferrer">Otwórz</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="stage">
+      <summary>Etap 3 — Warhammer40k/Gilead</summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
+          <tbody>
+            <tr><td class="path">Patroni.txt</td><td><a class="btn" href="../Warhammer40k/Gilead/Patroni.txt" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+            <tr><td class="path">Gilead.html</td><td><a class="btn" href="../Warhammer40k/Gilead/Gilead.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+            <tr><td class="path">Frakcje.txt</td><td><a class="btn" href="../Warhammer40k/Gilead/Frakcje.txt" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+            <tr><td class="path">Podręcznik Główny.txt</td><td><a class="btn" href="../Warhammer40k/Gilead/Podręcznik Główny.txt" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+            <tr><td class="path">Ostamotniony System.txt</td><td><a class="btn" href="../Warhammer40k/Gilead/Ostamotniony System.txt" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="stage">
+      <summary>Etap 4 — Warhammer40k/Scenariusz_Oko</summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
+          <tbody>
+            <tr><td class="path">Oko_01.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Oko/Oko_01.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+            <tr><td class="path">Oko_02.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Oko/Oko_02.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="stage">
+      <summary>Etap 5 — Warhammer40k/Scenariusz_Rico</summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
+          <tbody>
+            <tr><td class="path">01.md</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/01.md" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+            <tr><td class="path">Backup_Rico.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/Backup_Rico.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+            <tr><td class="path">Handouty.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/Handouty.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+            <tr><td class="path">Prompt_01.md</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/Prompt_01.md" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+            <tr><td class="path">Rico_01.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/Rico_01.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+            <tr><td class="path">Rico_02.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/Rico_02.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+            <tr><td class="path">Rico_03.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/Rico_03.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+            <tr><td class="path">prompty.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/prompty.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="stage">
+      <summary>Etap 6 — Warhammer40k/Scenariusz_Epilog</summary>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
+          <tbody>
+            <tr><td class="path">Epilog.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Epilog/Epilog.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+            <tr><td class="path">Pancerz.md</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Epilog/Pancerz.md" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+  </main>
+</body>
+</html>
