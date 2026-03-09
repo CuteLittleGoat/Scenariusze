@@ -93,7 +93,7 @@
 
     .toolbar {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: 8px;
       margin-bottom: 16px;
       padding: 10px 12px;
@@ -102,28 +102,23 @@
       border-radius: 14px;
     }
 
-    .toolbar span {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
     .toolbar button {
-      width: 34px;
-      height: 34px;
+      width: 100%;
+      height: auto;
       border-radius: 10px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-strong);
       background: var(--panel-2);
       color: var(--text);
       cursor: pointer;
       transition: 0.2s ease;
-      font-size: 1rem;
+      font-size: 0.95rem;
+      text-align: left;
+      padding: 9px 12px;
     }
 
     .toolbar button:hover {
       border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-1px);
-      box-shadow: 0 0 0 4px rgba(127, 200, 255, 0.08);
+      color: white;
     }
 
     .nav-group {
@@ -544,9 +539,8 @@
         </p>
 
         <div class="toolbar">
-          <span>Rozmiar tekstu</span>
-          <button type="button" onclick="changeFontSize(1)" aria-label="Powiększ tekst">▲</button>
-          <button type="button" onclick="changeFontSize(-1)" aria-label="Pomniejsz tekst">▼</button>
+          <button type="button" onclick="changeFontSize(1)" aria-label="Zwiększ rozmiar tekstu">Zwiększ rozmiar tekstu</button>
+          <button type="button" onclick="changeFontSize(-1)" aria-label="Zmniejsz rozmiar tekstu">Zmniejsz rozmiar tekstu</button>
         </div>
 
         <nav class="nav-group">
