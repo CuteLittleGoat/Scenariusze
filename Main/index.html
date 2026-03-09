@@ -241,8 +241,8 @@
       <div>
         <h1>Archiwum Scenariuszy TTRPG</h1>
         <p>
-          Szybka nawigacja po materiałach kampanii. Kliknij <strong>Odśwież</strong>, aby najpierw wygenerować
-          nowy manifest i od razu wczytać aktualną listę plików.
+          Szybka nawigacja po materiałach kampanii. Kliknij <strong>Odśwież</strong>, aby od razu pobrać
+          aktualną listę plików i odświeżyć widok.
         </p>
       </div>
       <img class="aquila" src="dice_no_background.png" alt="Logo kostek" />
@@ -269,6 +269,7 @@
     const statusElement = document.getElementById('status');
     const stagesContainer = document.getElementById('stagesContainer');
     const allowedExtensions = new Set(['.html', '.md', '.txt', '.png']);
+    const DEFAULT_GITHUB_REPO = { owner: 'cutelittlegoat', repo: 'Scenariusze' };
 
     function createStageMarkup(title, id) {
       return `
@@ -399,7 +400,7 @@
         }
       }
 
-      return null;
+      return DEFAULT_GITHUB_REPO;
     }
 
     async function fetchGitHubSectionFiles(owner, repo, section) {
