@@ -241,8 +241,8 @@
       <div>
         <h1>Archiwum Scenariuszy TTRPG</h1>
         <p>
-          Szybka nawigacja po materiałach kampanii. Kliknij <strong>Odśwież</strong>, aby wczytać aktualną listę plików
-          z lokalnego manifestu wygenerowanego przez <code>Main/refresh.sh</code> lub <code>Main/refresh.ps1</code>.
+          Szybka nawigacja po materiałach kampanii. Kliknij <strong>Odśwież</strong>, aby najpierw wygenerować
+          nowy manifest i od razu wczytać aktualną listę plików.
         </p>
       </div>
       <img class="aquila" src="dice_no_background.png" alt="Logo kostek" />
@@ -324,9 +324,57 @@
         .join('');
     }
 
+    async function tryGenerateManifest() {
+      const endpoints = ['/refresh-manifest', './refresh-manifest'];
+
+      for (const endpoint of endpoints) {
+        try {
+          const refreshResponse = await fetch(endpoint, {
+            method: 'POST',
+            cache: 'no-store'
+          });
+
+          if (refreshResponse.ok) {
+            return { generated: true };
+          }
+
+          if (refreshResponse.status === 404 || refreshResponse.status === 405) {
+            continue;
+          }
+
+          let details = '';
+          try {
+            const payload = await refreshResponse.json();
+            details = payload?.error ? `: ${payload.error}` : '';
+          } catch {
+            details = '';
+          }
+
+          throw new Error(`nie udało się wygenerować manifestu (${refreshResponse.status})${details}`);
+        } catch (error) {
+          const isNetworkError = error instanceof TypeError;
+          if (isNetworkError) {
+            continue;
+          }
+          throw error;
+        }
+      }
+
+      return { generated: false };
+    }
+
     async function refreshFileList() {
+      const refreshButton = document.getElementById('refreshButton');
+      refreshButton.disabled = true;
+
       try {
-        statusElement.textContent = 'Status: odczytywanie pliku Main/files-manifest.json...';
+        statusElement.textContent = 'Status: generowanie nowego manifestu...';
+        const generation = await tryGenerateManifest();
+
+        statusElement.textContent = generation.generated
+          ? 'Status: odczytywanie zaktualizowanego manifestu...'
+          : 'Status: serwer nie obsługuje generowania z UI, odczytywanie istniejącego manifestu...';
+
         const response = await fetch(`./files-manifest.json?t=${Date.now()}`, { cache: 'no-store' });
 
         if (!response.ok) {
@@ -345,9 +393,14 @@
         const generatedAt = manifest.generatedAt
           ? new Date(manifest.generatedAt).toLocaleString('pl-PL')
           : 'nieznany czas';
-        statusElement.textContent = `Status: odświeżono z manifestu (${generatedAt}).`;
+
+        statusElement.textContent = generation.generated
+          ? `Status: wygenerowano i odświeżono manifest (${generatedAt}).`
+          : `Status: odświeżono z istniejącego manifestu (${generatedAt}). Aby generować z przycisku, uruchom Main/refresh.sh lub Main/refresh.ps1.`;
       } catch (error) {
-        statusElement.textContent = `Status: nie udało się odczytać manifestu (${error.message}). Uruchom Main/refresh.sh lub Main/refresh.ps1.`;
+        statusElement.textContent = `Status: nie udało się odświeżyć listy plików (${error.message}). Uruchom Main/refresh.sh lub Main/refresh.ps1.`;
+      } finally {
+        refreshButton.disabled = false;
       }
     }
 

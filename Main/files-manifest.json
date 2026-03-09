@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-03-09T10:08:22.357158+00:00",
+  "generatedAt": "2026-03-09T11:39:50.784802+00:00",
   "sections": [
     {
       "id": "analizy",
@@ -67,7 +67,8 @@
         "prompty.html",
         "Rico_01.html",
         "Rico_02.html",
-        "Rico_03.html"
+        "Rico_03.html",
+        "Rico_04.html"
       ]
     },
     {
@@ -79,6 +80,7 @@
       ],
       "files": [
         "Epilog.html",
+        "Epilog_02.html",
         "Pancerz.html"
       ]
     }
