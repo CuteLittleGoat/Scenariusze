@@ -20,6 +20,11 @@
       --shadow: rgba(0, 0, 0, 0.42);
       --sidebar-w: 290px;
       --content-font-size: 18px;
+      --font-body: Calibri, Arial, Verdana, Tahoma, "Trebuchet MS";
+      --font-heading: "Trebuchet MS", Verdana, Arial, Tahoma, Calibri;
+      --font-navigation: Verdana, Tahoma, Arial, Calibri, "Trebuchet MS";
+      --font-ui: Tahoma, Verdana, Arial, Calibri, "Trebuchet MS";
+      --font-table: Arial, Calibri, Verdana, Tahoma, "Trebuchet MS";
     }
 
     * {
@@ -37,7 +42,7 @@
         radial-gradient(circle at bottom right, rgba(137, 224, 194, 0.05), transparent 22%),
         linear-gradient(180deg, var(--bg), #080b10 100%);
       color: var(--text);
-      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: var(--font-body);
       line-height: 1.7;
       font-size: 18px;
     }
@@ -77,6 +82,7 @@
     }
 
     .sidebar h2 {
+      font-family: var(--font-heading);
       margin: 0 0 6px;
       font-size: 1.05rem;
       letter-spacing: 0.04em;
@@ -93,7 +99,7 @@
 
     .toolbar {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: 8px;
       margin-bottom: 16px;
       padding: 10px 12px;
@@ -102,28 +108,24 @@
       border-radius: 14px;
     }
 
-    .toolbar span {
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
     .toolbar button {
-      width: 34px;
-      height: 34px;
+      font-family: var(--font-ui);
+      width: 100%;
+      height: auto;
       border-radius: 10px;
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-strong);
       background: var(--panel-2);
       color: var(--text);
       cursor: pointer;
       transition: 0.2s ease;
-      font-size: 1rem;
+      font-size: 0.95rem;
+      text-align: left;
+      padding: 9px 12px;
     }
 
     .toolbar button:hover {
       border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-1px);
-      box-shadow: 0 0 0 4px rgba(127, 200, 255, 0.08);
+      color: white;
     }
 
     .nav-group {
@@ -133,6 +135,7 @@
     }
 
     .nav-link {
+      font-family: var(--font-navigation);
       display: block;
       text-decoration: none;
       padding: 11px 13px;
@@ -207,6 +210,7 @@
     }
 
     .hero h1 {
+      font-family: var(--font-heading);
       margin: 0 0 12px;
       font-size: 2.15em;
       line-height: 1.1;
@@ -250,6 +254,7 @@
     }
 
     .summary-title {
+      font-family: var(--font-heading);
       margin: 0;
       font-size: 1.35em;
       line-height: 1.2;
@@ -294,6 +299,7 @@
     }
 
     .block h3 {
+      font-family: var(--font-heading);
       margin: 0 0 10px;
       font-size: 1.04em;
       color: var(--accent-2);
@@ -367,6 +373,7 @@
     }
 
     table {
+      font-family: var(--font-table);
       width: 100%;
       min-width: 760px;
       border-collapse: collapse;
@@ -432,6 +439,7 @@
     }
 
     .entry-title {
+      font-family: var(--font-heading);
       margin: 0 0 8px;
       font-size: 1.05em;
       color: var(--accent);
@@ -466,6 +474,7 @@
     }
 
     .ai-instruction-title {
+      font-family: var(--font-navigation);
       margin: 0 0 8px;
       font-size: 14px;
       color: #748190;
@@ -538,15 +547,10 @@
   <div class="layout">
     <aside class="sidebar" aria-label="Panel nawigacyjny scenariusza">
       <div class="sidebar-card">
-        <h2>Nawigacja scenariusza</h2>
-        <p class="sidebar-intro">
-          Szybkie przejścia między scenami i sekcjami pomocniczymi.
-        </p>
 
         <div class="toolbar">
-          <span>Rozmiar tekstu</span>
-          <button type="button" onclick="changeFontSize(1)" aria-label="Powiększ tekst">▲</button>
-          <button type="button" onclick="changeFontSize(-1)" aria-label="Pomniejsz tekst">▼</button>
+          <button type="button" onclick="changeFontSize(1)" aria-label="Font ▲">Font ▲</button>
+          <button type="button" onclick="changeFontSize(-1)" aria-label="Font ▼">Font ▼</button>
         </div>
 
         <nav class="nav-group">
