@@ -242,7 +242,7 @@
         <h1>Archiwum Scenariuszy TTRPG</h1>
         <p>
           Szybka nawigacja po materiałach kampanii. Kliknij <strong>Odśwież</strong>, aby wczytać aktualną listę plików
-          ze wskazanych folderów repozytorium.
+          z lokalnego manifestu wygenerowanego przez <code>Main/refresh.sh</code> lub <code>Main/refresh.ps1</code>.
         </p>
       </div>
       <img class="aquila" src="dice_no_background.png" alt="Logo kostek" />
@@ -292,25 +292,14 @@
         .join('');
     }
 
-    async function getSubdirectory(rootHandle, segments) {
-      let currentHandle = rootHandle;
-      for (const segment of segments) {
-        currentHandle = await currentHandle.getDirectoryHandle(segment);
-      }
-      return currentHandle;
-    }
-
-    async function getFilesFromDirectory(dirHandle) {
-      const files = [];
-      for await (const entry of dirHandle.values()) {
-        if (entry.kind !== 'file') continue;
-        const lowerName = entry.name.toLowerCase();
-        const extension = lowerName.slice(lowerName.lastIndexOf('.'));
-        if (allowedExtensions.has(extension)) {
-          files.push(entry.name);
-        }
-      }
-      return files.sort((a, b) => a.localeCompare(b, 'pl'));
+    function getAllowedFiles(files) {
+      return files
+        .filter(fileName => {
+          const lowerName = fileName.toLowerCase();
+          const extension = lowerName.slice(lowerName.lastIndexOf('.'));
+          return allowedExtensions.has(extension);
+        })
+        .sort((a, b) => a.localeCompare(b, 'pl'));
     }
 
     function renderSectionRows(sectionId, files, segments) {
@@ -336,24 +325,29 @@
     }
 
     async function refreshFileList() {
-      if (!('showDirectoryPicker' in window)) {
-        statusElement.textContent = 'Status: przeglądarka nie obsługuje File System Access API.';
-        return;
-      }
-
       try {
-        statusElement.textContent = 'Status: wybierz główny folder repozytorium „Scenariusze”.';
-        const rootHandle = await window.showDirectoryPicker({ mode: 'read' });
+        statusElement.textContent = 'Status: odczytywanie pliku Main/files-manifest.json...';
+        const response = await fetch(`./files-manifest.json?t=${Date.now()}`, { cache: 'no-store' });
+
+        if (!response.ok) {
+          throw new Error(`brak manifestu (${response.status})`);
+        }
+
+        const manifest = await response.json();
+        const sectionsById = new Map((manifest.sections || []).map(section => [section.id, section]));
 
         for (const section of sectionConfig) {
-          const directory = await getSubdirectory(rootHandle, section.segments);
-          const files = await getFilesFromDirectory(directory);
+          const manifestSection = sectionsById.get(section.id);
+          const files = getAllowedFiles(manifestSection?.files || []);
           renderSectionRows(section.id, files, section.segments);
         }
 
-        statusElement.textContent = `Status: odświeżono ${new Date().toLocaleTimeString('pl-PL')}.`;
+        const generatedAt = manifest.generatedAt
+          ? new Date(manifest.generatedAt).toLocaleString('pl-PL')
+          : 'nieznany czas';
+        statusElement.textContent = `Status: odświeżono z manifestu (${generatedAt}).`;
       } catch (error) {
-        statusElement.textContent = `Status: nie udało się odświeżyć (${error.message}).`;
+        statusElement.textContent = `Status: nie udało się odczytać manifestu (${error.message}). Uruchom Main/refresh.sh lub Main/refresh.ps1.`;
       }
     }
 
