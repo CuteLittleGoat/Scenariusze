@@ -1,0 +1,11 @@
+Template scenariusza:
+https://raw.githubusercontent.com/cutelittlegoat/Scenariusze/main/template.md
+
+Notatki z minionych sesji:
+https://cutelittlegoat.github.io/Scenariusze/Warhammer40k/Notatki/Notatki.html
+
+Informacje o miejscu akcji (układ planetarny Gilead):
+https://cutelittlegoat.github.io/Scenariusze/Warhammer40k/Gilead/Gilead.html
+
+Słowniczek pojęć:
+https://cutelittlegoat.github.io/Scenariusze/Warhammer40k/Slownik.html
