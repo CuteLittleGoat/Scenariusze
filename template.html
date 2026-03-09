@@ -15,13 +15,11 @@
       --muted: #93a3b5;
       --accent: #7fc8ff;
       --accent-2: #89e0c2;
-      --accent-soft: rgba(127, 200, 255, 0.12);
       --border: #243140;
       --border-strong: #324557;
       --shadow: rgba(0, 0, 0, 0.42);
       --sidebar-w: 290px;
-      --radius: 18px;
-      --radius-sm: 12px;
+      --content-font-size: 18px;
     }
 
     * {
@@ -66,6 +64,8 @@
         rgba(9, 13, 18, 0.92);
       backdrop-filter: blur(10px);
       overflow-y: auto;
+      flex: 0 0 var(--sidebar-w);
+      font-size: 18px;
     }
 
     .sidebar-card {
@@ -165,12 +165,14 @@
     .content {
       flex: 1;
       min-width: 0;
-      padding: 26px 30px 70px;
+      padding: 26px 24px 70px 24px;
+      font-size: var(--content-font-size);
     }
 
     .content-inner {
-      max-width: 1200px;
-      margin: 0 auto;
+      width: 100%;
+      max-width: none;
+      margin: 0;
     }
 
     .hero,
@@ -178,7 +180,7 @@
     .ai-instruction-box {
       background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-radius: 18px;
       box-shadow: 0 18px 40px var(--shadow);
     }
 
@@ -206,7 +208,7 @@
 
     .hero h1 {
       margin: 0 0 12px;
-      font-size: 2.15rem;
+      font-size: 2.15em;
       line-height: 1.1;
       letter-spacing: -0.02em;
     }
@@ -214,7 +216,7 @@
     .lead {
       color: var(--muted);
       margin: 0;
-      max-width: 950px;
+      max-width: none;
     }
 
     details {
@@ -249,7 +251,7 @@
 
     .summary-title {
       margin: 0;
-      font-size: 1.35rem;
+      font-size: 1.35em;
       line-height: 1.2;
       letter-spacing: -0.01em;
     }
@@ -261,7 +263,7 @@
 
     .chevron {
       color: var(--accent);
-      font-size: 1.2rem;
+      font-size: 1.2em;
       transition: transform 0.2s ease;
       flex: 0 0 auto;
       padding-top: 2px;
@@ -293,7 +295,7 @@
 
     .block h3 {
       margin: 0 0 10px;
-      font-size: 1.04rem;
+      font-size: 1.04em;
       color: var(--accent-2);
       letter-spacing: 0.01em;
     }
@@ -325,7 +327,7 @@
       display: block;
       margin-bottom: 8px;
       color: var(--muted);
-      font-size: 0.84rem;
+      font-size: 0.84em;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -347,7 +349,7 @@
       background: rgba(127, 200, 255, 0.08);
       color: var(--accent);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.9em;
       transition: 0.2s ease;
     }
 
@@ -391,7 +393,7 @@
     th {
       background: rgba(255,255,255,0.04);
       color: var(--accent-2);
-      font-size: 0.98rem;
+      font-size: 0.98em;
     }
 
     .button-placeholder {
@@ -431,7 +433,7 @@
 
     .entry-title {
       margin: 0 0 8px;
-      font-size: 1.05rem;
+      font-size: 1.05em;
       color: var(--accent);
     }
 
@@ -444,7 +446,7 @@
       display: inline-block;
       margin-right: 8px;
       color: var(--accent);
-      font-size: 0.86rem;
+      font-size: 0.86em;
       font-weight: 700;
       letter-spacing: 0.04em;
     }
@@ -472,7 +474,7 @@
     }
 
     .ai-instruction-content {
-      font-size: 1px;
+      font-size: 1px !important;
       line-height: 1.2;
       color: #808b97;
       white-space: pre-wrap;
@@ -499,14 +501,10 @@
       .content {
         padding: 20px 16px 60px;
       }
-
-      .content-inner {
-        max-width: none;
-      }
     }
 
     @media (max-width: 720px) {
-      body {
+      .content {
         font-size: 17px;
       }
 
@@ -515,7 +513,7 @@
       }
 
       .hero h1 {
-        font-size: 1.72rem;
+        font-size: 2em;
       }
 
       summary {
@@ -527,7 +525,7 @@
       }
 
       .summary-title {
-        font-size: 1.15rem;
+        font-size: 1.15em;
       }
 
       table {
@@ -568,7 +566,7 @@
       </div>
     </aside>
 
-    <main class="content">
+    <main class="content" id="contentArea">
       <div class="content-inner">
 
         <section class="hero" id="wprowadzenie">
@@ -1165,9 +1163,7 @@
 
         <section class="ai-instruction-box" id="instrukcja-ai" aria-label="Instrukcja dla AI">
           <h2 class="ai-instruction-title">Instrukcja dla AI</h2>
-          <div class="ai-instruction-content">INSTRUKCJA DLA ASYSTENTA AI UZUPEŁNIAJĄCEGO TEN SZABLON:
-
-To jest uniwersalny template do tworzenia scenariuszy TTRPG. Twoim zadaniem jest uzupełniać go logicznie, czytelnie i praktycznie z punktu widzenia Mistrza Gry. Każda sekcja ma określoną funkcję. Nie należy wpisywać treści przypadkowo ani na siłę. Jeżeli jakiś element nie występuje w danym scenariuszu, sekcja może pozostać pusta, bardzo krótka albo może zawierać tylko informację, że dana przygoda nie korzysta z tego typu elementów.
+          <div class="ai-instruction-content">To jest uniwersalny template do tworzenia scenariuszy TTRPG. Twoim zadaniem jest uzupełniać go logicznie, czytelnie i praktycznie z punktu widzenia Mistrza Gry. Każda sekcja ma określoną funkcję. Nie należy wpisywać treści przypadkowo ani na siłę. Jeżeli jakiś element nie występuje w danym scenariuszu, sekcja może pozostać pusta, bardzo krótka albo może zawierać tylko informację, że dana przygoda nie korzysta z tego typu elementów.
 
 ZASADY OGÓLNE:
 1. Nie dodawaj treści na siłę tylko dlatego, że sekcja istnieje.
@@ -1351,10 +1347,10 @@ NAJWAŻNIEJSZE OGRANICZENIA:
 
   <script>
     (function () {
-      const savedSize = localStorage.getItem("scenarioFontSize");
-      if (savedSize) {
-        document.body.style.fontSize = savedSize + "px";
-      }
+      const savedSize = localStorage.getItem("scenarioContentFontSize");
+      const defaultSize = savedSize ? parseFloat(savedSize) : 18;
+      document.documentElement.style.setProperty("--content-font-size", defaultSize + "px");
+
       const aiSection = document.querySelector(".ai-instruction-content");
       if (aiSection) {
         aiSection.style.fontSize = "1px";
@@ -1362,16 +1358,17 @@ NAJWAŻNIEJSZE OGRANICZENIA:
     })();
 
     function changeFontSize(step) {
-      const current = parseFloat(getComputedStyle(document.body).fontSize);
-      const next = Math.min(26, Math.max(14, current + step));
-      document.body.style.fontSize = next + "px";
+      const rootStyles = getComputedStyle(document.documentElement);
+      const current = parseFloat(rootStyles.getPropertyValue("--content-font-size")) || 18;
+      const next = Math.min(26, Math.max(12, current + step));
+      document.documentElement.style.setProperty("--content-font-size", next + "px");
 
       const aiSection = document.querySelector(".ai-instruction-content");
       if (aiSection) {
         aiSection.style.fontSize = "1px";
       }
 
-      localStorage.setItem("scenarioFontSize", next);
+      localStorage.setItem("scenarioContentFontSize", next);
     }
   </script>
 </body>
