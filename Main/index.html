@@ -30,6 +30,8 @@
       background:
         radial-gradient(circle at 15% -10%, rgba(251,191,36,0.16), transparent 35%),
         radial-gradient(circle at 100% 0%, rgba(103,232,249,0.10), transparent 30%),
+        radial-gradient(circle at 20% 25%, rgba(251,191,36,0.22) 0 2px, transparent 3px) 0 0 / 14px 14px,
+        radial-gradient(circle at 70% 70%, rgba(103,232,249,0.16) 0 1.6px, transparent 2.8px) 0 0 / 16px 16px,
         linear-gradient(180deg, var(--bg-1), var(--bg-2));
       overflow-x: hidden;
     }
@@ -160,6 +162,7 @@
 
     table {
       width: 100%;
+      table-layout: fixed;
       border-collapse: collapse;
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 12px;
@@ -189,6 +192,10 @@
       word-break: break-word;
     }
 
+    th:nth-child(1), td:nth-child(1) { width: 70%; }
+    th:nth-child(2), td:nth-child(2) { width: 30%; }
+    td:nth-child(2) { text-align: center; }
+
     .btn {
       display: inline-block;
       text-decoration: none;
@@ -215,8 +222,6 @@
   </style>
 </head>
 <body>
-  <div class="stars"></div>
-
   <main class="wrap">
     <section class="hero">
       <div>
@@ -227,16 +232,27 @@
         </p>
       </div>
       <svg class="aquila" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M64 10l12 16 20 2-13 14 4 20-23-10-23 10 4-20-13-14 20-2 12-16z" fill="#FBBF24"/>
-        <path d="M16 80l22-8 8 14-18 16-12-22zm96 0l-22-8-8 14 18 16 12-22z" fill="#F59E0B"/>
-        <path d="M54 56h20v52H54z" fill="#FDE68A"/>
+        <rect x="12" y="14" width="42" height="42" rx="8" fill="#22d3ee" transform="rotate(-12 12 14)"/>
+        <circle cx="30" cy="36" r="4" fill="#0f172a"/>
+        <circle cx="44" cy="28" r="4" fill="#0f172a"/>
+        <circle cx="38" cy="44" r="4" fill="#0f172a"/>
+
+        <rect x="62" y="18" width="48" height="48" rx="10" fill="#f472b6" transform="rotate(8 62 18)"/>
+        <circle cx="78" cy="34" r="4" fill="#0f172a"/>
+        <circle cx="95" cy="40" r="4" fill="#0f172a"/>
+        <circle cx="86" cy="52" r="4" fill="#0f172a"/>
+
+        <polygon points="52,74 78,62 102,78 94,106 66,112 46,94" fill="#a3e635"/>
+        <circle cx="66" cy="86" r="4" fill="#0f172a"/>
+        <circle cx="82" cy="96" r="4" fill="#0f172a"/>
+        <circle cx="60" cy="102" r="4" fill="#0f172a"/>
       </svg>
     </section>
 
     <p class="legend">Sekcje: Analizy, Notatki, Gilead, Oko, Rico, Epilog.</p>
 
-    <details class="stage" open>
-      <summary>Etap 1 — Analizy</summary>
+    <details class="stage">
+      <summary>Analizy</summary>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
@@ -251,7 +267,7 @@
     </details>
 
     <details class="stage">
-      <summary>Etap 2 — Warhammer40k/Notatki</summary>
+      <summary>Warhammer40k/Notatki</summary>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
@@ -266,7 +282,7 @@
     </details>
 
     <details class="stage">
-      <summary>Etap 3 — Warhammer40k/Gilead</summary>
+      <summary>Warhammer40k/Gilead</summary>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
@@ -282,7 +298,7 @@
     </details>
 
     <details class="stage">
-      <summary>Etap 4 — Warhammer40k/Scenariusz_Oko</summary>
+      <summary>Warhammer40k/Scenariusz_Oko</summary>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
@@ -295,7 +311,7 @@
     </details>
 
     <details class="stage">
-      <summary>Etap 5 — Warhammer40k/Scenariusz_Rico</summary>
+      <summary>Warhammer40k/Scenariusz_Rico</summary>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
@@ -314,7 +330,7 @@
     </details>
 
     <details class="stage">
-      <summary>Etap 6 — Warhammer40k/Scenariusz_Epilog</summary>
+      <summary>Warhammer40k/Scenariusz_Epilog</summary>
       <div class="table-wrap">
         <table>
           <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
