@@ -269,7 +269,6 @@
     const statusElement = document.getElementById('status');
     const stagesContainer = document.getElementById('stagesContainer');
     const allowedExtensions = new Set(['.html', '.md', '.txt', '.png']);
-    const DEFAULT_GITHUB_REPO = { owner: 'cutelittlegoat', repo: 'Scenariusze' };
 
     function createStageMarkup(title, id) {
       return `
@@ -335,120 +334,28 @@
       }
     }
 
+    function validateManifestShape(manifest) {
+      if (!manifest || typeof manifest !== 'object') {
+        throw new Error('manifest ma nieprawidłowy format');
+      }
+
+      if (!Array.isArray(manifest.sections)) {
+        throw new Error('manifest nie zawiera pola "sections"');
+      }
+
+      if (!manifest.generatedAt) {
+        throw new Error('manifest nie zawiera pola "generatedAt"');
+      }
+    }
+
     async function readManifestFile() {
-      const response = await fetch(`./files-manifest.json?t=${Date.now()}`, { cache: 'no-store' });
+      const response = await fetch(`./files-manifest.json?ts=${Date.now()}`, { cache: 'no-store' });
       if (!response.ok) {
         throw new Error(`brak manifestu (${response.status})`);
       }
-      return response.json();
-    }
-
-    async function tryGenerateManifest() {
-      const endpoints = ['/refresh-manifest', './refresh-manifest'];
-
-      for (const endpoint of endpoints) {
-        try {
-          const refreshResponse = await fetch(endpoint, {
-            method: 'POST',
-            cache: 'no-store'
-          });
-
-          if (refreshResponse.ok) {
-            return { generated: true };
-          }
-
-          if (refreshResponse.status === 404 || refreshResponse.status === 405) {
-            continue;
-          }
-
-          let details = '';
-          try {
-            const payload = await refreshResponse.json();
-            details = payload?.error ? `: ${payload.error}` : '';
-          } catch {
-            details = '';
-          }
-
-          throw new Error(`nie udało się wygenerować manifestu (${refreshResponse.status})${details}`);
-        } catch (error) {
-          if (error instanceof TypeError) {
-            continue;
-          }
-          throw error;
-        }
-      }
-
-      return { generated: false };
-    }
-
-    function inferGitHubRepo() {
-      const host = window.location.hostname;
-
-      if (host.endsWith('github.io')) {
-        const owner = host.split('.')[0];
-        const pathParts = window.location.pathname.split('/').filter(Boolean);
-        const repo = pathParts[0];
-        if (owner && repo) {
-          return { owner, repo };
-        }
-      }
-
-      if (host === 'github.com') {
-        const parts = window.location.pathname.split('/').filter(Boolean);
-        if (parts.length >= 2) {
-          return { owner: parts[0], repo: parts[1] };
-        }
-      }
-
-      return DEFAULT_GITHUB_REPO;
-    }
-
-    async function fetchGitHubSectionFiles(owner, repo, section) {
-      const folderPath = section.segments.join('/');
-      const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${folderPath}`;
-      const response = await fetch(apiUrl, {
-        cache: 'no-store',
-        headers: { Accept: 'application/vnd.github+json' }
-      });
-
-      if (!response.ok) {
-        throw new Error(`GitHub API ${response.status} dla ${folderPath}`);
-      }
-
-      const payload = await response.json();
-      if (!Array.isArray(payload)) {
-        return [];
-      }
-
-      return payload
-        .filter(item => item?.type === 'file' && typeof item.name === 'string')
-        .map(item => item.name);
-    }
-
-    async function tryFetchGitHubManifest() {
-      const repoInfo = inferGitHubRepo();
-      if (!repoInfo) {
-        return { manifest: null, source: 'none' };
-      }
-
-      const sections = [];
-      for (const section of sectionConfig) {
-        const files = await fetchGitHubSectionFiles(repoInfo.owner, repoInfo.repo, section);
-        sections.push({
-          id: section.id,
-          title: section.title,
-          segments: section.segments,
-          files: getAllowedFiles(files)
-        });
-      }
-
-      return {
-        source: 'github-api',
-        manifest: {
-          generatedAt: new Date().toISOString(),
-          sections
-        }
-      };
+      const manifest = await response.json();
+      validateManifestShape(manifest);
+      return manifest;
     }
 
     async function refreshFileList() {
@@ -456,42 +363,11 @@
       refreshButton.disabled = true;
 
       try {
-        statusElement.textContent = 'Status: generowanie nowego manifestu...';
-        const generation = await tryGenerateManifest();
-
-        if (generation.generated) {
-          statusElement.textContent = 'Status: odczytywanie zaktualizowanego manifestu...';
-          const manifest = await readManifestFile();
-          renderManifest(manifest);
-
-          const generatedAt = manifest.generatedAt
-            ? new Date(manifest.generatedAt).toLocaleString('pl-PL')
-            : 'nieznany czas';
-          statusElement.textContent = `Status: wygenerowano i odświeżono manifest (${generatedAt}).`;
-          return;
-        }
-
-        statusElement.textContent = 'Status: brak lokalnego endpointu, próba odczytu aktualnej listy z GitHub API...';
-        try {
-          const githubResult = await tryFetchGitHubManifest();
-          if (githubResult.manifest) {
-            renderManifest(githubResult.manifest);
-            const generatedAt = new Date(githubResult.manifest.generatedAt).toLocaleString('pl-PL');
-            statusElement.textContent = `Status: odświeżono z GitHub API (${generatedAt}).`;
-            return;
-          }
-        } catch (error) {
-          // fallback do lokalnego manifestu
-        }
-
-        statusElement.textContent = 'Status: odczytywanie istniejącego manifestu...';
+        statusElement.textContent = 'Status: odświeżanie...';
         const manifest = await readManifestFile();
         renderManifest(manifest);
-
-        const generatedAt = manifest.generatedAt
-          ? new Date(manifest.generatedAt).toLocaleString('pl-PL')
-          : 'nieznany czas';
-        statusElement.textContent = `Status: odświeżono z istniejącego manifestu (${generatedAt}).`;
+        const generatedAt = new Date(manifest.generatedAt).toLocaleString('pl-PL');
+        statusElement.textContent = `Status: odświeżono: ${generatedAt}.`;
       } catch (error) {
         const message = error?.message ? error.message : String(error);
         statusElement.textContent = `Status: nie udało się odświeżyć listy plików (${message}).`;
