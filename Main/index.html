@@ -241,8 +241,8 @@
       <div>
         <h1>Archiwum Scenariuszy TTRPG</h1>
         <p>
-          Szybka nawigacja po materiałach kampanii. Kliknij <strong>Odśwież</strong>, aby wczytać aktualną listę plików
-          z lokalnego manifestu wygenerowanego przez <code>Main/refresh.sh</code> lub <code>Main/refresh.ps1</code>.
+          Szybka nawigacja po materiałach kampanii. Kliknij <strong>Odśwież</strong>, aby najpierw wygenerować
+          nowy manifest i od razu wczytać aktualną listę plików.
         </p>
       </div>
       <img class="aquila" src="dice_no_background.png" alt="Logo kostek" />
@@ -324,30 +324,178 @@
         .join('');
     }
 
+    function renderManifest(manifest) {
+      const sectionsById = new Map((manifest.sections || []).map(section => [section.id, section]));
+
+      for (const section of sectionConfig) {
+        const manifestSection = sectionsById.get(section.id);
+        const files = getAllowedFiles(manifestSection?.files || []);
+        renderSectionRows(section.id, files, section.segments);
+      }
+    }
+
+    async function readManifestFile() {
+      const response = await fetch(`./files-manifest.json?t=${Date.now()}`, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error(`brak manifestu (${response.status})`);
+      }
+      return response.json();
+    }
+
+    async function tryGenerateManifest() {
+      const endpoints = ['/refresh-manifest', './refresh-manifest'];
+
+      for (const endpoint of endpoints) {
+        try {
+          const refreshResponse = await fetch(endpoint, {
+            method: 'POST',
+            cache: 'no-store'
+          });
+
+          if (refreshResponse.ok) {
+            return { generated: true };
+          }
+
+          if (refreshResponse.status === 404 || refreshResponse.status === 405) {
+            continue;
+          }
+
+          let details = '';
+          try {
+            const payload = await refreshResponse.json();
+            details = payload?.error ? `: ${payload.error}` : '';
+          } catch {
+            details = '';
+          }
+
+          throw new Error(`nie udało się wygenerować manifestu (${refreshResponse.status})${details}`);
+        } catch (error) {
+          if (error instanceof TypeError) {
+            continue;
+          }
+          throw error;
+        }
+      }
+
+      return { generated: false };
+    }
+
+    function inferGitHubRepo() {
+      const host = window.location.hostname;
+
+      if (host.endsWith('github.io')) {
+        const owner = host.split('.')[0];
+        const pathParts = window.location.pathname.split('/').filter(Boolean);
+        const repo = pathParts[0];
+        if (owner && repo) {
+          return { owner, repo };
+        }
+      }
+
+      if (host === 'github.com') {
+        const parts = window.location.pathname.split('/').filter(Boolean);
+        if (parts.length >= 2) {
+          return { owner: parts[0], repo: parts[1] };
+        }
+      }
+
+      return null;
+    }
+
+    async function fetchGitHubSectionFiles(owner, repo, section) {
+      const folderPath = section.segments.join('/');
+      const apiUrl = `https://api.github.com/repos/${encodeURIComponent(owner)}/${encodeURIComponent(repo)}/contents/${folderPath}`;
+      const response = await fetch(apiUrl, {
+        cache: 'no-store',
+        headers: { Accept: 'application/vnd.github+json' }
+      });
+
+      if (!response.ok) {
+        throw new Error(`GitHub API ${response.status} dla ${folderPath}`);
+      }
+
+      const payload = await response.json();
+      if (!Array.isArray(payload)) {
+        return [];
+      }
+
+      return payload
+        .filter(item => item?.type === 'file' && typeof item.name === 'string')
+        .map(item => item.name);
+    }
+
+    async function tryFetchGitHubManifest() {
+      const repoInfo = inferGitHubRepo();
+      if (!repoInfo) {
+        return { manifest: null, source: 'none' };
+      }
+
+      const sections = [];
+      for (const section of sectionConfig) {
+        const files = await fetchGitHubSectionFiles(repoInfo.owner, repoInfo.repo, section);
+        sections.push({
+          id: section.id,
+          title: section.title,
+          segments: section.segments,
+          files: getAllowedFiles(files)
+        });
+      }
+
+      return {
+        source: 'github-api',
+        manifest: {
+          generatedAt: new Date().toISOString(),
+          sections
+        }
+      };
+    }
+
     async function refreshFileList() {
+      const refreshButton = document.getElementById('refreshButton');
+      refreshButton.disabled = true;
+
       try {
-        statusElement.textContent = 'Status: odczytywanie pliku Main/files-manifest.json...';
-        const response = await fetch(`./files-manifest.json?t=${Date.now()}`, { cache: 'no-store' });
+        statusElement.textContent = 'Status: generowanie nowego manifestu...';
+        const generation = await tryGenerateManifest();
 
-        if (!response.ok) {
-          throw new Error(`brak manifestu (${response.status})`);
+        if (generation.generated) {
+          statusElement.textContent = 'Status: odczytywanie zaktualizowanego manifestu...';
+          const manifest = await readManifestFile();
+          renderManifest(manifest);
+
+          const generatedAt = manifest.generatedAt
+            ? new Date(manifest.generatedAt).toLocaleString('pl-PL')
+            : 'nieznany czas';
+          statusElement.textContent = `Status: wygenerowano i odświeżono manifest (${generatedAt}).`;
+          return;
         }
 
-        const manifest = await response.json();
-        const sectionsById = new Map((manifest.sections || []).map(section => [section.id, section]));
-
-        for (const section of sectionConfig) {
-          const manifestSection = sectionsById.get(section.id);
-          const files = getAllowedFiles(manifestSection?.files || []);
-          renderSectionRows(section.id, files, section.segments);
+        statusElement.textContent = 'Status: brak lokalnego endpointu, próba odczytu aktualnej listy z GitHub API...';
+        try {
+          const githubResult = await tryFetchGitHubManifest();
+          if (githubResult.manifest) {
+            renderManifest(githubResult.manifest);
+            const generatedAt = new Date(githubResult.manifest.generatedAt).toLocaleString('pl-PL');
+            statusElement.textContent = `Status: odświeżono z GitHub API (${generatedAt}).`;
+            return;
+          }
+        } catch (error) {
+          // fallback do lokalnego manifestu
         }
+
+        statusElement.textContent = 'Status: odczytywanie istniejącego manifestu...';
+        const manifest = await readManifestFile();
+        renderManifest(manifest);
 
         const generatedAt = manifest.generatedAt
           ? new Date(manifest.generatedAt).toLocaleString('pl-PL')
           : 'nieznany czas';
-        statusElement.textContent = `Status: odświeżono z manifestu (${generatedAt}).`;
+        statusElement.textContent = `Status: odświeżono z istniejącego manifestu (${generatedAt}).`;
       } catch (error) {
-        statusElement.textContent = `Status: nie udało się odczytać manifestu (${error.message}). Uruchom Main/refresh.sh lub Main/refresh.ps1.`;
+        const message = error?.message ? error.message : String(error);
+        statusElement.textContent = `Status: nie udało się odświeżyć listy plików (${message}).`;
+      } finally {
+        refreshButton.disabled = false;
       }
     }
 
