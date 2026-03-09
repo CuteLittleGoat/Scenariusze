@@ -245,6 +245,29 @@
       border: 1px solid var(--border);
       border-radius: 999px;
       background: rgba(124, 199, 255, 0.08);
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .tag:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .small-label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
     .table-wrap {
@@ -311,6 +334,36 @@
       font-weight: 700;
       display: inline-block;
       margin-right: 8px;
+    }
+
+    .entry-card {
+      margin-bottom: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--panel-3);
+    }
+
+    .entry-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .entry-title {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      color: var(--accent);
+    }
+
+    .entry-meta {
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .readaloud {
+      padding: 14px 16px;
+      border-left: 4px solid var(--accent);
+      background: rgba(124, 199, 255, 0.08);
+      border-radius: 10px;
     }
 
     .ai-instruction-box {
@@ -430,6 +483,20 @@
           </p>
         </div>
 
+        <div class="block" id="scena-1-dla-graczy">
+          <h3>Sekcja dla Graczy</h3>
+          <p>
+            Tutaj wpisz treści przeznaczone bezpośrednio do przedstawienia graczom, na przykład opisy
+            lokacji do odczytania przez MG, pierwsze wrażenia, narracyjne wejście do sceny, krótkie
+            opisy wydarzeń albo informacje, które mają wybrzmieć w formie gotowego tekstu mówionego.
+          </p>
+          <div class="readaloud">
+            <strong>Przykład formy:</strong><br />
+            „Gdy wchodzicie do wnętrza budynku, czujecie zapach wilgoci i starego kurzu. Z głębi
+            korytarza dobiega metaliczny stukot, a w świetle waszych latarek drżą długie cienie.”
+          </div>
+        </div>
+
         <div class="block">
           <h3>Scena Krok-po-kroku</h3>
           <p class="muted">
@@ -446,6 +513,21 @@
         </div>
 
         <div class="block">
+          <h3>Powiązane materiały</h3>
+          <span class="small-label">Handouty używane w tej scenie</span>
+          <div class="link-row">
+            <a class="tag" href="#handout-h1">H1</a>
+            <a class="tag" href="#handout-h2">H2</a>
+          </div>
+
+          <span class="small-label" style="margin-top: 16px;">Ilustracje używane w tej scenie</span>
+          <div class="link-row">
+            <a class="tag" href="#ilustracja-il1">IL1</a>
+            <a class="tag" href="#ilustracja-il2">IL2</a>
+          </div>
+        </div>
+
+        <div class="block">
           <h3>Co ma się znaleźć w tej sekcji</h3>
           <ul>
             <li>opis miejsca akcji i jego atmosfery,</li>
@@ -454,7 +536,7 @@
             <li>jakich NPC można tu spotkać,</li>
             <li>jakie testy, przeszkody, zagrożenia lub konflikty mogą się pojawić,</li>
             <li>jakie ilustracje są potrzebne do tej sceny, oznaczone numerami IL1, IL2, IL3 itd.,</li>
-            <li>jakie handouty można tu zdobyć, oznaczone numerami H1, H2, H3 itd.,</li>
+            <li>jakie handouty można tu zdobyć lub wykorzystać, oznaczone numerami H1, H2, H3 itd.,</li>
             <li>co się stanie, jeśli gracze odniosą sukces,</li>
             <li>co się stanie, jeśli gracze zawiodą, zignorują trop albo pójdą inną drogą,</li>
             <li>dokąd ta scena powinna prowadzić dalej.</li>
@@ -487,6 +569,20 @@
           </p>
         </div>
 
+        <div class="block" id="scena-2-dla-graczy">
+          <h3>Sekcja dla Graczy</h3>
+          <p>
+            Tutaj wpisz teksty, które MG może odczytać graczom albo sparafrazować przy stole.
+            To dobre miejsce na opisy pomieszczeń, nastroju, spotkań, odkryć, wizji, odgłosów
+            i innych elementów, które mają wywołać określone wrażenie po stronie drużyny.
+          </p>
+          <div class="readaloud">
+            <strong>Przykład formy:</strong><br />
+            „Wąski korytarz kończy się ciężkimi drzwiami. Na metalu ktoś wyrył serię płytkich,
+            nerwowych nacięć, jakby próbował zaznaczyć kolejne dni albo godziny.”
+          </div>
+        </div>
+
         <div class="block">
           <h3>Scena Krok-po-kroku</h3>
           <p class="muted">
@@ -503,6 +599,21 @@
         </div>
 
         <div class="block">
+          <h3>Powiązane materiały</h3>
+          <span class="small-label">Handouty używane w tej scenie</span>
+          <div class="link-row">
+            <a class="tag" href="#handout-h2">H2</a>
+            <a class="tag" href="#handout-h3">H3</a>
+          </div>
+
+          <span class="small-label" style="margin-top: 16px;">Ilustracje używane w tej scenie</span>
+          <div class="link-row">
+            <a class="tag" href="#ilustracja-il2">IL2</a>
+            <a class="tag" href="#ilustracja-il3">IL3</a>
+          </div>
+        </div>
+
+        <div class="block">
           <h3>Co ma się znaleźć w tej sekcji</h3>
           <ul>
             <li>opis rozwoju sytuacji po poprzedniej scenie,</li>
@@ -510,7 +621,7 @@
             <li>jakie decyzje mogą podjąć gracze,</li>
             <li>jak reagują NPC, przeciwnicy lub otoczenie,</li>
             <li>jakie ilustracje są potrzebne do tej sceny, oznaczone numerami IL1, IL2, IL3 itd.,</li>
-            <li>jakie handouty można tu zdobyć, oznaczone numerami H1, H2, H3 itd.,</li>
+            <li>jakie handouty można tu zdobyć lub wykorzystać, oznaczone numerami H1, H2, H3 itd.,</li>
             <li>jakie mogą być warianty przebiegu sceny,</li>
             <li>jak połączyć tę scenę z kolejnymi częściami scenariusza.</li>
           </ul>
@@ -542,6 +653,20 @@
           </p>
         </div>
 
+        <div class="block" id="scena-3-dla-graczy">
+          <h3>Sekcja dla Graczy</h3>
+          <p>
+            Tutaj wpisz gotowe opisy do odczytania przez MG w kulminacyjnych momentach sceny:
+            wejście do finału, odkrycie prawdy, ujawnienie przeciwnika, opis starcia, przemianę lokacji,
+            wizję albo końcowe odsłonięcie stawki.
+          </p>
+          <div class="readaloud">
+            <strong>Przykład formy:</strong><br />
+            „Światła gasną jedno po drugim. W ciszy, która po nich zapada, słyszycie tylko własny oddech
+            i pojedynczy dźwięk kroków, powoli zbliżających się z głębi hali.”
+          </div>
+        </div>
+
         <div class="block">
           <h3>Scena Krok-po-kroku</h3>
           <p class="muted">
@@ -558,13 +683,28 @@
         </div>
 
         <div class="block">
+          <h3>Powiązane materiały</h3>
+          <span class="small-label">Handouty używane w tej scenie</span>
+          <div class="link-row">
+            <a class="tag" href="#handout-h3">H3</a>
+            <a class="tag" href="#handout-h4">H4</a>
+          </div>
+
+          <span class="small-label" style="margin-top: 16px;">Ilustracje używane w tej scenie</span>
+          <div class="link-row">
+            <a class="tag" href="#ilustracja-il3">IL3</a>
+            <a class="tag" href="#ilustracja-il4">IL4</a>
+          </div>
+        </div>
+
+        <div class="block">
           <h3>Co ma się znaleźć w tej sekcji</h3>
           <ul>
             <li>najważniejsze wydarzenie lub konflikt tej części przygody,</li>
             <li>ujawnienie kluczowej prawdy, przeciwnika albo zagrożenia,</li>
             <li>konsekwencje wcześniejszych decyzji graczy,</li>
             <li>jakie ilustracje są potrzebne do tej sceny, oznaczone numerami IL1, IL2, IL3 itd.,</li>
-            <li>jakie handouty można tu zdobyć, oznaczone numerami H1, H2, H3 itd.,</li>
+            <li>jakie handouty można tu zdobyć lub wykorzystać, oznaczone numerami H1, H2, H3 itd.,</li>
             <li>możliwe przejścia do finału lub alternatywne zakończenia,</li>
             <li>informacja, co musi zostać domknięte przed końcem scenariusza.</li>
           </ul>
@@ -774,28 +914,55 @@
             oznaczony numerem, np. <strong>IL1</strong>, <strong>IL2</strong>, <strong>IL3</strong>, aby łatwo było
             odwoływać się do nich z poziomu poszczególnych scen.
           </p>
+        </div>
 
-          <div class="example">
-            <p><strong>Każdy wpis ilustracji powinien zawierać:</strong></p>
-            <ul>
-              <li>oznaczenie ilustracji, np. IL1,</li>
-              <li>nazwę ilustracji,</li>
-              <li>do jakiej sceny lub elementu scenariusza należy,</li>
-              <li>długi opis obrazu, kompozycji, kadru, oświetlenia, kolorystyki i nastroju,</li>
-              <li>tagi pozytywne,</li>
-              <li>tagi negatywne,</li>
-              <li>opcjonalnie: format obrazu, proporcje i styl wykonania.</li>
-            </ul>
+        <div class="entry-card" id="ilustracja-il1">
+          <h4 class="entry-title"><span class="mini-id">IL1</span>Nazwa ilustracji</h4>
+          <div class="entry-meta">Powiązana scena: Scena 1</div>
+          <p>
+            Tutaj wpisz długi prompt do ilustracji. Opisz kompozycję, kadr, oświetlenie, nastrój,
+            kluczowe obiekty, wygląd miejsca lub postaci, styl wizualny oraz szczegóły techniczne.
+          </p>
+          <p><strong>Tagi pozytywne:</strong> tutaj wpisz pożądane cechy obrazu.</p>
+          <p><strong>Tagi negatywne:</strong> tutaj wpisz elementy, których generator ma unikać.</p>
+          <div class="link-row">
+            <a class="tag" href="#scena-1">Przejdź do Sceny 1</a>
           </div>
+        </div>
 
-          <p><strong>Przykładowe pola:</strong></p>
-          <span class="tag">IL1</span>
-          <span class="tag">Nazwa ilustracji</span>
-          <span class="tag">Powiązana scena</span>
-          <span class="tag">Główny prompt</span>
-          <span class="tag">Tagi pozytywne</span>
-          <span class="tag">Tagi negatywne</span>
-          <span class="tag">Format / proporcje</span>
+        <div class="entry-card" id="ilustracja-il2">
+          <h4 class="entry-title"><span class="mini-id">IL2</span>Nazwa ilustracji</h4>
+          <div class="entry-meta">Powiązana scena: Scena 1 lub Scena 2</div>
+          <p>
+            Ten blok jest gotowym wzorem pod kolejną ilustrację. Zachowaj numerację IL1, IL2, IL3 itd.
+          </p>
+          <div class="link-row">
+            <a class="tag" href="#scena-1">Przejdź do Sceny 1</a>
+            <a class="tag" href="#scena-2">Przejdź do Sceny 2</a>
+          </div>
+        </div>
+
+        <div class="entry-card" id="ilustracja-il3">
+          <h4 class="entry-title"><span class="mini-id">IL3</span>Nazwa ilustracji</h4>
+          <div class="entry-meta">Powiązana scena: Scena 2 lub Scena 3</div>
+          <p>
+            Kolejny wzór wpisu ilustracji. W razie potrzeby duplikuj cały blok i aktualizuj numer.
+          </p>
+          <div class="link-row">
+            <a class="tag" href="#scena-2">Przejdź do Sceny 2</a>
+            <a class="tag" href="#scena-3">Przejdź do Sceny 3</a>
+          </div>
+        </div>
+
+        <div class="entry-card" id="ilustracja-il4">
+          <h4 class="entry-title"><span class="mini-id">IL4</span>Nazwa ilustracji</h4>
+          <div class="entry-meta">Powiązana scena: Scena 3</div>
+          <p>
+            Użyj tego układu dla ilustracji związanych z finałem lub zakończeniem przygody.
+          </p>
+          <div class="link-row">
+            <a class="tag" href="#scena-3">Przejdź do Sceny 3</a>
+          </div>
         </div>
       </div>
     </details>
@@ -821,27 +988,52 @@
             oznaczony numerem, np. <strong>H1</strong>, <strong>H2</strong>, <strong>H3</strong>, aby łatwo było
             odwoływać się do nich w scenach.
           </p>
+        </div>
 
-          <div class="example">
-            <p><strong>Każdy wpis handoutu powinien zawierać:</strong></p>
-            <ul>
-              <li>oznaczenie handoutu, np. H1,</li>
-              <li>nazwę handoutu,</li>
-              <li>gdzie i kiedy gracze mogą go znaleźć,</li>
-              <li>pełną treść handoutu gotową do pokazania lub przeczytania,</li>
-              <li>opcjonalnie informację, co z niego wynika i do czego prowadzi.</li>
-            </ul>
+        <div class="entry-card" id="handout-h1">
+          <h4 class="entry-title"><span class="mini-id">H1</span>Nazwa handoutu</h4>
+          <div class="entry-meta">Gdzie występuje: Scena 1</div>
+          <p><strong>Miejsce odnalezienia:</strong> wpisz, gdzie gracze zdobywają ten materiał.</p>
+          <p><strong>Treść handoutu:</strong></p>
+          <div class="readaloud">
+            Tutaj wpisz pełną treść listu, notatki, raportu, wiadomości, ogłoszenia albo innego materiału,
+            który gracze mogą przeczytać lub otrzymać.
           </div>
+          <div class="link-row">
+            <a class="tag" href="#scena-1">Wróć do miejsca użycia w Scenie 1</a>
+          </div>
+        </div>
 
-          <p><strong>Przykładowe typy handoutów:</strong></p>
-          <span class="tag">H1</span>
-          <span class="tag">List</span>
-          <span class="tag">Notatka</span>
-          <span class="tag">Raport</span>
-          <span class="tag">Nagranie</span>
-          <span class="tag">Dziennik</span>
-          <span class="tag">Ogłoszenie</span>
-          <span class="tag">Fragment księgi</span>
+        <div class="entry-card" id="handout-h2">
+          <h4 class="entry-title"><span class="mini-id">H2</span>Nazwa handoutu</h4>
+          <div class="entry-meta">Gdzie występuje: Scena 1 lub Scena 2</div>
+          <p><strong>Miejsce odnalezienia:</strong> wpisz, kiedy i gdzie handout trafia do graczy.</p>
+          <p><strong>Treść handoutu:</strong> wpisz pełną treść materiału.</p>
+          <div class="link-row">
+            <a class="tag" href="#scena-1">Wróć do miejsca użycia w Scenie 1</a>
+            <a class="tag" href="#scena-2">Wróć do miejsca użycia w Scenie 2</a>
+          </div>
+        </div>
+
+        <div class="entry-card" id="handout-h3">
+          <h4 class="entry-title"><span class="mini-id">H3</span>Nazwa handoutu</h4>
+          <div class="entry-meta">Gdzie występuje: Scena 2 lub Scena 3</div>
+          <p><strong>Miejsce odnalezienia:</strong> wpisz okoliczności znalezienia lub przekazania handoutu.</p>
+          <p><strong>Treść handoutu:</strong> wpisz pełną treść materiału.</p>
+          <div class="link-row">
+            <a class="tag" href="#scena-2">Wróć do miejsca użycia w Scenie 2</a>
+            <a class="tag" href="#scena-3">Wróć do miejsca użycia w Scenie 3</a>
+          </div>
+        </div>
+
+        <div class="entry-card" id="handout-h4">
+          <h4 class="entry-title"><span class="mini-id">H4</span>Nazwa handoutu</h4>
+          <div class="entry-meta">Gdzie występuje: Scena 3</div>
+          <p><strong>Miejsce odnalezienia:</strong> wpisz, gdzie ten handout pojawia się pod koniec przygody.</p>
+          <p><strong>Treść handoutu:</strong> wpisz pełną treść materiału.</p>
+          <div class="link-row">
+            <a class="tag" href="#scena-3">Wróć do miejsca użycia w Scenie 3</a>
+          </div>
         </div>
       </div>
     </details>
@@ -866,6 +1058,13 @@ ZASADY OGÓLNE:
 11. Pisz treści z myślą o późniejszym użyciu przy stole przez MG.
 12. Zachowuj przejrzystość i funkcjonalność. Priorytetem jest użyteczność scenariusza, nie literackość dla samej literackości.
 13. Jeżeli użytkownik poda własne nazwy sekcji, scen, NPC, handoutów lub ilustracji, należy ich używać konsekwentnie i nie podmieniać ich bez powodu.
+14. W każdej scenie należy utrzymywać mały blok „Powiązane materiały”, zawierający szybkie linki do używanych tam handoutów i ilustracji.
+15. Po kliknięciu oznaczenia H1, H2, H3 itd. użytkownik ma być przenoszony do odpowiedniego wpisu w sekcji „Handouty”.
+16. Każdy wpis handoutu powinien zawierać link zwrotny do sceny, w której jest używany.
+17. Po kliknięciu oznaczenia IL1, IL2, IL3 itd. użytkownik ma być przenoszony do odpowiedniego wpisu w sekcji „Ilustracje”.
+18. Każdy wpis ilustracji powinien zawierać link zwrotny do sceny, w której jest używany.
+19. Linki w blokach „Powiązane materiały” mają być utrzymywane ręcznie i aktualizowane przy dodawaniu lub usuwaniu scen, handoutów i ilustracji.
+20. Sekcja „Instrukcja dla AI” ma pozostać bardzo mała wizualnie i nie może reagować na przyciski zmiany rozmiaru fontu.
 
 SEKCJA „Tytuł scenariusza”:
 Tutaj należy wpisać nazwę przygody. Tytuł powinien jasno identyfikować scenariusz i dobrze nadawać się do późniejszego wyszukiwania w archiwum użytkownika.
@@ -882,7 +1081,9 @@ Każda scena powinna mieć:
 - numer i tytuł,
 - krótki opis w nagłówku sekcji,
 - streszczenie sceny,
+- sekcję dla graczy,
 - blok „Scena Krok-po-kroku”,
+- blok „Powiązane materiały”,
 - blok „Co ma się znaleźć w tej sekcji”.
 
 W „Streszczeniu sceny” należy wpisać:
@@ -892,7 +1093,23 @@ W „Streszczeniu sceny” należy wpisać:
 - jaki konflikt, problem albo odkrycie znajduje się w centrum tej sceny,
 - do czego scena prowadzi dalej.
 
+W „Sekcji dla Graczy” należy wpisać treści przeznaczone bezpośrednio do odczytania lub przedstawienia przez MG. Mogą to być:
+- opisy wejścia do sceny,
+- opisy lokacji,
+- opisy pierwszego wrażenia,
+- opisy dźwięków, zapachów i atmosfery,
+- opisy ważnych odkryć,
+- krótkie narracyjne komunikaty przygotowane do przeczytania na głos.
+To jest sekcja użytkowa dla MG, ale jej treść jest skierowana do graczy.
+
 W „Scena Krok-po-kroku” należy opisać możliwy przebieg sceny w kolejnych punktach. To nie musi być sztywny scenariusz działań graczy. Ma to być pomoc dla MG: uporządkowana sekwencja zdarzeń, informacji, reakcji NPC, możliwych odkryć i konsekwencji. Lista ma wspierać improwizację, a nie ją ograniczać.
+
+W bloku „Powiązane materiały” należy umieszczać szybkie linki do handoutów i ilustracji używanych w danej scenie.
+- Handouty należy oznaczać jako H1, H2, H3 itd.
+- Ilustracje należy oznaczać jako IL1, IL2, IL3 itd.
+- Każdy link powinien prowadzić do konkretnego wpisu niżej na stronie.
+- Każdy wpis handoutu i ilustracji powinien mieć link zwrotny do sceny, gdzie jest używany.
+- Przy zmianie numeracji należy poprawić wszystkie linki w obie strony.
 
 W bloku „Co ma się znaleźć w tej sekcji” należy umieszczać praktyczne informacje, które MG może wykorzystać przy prowadzeniu. Mogą to być:
 - opis miejsca,
@@ -934,6 +1151,7 @@ SEKCJA „Ilustracje”:
 Ta sekcja służy do przygotowania promptów do generatorów obrazów AI.
 Każdy wpis powinien mieć oznaczenie IL1, IL2, IL3 itd.
 Każdy wpis powinien być powiązany z konkretną sceną, lokacją, NPC, wydarzeniem albo przedmiotem.
+Każdy wpis powinien mieć też link zwrotny do sceny lub scen, gdzie dana ilustracja jest używana.
 Prompty mają być długie, rozbudowane i praktyczne. Powinny zawierać:
 - nazwę ilustracji,
 - numer ilustracji,
@@ -951,6 +1169,7 @@ Nie twórz krótkich, ogólnikowych promptów. Ta sekcja ma być użyteczna przy
 SEKCJA „Handouty”:
 Ta sekcja służy do wpisywania materiałów, które mogą trafić do rąk graczy.
 Każdy wpis powinien mieć oznaczenie H1, H2, H3 itd.
+Każdy wpis powinien mieć też link zwrotny do sceny lub scen, gdzie dany handout jest używany.
 Każdy handout powinien mieć:
 - numer,
 - nazwę,
@@ -980,6 +1199,9 @@ NUMERACJA I SPÓJNOŚĆ:
 - Jeżeli dodasz nową scenę, zadbaj o zgodność numeracji w panelu nawigacyjnym.
 - Jeżeli usuniesz scenę, popraw odpowiednio odnośniki.
 - Jeżeli scenariusz ma więcej scen, dodaj nowe sekcje „Scena” w tym samym układzie.
+- Każdy link do handoutu powinien prowadzić do istniejącego identyfikatora w sekcji „Handouty”.
+- Każdy link do ilustracji powinien prowadzić do istniejącego identyfikatora w sekcji „Ilustracje”.
+- Każdy wpis handoutu i ilustracji powinien zawierać aktualne linki zwrotne.
 
 STYL TREŚCI:
 - Pisz po polsku, chyba że użytkownik zażąda inaczej.
@@ -1005,6 +1227,10 @@ NAJWAŻNIEJSZE OGRANICZENIA:
       const savedSize = localStorage.getItem("scenarioFontSize");
       if (savedSize) {
         document.body.style.fontSize = savedSize + "px";
+      }
+      const aiSection = document.querySelector(".ai-instruction-content");
+      if (aiSection) {
+        aiSection.style.fontSize = "1px";
       }
     })();
 
