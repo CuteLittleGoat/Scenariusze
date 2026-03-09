@@ -497,14 +497,13 @@
       }
 
       .sidebar {
-        position: sticky;
-        top: 0;
+        position: static;
         width: 100%;
         height: auto;
-        max-height: 55vh;
+        max-height: none;
         border-right: none;
         border-bottom: 1px solid var(--border);
-        z-index: 40;
+        overflow-y: visible;
       }
 
       .content {
@@ -513,8 +512,12 @@
     }
 
     @media (max-width: 720px) {
+      :root {
+        --content-font-size: 17px;
+      }
+
       .content {
-        font-size: 17px;
+        font-size: var(--content-font-size);
       }
 
       .hero {
@@ -549,8 +552,8 @@
       <div class="sidebar-card">
 
         <div class="toolbar">
-          <button type="button" onclick="changeFontSize(1)" aria-label="Font ▲">Font ▲</button>
-          <button type="button" onclick="changeFontSize(-1)" aria-label="Font ▼">Font ▼</button>
+          <button type="button" data-font-step="1" aria-label="Font ▲">Font ▲</button>
+          <button type="button" data-font-step="-1" aria-label="Font ▼">Font ▼</button>
         </div>
 
         <nav class="nav-group">
@@ -1352,8 +1355,20 @@ NAJWAŻNIEJSZE OGRANICZENIA:
   <script>
     (function () {
       const savedSize = localStorage.getItem("scenarioContentFontSize");
-      const defaultSize = savedSize ? parseFloat(savedSize) : 18;
+      const cssDefaultSize = parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue("--content-font-size")
+      ) || 18;
+      const defaultSize = savedSize ? parseFloat(savedSize) : cssDefaultSize;
       document.documentElement.style.setProperty("--content-font-size", defaultSize + "px");
+
+      document.querySelectorAll("[data-font-step]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const step = parseFloat(button.getAttribute("data-font-step"));
+          if (!Number.isNaN(step)) {
+            changeFontSize(step);
+          }
+        });
+      });
 
       const aiSection = document.querySelector(".ai-instruction-content");
       if (aiSection) {
