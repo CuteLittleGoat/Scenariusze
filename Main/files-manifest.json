@@ -1,0 +1,86 @@
+{
+  "generatedAt": "2026-03-09T10:08:22.357158+00:00",
+  "sections": [
+    {
+      "id": "analizy",
+      "title": "Analizy",
+      "segments": [
+        "Analizy"
+      ],
+      "files": [
+        "analiza-przycisku-odswiez-file-system-access.md",
+        "Analiza_auto_odswiezania_index_html_2026-03-09.md"
+      ]
+    },
+    {
+      "id": "notatki",
+      "title": "Warhammer40k/Notatki",
+      "segments": [
+        "Warhammer40k",
+        "Notatki"
+      ],
+      "files": [
+        "Notatki.html",
+        "Notatki.md"
+      ]
+    },
+    {
+      "id": "gilead",
+      "title": "Warhammer40k/Gilead",
+      "segments": [
+        "Warhammer40k",
+        "Gilead"
+      ],
+      "files": [
+        "Frakcje.txt",
+        "Gilead.html",
+        "Ostamotniony System.txt",
+        "Patroni.txt",
+        "Podręcznik Główny.txt"
+      ]
+    },
+    {
+      "id": "oko",
+      "title": "Warhammer40k/Scenariusz_Oko",
+      "segments": [
+        "Warhammer40k",
+        "Scenariusz_Oko"
+      ],
+      "files": [
+        "Oko_01.html",
+        "Oko_02.html",
+        "Oko_03.html"
+      ]
+    },
+    {
+      "id": "rico",
+      "title": "Warhammer40k/Scenariusz_Rico",
+      "segments": [
+        "Warhammer40k",
+        "Scenariusz_Rico"
+      ],
+      "files": [
+        "01.md",
+        "Backup_Rico.html",
+        "Handouty.html",
+        "Prompt_01.md",
+        "prompty.html",
+        "Rico_01.html",
+        "Rico_02.html",
+        "Rico_03.html"
+      ]
+    },
+    {
+      "id": "epilog",
+      "title": "Warhammer40k/Scenariusz_Epilog",
+      "segments": [
+        "Warhammer40k",
+        "Scenariusz_Epilog"
+      ],
+      "files": [
+        "Epilog.html",
+        "Pancerz.html"
+      ]
+    }
+  ]
+}
