@@ -21,11 +21,7 @@
     }
 
     * { box-sizing: border-box; }
-
-    html,
-    body {
-      min-height: 100%;
-    }
+    html, body { min-height: 100%; }
 
     body {
       margin: 0;
@@ -106,8 +102,9 @@
     .aquila {
       width: 260px;
       height: 84px;
-      opacity: 0.85;
-      filter: drop-shadow(0 0 14px rgba(251,191,36,0.22));
+      opacity: 0.96;
+      object-fit: contain;
+      filter: invert(1) brightness(1.25) drop-shadow(0 0 10px rgba(251,191,36,0.35));
       animation: pulse 4s ease-in-out infinite;
     }
 
@@ -116,7 +113,11 @@
       50% { transform: scale(1.05); }
     }
 
-    .legend {
+    .toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
       margin: 0 0 18px;
       background: var(--panel);
       border: 1px solid rgba(255,255,255,0.08);
@@ -125,6 +126,16 @@
       color: var(--muted);
       font-size: 0.95rem;
       backdrop-filter: blur(4px);
+    }
+
+    .refresh-btn {
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      padding: 8px 14px;
+      cursor: pointer;
+      font-weight: 700;
+      color: #101827;
+      background: linear-gradient(180deg, #fcd34d, #f59e0b);
     }
 
     details.stage {
@@ -195,10 +206,7 @@
 
     tr:last-child td { border-bottom: none; }
 
-    .path {
-      color: #dbe3ee;
-      word-break: break-word;
-    }
+    .path { color: #dbe3ee; word-break: break-word; }
 
     th:nth-child(1), td:nth-child(1) { width: 70%; }
     th:nth-child(2), td:nth-child(2) { width: 30%; }
@@ -214,166 +222,143 @@
       border: 1px solid rgba(255,255,255,0.25);
       border-radius: 999px;
       padding: 7px 12px;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px rgba(245, 158, 11, 0.35);
-    }
+    .empty-row { color: #9ca3af; text-align: center; }
 
     @media (max-width: 760px) {
       .hero { grid-template-columns: 1fr; }
       .aquila { width: 220px; height: 72px; }
+      .toolbar { flex-direction: column; align-items: flex-start; }
       th:nth-child(1), td:nth-child(1) { width: auto; }
     }
   </style>
 </head>
 <body>
+  <div class="stars" aria-hidden="true"></div>
   <main class="wrap">
     <section class="hero">
       <div>
         <h1>Archiwum Scenariuszy TTRPG</h1>
         <p>
-          Szybka nawigacja po materiałach kampanii. Każdy etap rozwija listę wszystkich plików
-          z wybranego folderu. Kliknięcie przycisku <strong>Otwórz</strong> uruchamia plik w nowym oknie.
+          Szybka nawigacja po materiałach kampanii. Kliknij <strong>Odśwież</strong>, aby wczytać aktualną listę plików
+          ze wskazanych folderów repozytorium.
         </p>
       </div>
-      <svg class="aquila" viewBox="0 0 336 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <g stroke="#111827" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="26,16 45,7 64,16 70,36 54,52 36,52 20,36" fill="#fca5a5" />
-          <line x1="26" y1="16" x2="45" y2="26" />
-          <line x1="64" y1="16" x2="45" y2="26" />
-          <line x1="20" y1="36" x2="45" y2="26" />
-          <line x1="70" y1="36" x2="45" y2="26" />
-          <text x="45" y="31" text-anchor="middle" font-size="16" fill="#111827" font-family="Segoe UI, sans-serif">20</text>
-
-          <polygon points="83,18 102,8 124,15 133,35 126,52 103,57 84,48 76,34" fill="#fdba74" />
-          <line x1="83" y1="18" x2="101" y2="27" />
-          <line x1="124" y1="15" x2="101" y2="27" />
-          <line x1="103" y1="57" x2="101" y2="27" />
-          <text x="103" y="34" text-anchor="middle" font-size="16" fill="#111827" font-family="Segoe UI, sans-serif">12</text>
-
-          <polygon points="145,26 168,12 190,26 168,50" fill="#fde68a" />
-          <line x1="145" y1="26" x2="168" y2="31" />
-          <line x1="190" y1="26" x2="168" y2="31" />
-          <line x1="168" y1="50" x2="168" y2="31" />
-          <text x="168" y="30" text-anchor="middle" font-size="14" fill="#111827" font-family="Segoe UI, sans-serif">10</text>
-
-          <polygon points="204,22 223,14 239,27 220,45 202,37" fill="#86efac" />
-          <line x1="204" y1="22" x2="220" y2="30" />
-          <line x1="239" y1="27" x2="220" y2="30" />
-          <line x1="202" y1="37" x2="220" y2="30" />
-          <text x="220" y="32" text-anchor="middle" font-size="14" fill="#111827" font-family="Segoe UI, sans-serif">8</text>
-
-          <rect x="248" y="20" width="36" height="32" rx="2" fill="#93c5fd" />
-          <line x1="248" y1="20" x2="256" y2="14" />
-          <line x1="284" y1="20" x2="292" y2="14" />
-          <line x1="292" y1="14" x2="292" y2="46" />
-          <line x1="284" y1="52" x2="292" y2="46" />
-          <line x1="256" y1="14" x2="292" y2="14" />
-          <text x="266" y="40" text-anchor="middle" font-size="14" fill="#111827" font-family="Segoe UI, sans-serif">6</text>
-
-          <polygon points="294,46 314,18 333,46" fill="#c4b5fd" transform="translate(-3,0)" />
-          <line x1="291" y1="46" x2="311" y2="37" />
-          <line x1="330" y1="46" x2="311" y2="37" />
-          <text x="311" y="40" text-anchor="middle" font-size="14" fill="#111827" font-family="Segoe UI, sans-serif">4</text>
-        </g>
-      </svg>
+      <img class="aquila" src="dice_no_background.png" alt="Logo kostek" />
     </section>
 
-    <p class="legend">Sekcje: Analizy, Notatki, Gilead, Oko, Rico, Epilog.</p>
+    <section class="toolbar">
+      <span id="status">Status: gotowe do odświeżenia.</span>
+      <button id="refreshButton" class="refresh-btn" type="button">Odśwież</button>
+    </section>
 
-    <details class="stage">
-      <summary>Analizy</summary>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
-          <tbody>
-            <tr>
-              <td class="path">Analiza_lore_Oko_Rico_Epilog_2026-03-08.md</td>
-              <td><a class="btn" href="../Analizy/Analiza_lore_Oko_Rico_Epilog_2026-03-08.md" target="_blank" rel="noopener noreferrer">Otwórz</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-
-    <details class="stage">
-      <summary>Warhammer40k/Notatki</summary>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
-          <tbody>
-            <tr>
-              <td class="path">Notatki.md</td>
-              <td><a class="btn" href="../Warhammer40k/Notatki/Notatki.md" target="_blank" rel="noopener noreferrer">Otwórz</a></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-
-    <details class="stage">
-      <summary>Warhammer40k/Gilead</summary>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
-          <tbody>
-            <tr><td class="path">Patroni.txt</td><td><a class="btn" href="../Warhammer40k/Gilead/Patroni.txt" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-            <tr><td class="path">Gilead.html</td><td><a class="btn" href="../Warhammer40k/Gilead/Gilead.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-            <tr><td class="path">Frakcje.txt</td><td><a class="btn" href="../Warhammer40k/Gilead/Frakcje.txt" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-            <tr><td class="path">Podręcznik Główny.txt</td><td><a class="btn" href="../Warhammer40k/Gilead/Podręcznik Główny.txt" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-            <tr><td class="path">Ostamotniony System.txt</td><td><a class="btn" href="../Warhammer40k/Gilead/Ostamotniony System.txt" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-
-    <details class="stage">
-      <summary>Warhammer40k/Scenariusz_Oko</summary>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
-          <tbody>
-            <tr><td class="path">Oko_01.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Oko/Oko_01.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-            <tr><td class="path">Oko_02.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Oko/Oko_02.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-
-    <details class="stage">
-      <summary>Warhammer40k/Scenariusz_Rico</summary>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
-          <tbody>
-            <tr><td class="path">01.md</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/01.md" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-            <tr><td class="path">Backup_Rico.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/Backup_Rico.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-            <tr><td class="path">Handouty.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/Handouty.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-            <tr><td class="path">Prompt_01.md</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/Prompt_01.md" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-            <tr><td class="path">Rico_01.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/Rico_01.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-            <tr><td class="path">Rico_02.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/Rico_02.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-            <tr><td class="path">Rico_03.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/Rico_03.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-            <tr><td class="path">prompty.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Rico/prompty.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
-
-    <details class="stage">
-      <summary>Warhammer40k/Scenariusz_Epilog</summary>
-      <div class="table-wrap">
-        <table>
-          <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
-          <tbody>
-            <tr><td class="path">Epilog.html</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Epilog/Epilog.html" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-            <tr><td class="path">Pancerz.md</td><td><a class="btn" href="../Warhammer40k/Scenariusz_Epilog/Pancerz.md" target="_blank" rel="noopener noreferrer">Otwórz</a></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
+    <div id="stagesContainer"></div>
   </main>
+
+  <script>
+    const sectionConfig = [
+      { id: 'analizy', title: 'Analizy', segments: ['Analizy'] },
+      { id: 'notatki', title: 'Warhammer40k/Notatki', segments: ['Warhammer40k', 'Notatki'] },
+      { id: 'gilead', title: 'Warhammer40k/Gilead', segments: ['Warhammer40k', 'Gilead'] },
+      { id: 'oko', title: 'Warhammer40k/Scenariusz_Oko', segments: ['Warhammer40k', 'Scenariusz_Oko'] },
+      { id: 'rico', title: 'Warhammer40k/Scenariusz_Rico', segments: ['Warhammer40k', 'Scenariusz_Rico'] },
+      { id: 'epilog', title: 'Warhammer40k/Scenariusz_Epilog', segments: ['Warhammer40k', 'Scenariusz_Epilog'] }
+    ];
+
+    const statusElement = document.getElementById('status');
+    const stagesContainer = document.getElementById('stagesContainer');
+    const allowedExtensions = new Set(['.html', '.md', '.txt', '.png']);
+
+    function createStageMarkup(title, id) {
+      return `
+        <details class="stage">
+          <summary>${title}</summary>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Plik</th><th>Akcja</th></tr></thead>
+              <tbody id="tbody-${id}">
+                <tr><td class="empty-row" colspan="2">Brak danych. Kliknij „Odśwież”.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      `;
+    }
+
+    function buildStageShell() {
+      stagesContainer.innerHTML = sectionConfig
+        .map(section => createStageMarkup(section.title, section.id))
+        .join('');
+    }
+
+    async function getSubdirectory(rootHandle, segments) {
+      let currentHandle = rootHandle;
+      for (const segment of segments) {
+        currentHandle = await currentHandle.getDirectoryHandle(segment);
+      }
+      return currentHandle;
+    }
+
+    async function getFilesFromDirectory(dirHandle) {
+      const files = [];
+      for await (const entry of dirHandle.values()) {
+        if (entry.kind !== 'file') continue;
+        const lowerName = entry.name.toLowerCase();
+        const extension = lowerName.slice(lowerName.lastIndexOf('.'));
+        if (allowedExtensions.has(extension)) {
+          files.push(entry.name);
+        }
+      }
+      return files.sort((a, b) => a.localeCompare(b, 'pl'));
+    }
+
+    function renderSectionRows(sectionId, files, segments) {
+      const tbody = document.getElementById(`tbody-${sectionId}`);
+      if (!tbody) return;
+
+      if (!files.length) {
+        tbody.innerHTML = '<tr><td class="empty-row" colspan="2">Brak pasujących plików.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = files
+        .map(fileName => {
+          const hrefPath = ['..', ...segments, fileName].map(part => encodeURIComponent(part)).join('/').replace('..', '..');
+          return `
+            <tr>
+              <td class="path">${fileName}</td>
+              <td><a class="btn" href="${hrefPath}" target="_blank" rel="noopener noreferrer">Otwórz</a></td>
+            </tr>
+          `;
+        })
+        .join('');
+    }
+
+    async function refreshFileList() {
+      if (!('showDirectoryPicker' in window)) {
+        statusElement.textContent = 'Status: przeglądarka nie obsługuje File System Access API.';
+        return;
+      }
+
+      try {
+        statusElement.textContent = 'Status: wybierz główny folder repozytorium „Scenariusze”.';
+        const rootHandle = await window.showDirectoryPicker({ mode: 'read' });
+
+        for (const section of sectionConfig) {
+          const directory = await getSubdirectory(rootHandle, section.segments);
+          const files = await getFilesFromDirectory(directory);
+          renderSectionRows(section.id, files, section.segments);
+        }
+
+        statusElement.textContent = `Status: odświeżono ${new Date().toLocaleTimeString('pl-PL')}.`;
+      } catch (error) {
+        statusElement.textContent = `Status: nie udało się odświeżyć (${error.message}).`;
+      }
+    }
+
+    buildStageShell();
+    document.getElementById('refreshButton').addEventListener('click', refreshFileList);
+  </script>
 </body>
 </html>
