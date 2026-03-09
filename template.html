@@ -512,8 +512,12 @@
     }
 
     @media (max-width: 720px) {
+      :root {
+        --content-font-size: 17px;
+      }
+
       .content {
-        font-size: 17px;
+        font-size: var(--content-font-size);
       }
 
       .hero {
@@ -1351,7 +1355,10 @@ NAJWAŻNIEJSZE OGRANICZENIA:
   <script>
     (function () {
       const savedSize = localStorage.getItem("scenarioContentFontSize");
-      const defaultSize = savedSize ? parseFloat(savedSize) : 18;
+      const cssDefaultSize = parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue("--content-font-size")
+      ) || 18;
+      const defaultSize = savedSize ? parseFloat(savedSize) : cssDefaultSize;
       document.documentElement.style.setProperty("--content-font-size", defaultSize + "px");
 
       document.querySelectorAll("[data-font-step]").forEach((button) => {
