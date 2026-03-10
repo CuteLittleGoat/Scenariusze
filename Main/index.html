@@ -358,12 +358,29 @@
       return manifest;
     }
 
+    async function triggerManifestRefresh() {
+      const response = await fetch(`/refresh-manifest?ts=${Date.now()}`, {
+        method: 'POST',
+        cache: 'no-store'
+      });
+
+      if (!response.ok) {
+        throw new Error(`backend refresh nie działa (${response.status})`);
+      }
+
+      const payload = await response.json();
+      if (!payload?.ok) {
+        throw new Error(payload?.error || 'backend refresh zwrócił błąd');
+      }
+    }
+
     async function refreshFileList() {
       const refreshButton = document.getElementById('refreshButton');
       refreshButton.disabled = true;
 
       try {
         statusElement.textContent = 'Status: odświeżanie...';
+        await triggerManifestRefresh();
         const manifest = await readManifestFile();
         renderManifest(manifest);
         const generatedAt = new Date(manifest.generatedAt).toLocaleString('pl-PL');
