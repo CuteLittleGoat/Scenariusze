@@ -269,6 +269,11 @@
     const statusElement = document.getElementById('status');
     const stagesContainer = document.getElementById('stagesContainer');
     const allowedExtensions = new Set(['.html', '.md', '.txt', '.png']);
+    const githubConfig = {
+      owner: 'cutelittlegoat',
+      repo: 'Scenariusze',
+      branch: 'Main'
+    };
 
     function createStageMarkup(title, id) {
       return `
@@ -324,61 +329,35 @@
         .join('');
     }
 
-    function renderManifest(manifest) {
-      const sectionsById = new Map((manifest.sections || []).map(section => [section.id, section]));
-
-      for (const section of sectionConfig) {
-        const manifestSection = sectionsById.get(section.id);
-        const files = getAllowedFiles(manifestSection?.files || []);
-        renderSectionRows(section.id, files, section.segments);
-      }
-    }
-
-    function validateManifestShape(manifest) {
-      if (!manifest || typeof manifest !== 'object') {
-        throw new Error('manifest ma nieprawidłowy format');
-      }
-
-      if (!Array.isArray(manifest.sections)) {
-        throw new Error('manifest nie zawiera pola "sections"');
-      }
-
-      if (!manifest.generatedAt) {
-        throw new Error('manifest nie zawiera pola "generatedAt"');
-      }
-    }
-
-    async function readManifestFile() {
-      const response = await fetch(`./files-manifest.json?ts=${Date.now()}`, { cache: 'no-store' });
-      if (!response.ok) {
-        throw new Error(`brak manifestu (${response.status})`);
-      }
-      const manifest = await response.json();
-      validateManifestShape(manifest);
-      return manifest;
-    }
-
-    function canUseBackendRefresh() {
-      const { protocol, hostname } = window.location;
-      const isHttp = protocol === 'http:' || protocol === 'https:';
-      const localHosts = new Set(['localhost', '127.0.0.1', '::1']);
-
-      return isHttp && localHosts.has(hostname);
-    }
-
-    async function triggerManifestRefresh() {
-      const response = await fetch(`/refresh-manifest?ts=${Date.now()}`, {
-        method: 'POST',
-        cache: 'no-store'
+    async function readSectionFilesFromGithub(section) {
+      const repoPath = section.segments.map(encodeURIComponent).join('/');
+      const url = `https://api.github.com/repos/${githubConfig.owner}/${githubConfig.repo}/contents/${repoPath}?ref=${encodeURIComponent(githubConfig.branch)}&ts=${Date.now()}`;
+      const response = await fetch(url, {
+        cache: 'no-store',
+        headers: {
+          Accept: 'application/vnd.github+json'
+        }
       });
 
       if (!response.ok) {
-        throw new Error(`backend refresh nie działa (${response.status})`);
+        throw new Error(`GitHub API: ${section.title} (${response.status})`);
       }
 
       const payload = await response.json();
-      if (!payload?.ok) {
-        throw new Error(payload?.error || 'backend refresh zwrócił błąd');
+      if (!Array.isArray(payload)) {
+        throw new Error(`GitHub API: nieoczekiwany format odpowiedzi dla ${section.title}`);
+      }
+
+      return payload
+        .filter(item => item?.type === 'file')
+        .map(item => item.name);
+    }
+
+    async function refreshSectionsFromGithub() {
+      for (const section of sectionConfig) {
+        const filesFromApi = await readSectionFilesFromGithub(section);
+        const files = getAllowedFiles(filesFromApi);
+        renderSectionRows(section.id, files, section.segments);
       }
     }
 
@@ -389,29 +368,9 @@
       try {
         statusElement.textContent = 'Status: odświeżanie...';
 
-        let usedBackendRefresh = false;
-        let fallbackReason = '';
-
-        if (canUseBackendRefresh()) {
-          try {
-            await triggerManifestRefresh();
-            usedBackendRefresh = true;
-          } catch (error) {
-            fallbackReason = error?.message ? error.message : String(error);
-          }
-        }
-
-        const manifest = await readManifestFile();
-        renderManifest(manifest);
-        const generatedAt = new Date(manifest.generatedAt).toLocaleString('pl-PL');
-
-        if (usedBackendRefresh) {
-          statusElement.textContent = `Status: odświeżono: ${generatedAt}.`;
-        } else if (fallbackReason) {
-          statusElement.textContent = `Status: pobrano aktualny manifest (${generatedAt}); backend refresh niedostępny: ${fallbackReason}.`;
-        } else {
-          statusElement.textContent = `Status: pobrano aktualny manifest: ${generatedAt}.`;
-        }
+        await refreshSectionsFromGithub();
+        const refreshedAt = new Date().toLocaleString('pl-PL');
+        statusElement.textContent = `Status: odświeżono listę plików z GitHub API (${refreshedAt}).`;
       } catch (error) {
         const message = error?.message ? error.message : String(error);
         statusElement.textContent = `Status: nie udało się odświeżyć listy plików (${message}).`;
