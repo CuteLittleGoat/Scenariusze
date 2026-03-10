@@ -358,6 +358,14 @@
       return manifest;
     }
 
+    function canUseBackendRefresh() {
+      const { protocol, hostname } = window.location;
+      const isHttp = protocol === 'http:' || protocol === 'https:';
+      const localHosts = new Set(['localhost', '127.0.0.1', '::1']);
+
+      return isHttp && localHosts.has(hostname);
+    }
+
     async function triggerManifestRefresh() {
       const response = await fetch(`/refresh-manifest?ts=${Date.now()}`, {
         method: 'POST',
@@ -380,11 +388,30 @@
 
       try {
         statusElement.textContent = 'Status: odświeżanie...';
-        await triggerManifestRefresh();
+
+        let usedBackendRefresh = false;
+        let fallbackReason = '';
+
+        if (canUseBackendRefresh()) {
+          try {
+            await triggerManifestRefresh();
+            usedBackendRefresh = true;
+          } catch (error) {
+            fallbackReason = error?.message ? error.message : String(error);
+          }
+        }
+
         const manifest = await readManifestFile();
         renderManifest(manifest);
         const generatedAt = new Date(manifest.generatedAt).toLocaleString('pl-PL');
-        statusElement.textContent = `Status: odświeżono: ${generatedAt}.`;
+
+        if (usedBackendRefresh) {
+          statusElement.textContent = `Status: odświeżono: ${generatedAt}.`;
+        } else if (fallbackReason) {
+          statusElement.textContent = `Status: pobrano aktualny manifest (${generatedAt}); backend refresh niedostępny: ${fallbackReason}.`;
+        } else {
+          statusElement.textContent = `Status: pobrano aktualny manifest: ${generatedAt}.`;
+        }
       } catch (error) {
         const message = error?.message ? error.message : String(error);
         statusElement.textContent = `Status: nie udało się odświeżyć listy plików (${message}).`;
