@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oko Płomiennej Pomsty — Oko_07</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-2: #111821;
+      --panel: #131b24;
+      --panel-2: #18222d;
+      --text: #dce6f1;
+      --muted: #93a3b5;
+      --accent: #7fc8ff;
+      --accent-2: #89e0c2;
+      --border: #243140;
+      --border-strong: #324557;
+      --shadow: rgba(0, 0, 0, 0.42);
+      --sidebar-w: 300px;
+      --content-font-size: 18px;
+      --font-body: Calibri, Arial, Verdana, Tahoma, "Trebuchet MS";
+      --font-heading: "Trebuchet MS", Verdana, Arial, Tahoma, Calibri;
+      --font-navigation: Verdana, Tahoma, Arial, Calibri, "Trebuchet MS";
+      --font-ui: Tahoma, Verdana, Arial, Calibri, "Trebuchet MS";
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(127, 200, 255, 0.08), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(137, 224, 194, 0.05), transparent 22%),
+        linear-gradient(180deg, var(--bg), #080b10 100%);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.7;
+      font-size: 18px;
+    }
+
+    .layout { display: flex; min-height: 100vh; }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+      width: var(--sidebar-w);
+      height: 100vh;
+      padding: 18px;
+      border-right: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)), rgba(9, 13, 18, 0.92);
+      overflow-y: auto;
+      flex: 0 0 var(--sidebar-w);
+    }
+
+    .sidebar-card,
+    .hero,
+    details,
+    .ai-instruction-box {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 18px 40px var(--shadow);
+    }
+
+    .sidebar-card { padding: 16px; }
+    .sidebar-intro { margin: 0 0 12px; color: var(--muted); font-size: .95rem; }
+
+    .toolbar { display: grid; gap: 8px; margin-bottom: 14px; }
+    .toolbar button {
+      font-family: var(--font-ui);
+      width: 100%;
+      border-radius: 10px;
+      border: 1px solid var(--border-strong);
+      background: var(--panel-2);
+      color: var(--text);
+      cursor: pointer;
+      font-size: .95rem;
+      text-align: left;
+      padding: 9px 12px;
+    }
+
+    .nav-group { display: grid; gap: 8px; }
+    .nav-link {
+      display: block;
+      text-decoration: none;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid transparent;
+      color: var(--text);
+      font-family: var(--font-navigation);
+      font-size: .95rem;
+    }
+
+    .nav-link:hover { border-color: var(--border); color: var(--accent); background: rgba(255,255,255,0.035); }
+
+    .content { flex: 1; min-width: 0; padding: 26px 24px 70px; font-size: var(--content-font-size); }
+    .hero { padding: 28px; margin-bottom: 20px; }
+    .hero h1 { margin: 0 0 10px; font-size: 2.1em; }
+    .lead { margin: 0; color: var(--muted); }
+
+    details { margin-bottom: 16px; overflow: hidden; }
+    summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 22px;
+      border-bottom: 1px solid transparent;
+    }
+
+    details[open] summary { border-bottom-color: var(--border); }
+    summary::-webkit-details-marker { display: none; }
+
+    .section-body { padding: 16px 22px 22px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+
+    .block {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+    }
+
+    h2, h3, h4 { font-family: var(--font-heading); margin: 0 0 8px; }
+    h3 { font-size: 1.08em; }
+    p, ul, ol { margin: 0 0 10px; }
+    .hint { color: var(--muted); font-size: .95rem; }
+    .tag { color: var(--accent-2); font-weight: 700; }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .table th, .table td {
+      border-bottom: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      padding: 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .table th:last-child, .table td:last-child { border-right: 0; }
+    .table tr:last-child td { border-bottom: 0; }
+
+    .ai-instruction-box { margin-top: 18px; padding: 18px; font-size: 1px; }
+    .ai-instruction-box * { font-size: 1px !important; }
+
+    @media (max-width: 1040px) {
+      .layout { flex-direction: column; }
+      .sidebar {
+        position: static;
+        width: auto;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <p class="sidebar-intro">Redakcja Oko_06 do szablonu draft dla sesji W&amp;G w systemie Gilead.</p>
+        <div class="toolbar">
+          <button type="button" data-font-step="1" aria-label="Font ▲">Font ▲</button>
+          <button type="button" data-font-step="-1" aria-label="Font ▼">Font ▼</button>
+        </div>
+
+        <nav class="nav-group">
+          <a class="nav-link" href="#wprowadzenie">Wprowadzenie</a>
+          <a class="nav-link" href="#brief">Brief wejściowy</a>
+          <a class="nav-link" href="#scena-1">Scena 1</a>
+          <a class="nav-link" href="#scena-2">Scena 2</a>
+          <a class="nav-link" href="#zakonczenie">Zakończenie</a>
+          <a class="nav-link" href="#npc">NPC</a>
+          <a class="nav-link" href="#przeciwnicy">Przeciwnicy</a>
+          <a class="nav-link" href="#ilustracje">Ilustracje</a>
+          <a class="nav-link" href="#handouty">Handouty</a>
+          <a class="nav-link" href="#instrukcja-ai">Instrukcja dla AI</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="hero" id="wprowadzenie">
+        <h1>Oko Płomiennej Pomsty</h1>
+        <p class="lead">Śledczo-horrorowy scenariusz w systemie Gilead (Warhammer 40k): wypaczona relikwia, brutalizacja wiernych i pierwszy mocny krok do pęknięcia Rico przed wydarzeniami z „Jądra Popiołu”.</p>
+      </section>
+
+      <details open id="brief">
+        <summary><h2>Brief wejściowy od MG</h2></summary>
+        <div class="section-body">
+          <div class="block">
+            <h3>Dane bazowe</h3>
+            <ul>
+              <li><strong>Setting i ton przygody:</strong> Warhammer 40k, system Gilead; klimat śledztwa, religijnego horroru i moralnej szarości Imperium.</li>
+              <li><strong>Punkt startowy drużyny:</strong> Strix (psionik Inkwizycji) i Toudi (Adepta Sororitas) na usługach floty Varoniusa; trop o „Oku Płomiennej Pomsty” prowadzi przez Rico.</li>
+              <li><strong>Cel sesji / konflikt przewodni:</strong> ustalić naturę relikwii i zdecydować, czy ją zabezpieczyć, zapieczętować, zniszczyć lub ukryć prawdę.</li>
+              <li><strong>Materiały źródłowe:</strong> Oko_06, Notatki kampanii, Gilead oraz dalsza konsekwencja pod scenariusz Rico_04.</li>
+            </ul>
+          </div>
+          <div class="block">
+            <h3>Braki i pytania do MG</h3>
+            <p class="hint"><span class="tag">DO DECYZJI MG:</span> jak jawnie chcesz pokazać wpływ relikwii na Strix (wizje/mechanika), czy finał może zakończyć się walką z Sororitas oraz jaki poziom politycznych konsekwencji ma wrócić w kolejnym scenariuszu Rico.</p>
+          </div>
+        </div>
+      </details>
+
+      <details open id="scena-1">
+        <summary><h2>Scena 1 — Archiwum Fyodora i trop na Charybdion</h2></summary>
+        <div class="section-body">
+          <div class="grid-2">
+            <div class="block">
+              <h3>Cel sceny</h3>
+              <p>Uruchomić śledztwo i dać bohaterom twardy dowód, że relikwia nie deprawuje przez herezję, tylko przez wielowiekowy osad emocjonalny Warp.</p>
+            </div>
+            <div class="block">
+              <h3>Efekt po scenie</h3>
+              <p>Drużyna zdobywa dokumenty Vossa i oficjalny szlak relikwii; kolejny etap to lot na Charybdion i wejście do Przystani Pokutnej.</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <h3>Scena krok-po-kroku</h3>
+            <ol>
+              <li>Rico odnajduje bohaterów i przedstawia trop do archiwum inkwizytora Fyodora.</li>
+              <li>Przelot shuttle’em Rico na asteroidę archiwalną; rozmowa o granicach prawa i „koniecznych” metodach.</li>
+              <li>Wejście legalne (autorytet Strix) lub nielegalne (infiltracja i ślady).</li>
+              <li>Przegląd akt: oficjalne wzmianki o relikwii + prywatne notatki Alfreda Vossa.</li>
+              <li>Złożenie wzorca: tam, gdzie przebywa monstrancja, rośnie surowość, przemoc i pogarda dla słabych.</li>
+              <li>Punkt zwrotny: dokumenty wskazują Charybdion i klasztor w „martwej bestii”.</li>
+            </ol>
+          </div>
+
+          <div class="block">
+            <h3><span class="tag">[DLA GRACZY]</span> Opis narracyjny</h3>
+            <p>Archiwum wygląda jak cmentarzysko prawdy. Chłodne korytarze pachną ozonem i starym pergaminem, a skrybowie przesuwają pieczęcie jakby każda z nich była ważniejsza od ludzkiego życia.</p>
+          </div>
+
+          <div class="block">
+            <h3><span class="tag">[DLA MG]</span> Informacje ukryte</h3>
+            <p>Fyodor celowo „zamroził” część akt zamiast zamknąć sprawę oficjalnie. Voss był blisko prawdy, ale bał się oskarżenia o bluźnierstwo. Rico zapamiętuje każdy moment, gdy instytucje wybierają formalizm nad bezpieczeństwo ludzi.</p>
+          </div>
+
+          <div class="block">
+            <h3>Punkt decyzyjny / przejście</h3>
+            <p>Czy bohaterowie lecą na Charybdion jako oficjalna delegacja, czy jako cichy zespół śledczy. Wariant determinuje reakcję lokalnych władz i skalę oporu w finale.</p>
+          </div>
+
+          <div class="block">
+            <h3>Materiały powiązane</h3>
+            <p>Ilustracje: IL1, IL2 • Handouty: H1 • NPC: N1, N2, N3</p>
+          </div>
+        </div>
+      </details>
+
+      <details open id="scena-2">
+        <summary><h2>Scena 2 — Charybdion, Przystań Pokutna i klasztor relikwii</h2></summary>
+        <div class="section-body">
+          <div class="grid-2">
+            <div class="block">
+              <h3>Cel sceny</h3>
+              <p>Pokazać skutki działania relikwii „w terenie” i doprowadzić do decyzji moralnej w sanktuarium: ratować wiarę instytucji czy ludzi.</p>
+            </div>
+            <div class="block">
+              <h3>Efekt po scenie</h3>
+              <p>Bohaterowie wybierają los relikwii; Rico otrzymuje doświadczenie, które bezpośrednio zasila jego przyszły kryzys.</p>
+            </div>
+          </div>
+
+          <div class="block">
+            <h3>Scena krok-po-kroku</h3>
+            <ol>
+              <li>Przylot na Charybdion: czarne morze, przemysłowe łuny i skażone mgły.</li>
+              <li>Wizyta w Przystani Pokutnej, osadzie zbudowanej w truchle gigantycznej bestii.</li>
+              <li>Bohaterowie oglądają „moralny porządek” osady: setki szubienic i publiczną przemoc.</li>
+              <li>Ślady prowadzą do klasztoru we wnętrzu bestii, gdzie przechowywana jest monstrancja św. Gheronta.</li>
+              <li>Konfrontacja z przeoryszą i strażniczkami; test argumentów, autorytetu i wiarygodności dowodów.</li>
+              <li>Psioniczne ciśnienie na Strix narasta przy relikwii (gniew, żar, imperatyw „oczyszczenia”).</li>
+              <li>Finał: przejęcie, zapieczętowanie, zniszczenie lub zatuszowanie sprawy.</li>
+            </ol>
+          </div>
+
+          <div class="block">
+            <h3><span class="tag">[DLA GRACZY]</span> Opis narracyjny</h3>
+            <p>Mięso i stal tworzą tu jedną architekturę. Klasztor drży przy każdym uderzeniu fal, a blask świec odbija się od kości tak, jakby całe sanktuarium modliło się o rozgrzeszenie, którego nie może otrzymać.</p>
+          </div>
+
+          <div class="block">
+            <h3><span class="tag">[DLA MG]</span> Informacje ukryte</h3>
+            <p>Sororitas nie są heretyczkami — są przekonane, że bronią świętości. Relikwia nie „kradnie wiary”, tylko przekręca ją w fanatyczny obowiązek przemocy. Najmocniejszą bronią graczy są dowody i język honoru, nie ogień.</p>
+          </div>
+
+          <div class="block">
+            <h3>Punkt decyzyjny / przejście</h3>
+            <p>Każdy wariant finału zostawia inny ślad dla kampanii: polityczne dochodzenie, zemsta skrzywdzonych wiernych, cichy rozłam w zakonie lub ciężar tajemnicy na barkach drużyny.</p>
+          </div>
+
+          <div class="block">
+            <h3>Materiały powiązane</h3>
+            <p>Ilustracje: IL3, IL4, IL5 • Handouty: H2, H3 • NPC: N4, N5</p>
+          </div>
+        </div>
+      </details>
+
+      <details id="zakonczenie">
+        <summary><h2>Zakończenie — Finał i konsekwencje</h2></summary>
+        <div class="section-body">
+          <div class="block">
+            <h3><span class="tag">[DLA GRACZY]</span> Finał do odczytania</h3>
+            <p>„Niezależnie od tego, co zrobiliście z relikwią, morze Charybdionu dalej jest czarne, a wiatr dalej niesie zapach tranu i popiołu. Uratowaliście przyszłość jednego miejsca — ale przeszłość tego świata nadal krzyczy z każdej liny szubienicy.”</p>
+          </div>
+          <div class="block">
+            <h3><span class="tag">[DLA MG]</span> Konsekwencje i haczyki na kolejną sesję</h3>
+            <ul>
+              <li><strong>Zabezpieczenie relikwii:</strong> Inkwizycja przejmuje sprawę, ale uruchamia lawinę kontroli i przesłuchań.</li>
+              <li><strong>Zniszczenie relikwii:</strong> praktycznie kończy źródło wpływu, lecz grozi oskarżeniem o świętokradztwo.</li>
+              <li><strong>Zapieczętowanie:</strong> kompromis krótkoterminowy; ryzyko, że ktoś ponownie otworzy sanktuarium.</li>
+              <li><strong>Zatuszowanie:</strong> spokój polityczny teraz, większa katastrofa później.</li>
+              <li><strong>Pomost do Rico_04:</strong> Rico zaczyna mówić o „porządku, który żeruje na słabych” i przestaje ufać imperialnym procedurom.</li>
+            </ul>
+          </div>
+        </div>
+      </details>
+
+      <details id="npc">
+        <summary><h2>NPC — Postacie niezależne</h2></summary>
+        <div class="section-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Nazwa</th>
+                <th>Wygląd</th>
+                <th>Rola fabularna</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>N1</td>
+                <td>Rico</td>
+                <td>Weteran Astra Militarum, twarda postawa, wojskowa oszczędność słów.</td>
+                <td>Inicjuje śledztwo i obserwuje moralne wybory drużyny; kluczowy dla przejścia do Rico_04.</td>
+              </tr>
+              <tr>
+                <td>N2</td>
+                <td>Magister-Archivista Vel</td>
+                <td>Wychudzony skryba z cybernetycznym okiem i pękiem pieczęci.</td>
+                <td>Może pomóc legalnie otworzyć akta albo opóźniać bohaterów, jeśli złamią procedury.</td>
+              </tr>
+              <tr>
+                <td>N3</td>
+                <td>Alfred Voss (zapisy)</td>
+                <td>Nieobecny fizycznie; istnieje przez raporty i adnotacje na marginesach.</td>
+                <td>Jego notatki budują główny dowód na wypaczenie relikwii.</td>
+              </tr>
+              <tr>
+                <td>N4</td>
+                <td>Przeorysza Halix</td>
+                <td>Pancerz ceremonialny nad habitowym kirem, głos jak stal.</td>
+                <td>Dowodzi klasztorem; przeciwnik społeczny lub potencjalna sojuszniczka w oczyszczeniu.</td>
+              </tr>
+              <tr>
+                <td>N5</td>
+                <td>Kapelan Merek</td>
+                <td>Ascetyczny duchowny z poparzonymi dłońmi od rytuałów kadzielnych.</td>
+                <td>Interpretator doktryny; może zmiękczyć stanowisko sióstr, jeśli gracze udowodnią zagrożenie.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details id="przeciwnicy">
+        <summary><h2>Przeciwnicy (uzupełnia MG)</h2></summary>
+        <div class="section-body">
+          <p class="hint">Sekcja bez statystyk — zgodnie z szablonem do uzupełnienia mechanicznego przez MG.</p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nazwa przeciwnika</th>
+                <th>Link / odniesienie do statystyk</th>
+                <th>Scena</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Rozjuszeni wierni Przystani Pokutnej</td>
+                <td>Do uzupełnienia przez MG</td>
+                <td>Scena 2</td>
+              </tr>
+              <tr>
+                <td>Strażniczki relikwiarza (Sororitas)</td>
+                <td>Do uzupełnienia przez MG</td>
+                <td>Scena 2</td>
+              </tr>
+              <tr>
+                <td>Personel bezpieczeństwa archiwum (opcjonalnie)</td>
+                <td>Do uzupełnienia przez MG</td>
+                <td>Scena 1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details id="ilustracje">
+        <summary><h2>Ilustracje</h2></summary>
+        <div class="section-body">
+          <div class="block" id="il1">
+            <h3>IL1 — Archiwum Fyodora</h3>
+            <p><strong>Użycie:</strong> Scena 1</p>
+            <p><strong>Prompt:</strong> monumentalne imperialne archiwum, długie korytarze, regały do sufitu, mrok, zimne światło lumenów, skrybowie i servo-czaszki, ciężki klimat biurokratycznej grozy, dark gothic sci-fi, bez chaosowych symboli.</p>
+          </div>
+          <div class="block" id="il2">
+            <h3>IL2 — Notatki Vossa</h3>
+            <p><strong>Użycie:</strong> Scena 1</p>
+            <p><strong>Prompt:</strong> zbliżenie na pergaminy z odręcznymi dopiskami, pieczęcie Inkwizycji, krew i wosk na brzegach kart, makro, wysoki detal, atmosfera tajemnicy.</p>
+          </div>
+          <div class="block" id="il3">
+            <h3>IL3 — Charybdion z orbity</h3>
+            <p><strong>Użycie:</strong> Scena 2</p>
+            <p><strong>Prompt:</strong> ciemna planeta oceaniczna, czarne morza, przemysłowe łuny, smugi dymu i burz, grimdark, szeroki kadr, poczucie skażenia.</p>
+          </div>
+          <div class="block" id="il4">
+            <h3>IL4 — Przystań Pokutna</h3>
+            <p><strong>Użycie:</strong> Scena 2</p>
+            <p><strong>Prompt:</strong> osada w szkielecie gigantycznej morskiej bestii, pomosty z metalu i kości, szubienice, mgła i słona wilgoć, tłum wiernych, brutalny religijny klimat.</p>
+          </div>
+          <div class="block" id="il5">
+            <h3>IL5 — Monstrancja św. Gheronta</h3>
+            <p><strong>Użycie:</strong> Scena 2, finał</p>
+            <p><strong>Prompt:</strong> złota monstrancja z kością dłoni relikwii, aureola świec, gotycki ołtarz z wnętrza bestii, dramatyczne światło, sacrum i groza jednocześnie.</p>
+          </div>
+        </div>
+      </details>
+
+      <details id="handouty">
+        <summary><h2>Handouty</h2></summary>
+        <div class="section-body">
+          <div class="block" id="h1">
+            <h3>H1 — Fragment notatek Alfreda Vossa</h3>
+            <p><strong>Użycie:</strong> Scena 1</p>
+            <p><strong>Treść dla graczy:</strong> „Nie znajduję dowodu na herezję sensu stricto. Znajduję za to regularność. Gdzie relikwiarz pozostaje dłużej niż cykl pielgrzymkowy, tam rośnie dyscyplina bez litości, kary bez miary i pobożność bez współczucia.”</p>
+          </div>
+          <div class="block" id="h2">
+            <h3>H2 — Tablica win z Przystani Pokutnej</h3>
+            <p><strong>Użycie:</strong> Scena 2</p>
+            <p><strong>Treść dla graczy:</strong> „Winny: ukrywanie racji żywnościowej dla dziecka. Wyrok: publiczne oczyszczenie przez powieszenie. Uzasadnienie: pycha ponad porządek.”</p>
+          </div>
+          <div class="block" id="h3">
+            <h3>H3 — Decyzja przeoryszy (pusty formularz)</h3>
+            <p><strong>Użycie:</strong> Scena 2, finał negocjacyjny</p>
+            <p><strong>Treść dla graczy:</strong> Krótki dekret do podpisu przez przeoryszę: oddanie relikwii pod nadzór Inkwizycji / pieczęć sanktuarium / odmowa i utrzymanie kultu.</p>
+          </div>
+        </div>
+      </details>
+
+      <section class="ai-instruction-box" id="instrukcja-ai" aria-label="Instrukcja dla AI">
+        <h2>Instrukcja dla AI</h2>
+        <p>Ta sekcja pozostaje celowo zminimalizowana wizualnie. Utrzymuj strukturę draft i spójność odwołań między scenami, NPC, ilustracjami i handoutami.</p>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const savedSize = localStorage.getItem("scenarioContentFontSize");
+      const current = parseFloat(savedSize || "18");
+      document.documentElement.style.setProperty("--content-font-size", `${Math.min(26, Math.max(12, current))}px`);
+
+      document.querySelectorAll("[data-font-step]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const step = parseFloat(button.getAttribute("data-font-step"));
+          const root = getComputedStyle(document.documentElement);
+          const now = parseFloat(root.getPropertyValue("--content-font-size")) || 18;
+          const next = Math.min(26, Math.max(12, now + step));
+          document.documentElement.style.setProperty("--content-font-size", `${next}px`);
+          localStorage.setItem("scenarioContentFontSize", String(next));
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
