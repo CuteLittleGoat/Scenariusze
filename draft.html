@@ -345,14 +345,68 @@
       <section class="ai-instruction-box" id="instrukcja-ai" aria-label="Instrukcja dla AI">
         <h2 class="ai-instruction-title">Instrukcja dla AI</h2>
         <div class="ai-instruction-content">
+          <p>Ten plik jest praktycznym, system-agnostycznym szkieletem do redakcji scenariusza TTRPG. Twoim zadaniem jest wypełniać sekcje treścią użyteczną dla Mistrza Gry, zachowując spójność nazewnictwa, numeracji i odwołań. Nie wpisuj treści na siłę: jeśli dany element nie występuje w przygodzie, pozostaw sekcję pustą lub zaznacz brak. Priorytetem jest funkcjonalność przy stole, nie ozdobny styl.</p>
+
+          <p><strong>Zasady ogólne (obowiązkowe):</strong></p>
           <ol>
-            <li>Zawsze rozpocznij od briefu. Jeśli danych brakuje, wypisz pytania i oznacz luki jako <strong>DO DECYZJI MG</strong>.</li>
-            <li>Template jest <strong>uniwersalny i system-agnostyczny</strong>: nie generuj mechaniki (statystyk, testów, rzutów), chyba że MG wyraźnie o to poprosi.</li>
-            <li>Rozdzielaj treść na bloki <strong>[DLA MG]</strong> oraz <strong>[DLA GRACZY]</strong>.</li>
-            <li>Twórz sceny decyzyjne i narracyjne. Każda scena musi mieć <strong>cel</strong> i <strong>efekt po scenie</strong>.</li>
-            <li>Gdy pracujesz na notatkach MG lub gotowym scenariuszu, porządkuj materiał do struktury template bez dopisywania nieuzgodnionej treści.</li>
-            <li>Kwestie safety i komfortu gry ustala MG z drużyną — AI nie narzuca granic treści.</li>
+            <li>Zawsze zaczynaj od sekcji <strong>„Brief wejściowy od MG”</strong>. Jeśli informacji brakuje lub są sprzeczne, najpierw wypisz je jako <strong>DO DECYZJI MG</strong>, a dopiero potem rozbudowuj scenariusz.</li>
+            <li>Template jest <strong>uniwersalny i system-agnostyczny</strong>: nie twórz statystyk, testów, rzutów ani mechaniki, chyba że MG wyraźnie o to poprosi.</li>
+            <li>Konsekwentnie rozdzielaj treści na <strong>[DLA GRACZY]</strong> (do odczytania/przedstawienia) i <strong>[DLA MG]</strong> (informacje zapleczowe, tajemnice, konsekwencje).</li>
+            <li>Nie zakładaj stałej liczby scen. Możesz powielać układ Sceny 1, dodawać kolejne sekcje „Scena” lub usuwać zbędne.</li>
+            <li>Utrzymuj spójność oznaczeń i odwołań: <strong>N1, N2...</strong> dla NPC, <strong>IL1, IL2...</strong> dla ilustracji, <strong>H1, H2...</strong> dla handoutów.</li>
+            <li>Nie używaj pustych fraz i lorem ipsum. Każdy akapit ma odpowiadać na pytanie: „jak to pomoże MG poprowadzić scenę?”.</li>
+            <li>Pracując na notatkach lub gotowym tekście MG, porządkuj i redaguj materiał do struktury template, ale nie dopisuj krytycznych faktów bez wyraźnego uzgodnienia.</li>
+            <li>Kwestie bezpieczeństwa treści i granic sesji ustala MG z drużyną. AI może wskazać miejsca ryzykowne, ale nie narzuca zasad stołu.</li>
           </ol>
+
+          <p><strong>Nawigacja i przyciski (lewy panel):</strong></p>
+          <ul>
+            <li><strong>+ Zwiększ rozmiar tekstu</strong> oraz <strong>− Zmniejsz rozmiar tekstu</strong> służą wyłącznie do komfortu czytania. Zmiana fontu nie powinna wpływać na strukturę ani treść scenariusza.</li>
+            <li>Linki nawigacyjne (<strong>Wprowadzenie, Brief, Scena 1, Scena 2, Zakończenie, NPC, Przeciwnicy, Ilustracje, Handouty, Instrukcja dla AI</strong>) mają umożliwić szybkie przejście do właściwych sekcji podczas redakcji i prowadzenia sesji.</li>
+            <li>Po rozbudowie scenariusza utrzymuj porządek: jeśli dodasz Scenę 3 i dalej, dopilnuj analogicznego nazewnictwa i czytelnych nagłówków.</li>
+          </ul>
+
+          <p><strong>Instrukcje sekcja po sekcji:</strong></p>
+          <p><strong>1) „Wprowadzenie” (hero, tytuł i lead):</strong><br>
+          Uzupełnij tytuł scenariusza tak, by jasno identyfikował przygodę. Lead ma krótko wyjaśniać charakter materiału (np. redakcja gotowca, tworzenie od zera, porządkowanie notatek).</p>
+
+          <p><strong>2) „Brief wejściowy od MG”:</strong><br>
+          To sekcja startowa. W „Danych bazowych” wpisz setting, ton, punkt startowy drużyny, główny konflikt i źródła. W bloku „Braki i pytania do MG” wypisz wszystkie luki decyzyjne przed generowaniem szczegółów fabuły.</p>
+
+          <p><strong>3) „Scena 1 — Tytuł sceny” (wzorzec dla wszystkich scen):</strong><br>
+          Każda scena musi zawierać: <strong>Cel sceny</strong>, <strong>Efekt po scenie</strong>, blok <strong>[DLA GRACZY] Opis narracyjny</strong>, blok <strong>[DLA MG] Informacje ukryte</strong>, <strong>Punkt decyzyjny / przejście</strong> oraz <strong>Materiały powiązane</strong>. Scena ma prowadzić do działania lub decyzji, a nie być tylko opisem atmosfery.</p>
+
+          <p><strong>4) „Scena 2 — Tytuł sceny”:</strong><br>
+          Traktuj ją jako kolejną kopię struktury Sceny 1. Jeżeli przygoda wymaga większej liczby etapów, dodawaj następne sceny według tego samego wzorca.</p>
+
+          <p><strong>5) „Zakończenie — Finał i konsekwencje”:</strong><br>
+          W części <strong>[DLA GRACZY]</strong> opisz domknięcie historii. W części <strong>[DLA MG]</strong> podaj krótkie i długie skutki decyzji graczy, nierozwiązane wątki i haczyki na kolejną sesję.</p>
+
+          <p><strong>6) „NPC — Postacie niezależne”:</strong><br>
+          Uzupełniaj tabelę tylko dla istotnych postaci. Każdy wpis powinien mieć: identyfikator (N1...), nazwę, wygląd i rolę fabularną. „Rola fabularna” powinna tłumaczyć po co postać istnieje, co wie i jak wpływa na sceny.</p>
+
+          <p><strong>7) „Przeciwnicy (uzupełnia MG)”:</strong><br>
+          Tej sekcji AI nie uzupełnia samodzielnie poza porządkowaniem danych dostarczonych przez MG. Nie wymyślaj przeciwników, nie dopisuj statystyk i nie twórz linków do kart bez danych od MG.</p>
+
+          <p><strong>8) „Ilustracje”:</strong><br>
+          Każdy wpis oznaczaj jako IL1, IL2 itd. Podawaj rozbudowane prompty: kompozycja, otoczenie, nastrój, światło, kluczowe obiekty/postacie, styl (jeśli MG określi), tagi pozytywne i negatywne. Każda ilustracja powinna mieć jasno opisane użycie w konkretnej scenie.</p>
+
+          <p><strong>9) „Handouty”:</strong><br>
+          Każdy wpis oznaczaj jako H1, H2 itd. Dodawaj nazwę, użycie sceniczne i pełną treść gotową do pokazania graczom (np. notatka, list, raport, transkrypcja, zapis terminala).</p>
+
+          <p><strong>10) „Instrukcja dla AI”:</strong><br>
+          Ta sekcja jest metainstrukcją i ma pozostać lekka wizualnie. Jej celem jest utrzymanie jakości oraz spójnej metody pracy, a nie rozbudowa fabuły.</p>
+
+          <p><strong>Przykłady poprawnego wypełnienia (skrót):</strong></p>
+          <ul>
+            <li><strong>Przykład „Cel sceny”:</strong> „Bohaterowie mają odkryć, że zniknięcia w porcie są powiązane z legalnym magazynem C-12 i zdobyć pierwszy twardy trop.”</li>
+            <li><strong>Przykład „Efekt po scenie”:</strong> „Drużyna zdobywa nazwisko pośrednika i wybiera: infiltracja magazynu albo rozmowa z informatorem.”</li>
+            <li><strong>Przykład [DLA GRACZY]:</strong> „Zapach ropy i mokrego drewna wisi nad nabrzeżem, a ciężkie łańcuchy dźwigów zgrzytają jak stare kości.”</li>
+            <li><strong>Przykład [DLA MG]:</strong> „Informator kłamie o godzinie transportu; prawdziwy kurs jest przyspieszony o dwie godziny.”</li>
+            <li><strong>Przykład materiałów:</strong> „Ilustracje: IL1 (dok), IL2 (magazyn C-12) • Handouty: H1 (lista dostaw) • NPC: N1 (brygadzista), N2 (księgowa).”</li>
+            <li><strong>Przykład handoutu:</strong> „H1 — Lista dostaw, użycie: Scena 1, treść: daty, skróty ładunków, podpis niezgodny z oficjalnym rejestrem.”</li>
+            <li><strong>Przykład ilustracji:</strong> „IL1 — Nocny dok, użycie: Scena 1, prompt: szeroki kadr, zimna mgła, punktowe światło lamp przemysłowych, mokry beton, sylwetka obserwatora na tle dźwigu.”</li>
+          </ul>
         </div>
       </section>
     </main>
