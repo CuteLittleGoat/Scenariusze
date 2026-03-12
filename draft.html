@@ -37,7 +37,7 @@
       color: var(--text);
       font-family: var(--font-body);
       line-height: 1.7;
-      font-size: var(--content-font-size);
+      font-size: 18px;
     }
 
     .layout { display: flex; min-height: 100vh; }
@@ -96,9 +96,9 @@
     }
     .nav-link:hover { border-color: var(--border); color: var(--accent); background: rgba(255,255,255,0.035); }
 
-    .content { flex: 1; min-width: 0; padding: 26px 24px 70px; }
+    .content { flex: 1; min-width: 0; padding: 26px 24px 70px; font-size: var(--content-font-size); }
     .hero { padding: 28px; margin-bottom: 20px; }
-    .hero h1 { margin: 0 0 10px; font-size: 2.1rem; }
+    .hero h1 { margin: 0 0 10px; font-size: 2.1em; }
     .lead { margin: 0; color: var(--muted); }
 
     details { margin-bottom: 16px; overflow: hidden; }
@@ -122,7 +122,7 @@
     }
 
     h2, h3, h4 { font-family: var(--font-heading); margin: 0 0 8px; }
-    h3 { font-size: 1.08rem; }
+    h3 { font-size: 1.08em; }
     p, ul { margin: 0 0 10px; }
     .hint { color: var(--muted); font-size: .95rem; }
     .tag { color: var(--accent-2); font-weight: 700; }
@@ -170,8 +170,8 @@
         <p class="sidebar-intro">Uniwersalny szablon do redakcji scenariuszy, niezależny od systemu.</p>
 
         <div class="toolbar">
-          <button type="button" data-font-step="1">+ Zwiększ rozmiar tekstu</button>
-          <button type="button" data-font-step="-1">− Zmniejsz rozmiar tekstu</button>
+          <button type="button" data-font-step="1" aria-label="Font ▲">Font ▲</button>
+          <button type="button" data-font-step="-1" aria-label="Font ▼">Font ▼</button>
         </div>
 
         <nav class="nav-group">
@@ -226,6 +226,11 @@
               <h3>Efekt po scenie</h3>
               <p>[Co zmienia się po zakończeniu: wiedza, relacje, napięcie, pozycja bohaterów]</p>
             </div>
+          </div>
+
+          <div class="block">
+            <h3>Scena krok-po-kroku</h3>
+            <p>[Rozpisz przebieg sceny w kolejnych krokach: bodziec/start, reakcje graczy, działania NPC/otoczenia, punkty zwrotne i możliwe odnogi. Każdy krok powinien kończyć się jasnym skutkiem lub decyzją.]</p>
           </div>
 
           <div class="block">
@@ -361,7 +366,7 @@
 
           <p><strong>Nawigacja i przyciski (lewy panel):</strong></p>
           <ul>
-            <li><strong>+ Zwiększ rozmiar tekstu</strong> oraz <strong>− Zmniejsz rozmiar tekstu</strong> służą wyłącznie do komfortu czytania. Zmiana fontu nie powinna wpływać na strukturę ani treść scenariusza.</li>
+            <li><strong>Font ▲</strong> oraz <strong>Font ▼</strong> służą wyłącznie do komfortu czytania. Zmiana fontu nie powinna wpływać na strukturę ani treść scenariusza.</li>
             <li>Linki nawigacyjne (<strong>Wprowadzenie, Brief, Scena 1, Scena 2, Zakończenie, NPC, Przeciwnicy, Ilustracje, Handouty, Instrukcja dla AI</strong>) mają umożliwić szybkie przejście do właściwych sekcji podczas redakcji i prowadzenia sesji.</li>
             <li>Po rozbudowie scenariusza utrzymuj porządek: jeśli dodasz Scenę 3 i dalej, dopilnuj analogicznego nazewnictwa i czytelnych nagłówków.</li>
           </ul>
@@ -374,7 +379,7 @@
           To sekcja startowa. W „Danych bazowych” wpisz setting, ton, punkt startowy drużyny, główny konflikt i źródła. W bloku „Braki i pytania do MG” wypisz wszystkie luki decyzyjne przed generowaniem szczegółów fabuły.</p>
 
           <p><strong>3) „Scena 1 — Tytuł sceny” (wzorzec dla wszystkich scen):</strong><br>
-          Każda scena musi zawierać: <strong>Cel sceny</strong>, <strong>Efekt po scenie</strong>, blok <strong>[DLA GRACZY] Opis narracyjny</strong>, blok <strong>[DLA MG] Informacje ukryte</strong>, <strong>Punkt decyzyjny / przejście</strong> oraz <strong>Materiały powiązane</strong>. Scena ma prowadzić do działania lub decyzji, a nie być tylko opisem atmosfery.</p>
+          Każda scena musi zawierać: <strong>Cel sceny</strong>, <strong>Efekt po scenie</strong>, <strong>Scena krok-po-kroku</strong>, blok <strong>[DLA GRACZY] Opis narracyjny</strong>, blok <strong>[DLA MG] Informacje ukryte</strong>, <strong>Punkt decyzyjny / przejście</strong> oraz <strong>Materiały powiązane</strong>. W sekcji „Scena krok-po-kroku” rozpisz przebieg wydarzeń punktami (co uruchamia scenę, co robią gracze/NPC, jakie są punkty zwrotne i możliwe odnogi), tak aby MG mógł poprowadzić scenę bez zgadywania kolejności zdarzeń. Scena ma prowadzić do działania lub decyzji, a nie być tylko opisem atmosfery.</p>
 
           <p><strong>4) „Scena 2 — Tytuł sceny”:</strong><br>
           Traktuj ją jako kolejną kopię struktury Sceny 1. Jeżeli przygoda wymaga większej liczby etapów, dodawaj następne sceny według tego samego wzorca.</p>
