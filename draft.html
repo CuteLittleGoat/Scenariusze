@@ -145,9 +145,10 @@
     .table th:last-child, .table td:last-child { border-right: 0; }
     .table tr:last-child td { border-bottom: 0; }
 
-    .ai-instruction-box { margin-top: 18px; padding: 18px; }
+    .ai-instruction-box { margin-top: 18px; padding: 18px; font-size: 1px; }
+    .ai-instruction-box * { font-size: 1px !important; }
     .ai-instruction-title { margin-top: 0; color: var(--accent); }
-    .ai-instruction-content { font-size: 0.9rem; color: var(--muted); }
+    .ai-instruction-content { color: var(--muted); }
 
     @media (max-width: 1040px) {
       .layout { flex-direction: column; }
@@ -166,8 +167,6 @@
   <div class="layout">
     <aside class="sidebar">
       <div class="sidebar-card">
-        <h2>Nawigacja</h2>
-        <p class="sidebar-intro">Uniwersalny szablon do redakcji scenariuszy, niezależny od systemu.</p>
 
         <div class="toolbar">
           <button type="button" data-font-step="1" aria-label="Font ▲">Font ▲</button>
@@ -181,7 +180,7 @@
           <a class="nav-link" href="#scena-2">Scena 2</a>
           <a class="nav-link" href="#zakonczenie">Zakończenie</a>
           <a class="nav-link" href="#npc">NPC</a>
-          <a class="nav-link" href="#przeciwnicy">Przeciwnicy (do uzupełnienia przez MG)</a>
+          <a class="nav-link" href="#przeciwnicy">Przeciwnicy</a>
           <a class="nav-link" href="#ilustracje">Ilustracje</a>
           <a class="nav-link" href="#handouty">Handouty</a>
           <a class="nav-link" href="#instrukcja-ai">Instrukcja dla AI</a>
