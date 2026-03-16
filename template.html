@@ -569,6 +569,7 @@
           <a class="nav-link" href="#npc">NPC</a>
           <a class="nav-link" href="#ilustracje">Ilustracje</a>
           <a class="nav-link" href="#handouty">Handouty</a>
+          <a class="nav-link" href="#inne-notatki">Inne Notatki</a>
         </nav>
       </div>
     </aside>
@@ -1168,6 +1169,46 @@
           </div>
         </details>
 
+        <details id="inne-notatki">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Inne Notatki</h2>
+                <p class="summary-desc">
+                  miejsce na dodatkowe notatki do scenariusza, które nie pasują do innych sekcji
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Co ma się znaleźć w tej sekcji</h3>
+              <p>
+                W tej sekcji wpisuj dodatkowe informacje pomocnicze dla MG, które nie pasują do wcześniej
+                rozpisanych sekcji. Mogą to być np. luźne pomysły, krótkie doprecyzowania zasad domowych,
+                alternatywne warianty scen, przypomnienia organizacyjne albo notatki o konsekwencjach decyzji
+                graczy, których nie ma sensu rozpisywać w głównych blokach scenariusza.
+              </p>
+            </div>
+
+            <div class="entry-card" id="notatka-n1">
+              <h4 class="entry-title"><span class="mini-id">N1</span>Nazwa notatki</h4>
+              <div class="entry-meta">Typ: Notatka dodatkowa</div>
+              <p><strong>Kontekst:</strong> wpisz, kiedy i po co ta notatka może się przydać podczas prowadzenia sesji.</p>
+              <p><strong>Treść notatki:</strong> wpisz konkretną informację, wskazówkę lub doprecyzowanie dla MG.</p>
+            </div>
+
+            <div class="entry-card" id="notatka-n2">
+              <h4 class="entry-title"><span class="mini-id">N2</span>Nazwa notatki</h4>
+              <div class="entry-meta">Typ: Notatka dodatkowa</div>
+              <p><strong>Kontekst:</strong> wpisz obszar scenariusza, którego dotyczy notatka.</p>
+              <p><strong>Treść notatki:</strong> wpisz treść pomocniczą, której nie umieszczono w innych sekcjach.</p>
+            </div>
+          </div>
+        </details>
+
         <section class="ai-instruction-box" id="instrukcja-ai" aria-label="Instrukcja dla AI">
           <h2 class="ai-instruction-title">Instrukcja dla AI</h2>
           <div class="ai-instruction-content">To jest uniwersalny template do tworzenia scenariuszy TTRPG. Twoim zadaniem jest uzupełniać go logicznie, czytelnie i praktycznie z punktu widzenia Mistrza Gry. Każda sekcja ma określoną funkcję. Nie należy wpisywać treści przypadkowo ani na siłę. Jeżeli jakiś element nie występuje w danym scenariuszu, sekcja może pozostać pusta, bardzo krótka albo może zawierać tylko informację, że dana przygoda nie korzysta z tego typu elementów.
@@ -1177,22 +1218,23 @@ ZASADY OGÓLNE:
 2. Nie każdy scenariusz wymaga NPC.
 3. Nie każdy scenariusz wymaga Handoutów.
 4. Nie każdy scenariusz wymaga Ilustracji.
-5. Nie każdy scenariusz wymaga sekcji Przeciwnicy.
-6. Nie każdy scenariusz będzie się składał z dokładnie trzech scen. Scen może być mniej albo więcej. W razie potrzeby należy powielać lub usuwać całe sekcje „Scena”.
-7. Zachowuj spójność nazw, numeracji i odwołań pomiędzy sekcjami.
-8. Jeżeli w scenie pojawia się odwołanie do ilustracji, używaj oznaczeń IL1, IL2, IL3 itd.
-9. Jeżeli w scenie pojawia się odwołanie do handoutu, używaj oznaczeń H1, H2, H3 itd.
-10. Nie wpisuj pustych ozdobników, lorem ipsum ani ogólników bez wartości praktycznej.
-11. Pisz treści z myślą o późniejszym użyciu przy stole przez MG.
-12. Zachowuj przejrzystość i funkcjonalność. Priorytetem jest użyteczność scenariusza, nie literackość dla samej literackości.
-13. Jeżeli użytkownik poda własne nazwy sekcji, scen, NPC, handoutów lub ilustracji, należy ich używać konsekwentnie i nie podmieniać ich bez powodu.
-14. W każdej scenie należy utrzymywać mały blok „Powiązane materiały”, zawierający szybkie linki do używanych tam handoutów i ilustracji.
-15. Po kliknięciu oznaczenia H1, H2, H3 itd. użytkownik ma być przenoszony do odpowiedniego wpisu w sekcji „Handouty”.
-16. Każdy wpis handoutu powinien zawierać link zwrotny do sceny, w której jest używany.
-17. Po kliknięciu oznaczenia IL1, IL2, IL3 itd. użytkownik ma być przenoszony do odpowiedniego wpisu w sekcji „Ilustracje”.
-18. Każdy wpis ilustracji powinien zawierać link zwrotny do sceny, w której jest używany.
-19. Linki w blokach „Powiązane materiały” mają być utrzymywane ręcznie i aktualizowane przy dodawaniu lub usuwaniu scen, handoutów i ilustracji.
-20. Sekcja „Instrukcja dla AI” ma pozostać bardzo mała wizualnie i nie może reagować na przyciski zmiany rozmiaru fontu.
+5. Nie każdy scenariusz wymaga sekcji Inne Notatki.
+6. Nie każdy scenariusz wymaga sekcji Przeciwnicy.
+7. Nie każdy scenariusz będzie się składał z dokładnie trzech scen. Scen może być mniej albo więcej. W razie potrzeby należy powielać lub usuwać całe sekcje „Scena”.
+8. Zachowuj spójność nazw, numeracji i odwołań pomiędzy sekcjami.
+9. Jeżeli w scenie pojawia się odwołanie do ilustracji, używaj oznaczeń IL1, IL2, IL3 itd.
+10. Jeżeli w scenie pojawia się odwołanie do handoutu, używaj oznaczeń H1, H2, H3 itd.
+11. Nie wpisuj pustych ozdobników, lorem ipsum ani ogólników bez wartości praktycznej.
+12. Pisz treści z myślą o późniejszym użyciu przy stole przez MG.
+13. Zachowuj przejrzystość i funkcjonalność. Priorytetem jest użyteczność scenariusza, nie literackość dla samej literackości.
+14. Jeżeli użytkownik poda własne nazwy sekcji, scen, NPC, handoutów lub ilustracji, należy ich używać konsekwentnie i nie podmieniać ich bez powodu.
+15. W każdej scenie należy utrzymywać mały blok „Powiązane materiały”, zawierający szybkie linki do używanych tam handoutów i ilustracji.
+16. Po kliknięciu oznaczenia H1, H2, H3 itd. użytkownik ma być przenoszony do odpowiedniego wpisu w sekcji „Handouty”.
+17. Każdy wpis handoutu powinien zawierać link zwrotny do sceny, w której jest używany.
+18. Po kliknięciu oznaczenia IL1, IL2, IL3 itd. użytkownik ma być przenoszony do odpowiedniego wpisu w sekcji „Ilustracje”.
+19. Każdy wpis ilustracji powinien zawierać link zwrotny do sceny, w której jest używany.
+20. Linki w blokach „Powiązane materiały” mają być utrzymywane ręcznie i aktualizowane przy dodawaniu lub usuwaniu scen, handoutów i ilustracji.
+21. Sekcja „Instrukcja dla AI” ma pozostać bardzo mała wizualnie i nie może reagować na przyciski zmiany rozmiaru fontu.
 
 SEKCJA „Tytuł scenariusza”:
 Tutaj należy wpisać nazwę przygody. Tytuł powinien jasno identyfikować scenariusz i dobrze nadawać się do późniejszego wyszukiwania w archiwum użytkownika.
@@ -1319,6 +1361,16 @@ Handoutami mogą być:
 - mapki opisowe.
 Jeżeli scenariusz nie przewiduje żadnych handoutów, nie trzeba ich dodawać.
 
+SEKCJA „Inne Notatki”:
+Ta sekcja służy do zapisywania różnych dodatkowych notatek do scenariusza, które nie pasują do wcześniej rozpisanych sekcji.
+Można tu wpisywać np.:
+- luźne doprecyzowania dla MG,
+- alternatywne warianty rozwoju scen,
+- przypomnienia organizacyjne,
+- krótkie uwagi o tempie sesji,
+- dodatkowe konsekwencje działań graczy, które nie mieszczą się naturalnie w innych sekcjach.
+Jeżeli scenariusz nie wymaga takich notatek, sekcję można zostawić pustą.
+
 NUMERACJA I SPÓJNOŚĆ:
 - Każda ilustracja powinna mieć unikalny numer IL.
 - Każdy handout powinien mieć unikalny numer H.
@@ -1344,6 +1396,7 @@ NAJWAŻNIEJSZE OGRANICZENIA:
 - Nie zakładaj, że każda przygoda ma NPC.
 - Nie zakładaj, że każda przygoda ma Handouty.
 - Nie zakładaj, że każda przygoda ma Ilustracje.
+- Nie zakładaj, że każda przygoda ma sekcję Inne Notatki.
 - Nie uzupełniaj samodzielnie sekcji „Przeciwnicy”.
 - Nie dodawaj nazw przeciwników ani linków do statystyk bez wyraźnych danych od użytkownika.</div>
         </section>
