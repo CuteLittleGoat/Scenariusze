@@ -177,6 +177,13 @@
 
     .hero,
     details,
+    .ai-instruction-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
     .ai-instruction-box {
       background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
       border: 1px solid var(--border);
@@ -1230,31 +1237,35 @@
           </div>
         </details>
 
-        <section class="ai-instruction-box" id="instrukcja-ai" aria-label="Instrukcja dla AI">
-          <h2 class="ai-instruction-title">Instrukcja dla AI</h2>
-          <div class="ai-instruction-content">To jest uniwersalny template do tworzenia scenariuszy TTRPG. Twoim zadaniem jest uzupełniać go logicznie, czytelnie i praktycznie z punktu widzenia Mistrza Gry. Każda sekcja ma określoną funkcję. Nie należy wpisywać treści przypadkowo ani na siłę. Jeżeli jakiś element nie występuje w danym scenariuszu, sekcja może pozostać pusta, bardzo krótka albo może zawierać tylko informację, że dana przygoda nie korzysta z tego typu elementów.
+        <div class="ai-instruction-row">
+          <section class="ai-instruction-box" id="instrukcja-ai" aria-label="Instrukcja ogólna dla AI">
+            <h2 class="ai-instruction-title">Instrukcja ogólna dla AI</h2>
+            <div class="ai-instruction-content">To jest uniwersalny template do tworzenia scenariuszy TTRPG. Twoim zadaniem jest uzupełniać go logicznie, czytelnie i praktycznie z punktu widzenia Mistrza Gry. Każda sekcja ma określoną funkcję. Nie należy wpisywać treści przypadkowo ani na siłę. Jeżeli jakiś element nie występuje w danym scenariuszu, sekcja może pozostać pusta, bardzo krótka albo może zawierać tylko informację, że dana przygoda nie korzysta z tego typu elementów.
+Design strony HTML zawierającej treść scenariusza musi być zgodny z szablonem: https://cutelittlegoat.github.io/Scenariusze/template.html
 
 ZASADY OGÓLNE:
 1. Nie dodawaj treści na siłę tylko dlatego, że sekcja istnieje.
 2. Nie każdy scenariusz wymaga NPC.
 3. Nie każdy scenariusz wymaga Handoutów.
 4. Nie każdy scenariusz wymaga Ilustracji.
-5. Nie każdy scenariusz wymaga sekcji Przeciwnicy.
-6. Nie każdy scenariusz będzie się składał z dokładnie trzech scen. Scen może być mniej albo więcej. W razie potrzeby należy powielać lub usuwać całe sekcje „Scena”.
-7. Zachowuj spójność nazw, numeracji i odwołań pomiędzy sekcjami.
-8. Jeżeli w scenie pojawia się odwołanie do ilustracji, używaj oznaczeń IL1, IL2, IL3 itd.
-9. Jeżeli w scenie pojawia się odwołanie do handoutu, używaj oznaczeń H1, H2, H3 itd.
-10. Nie wpisuj pustych ozdobników, lorem ipsum ani ogólników bez wartości praktycznej.
-11. Pisz treści z myślą o późniejszym użyciu przy stole przez MG.
-12. Zachowuj przejrzystość i funkcjonalność. Priorytetem jest użyteczność scenariusza, nie literackość dla samej literackości.
-13. Jeżeli użytkownik poda własne nazwy sekcji, scen, NPC, handoutów lub ilustracji, należy ich używać konsekwentnie i nie podmieniać ich bez powodu.
-14. W każdej scenie należy utrzymywać mały blok „Powiązane materiały”, zawierający szybkie linki do używanych tam handoutów i ilustracji.
-15. Po kliknięciu oznaczenia H1, H2, H3 itd. użytkownik ma być przenoszony do odpowiedniego wpisu w sekcji „Handouty”.
-16. Każdy wpis handoutu powinien zawierać link zwrotny do sceny, w której jest używany.
-17. Po kliknięciu oznaczenia IL1, IL2, IL3 itd. użytkownik ma być przenoszony do odpowiedniego wpisu w sekcji „Ilustracje”.
-18. Każdy wpis ilustracji powinien zawierać link zwrotny do sceny, w której jest używany.
-19. Linki w blokach „Powiązane materiały” mają być utrzymywane ręcznie i aktualizowane przy dodawaniu lub usuwaniu scen, handoutów i ilustracji.
-20. Sekcja „Instrukcja dla AI” ma pozostać bardzo mała wizualnie i nie może reagować na przyciski zmiany rozmiaru fontu.
+5. Nie każdy scenariusz wymaga sekcji Inne Notatki.
+6. Nie każdy scenariusz wymaga sekcji Przeciwnicy.
+7. Nie każdy scenariusz będzie się składał z dokładnie trzech scen. Scen może być mniej albo więcej. W razie potrzeby należy powielać lub usuwać całe sekcje „Scena”.
+8. Zachowuj spójność nazw, numeracji i odwołań pomiędzy sekcjami.
+9. Jeżeli w scenie pojawia się odwołanie do ilustracji, używaj oznaczeń IL1, IL2, IL3 itd.
+10. Jeżeli w scenie pojawia się odwołanie do handoutu, używaj oznaczeń H1, H2, H3 itd.
+11. Nie wpisuj pustych ozdobników, lorem ipsum ani ogólników bez wartości praktycznej.
+12. Pisz treści z myślą o późniejszym użyciu przy stole przez MG.
+13. Zachowuj przejrzystość i funkcjonalność. Priorytetem jest użyteczność scenariusza, nie literackość dla samej literackości.
+14. Jeżeli użytkownik poda własne nazwy sekcji, scen, NPC, handoutów lub ilustracji, należy ich używać konsekwentnie i nie podmieniać ich bez powodu.
+15. W każdej scenie należy utrzymywać mały blok „Powiązane materiały”, zawierający szybkie linki do używanych tam handoutów i ilustracji.
+16. Po kliknięciu oznaczenia H1, H2, H3 itd. użytkownik ma być przenoszony do odpowiedniego wpisu w sekcji „Handouty”.
+17. Każdy wpis handoutu powinien zawierać link zwrotny do sceny, w której jest używany.
+18. Po kliknięciu oznaczenia IL1, IL2, IL3 itd. użytkownik ma być przenoszony do odpowiedniego wpisu w sekcji „Ilustracje”.
+19. Każdy wpis ilustracji powinien zawierać link zwrotny do sceny, w której jest używany.
+20. Linki w blokach „Powiązane materiały” mają być utrzymywane ręcznie i aktualizowane przy dodawaniu lub usuwaniu scen, handoutów i ilustracji.
+21. Sekcja „Instrukcja dla AI” ma pozostać bardzo mała wizualnie i nie może reagować na przyciski zmiany rozmiaru fontu.
+22. Nie możesz nic samodzielnie zmieniać w treści sekcji "Instrukcja ogólna dla AI" oraz "Instrukcja dla AI odnośnie tego scenariusza"
 
 SEKCJA „Tytuł scenariusza”:
 Tutaj należy wpisać nazwę przygody. Tytuł powinien jasno identyfikować scenariusz i dobrze nadawać się do późniejszego wyszukiwania w archiwum użytkownika.
@@ -1381,6 +1392,16 @@ Handoutami mogą być:
 - mapki opisowe.
 Jeżeli scenariusz nie przewiduje żadnych handoutów, nie trzeba ich dodawać.
 
+SEKCJA „Inne Notatki”:
+Ta sekcja służy do zapisywania różnych dodatkowych notatek do scenariusza, które nie pasują do wcześniej rozpisanych sekcji.
+Można tu wpisywać np.:
+- luźne doprecyzowania dla MG,
+- alternatywne warianty rozwoju scen,
+- przypomnienia organizacyjne,
+- krótkie uwagi o tempie sesji,
+- dodatkowe konsekwencje działań graczy, które nie mieszczą się naturalnie w innych sekcjach.
+Jeżeli scenariusz nie wymaga takich notatek, sekcję można zostawić pustą.
+
 NUMERACJA I SPÓJNOŚĆ:
 - Każda ilustracja powinna mieć unikalny numer IL.
 - Każdy handout powinien mieć unikalny numer H.
@@ -1406,9 +1427,17 @@ NAJWAŻNIEJSZE OGRANICZENIA:
 - Nie zakładaj, że każda przygoda ma NPC.
 - Nie zakładaj, że każda przygoda ma Handouty.
 - Nie zakładaj, że każda przygoda ma Ilustracje.
+- Nie zakładaj, że każda przygoda ma sekcję Inne Notatki.
 - Nie uzupełniaj samodzielnie sekcji „Przeciwnicy”.
 - Nie dodawaj nazw przeciwników ani linków do statystyk bez wyraźnych danych od użytkownika.</div>
-        </section>
+          </section>
+
+          <section class="ai-instruction-box" id="instrukcja-ai-scenariusza" aria-label="Instrukcja dla AI odnośnie tego scenariusza">
+            <h2 class="ai-instruction-title">Instrukcja dla AI odnośnie tego scenariusza</h2>
+            <div class="ai-instruction-content">To jest miejsce do uzupełnienia przez MG.
+Tutaj mają się znaleźć instrukcje specyficzne dla tego konkretnego scenariusza
+            
+            </div>
 
       </div>
     </main>
@@ -1420,10 +1449,9 @@ NAJWAŻNIEJSZE OGRANICZENIA:
       const defaultSize = savedSize ? parseFloat(savedSize) : 18;
       document.documentElement.style.setProperty("--content-font-size", defaultSize + "px");
 
-      const aiSection = document.querySelector(".ai-instruction-content");
-      if (aiSection) {
+      document.querySelectorAll(".ai-instruction-content").forEach((aiSection) => {
         aiSection.style.fontSize = "1px";
-      }
+      });
     })();
 
     function changeFontSize(step) {
@@ -1432,10 +1460,9 @@ NAJWAŻNIEJSZE OGRANICZENIA:
       const next = Math.min(26, Math.max(12, current + step));
       document.documentElement.style.setProperty("--content-font-size", next + "px");
 
-      const aiSection = document.querySelector(".ai-instruction-content");
-      if (aiSection) {
+      document.querySelectorAll(".ai-instruction-content").forEach((aiSection) => {
         aiSection.style.fontSize = "1px";
-      }
+      });
 
       localStorage.setItem("scenarioContentFontSize", next);
     }
