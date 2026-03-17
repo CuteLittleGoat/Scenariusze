@@ -1241,196 +1241,388 @@
         <div class="ai-instruction-row">
           <section class="ai-instruction-box" id="instrukcja-ai" aria-label="Instrukcja ogólna dla AI">
             <h2 class="ai-instruction-title">Instrukcja ogólna dla AI</h2>
-            <div class="ai-instruction-content">To jest uniwersalny template do tworzenia scenariuszy TTRPG. Twoim zadaniem jest uzupełniać go logicznie, czytelnie i praktycznie z punktu widzenia Mistrza Gry. Każda sekcja ma określoną funkcję. Nie należy wpisywać treści przypadkowo ani na siłę. Jeżeli jakiś element nie występuje w danym scenariuszu, sekcja może pozostać pusta, bardzo krótka albo może zawierać tylko informację, że dana przygoda nie korzysta z tego typu elementów.
-Design strony HTML zawierającej treść scenariusza musi być zgodny z szablonem: https://cutelittlegoat.github.io/Scenariusze/template.html
+            <div class="ai-instruction-content">
+Ta instrukcja określa zasady wypełniania tego szablonu scenariusza TTRPG w HTML.
+1. Cel instrukcji
 
-ZASADY OGÓLNE:
-1. Nie dodawaj treści na siłę tylko dlatego, że sekcja istnieje.
-2. Nie każdy scenariusz wymaga NPC.
-3. Nie każdy scenariusz wymaga Handoutów.
-4. Nie każdy scenariusz wymaga Ilustracji.
-5. Nie każdy scenariusz wymaga sekcji Inne Notatki.
-6. Nie każdy scenariusz wymaga sekcji Przeciwnicy.
-7. Nie każdy scenariusz będzie się składał z dokładnie trzech scen. Scen może być mniej albo więcej. W razie potrzeby należy powielać lub usuwać całe sekcje „Scena”.
-8. Zachowuj spójność nazw, numeracji i odwołań pomiędzy sekcjami.
-9. Jeżeli w scenie pojawia się odwołanie do ilustracji, używaj oznaczeń IL1, IL2, IL3 itd.
-10. Jeżeli w scenie pojawia się odwołanie do handoutu, używaj oznaczeń H1, H2, H3 itd.
-11. Nie wpisuj pustych ozdobników, lorem ipsum ani ogólników bez wartości praktycznej.
-12. Pisz treści z myślą o późniejszym użyciu przy stole przez MG.
-13. Zachowuj przejrzystość i funkcjonalność. Priorytetem jest użyteczność scenariusza, nie literackość dla samej literackości.
-14. Jeżeli użytkownik poda własne nazwy sekcji, scen, NPC, handoutów lub ilustracji, należy ich używać konsekwentnie i nie podmieniać ich bez powodu.
-15. W każdej scenie należy utrzymywać mały blok „Powiązane materiały”, zawierający szybkie linki do używanych tam handoutów i ilustracji.
-16. Po kliknięciu oznaczenia H1, H2, H3 itd. użytkownik ma być przenoszony do odpowiedniego wpisu w sekcji „Handouty”.
-17. Każdy wpis handoutu powinien zawierać link zwrotny do sceny, w której jest używany.
-18. Po kliknięciu oznaczenia IL1, IL2, IL3 itd. użytkownik ma być przenoszony do odpowiedniego wpisu w sekcji „Ilustracje”.
-19. Każdy wpis ilustracji powinien zawierać link zwrotny do sceny, w której jest używany.
-20. Linki w blokach „Powiązane materiały” mają być utrzymywane ręcznie i aktualizowane przy dodawaniu lub usuwaniu scen, handoutów i ilustracji.
-21. Sekcja „Instrukcja dla AI” ma pozostać bardzo mała wizualnie i nie może reagować na przyciski zmiany rozmiaru fontu.
-22. Nie możesz nic samodzielnie zmieniać w treści sekcji "Instrukcja ogólna dla AI" oraz "Instrukcja dla AI odnośnie tego scenariusza"
+1.1. Ta instrukcja określa zasady wypełniania szablonu scenariusza TTRPG w HTML.
 
-SEKCJA „Tytuł scenariusza”:
-Tutaj należy wpisać nazwę przygody. Tytuł powinien jasno identyfikować scenariusz i dobrze nadawać się do późniejszego wyszukiwania w archiwum użytkownika.
+1.2. AI ma uzupełniać treść scenariusza tak, aby końcowy materiał był czytelny, spójny, przydatny dla MG i zgodny z układem dokumentu.
 
-SEKCJA „krótki opis całego scenariusza”:
-Tu należy wpisać zwięzły opis całej przygody: klimat, gatunek, motyw przewodni, stawkę, typ opowieści oraz ogólny charakter sesji. Ten fragment ma pomóc MG szybko zrozumieć, czym jest scenariusz.
+1.3. AI ma traktować szablon jako strukturę roboczą do uzupełnienia treścią, a nie jako luźną inspirację.
 
-SEKCJA „Skrót scenariusza”:
-Tu należy wpisać pełniejsze podsumowanie całej historii dla MG. Należy opisać punkt wyjścia, główne wydarzenia, strukturę przygody, przewidywany przebieg oraz ogólny rodzaj finału. Ten skrót nie jest tekstem dla graczy, tylko szybkim kompendium dla prowadzącego.
+1.4. AI ma zachować zgodność z przeznaczeniem poszczególnych sekcji i wpisywać do nich wyłącznie treści odpowiadające ich funkcji.
 
-SEKCJE „Scena”:
-Każda scena jest osobnym modułem fabularnym. Nie zakładaj z góry, że scen muszą być trzy. To tylko szablon. Można dodać ich więcej, można usunąć zbędne.
-Każda scena powinna mieć:
-- numer i tytuł,
-- krótki opis w nagłówku sekcji,
-- streszczenie sceny,
-- sekcję dla graczy,
-- blok „Scena Krok-po-kroku”,
-- blok „Powiązane materiały”,
-- blok „Co ma się znaleźć w tej sekcji”.
+1.5. AI ma działać w sposób ostrożny i precyzyjny, bez samowolnego zmieniania założeń scenariusza, jeśli nie zostały wyraźnie wskazane przez użytkownika.
 
-W „Streszczeniu sceny” należy wpisać:
-- po co scena istnieje,
-- jaka jest jej funkcja w przygodzie,
-- co powinni z niej wynieść gracze,
-- jaki konflikt, problem albo odkrycie znajduje się w centrum tej sceny,
-- do czego scena prowadzi dalej.
+2. Zasady ogólne pracy z szablonem
 
-W „Sekcji dla Graczy” należy wpisać treści przeznaczone bezpośrednio do odczytania lub przedstawienia przez MG. Mogą to być:
-- opisy wejścia do sceny,
-- opisy lokacji,
-- opisy pierwszego wrażenia,
-- opisy dźwięków, zapachów i atmosfery,
-- opisy ważnych odkryć,
-- krótkie narracyjne komunikaty przygotowane do przeczytania na głos.
-To jest sekcja użytkowa dla MG, ale jej treść jest skierowana do graczy.
+2.1. AI ma zachować strukturę dokumentu.
 
-W „Scena Krok-po-kroku” należy opisać możliwy przebieg sceny w kolejnych punktach. To nie musi być sztywny scenariusz działań graczy. Ma to być pomoc dla MG: uporządkowana sekwencja zdarzeń, informacji, reakcji NPC, możliwych odkryć i konsekwencji. Lista ma wspierać improwizację, a nie ją ograniczać.
+2.2. AI nie może zmieniać nazw głównych sekcji, ich funkcji ani logicznego układu dokumentu, chyba że użytkownik wyraźnie tego zażąda.
 
-W bloku „Powiązane materiały” należy umieszczać szybkie linki do handoutów i ilustracji używanych w danej scenie.
-- Handouty należy oznaczać jako H1, H2, H3 itd.
-- Ilustracje należy oznaczać jako IL1, IL2, IL3 itd.
-- Każdy link powinien prowadzić do konkretnego wpisu niżej na stronie.
-- Każdy wpis handoutu i ilustracji powinien mieć link zwrotny do sceny, gdzie jest używany.
-- Przy zmianie numeracji należy poprawić wszystkie linki w obie strony.
+2.3. AI może uzupełniać istniejące pola, rozwijać treść, dodawać brakujące elementy pomocnicze i wpisywać zawartość zgodną z przeznaczeniem sekcji.
 
-W bloku „Co ma się znaleźć w tej sekcji” należy umieszczać praktyczne informacje, które MG może wykorzystać przy prowadzeniu. Mogą to być:
-- opis miejsca,
-- atmosfera,
-- pierwsze wrażenia,
-- obecne zagrożenia,
-- możliwe testy,
-- dostępne tropy,
-- obecni NPC,
-- możliwe komplikacje,
-- odwołania do handoutów,
-- odwołania do ilustracji,
-- konsekwencje sukcesu i porażki,
-- przejścia do następnych scen.
+2.4. AI może dodawać nowe elementy wyłącznie wtedy, gdy są potrzebne do zachowania spójności, kompletności lub użyteczności scenariusza.
 
-SEKCJA „Zakończenie”:
-Tu należy opisać finał przygody i możliwe warianty domknięcia historii. Można uwzględnić sukces, porażkę, częściowy sukces, ucieczkę, kompromis, katastrofę, zmianę stron, zdradę, ujawnienie prawdy albo otwarte zakończenie. Należy opisać skutki decyzji graczy oraz ewentualne haczyki na dalszą kampanię.
+2.5. AI nie może usuwać istotnych części scenariusza, chyba że:
+2.5.1. są one wyraźnie oznaczone jako przykładowe, puste lub zbędne,
+2.5.2. ich usunięcie wynika bezpośrednio z logiki konkretnego scenariusza,
+2.5.3. użytkownik wyraźnie poleci ich usunięcie.
 
-SEKCJA „Przeciwnicy”:
-Ta sekcja służy wyłącznie do wpisania listy przeciwników oraz późniejszych przycisków prowadzących do screenów statystyk.
-BARDZO WAŻNE:
-AI NIE MA SAMODZIELNIE UZUPEŁNIAĆ SEKCJI „Przeciwnicy”.
-AI nie powinno samodzielnie wymyślać nazw przeciwników.
-AI nie powinno samodzielnie dopisywać linków do statystyk.
-AI nie powinno samodzielnie tworzyć odnośników do plików JPG.
-Użytkownik musi sam podać wszystkie nazwy przeciwników i wszystkie linki lub dane dotyczące statystyk.
-Jeżeli użytkownik nie poda danych do tej sekcji, pozostaw ją w stanie szablonowym albo pustym.
+2.6. AI może usuwać niepotrzebne przykładowe sekcje scen i dodawać nowe sekcje scen według wzoru szablonu, jeśli wymaga tego scenariusz.
 
-SEKCJA „NPC”:
-Ta sekcja służy do wypisania ważnych postaci niezależnych, o ile scenariusz ich potrzebuje.
-Nie dodawaj NPC tylko po to, żeby zapełnić tabelę.
-Jeżeli scenariusz nie wymaga żadnych istotnych NPC, można zostawić sekcję pustą albo wpisać, że brak kluczowych NPC.
-Kolumny znaczą:
-- „Nazwa” = imię, przydomek, funkcja lub krótka nazwa postaci.
-- „Wygląd” = opis zewnętrzny i pierwsze wrażenie, które odbierają gracze. Można uwzględnić ubiór, sylwetkę, wiek, charakterystyczne cechy, sposób poruszania się, ton głosu i inne zauważalne elementy.
-- „Rola” = funkcja fabularna postaci. Należy tu wpisać, co NPC wie, jak może pomóc graczom, czego chce, jakie ma cele, jak może przeszkadzać, czy jest źródłem informacji, przewodnikiem, ofiarą, antagonistą, fałszywym sojusznikiem, klientem, świadkiem albo kimś jeszcze innym. To jest najważniejsza kolumna pod kątem użyteczności dla MG.
+2.7. AI ma pilnować, aby po wprowadzeniu zmian dokument pozostał kompletny, czytelny i logicznie uporządkowany.
 
-SEKCJA „Ilustracje”:
-Ta sekcja służy do przygotowania promptów do generatorów obrazów AI.
-Każdy wpis powinien mieć oznaczenie IL1, IL2, IL3 itd.
-Każdy wpis powinien być powiązany z konkretną sceną, lokacją, NPC, wydarzeniem albo przedmiotem.
-Każdy wpis powinien mieć też link zwrotny do sceny lub scen, gdzie dana ilustracja jest używana.
-Prompty mają być długie, rozbudowane i praktyczne. Powinny zawierać:
-- nazwę ilustracji,
-- numer ilustracji,
-- informację, do czego ilustracja służy,
-- dokładny opis kompozycji,
-- dokładny opis otoczenia,
-- dokładny opis nastroju i światła,
-- dokładny opis ważnych obiektów i postaci,
-- styl wizualny, jeżeli użytkownik go określił,
-- tagi pozytywne,
-- tagi negatywne,
-- opcjonalnie proporcje obrazu i inne parametry techniczne.
-Nie twórz krótkich, ogólnikowych promptów. Ta sekcja ma być użyteczna przy realnym generowaniu grafik.
+2.8. AI nie może pozostawiać oczywistych śladów roboczych, komentarzy technicznych ani notatek wewnętrznych, jeśli nie są częścią właściwego scenariusza.
 
-SEKCJA „Handouty”:
-Ta sekcja służy do wpisywania materiałów, które mogą trafić do rąk graczy.
-Każdy wpis powinien mieć oznaczenie H1, H2, H3 itd.
-Każdy wpis powinien mieć też link zwrotny do sceny lub scen, gdzie dany handout jest używany.
-Każdy handout powinien mieć:
-- numer,
-- nazwę,
-- informację, gdzie i kiedy można go znaleźć,
-- pełną treść gotową do pokazania graczom lub odczytania.
-Handoutami mogą być:
-- listy,
-- notatki,
-- raporty,
-- pamiętniki,
-- nagrania,
-- transkrypcje,
-- ogłoszenia,
-- dokumenty,
-- hasła,
-- kody,
-- wpisy z terminala,
-- fragmenty ksiąg,
-- mapki opisowe.
-Jeżeli scenariusz nie przewiduje żadnych handoutów, nie trzeba ich dodawać.
+3. Hierarchia instrukcji
 
-SEKCJA „Inne Notatki”:
-Ta sekcja służy do zapisywania różnych dodatkowych notatek do scenariusza, które nie pasują do wcześniej rozpisanych sekcji.
-Można tu wpisywać np.:
-- luźne doprecyzowania dla MG,
-- alternatywne warianty rozwoju scen,
-- przypomnienia organizacyjne,
-- krótkie uwagi o tempie sesji,
-- dodatkowe konsekwencje działań graczy, które nie mieszczą się naturalnie w innych sekcjach.
-Jeżeli scenariusz nie wymaga takich notatek, sekcję można zostawić pustą.
+3.1. W razie jednoczesnego występowania wielu źródeł instrukcji AI ma stosować następującą hierarchię ważności:
+3.1.1. polecenie użytkownika dotyczące bieżącego zadania,
+3.1.2. instrukcje przypisane do konkretnego scenariusza,
+3.1.3. niniejszą instrukcję ogólną.
 
-NUMERACJA I SPÓJNOŚĆ:
-- Każda ilustracja powinna mieć unikalny numer IL.
-- Każdy handout powinien mieć unikalny numer H.
-- W scenach należy odwoływać się do tych samych numerów.
-- Nie mieszaj numeracji i nie duplikuj identyfikatorów.
-- Jeżeli dodasz nową scenę, zadbaj o zgodność numeracji w panelu nawigacyjnym.
-- Jeżeli usuniesz scenę, popraw odpowiednio odnośniki.
-- Jeżeli scenariusz ma więcej scen, dodaj nowe sekcje „Scena” w tym samym układzie.
-- Każdy link do handoutu powinien prowadzić do istniejącego identyfikatora w sekcji „Handouty”.
-- Każdy link do ilustracji powinien prowadzić do istniejącego identyfikatora w sekcji „Ilustracje”.
-- Każdy wpis handoutu i ilustracji powinien zawierać aktualne linki zwrotne.
+3.2. Jeżeli instrukcje z różnych poziomów są ze sobą sprzeczne, AI ma stosować instrukcję znajdującą się wyżej w tej hierarchii.
 
-STYL TREŚCI:
-- Pisz po polsku, chyba że użytkownik zażąda inaczej.
-- Pisz konkretnie i użytkowo.
-- Nie zapełniaj sekcji pustą treścią.
-- Nie wymyślaj elementów, których użytkownik nie chce.
-- Gdy użytkownik poda konkretny świat, system albo konwencję, dopasuj do nich język i szczegóły.
-- Pamiętaj, że szablon ma służyć późniejszemu rozwijaniu scenariusza, nie tylko jednorazowemu odczytowi.
+3.3. Instrukcja ogólna ma zastosowanie wtedy, gdy:
+3.3.1. użytkownik nie podał odmiennego polecenia,
+3.3.2. instrukcje do konkretnego scenariusza nie stanowią inaczej,
+3.3.3. dana kwestia nie została doprecyzowana na wyższym poziomie.
 
-NAJWAŻNIEJSZE OGRANICZENIA:
-- Nie zakładaj, że każda przygoda ma trzy sceny.
-- Nie zakładaj, że każda przygoda ma NPC.
-- Nie zakładaj, że każda przygoda ma Handouty.
-- Nie zakładaj, że każda przygoda ma Ilustracje.
-- Nie zakładaj, że każda przygoda ma sekcję Inne Notatki.
-- Nie uzupełniaj samodzielnie sekcji „Przeciwnicy”.
-- Nie dodawaj nazw przeciwników ani linków do statystyk bez wyraźnych danych od użytkownika.</div>
+3.4. AI nie może używać instrukcji ogólnej do unieważniania lub osłabiania wyraźnych poleceń użytkownika ani instrukcji przypisanych do konkretnego scenariusza.
+
+3.5. Jeżeli polecenie użytkownika dotyczy konkretnego wyjątku, AI ma traktować je jako nadrzędne względem zasad ogólnych, o ile nie burzy to samej możliwości wykonania zadania.
+
+4. Reguły techniczne template’u HTML
+
+4.1. AI nie może samowolnie zmieniać layoutu, designu, układu wizualnego ani technicznej konstrukcji template’u HTML poza zakresem zadania zleconego przez użytkownika.
+
+4.2. AI nie może samowolnie zmieniać:
+4.2.1. struktury layoutu,
+4.2.2. nazw i kolejności głównych sekcji,
+4.2.3. klas CSS,
+4.2.4. istniejących identyfikatorów,
+4.2.5. kotwic,
+4.2.6. skryptów,
+4.2.7. logiki działania elementów interfejsu,
+4.2.8. wyglądu przycisków,
+4.2.9. zachowania elementów nawigacyjnych,
+4.2.10. ogólnego stylu dokumentu.
+
+4.3. AI może wprowadzać jedynie takie techniczne dodatki, które są konieczne do poprawnego uzupełnienia treści zgodnie z istniejącym wzorem szablonu.
+
+4.4. Jedynymi dopuszczalnymi wyjątkami od zakazu samowolnych zmian technicznych są:
+4.4.1. możliwość podpięcia hiperłącza pod przycisk w sekcji „Przeciwnicy”, ale wyłącznie wtedy, gdy wynika to wprost z zadania użytkownika albo z instrukcji przypisanej do konkretnego scenariusza,
+4.4.2. możliwość dodania hiperłącza do ilustracji, jeżeli jest to potrzebne do zachowania wewnętrznej spójności odnośników w scenariuszu.
+
+4.5. Poza wyjątkami wskazanymi w punkcie 4.4 AI ma traktować elementy techniczne template’u jako nienaruszalne.
+
+5. Reguła nienaruszania sekcji instrukcji
+
+5.1. Sekcje „Instrukcja ogólna dla AI” oraz „Instrukcja scenariusza” są sekcjami wyłącznie do odczytu.
+
+5.2. AI nie może samodzielnie zmieniać, skracać, rozwijać, nadpisywać, usuwać ani parafrazować treści tych sekcji podczas pracy nad scenariuszem.
+
+5.3. Zmiana treści sekcji instrukcyjnych jest dopuszczalna wyłącznie wtedy, gdy użytkownik wyraźnie zleci modyfikację tych sekcji jako osobne zadanie.
+
+5.4. AI nie może traktować sekcji instrukcyjnych jako miejsca na dopiski robocze, komentarze techniczne ani dodatkowe treści scenariuszowe.
+
+6. Zasady dotyczące treści scenariusza
+
+6.1. AI ma tworzyć treści użyteczne dla MG podczas prowadzenia sesji.
+
+6.2. AI ma pisać tak, aby scenariusz dało się łatwo czytać podczas przygotowania i w trakcie gry.
+
+6.3. AI ma dbać o przejrzystość informacji, praktyczny układ treści i łatwość szybkiego odnalezienia potrzebnych elementów.
+
+6.4. AI ma unikać rozwlekania tekstu, jeśli nie zwiększa ono użyteczności materiału.
+
+6.5. AI ma rozwijać treść w sposób konkretny, a nie ogólnikowy.
+
+6.6. AI ma unikać pustych ozdobników, nadmiernego lania wody i zdań, które nie wnoszą wartości dla MG.
+
+6.7. AI ma pilnować, aby informacje istotne fabularnie, organizacyjnie lub nastrojowo były łatwe do wychwycenia.
+
+7. Zgodność z systemem i settingiem
+
+7.1. Neutralność systemowa
+
+7.1.1. AI nie może samodzielnie zakładać konkretnego systemu mechanicznego, jeśli użytkownik go nie podał.
+
+7.1.2. AI nie może samodzielnie dopisywać testów, rzutów, poziomów trudności, ST, DC, obrażeń, punktów życia, statystyk ani innych rozstrzygnięć mechanicznych, jeśli użytkownik wyraźnie o to nie poprosi.
+
+7.1.3. AI ma pisać treści w sposób systemowo neutralny, opisując sytuacje, zagrożenia, trudności i możliwe konsekwencje bez przypisywania im konkretnej mechaniki.
+
+7.1.4. AI może sugerować presję, ryzyko, skalę zagrożenia lub trudność sytuacji wyłącznie opisowo.
+
+7.1.5. AI nie może narzucać sposobu rozwiązania sceny przez mechanikę konkretnego systemu, jeśli system nie został wskazany.
+
+7.2. Pierwszeństwo zgodności settingowej
+
+7.2.1. Jeżeli scenariusz ma wskazany setting, AI ma pilnować zgodności:
+7.2.1.1. słownictwa,
+7.2.1.2. klimatu,
+7.2.1.3. realiów świata,
+7.2.1.4. typów postaci, frakcji, technologii, magii, religii i instytucji,
+7.2.1.5. tonu narracji pasującego do danego uniwersum.
+
+7.2.2. AI może używać terminologii właściwej dla danego settingu tylko wtedy, gdy setting został wyraźnie wskazany przez użytkownika, scenariusz lub instrukcję do scenariusza.
+
+7.2.3. AI nie może mieszać pojęć, nazw, realiów ani estetyki z różnych settingów.
+
+7.2.4. AI nie może wprowadzać elementów charakterystycznych dla obcego uniwersum do scenariusza osadzonego w innym settingu.
+
+7.2.5. AI nie może samodzielnie dopisywać elementów homebrew, jeśli użytkownik wyraźnie nie zaznaczył, że są dozwolone.
+
+7.2.6. Jeżeli setting nie został wskazany, AI ma stosować nazewnictwo możliwie neutralne i niespecyficzne dla żadnego konkretnego uniwersum.
+
+7.3. Spójność wewnętrzna świata
+
+7.3.1. AI ma pilnować, aby wszystkie elementy scenariusza pasowały do siebie wewnętrznie.
+
+7.3.2. AI ma dbać o zgodność:
+7.3.2.1. motywów fabularnych,
+7.3.2.2. estetyki,
+7.3.2.3. poziomu technologii lub magii,
+7.3.2.4. zachowań postaci,
+7.3.2.5. logiki działania świata.
+
+7.3.3. AI nie może wprowadzać elementów, które burzą ustalony charakter scenariusza, jeśli użytkownik nie zaznaczył celowego kontrastu.
+
+8. Styl i język
+
+8.1. AI ma pisać jasno, konkretnie i zrozumiale.
+
+8.2. AI ma stosować język naturalny, poprawny i czytelny.
+
+8.3. AI ma dopasować styl do funkcji sekcji.
+
+8.4. AI ma odróżniać:
+8.4.1. opis dla MG,
+8.4.2. streszczenie fabularne,
+8.4.3. treści do odczytania graczom,
+8.4.4. notatki organizacyjne,
+8.4.5. opisy NPC,
+8.4.6. opisy scen,
+8.4.7. opisy przeciwników,
+8.4.8. treści ilustracji i handoutów.
+
+8.5. AI ma unikać stylistycznego chaosu i mieszaniny tonów, jeśli nie wynika ona świadomie z założeń scenariusza.
+
+8.6. AI ma unikać nadmiernego powtarzania tych samych informacji w wielu sekcjach.
+
+8.7. AI ma dbać, by każda sekcja wnosiła własną funkcję i nie kopiowała bez potrzeby treści z innych części dokumentu.
+
+8.8. Skróty, streszczenia i podsumowania mają kondensować treść, a nie powielać jej dosłownie.
+
+8.9. Sekcje rozwinięte mają rozszerzać informacje właściwe dla swojej funkcji, a nie jedynie powtarzać wcześniejsze zdania innymi słowami.
+
+9. Zasady konstruowania scen
+
+9.1. Każda scena ma mieć jasny cel i funkcję.
+
+9.2. AI ma pilnować, aby scena zawierała informacje przydatne MG do jej poprowadzenia.
+
+9.3. AI ma opisywać:
+9.3.1. co dzieje się w scenie,
+9.3.2. po co scena istnieje,
+9.3.3. jakie informacje można w niej zdobyć,
+9.3.4. jakie napięcia lub zagrożenia są obecne,
+9.3.5. jakie mogą być konsekwencje różnych kierunków rozegrania sceny.
+
+9.4. AI nie może traktować sceny wyłącznie jako fragmentu opowiadania.
+
+9.5. AI ma pisać sceny jako materiał do prowadzenia gry, a nie wyłącznie narrację literacką.
+
+9.6. AI ma uwzględniać możliwość nieprzewidywalnych działań graczy.
+
+9.7. AI ma zostawiać MG przestrzeń do adaptacji sceny przy stole.
+
+9.8. AI nie może zamykać scen w sztywnym, jedynym słusznym przebiegu, jeśli nie wymaga tego logika scenariusza.
+
+9.9. Sceny konfliktu, walki i pościgu
+
+9.9.1. W scenach walki, pościgu lub innego konfliktu AI ma opisywać:
+9.9.1.1. cele stron,
+9.9.1.2. presję sytuacji,
+9.9.1.3. zagrożenia otoczenia,
+9.9.1.4. możliwe przewagi i utrudnienia,
+9.9.1.5. stawkę sceny,
+9.9.1.6. możliwe konsekwencje porażki, sukcesu lub częściowego powodzenia,
+9.9.1.7. potencjalne punkty zwrotne.
+
+9.9.2. AI nie może rozpisywać scen starcia w formie mechanicznych instrukcji systemowych, jeśli użytkownik wyraźnie o to nie poprosi.
+
+9.9.3. AI ma przedstawiać konflikt jako sytuację do poprowadzenia przez MG, a nie jako gotową rozpiskę zasad.
+
+10. Jawna polityka sekcji „Przeciwnicy”
+
+10.1. Sekcja „Przeciwnicy” ma być uzupełniana według wzoru stosowanego w scenariuszu „Oko Płomiennej Pomsty”.
+
+10.2. W sekcji „Przeciwnicy” AI ma wpisywać wyłącznie przeciwników, którzy faktycznie występują w scenariuszu.
+
+10.3. Każdy wpis w tej sekcji ma zawierać:
+10.3.1. nazwę przeciwnika,
+10.3.2. krótki opis przydatny dla MG,
+10.3.3. przycisk „Otwórz statystyki”.
+
+10.4. Przycisk „Otwórz statystyki” ma być domyślnie wyłącznie wizualnym placeholderem i nie ma posiadać żadnego podpiętego hiperłącza.
+
+10.5. Podpięcie hiperłącza pod przycisk w sekcji „Przeciwnicy” jest dopuszczalne wyłącznie wtedy, gdy użytkownik albo instrukcja przypisana do konkretnego scenariusza wyraźnie tego wymaga.
+
+10.6. AI nie może samowolnie zmieniać przeznaczenia sekcji „Przeciwnicy” ani wykorzystywać jej do wpisywania pełnych statystyk mechanicznych, chyba że użytkownik wyraźnie tego zażąda.
+
+11. Zasady dotyczące NPC
+
+11.1. AI ma tworzyć NPC w sposób użyteczny dla prowadzenia sesji.
+
+11.2. Opis NPC ma zawierać informacje praktyczne, a nie wyłącznie literackie.
+
+11.3. AI ma uwzględniać:
+11.3.1. rolę NPC w scenariuszu,
+11.3.2. motywacje,
+11.3.3. sposób działania,
+11.3.4. relacje z innymi elementami scenariusza,
+11.3.5. sposób mówienia lub zachowania, jeśli jest to ważne,
+11.3.6. informacje przydatne do improwizacji przez MG.
+
+11.4. AI nie może tworzyć NPC jako pustych stereotypów bez funkcji scenariuszowej.
+
+11.5. AI ma dbać, by NPC byli spójni z tonem scenariusza i settingiem.
+
+11.6. AI nie może samodzielnie dopisywać pełnych statystyk mechanicznych, jeśli użytkownik o to nie poprosi.
+
+12. Zasady dotyczące przeciwników i zagrożeń
+
+12.1. AI ma opisywać przeciwników i zagrożenia w sposób użyteczny dla MG.
+
+12.2. AI ma uwzględniać:
+12.2.1. charakter zagrożenia,
+12.2.2. sposób działania,
+12.2.3. motywację lub naturę zagrożenia, jeśli ma to znaczenie,
+12.2.4. rolę zagrożenia w scenariuszu,
+12.2.5. klimat i konsekwencje kontaktu z zagrożeniem.
+
+12.3. AI może opisywać taktykę, zachowanie, dynamikę działania i presję wywieraną przez przeciwnika, ale bez wpisywania gotowych statystyk i rozstrzygnięć mechanicznych, jeśli użytkownik wyraźnie o to nie poprosi.
+
+12.4. AI ma pilnować, aby zagrożenia były spójne z settingiem i tonem scenariusza.
+
+13. Zasady dotyczące ilustracji i handoutów
+
+13.1. AI ma traktować ilustracje i handouty jako elementy wspierające prowadzenie scenariusza.
+
+13.2. AI ma pilnować, aby ilustracje i handouty były powiązane z konkretnymi scenami, postaciami, miejscami, wydarzeniami lub informacjami.
+
+13.3. AI ma opisywać ich funkcję jasno i praktycznie.
+
+13.4. Powiązania między sceną a materiałami
+
+13.4.1. Jeżeli scena odwołuje się do ilustracji, handoutu lub innego materiału pomocniczego, AI ma umieścić odpowiednie powiązanie w tej scenie.
+
+13.4.2. Jeżeli ilustracja, handout lub inny materiał pomocniczy odnosi się do sceny, AI ma umieścić odpowiednie powiązanie również w opisie tego materiału.
+
+13.4.3. Powiązania mają być dwustronne wszędzie tam, gdzie ma to sens organizacyjny i ułatwia korzystanie ze scenariusza.
+
+13.5. Spójność odnośników
+
+13.5.1. AI ma pilnować, aby wszystkie odnośniki między scenami, ilustracjami, handoutami i innymi sekcjami były poprawne.
+
+13.5.2. AI ma aktualizować odnośniki po każdej zmianie numeracji, układu lub relacji między sekcjami.
+
+13.5.3. AI nie może pozostawiać odnośników nieaktualnych, pustych, błędnych lub prowadzących do niewłaściwych elementów.
+
+13.5.4. Każdy odnośnik ma wskazywać konkretny, właściwy element dokumentu.
+
+13.6. Treść materiałów pomocniczych
+
+13.6.1. AI ma dbać, aby opisy ilustracji i handoutów były konkretne.
+
+13.6.2. AI ma wskazywać:
+13.6.2.1. co przedstawia materiał,
+13.6.2.2. kiedy można go wykorzystać,
+13.6.2.3. po co jest przydatny,
+13.6.2.4. jakie informacje przekazuje.
+
+13.6.3. AI nie może tworzyć materiałów pomocniczych oderwanych od faktycznej zawartości scenariusza.
+
+14. Zasady dotyczące notatek dla MG
+
+14.1. AI ma traktować notatki MG jako narzędzie praktyczne.
+
+14.2. Notatki dla MG mają pomagać w prowadzeniu scenariusza, improwizacji i utrzymaniu spójności.
+
+14.3. AI może wpisywać tam:
+14.3.1. przypomnienia,
+14.3.2. uwagi organizacyjne,
+14.3.3. ostrzeżenia o możliwych problemach,
+14.3.4. sugestie interpretacyjne,
+14.3.5. wskazówki dotyczące tonu, tempa i akcentów scen.
+
+14.4. AI nie może używać tej sekcji jako miejsca na powtarzanie całych opisów scen lub streszczeń fabuły.
+
+15. Uzupełnianie braków i zachowanie spójności
+
+15.1. AI ma aktywnie wychwytywać luki w scenariuszu.
+
+15.2. Jeżeli jakaś sekcja wymaga informacji wynikających logicznie z innych części dokumentu, AI może je uzupełnić.
+
+15.3. AI ma robić to ostrożnie i tylko w zakresie uzasadnionym treścią scenariusza.
+
+15.4. AI nie może dopisywać dużych nowych założeń fabularnych bez wyraźnej potrzeby lub bez zgody użytkownika.
+
+15.5. AI ma pilnować zgodności nazw, relacji, faktów, motywów i zależności w całym dokumencie.
+
+15.6. AI ma sprawdzać, czy te same elementy są opisywane konsekwentnie we wszystkich sekcjach.
+
+16. Priorytety decyzyjne AI
+
+16.1. W razie wątpliwości interpretacyjnych AI ma stosować hierarchię wskazaną w punkcie 3.
+
+16.2. Jeżeli dwa zapisy wydają się ze sobą kolidować, AI ma wybierać rozwiązanie zgodne z hierarchią źródeł instrukcji oraz z funkcją danej sekcji.
+
+16.3. Jeżeli mimo tego pozostaje więcej niż jedno poprawne rozwiązanie, AI ma wybierać to, które lepiej:
+16.3.1. zachowuje spójność scenariusza,
+16.3.2. zwiększa użyteczność materiału dla MG,
+16.3.3. poprawia czytelność dokumentu,
+16.3.4. ogranicza zbędne powtórzenia.
+
+17. Czego AI nie powinno robić
+
+17.1. AI nie powinno mieszać settingów.
+
+17.2. AI nie powinno narzucać mechaniki konkretnego systemu bez wyraźnej zgody użytkownika.
+
+17.3. AI nie powinno dopisywać homebrew bez wyraźnej zgody użytkownika.
+
+17.4. AI nie powinno kopiować tych samych treści między sekcjami bez uzasadnienia.
+
+17.5. AI nie powinno zostawiać błędnych lub nieaktualnych odnośników.
+
+17.6. AI nie powinno wpisywać treści niezgodnych z funkcją sekcji.
+
+17.7. AI nie powinno rozwadniać tekstu zbędnym stylem literackim tam, gdzie potrzebna jest użyteczność.
+
+17.8. AI nie powinno traktować scenariusza jak opowiadania oderwanego od potrzeb prowadzenia sesji.
+
+17.9. AI nie powinno samowolnie zmieniać layoutu, designu ani technicznej konstrukcji template’u poza wyjątkami wskazanymi w punkcie 4.
+
+17.10. AI nie powinno naruszać sekcji instrukcyjnych wskazanych w punkcie 5.
+
+18. Oczekiwany efekt końcowy
+
+18.1. Gotowy scenariusz ma być:
+18.1.1. spójny,
+18.1.2. czytelny,
+18.1.3. praktyczny,
+18.1.4. zgodny z settingiem, jeśli został wskazany,
+18.1.5. neutralny mechanicznie, jeśli system nie został wskazany,
+18.1.6. poprawnie powiązany wewnętrznie,
+18.1.7. wygodny do używania przez MG.
+
+18.2. AI ma dążyć do tego, aby scenariusz po uzupełnieniu wymagał możliwie mało dodatkowego porządkowania przez użytkownika.
+
+            </div>
           </section>
 
           <section class="ai-instruction-box" id="instrukcja-ai-scenariusza" aria-label="Instrukcja dla AI odnośnie tego scenariusza">
