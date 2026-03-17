@@ -1422,7 +1422,7 @@ NAJWAŻNIEJSZE OGRANICZENIA:
           <section class="ai-instruction-box" id="instrukcja-ai-scenariusza" aria-label="Instrukcja dla AI odnośnie tego scenariusza">
             <h2 class="ai-instruction-title">Instrukcja dla AI odnośnie tego scenariusza</h2>
             <div class="ai-instruction-content">To jest miejsce do uzupełnienia przez MG.
-Tutaj mają się znaleźć instrukcje specyficzne dla tego konkretnego scenariusza
+Tutaj mają się znaleźć instrukcje specyficzne dla tego konkretnego scenariusza oraz linki do dokumentów jakie AI ma przeczytać.
             
             </div>
           </section>
