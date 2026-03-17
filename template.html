@@ -611,7 +611,7 @@
           </div>
         </section>
 
-        <details open id="scena-1">
+        <details id="scena-1">
           <summary>
             <div class="summary-top">
               <div>
