@@ -20,6 +20,10 @@
       --shadow: rgba(0, 0, 0, 0.42);
       --sidebar-w: 290px;
       --content-font-size: 18px;
+      --font-body: Calibri, Arial, Verdana, Tahoma, "Trebuchet MS";
+      --font-heading: "Trebuchet MS", Verdana, Arial, Tahoma, Calibri;
+      --font-navigation: Verdana, Tahoma, Arial, Calibri, "Trebuchet MS";
+      --font-ui: Tahoma, Verdana, Arial, Calibri, "Trebuchet MS";
     }
 
     * {
@@ -32,14 +36,18 @@
 
     body {
       margin: 0;
-      font-family: Calibri, "Segoe UI", Roboto, Arial, sans-serif;
-      background: linear-gradient(180deg, var(--bg) 0%, #0e141c 100%);
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at top left, rgba(127, 200, 255, 0.08), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(137, 224, 194, 0.05), transparent 22%),
+        linear-gradient(180deg, var(--bg), #080b10 100%);
       color: var(--text);
+      font-size: 18px;
+      line-height: 1.7;
     }
 
     a {
-      color: var(--accent);
-      text-decoration: none;
+      color: inherit;
     }
 
     a:hover {
@@ -47,51 +55,74 @@
     }
 
     .app {
-      display: grid;
-      grid-template-columns: var(--sidebar-w) 1fr;
+      display: flex;
       min-height: 100vh;
     }
 
     .sidebar {
       position: sticky;
       top: 0;
+      align-self: flex-start;
+      width: var(--sidebar-w);
       height: 100vh;
-      overflow-y: auto;
-      background: linear-gradient(180deg, var(--panel) 0%, var(--panel-3) 100%);
+      padding: 18px;
       border-right: 1px solid var(--border);
-      padding: 22px 18px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)),
+        rgba(9, 13, 18, 0.92);
+      backdrop-filter: blur(10px);
+      overflow-y: auto;
+      flex: 0 0 var(--sidebar-w);
       box-shadow: 8px 0 24px var(--shadow);
+      font-size: 18px;
+    }
+
+    .sidebar-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 18px 40px var(--shadow);
+      padding: 18px;
     }
 
     .sidebar h2 {
-      margin: 0 0 10px 0;
-      font-size: 22px;
-      line-height: 1.2;
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
     }
 
     .sidebar p {
-      margin: 0 0 18px 0;
+      margin: 0 0 14px;
       color: var(--muted);
-      line-height: 1.5;
-      font-size: 14px;
+      line-height: 1.45;
+      font-size: 0.95rem;
     }
 
     .font-controls {
       display: flex;
+      flex-direction: column;
       gap: 8px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
+      margin-bottom: 16px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
     }
 
     .btn {
+      font-family: var(--font-ui);
+      width: 100%;
       background: var(--panel-2);
       color: var(--text);
       border: 1px solid var(--border-strong);
-      padding: 10px 12px;
+      padding: 9px 12px;
       border-radius: 10px;
       cursor: pointer;
-      font-size: 14px;
-      transition: 0.18s ease;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+      text-align: left;
       box-shadow: 0 3px 10px rgba(0,0,0,0.25);
     }
 
@@ -101,31 +132,48 @@
     }
 
     .nav-group {
-      margin: 0 0 18px 0;
-      display: grid;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
       gap: 8px;
+    }
+
+    .nav-divider {
+      height: 1px;
+      margin: 14px 0;
+      background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
     }
 
     .nav-link {
       display: block;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--border);
+      text-decoration: none;
+      padding: 11px 13px;
+      border-radius: 12px;
+      border: 1px solid transparent;
       color: var(--text);
-      padding: 10px 12px;
-      border-radius: 10px;
-      line-height: 1.35;
-      transition: 0.18s ease;
+      background: transparent;
+      transition: 0.2s ease;
+      font-size: 0.98rem;
+      font-family: var(--font-navigation);
     }
 
     .nav-link:hover {
-      border-color: var(--accent);
-      background: rgba(127, 200, 255, 0.06);
+      background: rgba(255,255,255,0.035);
+      border-color: var(--border);
+      color: var(--accent);
+      transform: translateX(2px);
       text-decoration: none;
+    }
+
+    .nav-link.is-main {
+      background: rgba(127, 200, 255, 0.06);
+      border-color: rgba(127, 200, 255, 0.14);
     }
 
     .main {
       width: 100%;
-      padding: 28px 34px 40px;
+      min-width: 0;
+      padding: 26px 24px 70px;
     }
 
     .content {
@@ -348,12 +396,14 @@
 
     @media (max-width: 1100px) {
       .app {
-        grid-template-columns: 1fr;
+        flex-direction: column;
       }
 
       .sidebar {
         position: relative;
         height: auto;
+        width: 100%;
+        flex-basis: auto;
         border-right: none;
         border-bottom: 1px solid var(--border);
       }
@@ -367,28 +417,33 @@
 <body>
   <div class="app">
     <aside class="sidebar">
+      <div class="sidebar-card">
+        <h2>Nawigacja</h2>
+        <p>Szybkie przejścia i ustawienia czytania scenariusza.</p>
 
+        <div class="font-controls">
+          <button class="btn" id="fontPlus">A+ Powiększ tekst</button>
+          <button class="btn" id="fontMinus">A− Pomniejsz tekst</button>
+        </div>
 
-      <div class="font-controls">
-        <button class="btn" id="fontPlus">Rozmiar tekstu ▲</button>
-        <button class="btn" id="fontMinus">Rozmiar tekstu ▼</button>
-      </div>
+        <div class="nav-group">
+          <a class="nav-link is-main" href="#wprowadzenie">Wprowadzenie</a>
+          <a class="nav-link" href="#scena1">Scena 1 — Archiwum Fyodora</a>
+          <a class="nav-link" href="#scena2">Scena 2 — Lot na Charybdion</a>
+          <a class="nav-link" href="#scena3">Scena 3 — Przystań Pokutna</a>
+          <a class="nav-link" href="#scena4">Scena 4 — Klasztor i monstrancja</a>
+          <a class="nav-link" href="#zakonczenie">Zakończenie</a>
+        </div>
 
-      <div class="nav-group">
-        <a class="nav-link" href="#wprowadzenie">Wprowadzenie</a>
-        <a class="nav-link" href="#scena1">Scena 1 — Archiwum Fyodora</a>
-        <a class="nav-link" href="#scena2">Scena 2 — Lot na Charybdion</a>
-        <a class="nav-link" href="#scena3">Scena 3 — Przystań Pokutna</a>
-        <a class="nav-link" href="#scena4">Scena 4 — Klasztor i monstrancja</a>
-        <a class="nav-link" href="#zakonczenie">Zakończenie</a>
-      </div>
+        <div class="nav-divider"></div>
 
-      <div class="nav-group">
-        <a class="nav-link" href="#przeciwnicy">Przeciwnicy</a>
-        <a class="nav-link" href="#npc">NPC</a>
-        <a class="nav-link" href="#ilustracje">Ilustracje</a>
-        <a class="nav-link" href="#handouty">Handouty</a>
-        <a class="nav-link" href="#notatki">Notatki</a>
+        <div class="nav-group">
+          <a class="nav-link" href="#przeciwnicy">Przeciwnicy</a>
+          <a class="nav-link" href="#npc">NPC</a>
+          <a class="nav-link" href="#ilustracje">Ilustracje</a>
+          <a class="nav-link" href="#handouty">Handouty</a>
+          <a class="nav-link" href="#notatki">Notatki</a>
+        </div>
       </div>
     </aside>
 
