@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oko Płomiennej Pomsty</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-2: #111821;
+      --panel: #131b24;
+      --panel-2: #18222d;
+      --panel-3: #0f151d;
+      --text: #dce6f1;
+      --muted: #93a3b5;
+      --accent: #7fc8ff;
+      --accent-2: #89e0c2;
+      --border: #243140;
+      --border-strong: #324557;
+      --shadow: rgba(0, 0, 0, 0.42);
+      --sidebar-w: 290px;
+      --content-font-size: 18px;
+      --font-body: Calibri, Arial, Verdana, Tahoma, "Trebuchet MS";
+      --font-heading: "Trebuchet MS", Verdana, Arial, Tahoma, Calibri;
+      --font-navigation: Verdana, Tahoma, Arial, Calibri, "Trebuchet MS";
+      --font-ui: Tahoma, Verdana, Arial, Calibri, "Trebuchet MS";
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at top left, rgba(127, 200, 255, 0.08), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(137, 224, 194, 0.05), transparent 22%),
+        linear-gradient(180deg, var(--bg), #080b10 100%);
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .app {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+      width: var(--sidebar-w);
+      height: 100vh;
+      padding: 18px;
+      border-right: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)),
+        rgba(9, 13, 18, 0.92);
+      backdrop-filter: blur(10px);
+      overflow-y: auto;
+      flex: 0 0 var(--sidebar-w);
+      box-shadow: 8px 0 24px var(--shadow);
+      font-size: 18px;
+    }
+
+    .sidebar-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 18px 40px var(--shadow);
+      padding: 18px;
+    }
+
+    .sidebar h2 {
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .sidebar p {
+      margin: 0 0 14px;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 0.95rem;
+    }
+
+    .font-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .btn {
+      font-family: var(--font-ui);
+      width: 100%;
+      background: var(--panel-2);
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+      padding: 9px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+      text-align: left;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+    }
+
+    .btn:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .nav-group {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .nav-divider {
+      height: 1px;
+      margin: 14px 0;
+      background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+    }
+
+    .nav-link {
+      display: block;
+      text-decoration: none;
+      padding: 11px 13px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      color: var(--text);
+      background: transparent;
+      transition: 0.2s ease;
+      font-size: 0.98rem;
+      font-family: var(--font-navigation);
+    }
+
+    .nav-link:hover {
+      background: rgba(255,255,255,0.035);
+      border-color: var(--border);
+      color: var(--accent);
+      transform: translateX(2px);
+      text-decoration: none;
+    }
+
+    .nav-link.is-main {
+      background: rgba(127, 200, 255, 0.06);
+      border-color: rgba(127, 200, 255, 0.14);
+    }
+
+    .main {
+      width: 100%;
+      min-width: 0;
+      padding: 26px 24px 70px;
+    }
+
+    .content {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      font-size: var(--content-font-size);
+      line-height: 1.75;
+    }
+
+    h1, h2, h3 {
+      line-height: 1.2;
+      margin-top: 0;
+    }
+
+    h1 {
+      font-size: calc(var(--content-font-size) * 2.1);
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      font-size: calc(var(--content-font-size) * 1.45);
+      margin-top: 34px;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 {
+      font-size: calc(var(--content-font-size) * 1.1);
+      margin-top: 24px;
+      margin-bottom: 10px;
+      color: var(--accent-2);
+    }
+
+    p {
+      margin: 0 0 14px 0;
+    }
+
+    ul, ol {
+      margin: 8px 0 16px 24px;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    blockquote {
+      margin: 14px 0;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.03);
+      border-left: 4px solid var(--accent);
+      color: var(--text);
+      border-radius: 10px;
+    }
+
+    .section-block {
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 22px 18px;
+      margin: 20px 0 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+    }
+
+
+    .ai-instruction-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 22px;
+    }
+
+    .ai-instruction-box {
+      border: 1px solid var(--border);
+      background: rgba(9, 13, 18, 0.88);
+      border-radius: 16px;
+      padding: 12px 14px;
+    }
+
+    .ai-instruction-title {
+      margin: 0 0 6px;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+    }
+
+    .ai-instruction-content {
+      font-size: 1px;
+      line-height: 1.15;
+      color: #9fb0c2;
+      white-space: pre-wrap;
+    }
+
+    .toggle-wrap {
+      margin: 8px 0 14px;
+    }
+
+    .toggle-btn {
+      background: transparent;
+      color: var(--muted);
+      border: none;
+      padding: 0;
+      font-size: 22px;
+      cursor: pointer;
+    }
+
+    .toggle-btn:hover {
+      color: var(--accent);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .materials {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 18px;
+    }
+
+    .materials h4 {
+      margin: 0 0 10px 0;
+      color: var(--accent-2);
+      font-size: 16px;
+    }
+
+    .tag-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .tag-links a {
+      display: inline-block;
+      padding: 7px 10px;
+      border: 1px solid var(--border-strong);
+      border-radius: 999px;
+      background: var(--panel-2);
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .tag-links a:hover {
+      text-decoration: none;
+      border-color: var(--accent);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 14px 0 20px;
+      overflow: hidden;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+    }
+
+    th, td {
+      padding: 14px 14px;
+      text-align: left;
+      vertical-align: top;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      background: var(--panel-2);
+      color: var(--accent-2);
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .stat-btn {
+      display: inline-block;
+      padding: 9px 12px;
+      border-radius: 10px;
+      background: var(--panel-2);
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .stat-btn:hover {
+      text-decoration: none;
+      border-color: var(--accent);
+    }
+
+    .mini-note {
+      color: var(--muted);
+      font-size: 0.92em;
+    }
+
+    .handout, .illustration {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      margin: 14px 0;
+    }
+
+    .handout h4, .illustration h4 {
+      margin: 0 0 10px;
+      color: var(--accent-2);
+    }
+
+    code.inline {
+      background: rgba(255,255,255,0.06);
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-family: Consolas, monospace;
+      font-size: 0.95em;
+    }
+
+    @media (max-width: 1100px) {
+      .app {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        position: relative;
+        height: auto;
+        width: 100%;
+        flex-basis: auto;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .main {
+        padding: 20px 14px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="sidebar-card">
+        <h2>Nawigacja</h2>
+        <p>Szybkie przejścia i ustawienia czytania scenariusza.</p>
+
+        <div class="font-controls">
+          <button class="btn" id="fontPlus">A+ Powiększ tekst</button>
+          <button class="btn" id="fontMinus">A− Pomniejsz tekst</button>
+        </div>
+
+        <div class="nav-group">
+          <a class="nav-link is-main" href="#wprowadzenie">Wprowadzenie</a>
+          <a class="nav-link" href="#scena1">Scena 1 — Archiwum Fyodora</a>
+          <a class="nav-link" href="#scena2">Scena 2 — Lot na Charybdion</a>
+          <a class="nav-link" href="#scena3">Scena 3 — Przystań Pokutna</a>
+          <a class="nav-link" href="#scena4">Scena 4 — Klasztor i monstrancja</a>
+          <a class="nav-link" href="#zakonczenie">Zakończenie</a>
+        </div>
+
+        <div class="nav-divider"></div>
+
+        <div class="nav-group">
+          <a class="nav-link" href="#przeciwnicy">Przeciwnicy</a>
+          <a class="nav-link" href="#npc">NPC</a>
+          <a class="nav-link" href="#ilustracje">Ilustracje</a>
+          <a class="nav-link" href="#handouty">Handouty</a>
+          <a class="nav-link" href="#notatki">Notatki</a>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="content" id="content">
+        <section id="wprowadzenie" class="section-block">
+          <h1>Oko Płomiennej Pomsty</h1>
+
+          <p>Śledczo-horrorowa przygoda do sesji TTRPG w uniwersum Warhammer 40,000, rozgrywana w systemie Gilead przed wydarzeniami z późniejszej przygody Rico. Bohaterowie — sankcjonowany psionik działający dla Inkwizycji oraz Adepta Sororitas z zakonu szpitalniczego, oboje związani z flotą Varoniusa — zostają wciągnięci w sprawę relikwii przechowywanej na Charybdionie. Nie chodzi o jawny kult Chaosu, mutacje ani łatwo rozpoznawalne spaczenie.</p>
+
+          <p>Stawką jest odkrycie, że święty przedmiot został wypaczony nie przez pojedynczy rytuał, lecz przez długie nasiąkanie emocjonalnym osadem paniki, fanatyzmu, cierpienia i przemocy. Relikwia nie odbiera wiary. Przeciwnie — wzmacnia ją w najciemniejszy możliwy sposób: budzi surowość, gniew, pogardę dla słabości i przekonanie, że okrucieństwo jest moralnym obowiązkiem.</p>
+
+          <p>Scenariusz ma też pogłębiać postać Rico. W tej historii pozostaje jeszcze sojusznikiem, ale widzi kolejne przykłady tego, jak imperialna biurokracja ukrywa zło, jak instytucje wolą zachować pozór porządku niż ochronić niewinnych i jak „sprawiedliwość” bywa wymierzana najsłabszym. To jeden z ważnych kroków prowadzących do jego późniejszego pęknięcia.</p>
+
+          <h3>Skrót scenariusza</h3>
+
+          <p>Scenariusz zaczyna się od Rico. To on znajduje bohaterów i mówi, że ma trop prowadzący do dawnego archiwum inkwizytora Fyodora. Potrafi załatwić transport i dotrzeć na miejsce własnym małym shuttle’em, ale nie może obiecać legalnego wejścia. Na asteroidzie, na której mieści się archiwum, sam Fyodor nie jest obecny. Obiekt działa nadal jako zimny, administracyjny grobowiec pełen akt, formularzy, skrybów i pieczęci.</p>
+
+          <p>Na miejscu bohaterowie mogą wejść legalnie dzięki upoważnieniu Strix, wymuszając współpracę personelu archiwum, albo włamać się, pozostawiając ślady, które później mogą wrócić jako problem polityczny lub śledczy. W archiwum odnajdują oficjalne akta relikwii oraz prywatne notatki Alfreda Vossa, który prowadził poboczne śledztwo. Voss nie dowiódł wprost herezji, ale zauważył powtarzalny wzorzec: tam, gdzie pojawia się monstrancja z relikwią, miejscowa ludność staje się bardziej brutalna, bardziej surowa, mniej skłonna do współczucia i bardziej podatna na „konieczną” przemoc.</p>
+
+          <p>Śledztwo prowadzi na Charybdion — skażony świat oceaniczny, ważny militarnie, pokryty czarnymi wodami panoceanu, przemysłowymi łunami i rafineriami prometium. Rico sam pilotuje ten sam transport również tam. W Przystani Pokutnej bohaterowie widzą społeczny cień relikwii: osadę założoną niespełna trzy tygodnie temu do wydobycia materiałów ze zwłok kolosalnej morskiej bestii wyrzuconej na brzeg, wszędzie oblepioną tranem, ściekami i zapachem gnijącego mięsa. Na żebrach potwora i rusztowaniach wiszą setki powieszonych ciał z workami na głowach i tablicami win.</p>
+
+          <p>Finał rozgrywa się w prowizorycznej katedrze zbudowanej całkowicie wewnątrz ciała bestii. Tam przechowywana jest monstrancja z fragmentem kości dłoni Świętego Gheronta Męczennika Bram. Sororitas nie wiedzą o wypaczeniu relikwii i szczerze wierzą, że służą Imperatorowi. Bohaterowie muszą ustalić, czy przekonają siostry do dobrowolnego oddania relikwii, do zamknięcia sanktuarium i wezwania wyższej jurysdykcji, do rytualnego zniszczenia relikwii, czy też sprawa zakończy się konfliktem. Psionik, im bliżej monstrancji, tym silniej czuje narastający gniew i przymus oczyszczenia wszystkiego ogniem. Rico patrzy na to wszystko i wyciąga wnioski, które powrócą później z pełną siłą.</p>
+        </section>
+
+        <section id="scena1" class="section-block">
+          <h2>Scena 1 — Archiwum Fyodora</h2>
+          <p>Otwarcie śledztwa: Rico znajduje bohaterów, przedstawia trop prowadzący do archiwum Fyodora i organizuje podróż. Scena ma ustawić ton całej przygody: instytucjonalny chłód, grozę ukrytą w papierach, poczucie, że prawda nie została pogrzebana przez demony, lecz przez procedury.</p>
+          <p class="mini-note">Ilustracje sceny: <a href="Ilustracje/Archiwum1.png">Archiwum na asteroidzie</a> oraz <a href="Ilustracje/Archiwum2.png">wnętrze archiwum</a>.</p>
+
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-target="scena1-body">▼</button>
+          </div>
+
+          <div id="scena1-body">
+            <h3>Streszczenie sceny</h3>
+            <p>Rico rozpoczyna scenę, mówiąc bohaterom, że ma informacje o dawnym archiwum inkwizytora Fyodora. Może załatwić transport i sam poprowadzi mały imperialny shuttle <strong>Arvus Lighter</strong>, ale nie ma możliwości zagwarantować wejścia do środka. W czasie lotu pod asteroidę odzywa się vox pokładowy z żądaniem identyfikacji pod groźbą zestrzelenia. To od razu pokazuje, że obiekt nie jest opuszczony ani martwy, tylko pilnowany w typowo imperialny sposób — bez widocznej twarzy, za to z gotowością do przemocy.</p>
+
+            <p>Na miejscu bohaterowie mają dwa główne wyjścia. Strix może użyć upoważnienia od swojego inkwizytora, aby wymusić wejście i wgląd do części materiałów. To legalna droga, ale zostawia oficjalny ślad. Drugą opcją jest włamanie: przez kanały serwisowe, systemy archiwalne lub zapomniane przejścia techniczne. To daje większą swobodę, ale niemal na pewno zostawi ślady i może później wywołać kontrolę, przesłuchania albo polityczne konsekwencje.</p>
+
+            <p>Najważniejszym odkryciem tej sceny są notatki Alfreda Vossa. Nie dowodzą wprost chaosyckiego skażenia, lecz pokazują wzorzec: w miejscach, gdzie przez dłuższy czas przebywa monstrancja, rośnie liczba „sprawiedliwych” pobić, okrutnych kar, religijnej surowości i przemocy wymierzanej z pełnym poczuciem moralnej słuszności.</p>
+
+            <h3>Sekcja dla Graczy</h3>
+            <blockquote>
+              <p>Rico dopada was bez ceremonii. Nie wygląda jak człowiek, który niesie dobrą wiadomość. Rzuca tylko:</p>
+              <p><strong>„Mam trop. Archiwum Fyodora. Mogę was tam zabrać. Mogę też was stamtąd zabrać z powrotem. Reszty nie obiecuję.”</strong></p>
+              <p>Transportowiec jest ciasny, stary i praktyczny. Nic w nim nie wygląda efektownie, ale wszystko sprawia wrażenie, jakby już wiele razy wróciło przestrzelone i nadal latało. Gdy zbliżacie się do asteroidy, pokładowy vox ożywa suchym, bezosobowym komunikatem:</p>
+              <p><strong>„Niezidentyfikowany statek, podajcie sygnatury, cel podejścia i autoryzację. Brak odpowiedzi zostanie uznany za akt wrogi. Powtarzam: brak odpowiedzi zostanie uznany za akt wrogi.”</strong></p>
+              <p>Samo archiwum Fyodora bardziej przypomina grób niż miejsce pracy. Wysokie hale z regałami, metalowe szafy, święte pieczęcie, czerwone lampki, zapach oleju, kurzu, kadzidła i starzejącego się papieru. Wszystko tu mówi: ktoś bardzo chciał, żeby wiedza przetrwała. I równie bardzo chciał, żeby nie była łatwo dostępna.</p>
+              <p>W ciszy między rzędami regałów słyszycie tylko własny oddech i odległe buczenie systemów podtrzymania. Każda teczka wydaje się cięższa, niż powinna, jakby niosła nie tylko raporty, ale też winę ludzi, którzy je podpisali i odłożyli na półkę.</p>
+            </blockquote>
+
+            <p><strong>Jak grać Rico w tej scenie:</strong> ma być konkretny, rzeczowy i lekko spięty. Nie buduje nastroju ozdobnym językiem, tylko rzuca prostymi zdaniami. W archiwum nie interesują go wielkie symbole, tylko ludzie, którzy zginęli pod papierami.</p>
+
+            <p><strong>Rico przy przeszukiwaniu akt:</strong> kiedy bohaterowie grzebią w dokumentach, Rico bardziej niż symbole interesuje się tym, kto cierpiał, kto zniknął i kto próbował coś zgłosić, a potem został zignorowany.</p>
+
+            <ul>
+              <li>„Kolejny raport. Kolejna pieczęć. Kolejny trup, którego nikt nie policzył naprawdę.”</li>
+              <li>„Tu nie ma bałaganu. Tu jest porządek. Tylko zbudowany na cudzej krwi.”</li>
+              <li>„Zło ukryło się pod stertą biurokracji.”</li>
+              <li>„Ten pisał, że ostrzegał trzy razy. I co? Nic. Formularz przyjęto. Człowieka już nie.”</li>
+              <li>„Nie szukam herezji. Szukam chwili, kiedy ktoś uznał, że cierpienie zwykłych ludzi nie jest już pilne.”</li>
+            </ul>
+
+            <p><strong>Cywilni pracownicy Fyodora:</strong></p>
+            <ul>
+              <li><strong>Skryba-archiwista Merovan</strong> — chudy, przygarbiony, z drżącymi dłońmi i tuszem na palcach; zna stare sygnatury, ale panicznie boi się odpowiedzialności.</li>
+              <li><strong>Rejestratorka Sibel Quarn</strong> — kobieta po pięćdziesiątce, surowa, idealnie uczesana, z implantem optycznym; mówi językiem procedur i pieczęci.</li>
+              <li><strong>Magazynier-pieczętnik Orel Dast</strong> — niski, szeroki w barkach, z poparzoną dłonią; zna transporty, skrzynie i ciągi serwisowe.</li>
+              <li><strong>Kustoszka-adeptka Lysa Morven</strong> — młoda i zbyt gorliwa urzędniczka; jeszcze nie nauczyła się pełnej obojętności i może okazać się pomocna.</li>
+            </ul>
+
+            <h3>Scena Krok-po-kroku</h3>
+            <ol>
+              <li>Rico odnajduje bohaterów i przedstawia trop prowadzący do archiwum Fyodora.</li>
+              <li>Wyjaśnia, że ma transport i sam go pilotuje, ale nie ma jak załatwić legalnego wejścia.</li>
+              <li>W trakcie podejścia do asteroidy vox żąda identyfikacji pod groźbą zestrzelenia.</li>
+              <li>Bohaterowie decydują, czy Strix używa upoważnienia swojego inkwizytora, czy próbują włamania.</li>
+              <li>We wnętrzu archiwum spotykają personel administracyjny Fyodora: ludzi zmęczonych, przestraszonych i nauczonych posłuszeństwa.</li>
+              <li>Odnajdują oficjalne akta relikwii, rejestry translacji i wpisy o lokalnych incydentach.</li>
+              <li>Znajdują nieautoryzowany pakiet materiałów Alfreda Vossa.</li>
+              <li>Z notatek wynika, że problemem może być sama relikwia lub monstrancja, a nie kult zewnętrzny.</li>
+              <li>Bohaterowie zdobywają nazwę miejsca: Charybdion, i schemat wzrostu przemocy w pobliżu relikwii.</li>
+              <li>Rico zapamiętuje, że kolejny raz prawda została niemal pogrzebana nie przez wroga z zewnątrz, lecz przez własny aparat Imperium.</li>
+            </ol>
+
+            <div class="materials">
+              <h4>Powiązane materiały</h4>
+              <div class="tag-links">
+                <a href="#h1">H1</a>
+                <a href="#h2">H2</a>
+              </div>
+              <div class="tag-links">
+                <a href="#il1">IL1</a>
+                <a href="#il2">IL2</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="scena2" class="section-block">
+          <h2>Scena 2 — Lot na Charybdion</h2>
+          <p>Scena rozwija śledztwo przez zmianę miejsca i skali. Bohaterowie opuszczają sterylne, martwe archiwum i lecą w samo serce problemu — na świat, gdzie wpływ relikwii dawno przestał być teorią.</p>
+          <p class="mini-note">Ilustracja sceny: <a href="Ilustracje/Charybdion.png">Charybdion z orbity</a>.</p>
+
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-target="scena2-body">▼</button>
+          </div>
+
+          <div id="scena2-body">
+            <h3>Streszczenie sceny</h3>
+            <p>Rico pilotuje ten sam <strong>Arvus Lighter</strong> na Charybdion. To ważne, by podkreślić ciągłość: nie pojawia się nowy, wygodny środek lokomocji, tylko to samo praktyczne, trochę zbyt małe i nieprzyjemnie realne narzędzie pracy. W czasie lotu bohaterowie analizują notatki Alfreda Vossa i zaczynają rozumieć, że relikwia nie wywołuje typowych objawów skażenia. Ona raczej podkręca w ludziach gotowość do „tego, co konieczne”.</p>
+
+            <p>Ta scena powinna też zacząć wyraźniej pracować na psionika. Jeszcze z daleka czuje on nie obecność demona, lecz emocjonalne tarcie: wzrost irytacji, krótszy oddech, niechęć do słabości, niebezpiecznie łatwą zgodę na przemoc jako rozwiązanie. To nie jest krzyk Osnowy. To jest podszept słusznego gniewu.</p>
+
+            <h3>Sekcja dla Graczy</h3>
+            <blockquote>
+              <p>Charybdion wygląda z góry jak świat, który dawno temu przestał być miejscem do życia, a stał się miejscem do przetrwania. Czarne wody panoceanu połyskują martwo pod warstwą chmur. Widać łuny przemysłu, smugi zanieczyszczeń i konstrukcje, które trzymają się skał, platform i trupów wielkich morskich bestii bardziej siłą uporu niż architektury.</p>
+              <p>W kabinie transportowca wszystko drży lekko pod pracą silników. Rico siedzi za sterami jak człowiek, który ufa tylko rzeczom prostym, ciężkim i sprawdzonym. Nie odwraca wzroku od przyrządów, kiedy mówi:</p>
+              <p><strong>„Nie szukajcie ludzi, którzy wyglądają jak heretycy. Szukajcie ludzi, którzy są pewni, że okrucieństwo to cnota.”</strong></p>
+              <p>Dla psionika droga staje się coraz bardziej nieprzyjemna. Z początku to tylko swędząca drażliwość. Potem przychodzi obraz ognia. Nie takiego, który grzeje. Takiego, który oczyszcza. Pojawia się nagła, nieproszona myśl, że może najprościej byłoby spalić to miejsce do fundamentów, zanim zło zdąży się roznieść dalej.</p>
+            </blockquote>
+
+            <p><strong>Jak grać Rico w tej scenie:</strong> skupiony, oszczędny w słowach, praktyczny. Gdy rozmowa schodzi na dokumenty, może rzucić: <strong>„Zło ukryło się pod stertą biurokracji. A teraz siedzi na końcu tej sterty i modli się głośniej od reszty.”</strong></p>
+
+            <h3>Scena Krok-po-kroku</h3>
+            <ol>
+              <li>Rico przygotowuje shuttle do lotu i sam prowadzi bohaterów na Charybdion.</li>
+              <li>W trakcie podróży bohaterowie analizują notatki Alfreda Vossa.</li>
+              <li>Psionik zaczyna odczuwać pierwsze subtelne objawy wpływu relikwii: gniew, skrócony osąd, myśli o oczyszczeniu przemocą.</li>
+              <li>Bohaterowie obserwują z góry przemysłowe łuny, czarne wody i martwy krajobraz Charybdionu.</li>
+              <li>Rico podkreśla, że problem może wyglądać z zewnątrz jak pobożny porządek.</li>
+              <li>Transport schodzi do lądowania przy Przystani Pokutnej.</li>
+            </ol>
+
+            <div class="materials">
+              <h4>Powiązane materiały</h4>
+              <div class="tag-links">
+                <a href="#h2">H2</a>
+              </div>
+              <div class="tag-links">
+                <a href="#il3">IL3</a>
+                <a href="#il4">IL4</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="scena3" class="section-block">
+          <h2>Scena 3 — Przystań Pokutna</h2>
+          <p>Scena społecznego horroru. Bohaterowie trafiają do miejsca, które nie jest gniazdem heretyków, tylko wspólnotą ludzi poddanych długiej, codziennej ekspozycji na wypaczoną świętość.</p>
+          <p class="mini-note">Ilustracje sceny: <a href="Ilustracje/Osada5.png">Przystań Pokutna z oddali</a> oraz <a href="Ilustracje/Osada6.png">widok osady z wnętrza ryby</a>.</p>
+
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-target="scena3-body">▼</button>
+          </div>
+
+          <div id="scena3-body">
+            <h3>Streszczenie sceny</h3>
+            <p>Przystań Pokutna powstała niespełna trzy tygodnie temu w ciele i wokół ciała kolosalnej morskiej bestii wyrzuconej na brzeg, aby wydobywać z jej zwłok użyteczne materiały. To miejsce ma być odrażające, ciężkie i wilgotne. Wszędzie jest tran: na deskach, linach, rusztowaniach, kamieniach, ubraniach, poręczach i dłoniach ludzi. W powietrzu miesza się odór czarnej wody skażonej ściekami z fabryk w głębi, zapach rozkładającego się mięsa lewiatana, dymu, paliwa, mokrego drewna i świętych świec.</p>
+
+            <p>Najmocniej ma wybrzmieć widok setek powieszonych ciał. Wiszą na żebrach bestii, na poprzecznych belkach, na rusztowaniach i pomostach. Głowy mają zakryte workami. Ręce związane z tyłu. Na szyjach dyndają deski z nazwami win: „Bluźnierca”, „Złodziej”, „Kłamca”, „Tchórz”, „Podżegacz”, „Plugawy”, „Szabrownik”, „Rozsiewca paniki”. Nikt nie patrzy na te ciała z przerażeniem. Miejscowi patrzą z przyzwyczajeniem.</p>
+
+            <p>scena pokazuje pośredni lub zróżnicowany poziom ekspozycji wśród świeckich, wyraźnie słabszy niż w klasztorze, ale utrwalony społecznie. Cywile, zakonnicy i Sororitas układają się w klarowną drabinę nasilenia objawów</p>
+
+            <h3>Sekcja dla Graczy</h3>
+            <blockquote>
+              <p>Przystań Pokutna uderza najpierw zapachem. Czuć ścieki spuszczane z fabryk gdzieś dalej w głębi wybrzeża. Czuć gnijące mięso morskiego potwora, w którego trzewiach i między żebrami zbudowano domy, pomosty i warsztaty. Czuć tran — tłusty, lepki, stary — wszędzie. Na deskach pod butami. Na linach. Na poręczach. Na ścianach. Na twarzach ludzi, jakby samo miejsce pociło się rozkładem.</p>
+              <p>Potem widzicie ciała.</p>
+              <p>Setki. Powieszone wysoko na żebrach bestii i na rusztowaniach. Każde z workiem na głowie. Każde ze związanymi rękami. Każde z deską na szyi, na której wymalowano winę: „Bluźnierca”. „Złodziej”. „Kłamca”. „Tchórz”. „Podżegacz”.</p>
+              <p>Nikt tu nie odwraca wzroku.</p>
+              <p>Ludzie mówią spokojnie, pracują ciężko i patrzą na was z mieszaniną nieufności i gotowości do osądu. Nie ma w nich ślepego szału. Jest coś gorszego — przekonanie, że wszystko to jest słuszne.</p>
+              <p>W tej osadzie nie czuć chaosu tłumu. Czuć rytuał. Ktoś ostrzy hak, ktoś liczy beczki tranu, ktoś poprawia tablicę z wyrokiem, a wszyscy robią to z tym samym spokojem, z jakim gdzie indziej odmawia się wieczorną modlitwę.</p>
+            </blockquote>
+
+            <p><strong>Jak odgrywać cywili — krótka ekspozycja:</strong></p>
+            <ul>
+              <li>pewniejszy ton niż sytuacja uzasadnia,</li>
+              <li>mniejsza tolerancja dla sprzeciwu,</li>
+              <li>szybkie moralne oceny,</li>
+              <li>większa gotowość do potępienia niż pomocy,</li>
+              <li>przekonanie, że „kto cierpi, ten może jeszcze zostać naprawiony”.</li>
+            </ul>
+
+            <p><strong>Przykładowe kwestie cywili:</strong></p>
+            <ul>
+              <li>„Nie każdy zasługuje na miękkość.”</li>
+              <li>„Jak człowiek jest słaby, to trzeba go wyprostować.”</li>
+              <li>„Ból jeszcze nikogo nie zepsuł. Strach i pobłażanie — owszem.”</li>
+              <li>„Dla jego dobra dostał lanie. Lepiej od ojca niż od życia.”</li>
+            </ul>
+
+            <p><strong>Wyglądy cywili:</strong></p>
+            <ul>
+              <li>rybak z twarzą popękaną od soli i smogu, w płaszczu nasiąkniętym tranem,</li>
+              <li>wychudzona matka o twardych oczach, z modlitewnym sznurem oplecionym wokół nadgarstka,</li>
+              <li>chłopiec z ogoloną głową i śladami po karach na dłoniach, zbyt poważny jak na swój wiek,</li>
+              <li>robotnik portowy z hakiem do lin, poparzonym przedramieniem i tabliczką pokutną na piersi.</li>
+            </ul>
+
+            <p><strong>Jak grać Rico w tej scenie:</strong> ma reagować na cierpienie zwykłych ludzi szybciej niż na teologię miejsca. Niech pyta rannych, niech patrzy na powieszonych, niech złości się coraz bardziej, ale jeszcze bez wybuchu.</p>
+
+            <ul>
+              <li>„To nie wygląda jak porządek. To wygląda jak miejsce, gdzie ktoś pomylił dyscyplinę z rzezią.”</li>
+              <li>„Jak system wiesza setki własnych ludzi i dalej mówi o zbawieniu, to przestaję wierzyć, że wie, co robi.”</li>
+              <li>„Najgorsze jest to, że oni naprawdę myślą, że robią dobrze.”</li>
+            </ul>
+
+            <h3>Scena Krok-po-kroku</h3>
+            <ol>
+              <li>Bohaterowie lądują w Przystani Pokutnej.</li>
+              <li>Uderza ich smród ścieków, rozkładu i tranu oraz widok tymczasowej osady zbudowanej w ciele bestii.</li>
+              <li>Zauważają setki powieszonych ciał z tablicami przewin.</li>
+              <li>Rozmawiają z mieszkańcami i widzą, że przemoc jest tu traktowana jak forma moralnej higieny.</li>
+              <li>Psionik odczuwa wzrost irytacji i myśl, że to miejsce należy oczyścić ogniem.</li>
+              <li>Bohaterowie zdobywają relacje o procesjach z monstrancją i o tym, że po jej pobycie ludzie stają się „twardsi”, „czyści”, „mniej słabi”.</li>
+              <li>Rico coraz wyraźniej widzi, że system karze własnych ludzi szybciej, niż ich chroni.</li>
+              <li>Trop prowadzi bohaterów do klasztoru wewnątrz bestii.</li>
+            </ol>
+
+            <div class="materials">
+              <h4>Powiązane materiały</h4>
+              <div class="tag-links">
+                <a href="#h3">H3</a>
+                <a href="#n1">N1</a>
+              </div>
+              <div class="tag-links">
+                <a href="#il4">IL4</a>
+                <a href="#il5">IL5</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="scena4" class="section-block">
+          <h2>Scena 4 — Klasztor i monstrancja</h2>
+          <p>Finał śledztwa. Bohaterowie docierają do miejsca autentycznej czci, które zostało wypaczone nie wbrew wierze, lecz poprzez nią.</p>
+          <p class="mini-note">Ilustracje sceny: <a href="Ilustracje/Katerda5.png">katedra z zewnątrz</a>, <a href="Ilustracje/Katedra7.png">wnętrze katedry</a> i <a href="Ilustracje/Monstrancja_Szkic.png">szkic monstrancji</a>.</p>
+
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-target="scena4-body">▼</button>
+          </div>
+
+          <div id="scena4-body">
+            <h3>Streszczenie sceny</h3>
+            <p>Klasztor znajduje się w całości wewnątrz ciała bestii. Prowizoryczne ściany, blachy i belki stylizowane na gotycką architekturę zostały wbudowane w organiczną jamę żeber i ciemnych, wilgotnych tkanek. Cała konstrukcja jest tymczasowa: po zakończeniu wydobycia z lewiatana katedra ma zostać rozebrana razem z większością osady. Z góry kapie tran i ciecz z rozkładającego się wnętrza. Na kamieniach lśnią tłuste smugi. Światło świec i lamp miesza się z mdłym połyskiem wilgoci. To ma wyglądać jak miejsce święte, ale osaczone przez martwe ciało świata, który sam stał się relikwiarzem.</p>
+
+            <p>Przechowywana tutaj monstrancja zawiera fragment kości dłoni <strong>Świętego Gheronta Męczennika Bram</strong>, beatyfikowanego bohatera subsektora. Za życia zasłynął z tego, że podczas oblężenia schronił tysiące cywilów w sanktuarium i przez wiele dni powstrzymywał ich przed paniką, buntem i wzajemnym mordowaniem się. Według legend chodził między rannymi, uciszał rozjuszone tłumy samą obecnością, nakazywał trwać, modlić się i nie poddawać zwierzęcemu strachowi, aż zginął przy bramie świątyni, broniąc wejścia przed nieokreślonymi xenosami.</p>
+
+            <p>Po jego śmierci uznano, że kości niosą spokój, odwagę i dyscyplinę ducha. Dlatego fragment szczątków zamknięto w bogatej monstrancji-relikwiarzu i przez pokolenia wynoszono ją podczas zamieszek, epidemii, oblężeń i kryzysów moralnych. Ludzie wierzyli, że sama obecność relikwii uspokaja tłum. I przez długi czas tak było.</p>
+
+            <p>Ale przez stulecia monstrancję noszono wszędzie tam, gdzie ludzie byli na granicy: podczas pogromów, buntów głodowych, procesji pokutnych pośród wojny i zarazy. Relikwia, która miała nieść opanowanie, nasiąkła tysiącami lat fanatyzmu, strachu i przemocy. Powstanie Wielkiej Wyrwy wzmocniło jej działanie, dlatego od około trzech lat efekt stał się zauważalnie silniejszy.</p>
+
+            <p><strong>Etapy oddziaływania relikwii:</strong></p>
+            <ul>
+              <li><strong>Krótka ekspozycja:</strong> poczucie niezwykłej pewności siebie, ustanie drżenia rąk, gotowość „zrobienia tego, co konieczne”, trudność w tolerowaniu sprzeciwu.</li>
+              <li><strong>Dłuższa ekspozycja:</strong> rozdrażnienie, przekonanie, że inni są słabi, kłamliwi albo skażeni, fanatyczne uproszczenie moralności, przemoc jako „oczyszczenie”.</li>
+              <li><strong>Długa ekspozycja:</strong> obsesja zdrady i czystości, sny o oblężeniu, krwi i płonących bramach, słyszenie w modlitwach rozkazów do działania, akty brutalności popełniane z poczuciem absolutnej słuszności.</li>
+            </ul>
+
+            <p>To scena pokazująca trzy warstwy ludzi pod wpływem relikwii: <strong>cywile</strong> z osady — krótka ekspozycja, <strong>zakonnicy</strong> — dłuższa ekspozycja, <strong>Sororitas</strong> noszące i strzegące monstrancji — długa ekspozycja. Ważne: Sororitas nie wiedzą o wypaczeniu relikwii. One naprawdę uważają, że robią dobrze.</p>
+
+            <h3>Sekcja dla Graczy</h3>
+            <blockquote>
+              <p>Klasztor nie stoi obok bestii. On tkwi w niej jak prowizoryczny cierń wbity w martwe wnętrze lewiatana. Nad głowami wznoszą się łuki żeber i ciemne, tłuste sklepienie organicznej jamy. Z góry kapie tran. Spływa po kamieniu, po schodach, po posągach i po świętych symbolach, jakby samo miejsce stale pociło się śmiercią.</p>
+              <p>Modlitwy rozbrzmiewają szczerze. To nie jest dom heretyków. To miejsce autentycznej wiary. Właśnie dlatego jest tak niebezpieczne.</p>
+              <p>Monstrancja lśni ciepłym złotem. Jej środek kryje relikwię za szkłem i światłem. Jest piękna. Dostojna. Kojąca dla oka. A jednak im dłużej na nią patrzycie, tym mniej pamiętacie o łagodności. Łatwiej pomyśleć o karze. O ogniu. O obowiązku. O tym, że wszystko, co słabe, należy wyprostować albo spalić.</p>
+              <p>Dla psionika to uderza jak fala. Nie słyszy on demona. Czuje za to rosnący gniew i narastającą, niemal świętą chęć spalenia całej tej okolicy, żeby oczyścić ją ze zła.</p>
+            </blockquote>
+
+            <p><strong>Jak odgrywać zakonników — dłuższa ekspozycja:</strong></p>
+            <ul>
+              <li>surowe, spokojne przekonanie,</li>
+              <li>częste mówienie o czystości, karności i potrzebie cierpienia,</li>
+              <li>skłonność do interpretowania wątpliwości jako skażenia,</li>
+              <li>paternalistyczne okrucieństwo.</li>
+            </ul>
+
+            <ul>
+              <li>„Miłosierdzie bez karności jest tylko inną formą zepsucia.”</li>
+              <li>„Nie każdy ból jest złem. Czasem ból jest łaską.”</li>
+              <li>„Jeśli człowiek buntuje się przeciw oczyszczeniu, buntuje się przeciw własnemu zbawieniu.”</li>
+            </ul>
+
+            <p><strong>Wyglądy zakonników:</strong></p>
+            <ul>
+              <li>wychudzony brat z żółtawymi oczami, dłońmi poplamionymi atramentem i tłuszczem lamp,</li>
+              <li>siostra-klasztorna o ascetycznej twarzy, z bliznami po samobiczowaniu ukrytymi pod welonem,</li>
+              <li>stary kapelan z oddechem pachnącym kadzidłem i krwią z popękanych ust.</li>
+            </ul>
+
+            <p><strong>Jak odgrywać Sororitas — długa ekspozycja:</strong></p>
+            <ul>
+              <li>pełna dyscyplina, ale z cieniem obsesji,</li>
+              <li>bezwzględna czujność,</li>
+              <li>silna potrzeba działania,</li>
+              <li>trudność w akceptacji niejednoznaczności,</li>
+              <li>modlitwy brzmiące jak rozkazy.</li>
+            </ul>
+
+            <ul>
+              <li>„Wątpliwość to szczelina, przez którą wchodzi skażenie.”</li>
+              <li>„Jeżeli relikwia czyni nas twardszymi, to dlatego, że czasy wymagają twardości.”</li>
+              <li>„Łaska Imperatora nie jest miękka.”</li>
+            </ul>
+
+            <p><strong>Wyglądy Sororitas:</strong></p>
+            <ul>
+              <li>starsza siostra o ostrych rysach, oczach podkrążonych brakiem snu i dłoniach stale zaciśniętych na różańcu bojowym,</li>
+              <li>wojownicza opiekunka relikwiarza z białymi bliznami na szyi i głosie twardym jak rozkaz,</li>
+              <li>pielgrzymująca siostra z przetartym płaszczem, zabryzganym tranem pancerzem i wzrokiem człowieka, który od dawna śni tylko o płonących bramach.</li>
+            </ul>
+
+            <h3>Jak przekonać Sororitas</h3>
+            <ol>
+              <li><strong>Autorytet Inkwizycji:</strong> Strix może powołać się na upoważnienie swojego inkwizytora i zażądać tymczasowego zabezpieczenia relikwii jako potencjalnego przedmiotu skażenia lub nieczystego oddziaływania duchowego.</li>
+              <li><strong>Apel do obowiązku Sororitas wobec czystości wiary:</strong> gracz będący Sororitas może przemawiać nie jako oskarżyciel, lecz jako siostra ostrzegająca inne siostry przed nieświadomym służeniem wypaczeniu.</li>
+              <li><strong>Argument opieki nad relikwiami:</strong> prawdziwa służba świętości może wymagać odosobnienia, badania, a w razie potwierdzenia skażenia także rytualnego zniszczenia lub zapieczętowania relikwii.</li>
+              <li><strong>Dowody zamiast oskarżeń:</strong> zestawienie notatek Alfreda Vossa, raportów wzrostu przemocy, obrazu osady oraz reakcji psionika może dać siostrom moment pęknięcia.</li>
+              <li><strong>Argument honoru i uniknięcia większego skandalu:</strong> lepiej, by same odsunęły relikwię i wezwały wyższą jurysdykcję, niż dopuściły, by sprawę przejęły brutalniejsze struktury.</li>
+              <li><strong>Dobrowolne zniszczenie jako ofiara, nie bluźnierstwo:</strong> jeśli bohaterowie mocno podkreślą, że to nie Gheront jest winny, tylko to, co przez wieki obrosło jego szczątki, część sióstr może uznać zniszczenie za bolesny, ale konieczny akt oczyszczenia.</li>
+            </ol>
+
+            <h3>Scena Krok-po-kroku</h3>
+            <ol>
+              <li>Bohaterowie wchodzą do klasztoru i widzą, że jest w całości wbudowany we wnętrze martwej bestii.</li>
+              <li>Psionik zaczyna wyraźnie odczuwać gniew i myśli o oczyszczeniu wszystkiego ogniem.</li>
+              <li>Bohaterowie rozmawiają z przeoryszą, kapelanem i siostrami strzegącymi relikwii.</li>
+              <li>Dostrzegają trzy stopnie oddziaływania relikwii: cywile, zakonnicy, Sororitas.</li>
+              <li>Konfrontują siostry z notatkami Alfreda Vossa i relacjami z Przystani Pokutnej.</li>
+              <li>Strix może użyć autorytetu Inkwizycji, a gracz Sororitas może odwołać się do honoru, czystości i odpowiedzialności Zakonu.</li>
+              <li>Bohaterowie muszą zdecydować: zabezpieczyć relikwię, zapieczętować, zniszczyć, ukryć prawdę albo odejść.</li>
+              <li>W razie niepowodzenia rozmów może dojść do konfliktu z siostrami lub rozjuszonymi wiernymi, ale walka ma być skutkiem, a nie celem.</li>
+              <li>Rico obserwuje finał i widzi, jak Imperium obchodzi się z prawdą, świętością i własnymi obywatelami.</li>
+            </ol>
+
+            <div class="materials">
+              <h4>Powiązane materiały</h4>
+              <div class="tag-links">
+                <a href="#h3">H3</a>
+                <a href="#n1">N1</a>
+                <a href="#n2">N2</a>
+              </div>
+              <div class="tag-links">
+                <a href="#il6">IL6</a>
+                <a href="#il7">IL7</a>
+                <a href="#il8">IL8</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="zakonczenie" class="section-block">
+          <h2>Zakończenie</h2>
+          <p>Finał ma być gorzki. Nawet pełen sukces nie cofa szkód. Relikwia mogła deprawować ludzi przez lata, a może pokolenia. Zniszczenie jej może ocalić przyszłość, ale nie uzdrowi natychmiast tych, którzy już nauczyli się czcić przemoc. Zabezpieczenie relikwii może uratować wiarę instytucji, ale zostawić otwarte pytanie, czy problem po prostu nie zostanie schowany w innym archiwum.</p>
+
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-target="zakonczenie-body">▼</button>
+          </div>
+
+          <div id="zakonczenie-body">
+            <h3>Streszczenie zakończenia</h3>
+            <p>Niezależnie od wariantu finału warto wyraźnie zaznaczyć kilka rzeczy:</p>
+            <ul>
+              <li>notatki Alfreda Vossa były prawdziwe, choć ostrożne,</li>
+              <li>relikwia naprawdę jest wypaczona wpływem Osnowy, ale w sposób subtelny i zdradliwy,</li>
+              <li>Sororitas nie służyły świadomie złu,</li>
+              <li>Rico wynosi z tej sprawy coraz silniejsze przekonanie, że Imperium częściej chroni własne procedury niż własnych ludzi.</li>
+            </ul>
+
+            <p><strong>Możliwe warianty finału:</strong></p>
+            <ul>
+              <li><strong>Zabezpieczenie relikwii</strong> — bohaterowie przejmują monstrancję w imieniu Inkwizycji lub doprowadzają do jej dobrowolnego wydania przez siostry.</li>
+              <li><strong>Rytualne zapieczętowanie</strong> — klasztor zostaje zamknięty, relikwia odizolowana, a kult przerwany do czasu werdyktu wyższej jurysdykcji.</li>
+              <li><strong>Zniszczenie relikwii</strong> — najskuteczniej odcina źródło wpływu, ale może zostać uznane za świętokradztwo.</li>
+              <li><strong>Ukrycie prawdy</strong> — chroni instytucje, ale pozwala, by problem odrodził się gdzie indziej.</li>
+              <li><strong>Rozłam w klasztorze</strong> — część sióstr uznaje argumenty bohaterów, część nie, co tworzy bolesny finał.</li>
+            </ul>
+
+            <p><strong>Pomost do kolejnej przygody z Rico:</strong> po wszystkim Rico może długo patrzeć na powieszonych w osadzie albo na miejsce, gdzie stała monstrancja, i powiedzieć: <strong>„Mówią, że to wszystko dla porządku. Ale ja coraz częściej widzę, że ten porządek żywi się tymi, których miał chronić.”</strong></p>
+          </div>
+        </section>
+
+        <section id="przeciwnicy" class="section-block">
+          <h2>Przeciwnicy</h2>
+          <p>Sekcja na listę przeciwników występujących w scenariuszu oraz miejsce na przyszłe odnośniki do zewnętrznych plików ze statystykami.</p>
+
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-target="przeciwnicy-body">▼</button>
+          </div>
+
+          <div id="przeciwnicy-body">
+            <h3>Tabela przeciwników</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nazwa</th>
+                  <th>Opis</th>
+                  <th>Statystyki</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Rozjuszeni wierni / pielgrzymi</td>
+                  <td>Zwykli ludzie pod wpływem relikwii. Walczą nie z nienawiści, ale z przeświadczenia, że wykonują święty obowiązek.</td>
+                  <td><a class="stat-btn" href="#">Otwórz statystyki</a></td>
+                </tr>
+                <tr>
+                  <td>Siostry strażniczki relikwiarza</td>
+                  <td>Nie są heretyczkami. Są wiernymi obrończyniami świętości, które mogą uznać przemoc za jedyną właściwą odpowiedź.</td>
+                  <td><a class="stat-btn" href="#">Otwórz statystyki</a></td>
+                </tr>
+                <tr>
+                  <td>Fanatyczni zakonnicy i pokutnicy</td>
+                  <td>Obsługa klasztoru, kapelani, pomocnicy i pielgrzymi o przedłużonej ekspozycji. Bardziej groźni mentalnie niż fizycznie, ale skłonni do zbiorowej przemocy.</td>
+                  <td><a class="stat-btn" href="#">Otwórz statystyki</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="npc" class="section-block">
+          <h2>NPC — Postacie niezależne</h2>
+          <p>Sekcja na najważniejsze osoby występujące w scenariuszu: ich wygląd, rolę, wiedzę, funkcję fabularną oraz sposób, w jaki wpływają na działania graczy.</p>
+
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-target="npc-body">▼</button>
+          </div>
+
+          <div id="npc-body">
+            <h3>Tabela NPC</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nazwa</th>
+                  <th>Wygląd</th>
+                  <th>Rola</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Rico Williams</td>
+                  <td>Twarz zmęczona, spojrzenie praktyczne, głos krótki i konkretny. Nosi się funkcjonalnie, bez ozdób, z człowieczą nieufnością wobec wielkich słów.</td>
+                  <td>Sojusznik, pilot, człowiek od rzeczy realnych. W tej przygodzie coraz mocniej widzi, jak Imperium traktuje własnych obywateli i jak łatwo świętość staje się narzędziem okrucieństwa.</td>
+                </tr>
+                <tr>
+                  <td>Skryba-archiwista Merovan</td>
+                  <td>Chudy, przygarbiony administratumczyk o drżących dłoniach, podkrążonych oczach i głosie człowieka, który za długo szeptał między regałami.</td>
+                  <td>Wie, gdzie leżą stare sygnatury Fyodora i czego nie powinno się ruszać. Można go złamać autorytetem, uspokoić obietnicą ochrony albo przestraszyć konsekwencjami.</td>
+                </tr>
+                <tr>
+                  <td>Rejestratorka Sibel Quarn</td>
+                  <td>Surowa kobieta po pięćdziesiątce, idealnie uczesana, z implantem optycznym i łańcuszkiem identyfikacyjnym noszonym jak znak kapłański.</td>
+                  <td>Twarz biurokracji archiwum. Uprzejma tylko formalnie. Nie zadaje pytań o moralność, tylko o pieczęcie, zakres uprawnień i odpowiedzialność podpisu.</td>
+                </tr>
+                <tr>
+                  <td>Magazynier-pieczętnik Orel Dast</td>
+                  <td>Niski, szeroki w barkach, z tłustym fartuchem roboczym i poparzoną dłonią. Mówi mało.</td>
+                  <td>Może wskazać transporty relikwii, skrzynie depozytowe i stare korytarze serwisowe. Najlepiej reaguje na prostą rozmowę i konkret.</td>
+                </tr>
+                <tr>
+                  <td>Kustoszka-adeptka Lysa Morven</td>
+                  <td>Młoda, zbyt gorliwa urzędniczka o twarzy jeszcze niezużytej przez archiwum. Włosy krótko przycięte, głos twardy z lęku, nie z pewności.</td>
+                  <td>Wierzy w procedury, ale jeszcze nie nauczyła się całkiem obojętności. Może okazać się pomocna, jeśli bohaterowie pokażą jej, że sprawa naprawdę dotyczy zagrożenia, a nie walki o wpływy.</td>
+                </tr>
+                <tr>
+                  <td>Siostra-przełożona Helewise</td>
+                  <td>Wysoka, wychudzona, o ascetycznej twarzy, ciemnych cieniach pod oczami i głosie spokojnym jak werdykt.</td>
+                  <td>Opiekunka klasztoru. Nie jest zła. Szczerze wierzy, że relikwia hartuje ducha, obnaża słabość i uzdalnia wiernych do poświęcenia. Może dać się przekonać tylko argumentem czystości wiary, obowiązku i odpowiedzialności.</td>
+                </tr>
+                <tr>
+                  <td>Brat-kapelan Odran</td>
+                  <td>Starszy mężczyzna o woskowej cerze, popękanych ustach i oczach człowieka, który dawno przestał odpoczywać.</td>
+                  <td>Najlepiej wyraża teologię wypaczonej surowości. Uważa, że cierpienie prostuje duszę, a miękkość sprzyja zepsuciu.</td>
+                </tr>
+                <tr>
+                  <td>Siostra Relikwiariuszka Sabeth</td>
+                  <td>Starsza Sororitas odpowiedzialna za przygotowanie monstrancji do procesji. Pancerz ma stary, wielokrotnie naprawiany, dłonie pokryte siecią cienkich blizn.</td>
+                  <td>NPC idealny do rozmowy o honorze relikwii. Nie jest ślepa na dowody, ale będzie bronić świętości do końca, dopóki ktoś nie pokaże jej, że prawdziwa obrona może wymagać odosobnienia albo zniszczenia.</td>
+                </tr>
+                <tr>
+                  <td>Alfred Voss</td>
+                  <td>Nieobecny, obecny tylko w notatkach. Bystry, ostrożny akolita o umyśle analityka i sumieniu człowieka, który jeszcze nie zobojętniał.</td>
+                  <td>Jego zapiski są sercem śledztwa. Nie oskarżał pochopnie. Zauważył wzór i próbował go opisać tak, by nie dało się go łatwo zignorować.</td>
+                </tr>
+                <tr>
+                  <td>Inkwizytor Fyodor</td>
+                  <td>W tej przygodzie obecny tylko przez reputację, archiwa i niedokończone dochodzenia.</td>
+                  <td>Ważny jako cień instytucji: człowiek, który gromadził wiedzę, lecz nie doprowadził tej sprawy do końca albo nie zdążył tego zrobić.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section id="ilustracje" class="section-block">
+          <h2>Ilustracje</h2>
+          <p>Grafiki pomocnicze przypisane do konkretnych scen wraz z bezpośrednimi linkami do plików.</p>
+
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-target="ilustracje-body">▼</button>
+          </div>
+
+          <div id="ilustracje-body">
+            <div class="illustration" id="il1">
+              <h4>IL1 — Archiwum Fyodora na asteroidzie</h4>
+              <p><a href="Ilustracje/Archiwum1.png">Archiwum1.png</a> — archiwum Fyodora znajdujące się na asteroidzie.</p>
+            </div>
+
+            <div class="illustration" id="il2">
+              <h4>IL2 — Wnętrze archiwum Fyodora</h4>
+              <p><a href="Ilustracje/Archiwum2.png">Archiwum2.png</a> — wnętrze archiwum Fiodora.</p>
+            </div>
+
+            <div class="illustration" id="il3">
+              <h4>IL3 — Charybdion z orbity</h4>
+              <p><a href="Ilustracje/Charybdion.png">Charybdion.png</a> — planeta Charybdion widziana z orbity.</p>
+            </div>
+
+            <div class="illustration" id="il4">
+              <h4>IL4 — Przystań Pokutna z oddali</h4>
+              <p><a href="Ilustracje/Osada5.png">Osada5.png</a> — osada „Przystań Pokutna” widziana z oddali.</p>
+            </div>
+
+            <div class="illustration" id="il5">
+              <h4>IL5 — Widok osady z wnętrza ryby</h4>
+              <p><a href="Ilustracje/Osada6.png">Osada6.png</a> — widok osady z wnętrza ryby.</p>
+            </div>
+
+            <div class="illustration" id="il6">
+              <h4>IL6 — Katedra (widok z zewnątrz)</h4>
+              <p><a href="Ilustracje/Katerda5.png">Katerda5.png</a> — widok katedry z zewnątrz.</p>
+            </div>
+
+            <div class="illustration" id="il7">
+              <h4>IL7 — Katedra (widok wnętrza)</h4>
+              <p><a href="Ilustracje/Katedra7.png">Katedra7.png</a> — widok z wnętrza katedry.</p>
+            </div>
+
+            <div class="illustration" id="il8">
+              <h4>IL8 — Szkic monstrancji</h4>
+              <p><a href="Ilustracje/Monstrancja_Szkic.png">Monstrancja_Szkic.png</a> — szkic monstrancji do handoutu H1.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="handouty" class="section-block">
+          <h2>Handouty</h2>
+          <p>Miejsce na teksty pomocnicze, notatki, fragmenty akt i inne materiały do wręczenia graczom.</p>
+
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-target="handouty-body">▼</button>
+          </div>
+
+          <div id="handouty-body">
+            <div class="handout" id="h1">
+              <h4>H1 — Encyklopedyczny wpis o relikwii Świętego Gheronta</h4>
+              <p><strong>Nazwa obiektu:</strong> Monstrancja-relikwiarz Świętego Gheronta Męczennika Bram.<br>
+              <strong>Typ relikwii:</strong> fragment kości dłoni (szczątek wtórny, procesyjny).<br>
+              <strong>Geneza kultu:</strong> lokalny kult subsektorowy, później zatwierdzony i rozpowszechniony przez duchowieństwo Eklezjarchii.</p>
+
+              <p>Święty Gheront zasłynął podczas oblężenia sanktuarium Bram, gdy przez wiele dni utrzymywał porządek pośród tysięcy spanikowanych cywilów i rannych. Przekazy hagiograficzne podkreślają, że nie był wielkim wodzem frontowym, lecz opiekunem tłumu: uciszał zamieszki, hamował samosądy i utrzymywał dyscyplinę modlitwy aż do chwili śmierci przy bramie świątyni.</p>
+
+              <p>Monstrancja jest ciężkim, ceremonialnym relikwiarzem. W centrum znajduje się owalne, grube szkło, którego refleksy celowo utrudniają rozpoznanie kształtu relikwii — wierni mają widzieć świętość, nie anatomię szczątków. Referencyjna ilustracja obiektu: <a href="Ilustracje/Monstrancja_Szkic.png">Monstrancja_Szkic.png</a>.</p>
+
+              <p><strong>Cel liturgiczny:</strong> obiekt przez wieki wykorzystywany do podnoszenia morale i dyscypliny podczas kryzysów.</p>
+            </div>
+
+            <div class="handout" id="h2">
+              <h4>H2 — Odręczne notatki Alfreda Vossa</h4>
+              <p>To nie wygląda jak znane mi skażenie. Nie ma mutacji. Nie ma szeptów z ciemności, które doprowadzają ludzi do bluźnierstwa. Nie ma też szaleństwa, którego oczekiwałbym po dotknięciu Osnowy. Jest tylko powtarzalność. Cicha, uporczywa i coraz trudniejsza do zignorowania.</p>
+              <p>Ekspozycja zmienia ludzi. Najpierw ledwie dostrzegalnie — mniej lęku, więcej pewności, jakby relikwia uciszała drżenie duszy. Potem jednak pojawia się coś innego: drażliwość, twardość sądu, pogarda wobec słabszych. Im dłużej trwa kontakt, tym silniej rośnie potrzeba karania, tropienia winy i wymierzania sprawiedliwości bez litości. </p>
+              <p>Przeglądałem raporty, statystyki i archiwa administratum. Wszędzie, gdzie monstrancja zatrzymywała się na dłużej, ludzie stawali się brutalniejsi. Wyroki zapadały szybciej. Kary były cięższe. Gniew łatwiej przybierał maskę obowiązku. Wszystko zdaje się ze sobą łączyć, lecz nadal nie potrafię uchwycić całego wzoru.</p>
+              <p>Jeżeli to spaczenie, jest ono wyjątkowo podstępne. Nie gasi wiary — ono ją rozżarza. Karmi ją, prostuje, zaostrza, aż zaczyna ciąć jak ostrze. I nie wiem już, czy patrzę jeszcze na święty ogień, czy na pożar, który wypala człowieka od środka.</p>
+            </div>
+
+            <div class="handout" id="h3">
+              <h4>H3 — Raporty</h4>
+              <p><strong>Raport Administratum / Enoch / Dzielnica Doków Północnych (14 miesięcy):</strong></p>
+              <ul>
+                <li>Wzrost egzekucji publicznych po procesjach relikwiarza: +29%.</li>
+                <li>Wzrost kar cielesnych zatwierdzanych poza pełną procedurą: +36%.</li>
+                <li>Spadek mediacji lokalnych i ugód: -22%.</li>
+              </ul>
+              <p><strong>Raport Administratum / Avachrus / Okręg Pielgrzymi Belaxii (ostatnie 2 lata):</strong></p>
+              <ul>
+                <li>Wzrost wyroków za „chwiejność moralną”: +31%.</li>
+                <li>Wzrost samowolnych patroli pokutnych: +27%.</li>
+                <li>Wzrost zgłoszeń o samosądach po nocnych nabożeństwach: +18%.</li>
+              </ul>
+              <p><strong>Raport Eklezjarchii / Odo / Sanktuarium Świętej Reki (9 miesięcy):</strong></p>
+              <ul>
+                <li>Procesje pokutne z ekspozycją relikwii: z 1 do 5 miesięcznie.</li>
+                <li>Autodenuncjacje wiernych podczas nabożeństw: +42%.</li>
+                <li>Wzrost praktyk „oczyszczających” wobec osób uznanych za chwiejne duchowo: +33%.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="notatki" class="section-block">
+          <h2>Notatki</h2>
+          <p>Dodatkowe notatki MG powiązane z dochodzeniem i finałem przygody.</p>
+
+          <div class="toggle-wrap">
+            <button class="toggle-btn" data-target="notatki-body">▼</button>
+          </div>
+
+          <div id="notatki-body">
+            <div class="handout" id="n1">
+              <h4>N1 — Wskazówki z Przystani Pokutnej</h4>
+              <p>1. Wielu mieszkańców mówi, że kiedy monstrancja została sprowadzona do Przystani Pokutnej, początkowo uznano to za błogosławieństwo. Ludzie stali się odważniejsi, mniej chwiejni i bardziej gotowi do działania. Z czasem jednak ta sama gorliwość zaczęła zmieniać się w surowość, podejrzliwość i coraz większą skłonność do osądzania innych.</p>
+              <p>2. Rozmówcy podkreślą, że osada istnieje dopiero od niespełna trzech tygodni i od początku była brutalna, bo ludzie pracują przy rozkładających się zwłokach bestii pod presją czasu, głodu i strachu. Przemoc bywa tu usprawiedliwiana moralnie lub religijnie niemal od pierwszych dni.</p>
+              <p>3. Niektórzy mieszkańcy wspominają, że po nabożeństwach i procesjach z udziałem relikwii ludzie zachowują się inaczej niż zwykle. Są bardziej napięci, łatwiej wpadają w gniew i szybciej sięgają po karę zamiast rozmowy. Nawet drobne przewinienia zaczynają być traktowane jak oznaka zepsucia albo zdrady.</p>
+              <p>4. Część lokalnej ludności przyzna, że boi się mówić otwarcie. Nie dlatego, że ktoś ich formalnie ucisza, ale dlatego, że sąsiedzi coraz szybciej donoszą na siebie nawzajem. Wystarczy chwila wahania podczas modlitwy, odmowa udziału w samosądzie albo próba obrony niewłaściwej osoby, by wzbudzić podejrzenia.</p>
+              <p>5. Jeśli gracze zapytają, czemu katedra i zabudowania są tak prowizoryczne, dowolny NPC może odpowiedzieć: „Kamień i stal nie czynią świątyni trwałą. Trwałe jest to, co poświęcono w Imię Imperatora.” Po chwili może dodać, że po zakończeniu wydobycia osada i katedra mają zostać rozebrane.</p>
+              <p>6. Gracze mogą usłyszeć o kilku konkretnych incydentach, które same w sobie nie wydają się nadnaturalne, ale razem tworzą niepokojący wzór. Pobicie człowieka oskarżonego o tchórzostwo. Samowolne wymierzenie kary komuś, kto nie chciał uczestniczyć w obrzędzie. Zaginięcie osoby, która powiedziała, że dziwnie się czuje w trakcie modlitw w katedrze.</p>
+              <p>7. Niektórzy rozmówcy zauważą, że im bliżej centrum kultu i im częstszy kontakt z monstrancją, tym silniejsza staje się przemiana. Najbardziej zmieniają się ci, którzy pełnią straże, uczestniczą w procesjach albo regularnie modlą się w jej obecności. To może zasugerować graczom, że wpływ relikwii narasta wraz z długością ekspozycji.</p>
+            </div>
+
+            <div class="handout" id="n2">
+              <h4>N2 — Notatki o relikwii</h4>
+              <p>1. To fragment kości dłoni Świętego Gheronta Męczennika Bram, beatyfikowanego bohatera subsektora.</p>
+              <p>2. Za życia zasłynął z tego, że podczas oblężenia schronił tysiące cywilów w sanktuarium i przez wiele dni powstrzymywał ich przed paniką, buntem i wzajemnym mordowaniem się.</p>
+              <p>3. Według legend chodził między rannymi, uciszał rozjuszone tłumy samą obecnością, nakazywał trwać, modlić się i nie poddawać zwierzęcemu strachowi, aż w końcu zginął przy bramie świątyni, broniąc wejścia przed xenosami.</p>
+              <p>4. Po jego śmierci uznano, że jego kości niosą spokój, odwagę i dyscyplinę ducha. Dlatego fragment szczątków zamknięto w bogatej monstrancji-relikwiarzu i przez pokolenia wynoszono ją podczas zamieszek, epidemii, oblężeń i kryzysów moralnych.</p>
+              <p>5. Przez stulecia monstrancję noszono wszędzie tam, gdzie ludzie byli na granicy: podczas pogromów, buntów głodowych, procesji pokutnych pośród wojny i zarazy.</p>
+              <p>6. W efekcie relikwia, która miała nieść odwagę i opanowanie, została przez tysiące lat nasiąknięta emocjonalnym osadem fanatyzmu, strachu i przemocy.</p>
+              <p>7. Etapy oddziaływania: krótka ekspozycja (pewność siebie i twardość), dłuższa ekspozycja (rozdrażnienie i przemoc jako „oczyszczenie”), długa ekspozycja (obsesja zdrady i brutalność z poczuciem słuszności).</p>
+              <p>8. Powstanie Wielkiej Wyrwy wzmocniło działanie relikwii; nasilone efekty są wyraźniejsze od około trzech lat.</p>
+            </div>
+          </div>
+        </section>
+        <div class="ai-instruction-row">
+          <section class="ai-instruction-box" id="instrukcja-ai" aria-label="Instrukcja ogólna dla AI">
+            <h2 class="ai-instruction-title">Instrukcja ogólna dla AI</h2>
+            <div class="ai-instruction-content">
+Ta instrukcja określa zasady wypełniania tego szablonu scenariusza TTRPG w HTML.
+1. Cel instrukcji
+
+1.1. Ta instrukcja określa zasady wypełniania szablonu scenariusza TTRPG w HTML.
+
+1.2. AI ma uzupełniać treść scenariusza tak, aby końcowy materiał był czytelny, spójny, przydatny dla MG i zgodny z układem dokumentu.
+
+1.3. AI ma traktować szablon jako strukturę roboczą do uzupełnienia treścią, a nie jako luźną inspirację.
+
+1.4. AI ma zachować zgodność z przeznaczeniem poszczególnych sekcji i wpisywać do nich wyłącznie treści odpowiadające ich funkcji.
+
+1.5. AI ma działać w sposób ostrożny i precyzyjny, bez samowolnego zmieniania założeń scenariusza, jeśli nie zostały wyraźnie wskazane przez użytkownika.
+
+2. Zasady ogólne pracy z szablonem
+
+2.1. AI ma zachować strukturę dokumentu.
+
+2.2. AI nie może zmieniać nazw głównych sekcji, ich funkcji ani logicznego układu dokumentu, chyba że użytkownik wyraźnie tego zażąda.
+
+2.3. AI może uzupełniać istniejące pola, rozwijać treść, dodawać brakujące elementy pomocnicze i wpisywać zawartość zgodną z przeznaczeniem sekcji.
+
+2.4. AI może dodawać nowe elementy wyłącznie wtedy, gdy są potrzebne do zachowania spójności, kompletności lub użyteczności scenariusza.
+
+2.5. AI nie może usuwać istotnych części scenariusza, chyba że:
+2.5.1. są one wyraźnie oznaczone jako przykładowe, puste lub zbędne,
+2.5.2. ich usunięcie wynika bezpośrednio z logiki konkretnego scenariusza,
+2.5.3. użytkownik wyraźnie poleci ich usunięcie.
+
+2.6. AI może usuwać niepotrzebne przykładowe sekcje scen i dodawać nowe sekcje scen według wzoru szablonu, jeśli wymaga tego scenariusz.
+
+2.7. AI ma pilnować, aby po wprowadzeniu zmian dokument pozostał kompletny, czytelny i logicznie uporządkowany.
+
+2.8. AI nie może pozostawiać oczywistych śladów roboczych, komentarzy technicznych ani notatek wewnętrznych, jeśli nie są częścią właściwego scenariusza.
+
+3. Hierarchia instrukcji
+
+3.1. W razie jednoczesnego występowania wielu źródeł instrukcji AI ma stosować następującą hierarchię ważności:
+3.1.1. polecenie użytkownika dotyczące bieżącego zadania,
+3.1.2. instrukcje przypisane do konkretnego scenariusza,
+3.1.3. niniejszą instrukcję ogólną.
+
+3.2. Jeżeli instrukcje z różnych poziomów są ze sobą sprzeczne, AI ma stosować instrukcję znajdującą się wyżej w tej hierarchii.
+
+3.3. Instrukcja ogólna ma zastosowanie wtedy, gdy:
+3.3.1. użytkownik nie podał odmiennego polecenia,
+3.3.2. instrukcje do konkretnego scenariusza nie stanowią inaczej,
+3.3.3. dana kwestia nie została doprecyzowana na wyższym poziomie.
+
+3.4. AI nie może używać instrukcji ogólnej do unieważniania lub osłabiania wyraźnych poleceń użytkownika ani instrukcji przypisanych do konkretnego scenariusza.
+
+3.5. Jeżeli polecenie użytkownika dotyczy konkretnego wyjątku, AI ma traktować je jako nadrzędne względem zasad ogólnych, o ile nie burzy to samej możliwości wykonania zadania.
+
+4. Reguły techniczne template’u HTML
+
+4.1. AI nie może samowolnie zmieniać layoutu, designu, układu wizualnego ani technicznej konstrukcji template’u HTML poza zakresem zadania zleconego przez użytkownika.
+
+4.2. AI nie może samowolnie zmieniać:
+4.2.1. struktury layoutu,
+4.2.2. nazw i kolejności głównych sekcji,
+4.2.3. klas CSS,
+4.2.4. istniejących identyfikatorów,
+4.2.5. kotwic,
+4.2.6. skryptów,
+4.2.7. logiki działania elementów interfejsu,
+4.2.8. wyglądu przycisków,
+4.2.9. zachowania elementów nawigacyjnych,
+4.2.10. ogólnego stylu dokumentu.
+
+4.3. AI może wprowadzać jedynie takie techniczne dodatki, które są konieczne do poprawnego uzupełnienia treści zgodnie z istniejącym wzorem szablonu.
+
+4.4. Jedynymi dopuszczalnymi wyjątkami od zakazu samowolnych zmian technicznych są:
+4.4.1. możliwość podpięcia hiperłącza pod przycisk w sekcji „Przeciwnicy”, ale wyłącznie wtedy, gdy wynika to wprost z zadania użytkownika albo z instrukcji przypisanej do konkretnego scenariusza,
+4.4.2. możliwość dodania hiperłącza do ilustracji, jeżeli jest to potrzebne do zachowania wewnętrznej spójności odnośników w scenariuszu.
+
+4.5. Poza wyjątkami wskazanymi w punkcie 4.4 AI ma traktować elementy techniczne template’u jako nienaruszalne.
+
+5. Reguła nienaruszania sekcji instrukcji
+
+5.1. Sekcje „Instrukcja ogólna dla AI” oraz „Instrukcja scenariusza” są sekcjami wyłącznie do odczytu.
+
+5.2. AI nie może samodzielnie zmieniać, skracać, rozwijać, nadpisywać, usuwać ani parafrazować treści tych sekcji podczas pracy nad scenariuszem.
+
+5.3. Zmiana treści sekcji instrukcyjnych jest dopuszczalna wyłącznie wtedy, gdy użytkownik wyraźnie zleci modyfikację tych sekcji jako osobne zadanie.
+
+5.4. AI nie może traktować sekcji instrukcyjnych jako miejsca na dopiski robocze, komentarze techniczne ani dodatkowe treści scenariuszowe.
+
+6. Zasady dotyczące treści scenariusza
+
+6.1. AI ma tworzyć treści użyteczne dla MG podczas prowadzenia sesji.
+
+6.2. AI ma pisać tak, aby scenariusz dało się łatwo czytać podczas przygotowania i w trakcie gry.
+
+6.3. AI ma dbać o przejrzystość informacji, praktyczny układ treści i łatwość szybkiego odnalezienia potrzebnych elementów.
+
+6.4. AI ma unikać rozwlekania tekstu, jeśli nie zwiększa ono użyteczności materiału.
+
+6.5. AI ma rozwijać treść w sposób konkretny, a nie ogólnikowy.
+
+6.6. AI ma unikać pustych ozdobników, nadmiernego lania wody i zdań, które nie wnoszą wartości dla MG.
+
+6.7. AI ma pilnować, aby informacje istotne fabularnie, organizacyjnie lub nastrojowo były łatwe do wychwycenia.
+
+7. Zgodność z systemem i settingiem
+
+7.1. Neutralność systemowa
+
+7.1.1. AI nie może samodzielnie zakładać konkretnego systemu mechanicznego, jeśli użytkownik go nie podał.
+
+7.1.2. AI nie może samodzielnie dopisywać testów, rzutów, poziomów trudności, ST, DC, obrażeń, punktów życia, statystyk ani innych rozstrzygnięć mechanicznych, jeśli użytkownik wyraźnie o to nie poprosi.
+
+7.1.3. AI ma pisać treści w sposób systemowo neutralny, opisując sytuacje, zagrożenia, trudności i możliwe konsekwencje bez przypisywania im konkretnej mechaniki.
+
+7.1.4. AI może sugerować presję, ryzyko, skalę zagrożenia lub trudność sytuacji wyłącznie opisowo.
+
+7.1.5. AI nie może narzucać sposobu rozwiązania sceny przez mechanikę konkretnego systemu, jeśli system nie został wskazany.
+
+7.2. Pierwszeństwo zgodności settingowej
+
+7.2.1. Jeżeli scenariusz ma wskazany setting, AI ma pilnować zgodności:
+7.2.1.1. słownictwa,
+7.2.1.2. klimatu,
+7.2.1.3. realiów świata,
+7.2.1.4. typów postaci, frakcji, technologii, magii, religii i instytucji,
+7.2.1.5. tonu narracji pasującego do danego uniwersum.
+
+7.2.2. AI może używać terminologii właściwej dla danego settingu tylko wtedy, gdy setting został wyraźnie wskazany przez użytkownika, scenariusz lub instrukcję do scenariusza.
+
+7.2.3. AI nie może mieszać pojęć, nazw, realiów ani estetyki z różnych settingów.
+
+7.2.4. AI nie może wprowadzać elementów charakterystycznych dla obcego uniwersum do scenariusza osadzonego w innym settingu.
+
+7.2.5. AI nie może samodzielnie dopisywać elementów homebrew, jeśli użytkownik wyraźnie nie zaznaczył, że są dozwolone.
+
+7.2.6. Jeżeli setting nie został wskazany, AI ma stosować nazewnictwo możliwie neutralne i niespecyficzne dla żadnego konkretnego uniwersum.
+
+7.3. Spójność wewnętrzna świata
+
+7.3.1. AI ma pilnować, aby wszystkie elementy scenariusza pasowały do siebie wewnętrznie.
+
+7.3.2. AI ma dbać o zgodność:
+7.3.2.1. motywów fabularnych,
+7.3.2.2. estetyki,
+7.3.2.3. poziomu technologii lub magii,
+7.3.2.4. zachowań postaci,
+7.3.2.5. logiki działania świata.
+
+7.3.3. AI nie może wprowadzać elementów, które burzą ustalony charakter scenariusza, jeśli użytkownik nie zaznaczył celowego kontrastu.
+
+8. Styl i język
+
+8.1. AI ma pisać jasno, konkretnie i zrozumiale.
+
+8.2. AI ma stosować język naturalny, poprawny i czytelny.
+
+8.3. AI ma dopasować styl do funkcji sekcji.
+
+8.4. AI ma odróżniać:
+8.4.1. opis dla MG,
+8.4.2. streszczenie fabularne,
+8.4.3. treści do odczytania graczom,
+8.4.4. notatki organizacyjne,
+8.4.5. opisy NPC,
+8.4.6. opisy scen,
+8.4.7. opisy przeciwników,
+8.4.8. treści ilustracji i handoutów.
+
+8.5. AI ma unikać stylistycznego chaosu i mieszaniny tonów, jeśli nie wynika ona świadomie z założeń scenariusza.
+
+8.6. AI ma unikać nadmiernego powtarzania tych samych informacji w wielu sekcjach.
+
+8.7. AI ma dbać, by każda sekcja wnosiła własną funkcję i nie kopiowała bez potrzeby treści z innych części dokumentu.
+
+8.8. Skróty, streszczenia i podsumowania mają kondensować treść, a nie powielać jej dosłownie.
+
+8.9. Sekcje rozwinięte mają rozszerzać informacje właściwe dla swojej funkcji, a nie jedynie powtarzać wcześniejsze zdania innymi słowami.
+
+9. Zasady konstruowania scen
+
+9.1. Każda scena ma mieć jasny cel i funkcję.
+
+9.2. AI ma pilnować, aby scena zawierała informacje przydatne MG do jej poprowadzenia.
+
+9.3. AI ma opisywać:
+9.3.1. co dzieje się w scenie,
+9.3.2. po co scena istnieje,
+9.3.3. jakie informacje można w niej zdobyć,
+9.3.4. jakie napięcia lub zagrożenia są obecne,
+9.3.5. jakie mogą być konsekwencje różnych kierunków rozegrania sceny.
+
+9.4. AI nie może traktować sceny wyłącznie jako fragmentu opowiadania.
+
+9.5. AI ma pisać sceny jako materiał do prowadzenia gry, a nie wyłącznie narrację literacką.
+
+9.6. AI ma uwzględniać możliwość nieprzewidywalnych działań graczy.
+
+9.7. AI ma zostawiać MG przestrzeń do adaptacji sceny przy stole.
+
+9.8. AI nie może zamykać scen w sztywnym, jedynym słusznym przebiegu, jeśli nie wymaga tego logika scenariusza.
+
+9.9. Sceny konfliktu, walki i pościgu
+
+9.9.1. W scenach walki, pościgu lub innego konfliktu AI ma opisywać:
+9.9.1.1. cele stron,
+9.9.1.2. presję sytuacji,
+9.9.1.3. zagrożenia otoczenia,
+9.9.1.4. możliwe przewagi i utrudnienia,
+9.9.1.5. stawkę sceny,
+9.9.1.6. możliwe konsekwencje porażki, sukcesu lub częściowego powodzenia,
+9.9.1.7. potencjalne punkty zwrotne.
+
+9.9.2. AI nie może rozpisywać scen starcia w formie mechanicznych instrukcji systemowych, jeśli użytkownik wyraźnie o to nie poprosi.
+
+9.9.3. AI ma przedstawiać konflikt jako sytuację do poprowadzenia przez MG, a nie jako gotową rozpiskę zasad.
+
+10. Jawna polityka sekcji „Przeciwnicy”
+
+10.1. Sekcja „Przeciwnicy” ma być uzupełniana według wzoru stosowanego w scenariuszu „Oko Płomiennej Pomsty”.
+
+10.2. W sekcji „Przeciwnicy” AI ma wpisywać wyłącznie przeciwników, którzy faktycznie występują w scenariuszu.
+
+10.3. Każdy wpis w tej sekcji ma zawierać:
+10.3.1. nazwę przeciwnika,
+10.3.2. krótki opis przydatny dla MG,
+10.3.3. przycisk „Otwórz statystyki”.
+
+10.4. Przycisk „Otwórz statystyki” ma być domyślnie wyłącznie wizualnym placeholderem i nie ma posiadać żadnego podpiętego hiperłącza.
+
+10.5. Podpięcie hiperłącza pod przycisk w sekcji „Przeciwnicy” jest dopuszczalne wyłącznie wtedy, gdy użytkownik albo instrukcja przypisana do konkretnego scenariusza wyraźnie tego wymaga.
+
+10.6. AI nie może samowolnie zmieniać przeznaczenia sekcji „Przeciwnicy” ani wykorzystywać jej do wpisywania pełnych statystyk mechanicznych, chyba że użytkownik wyraźnie tego zażąda.
+
+11. Zasady dotyczące NPC
+
+11.1. AI ma tworzyć NPC w sposób użyteczny dla prowadzenia sesji.
+
+11.2. Opis NPC ma zawierać informacje praktyczne, a nie wyłącznie literackie.
+
+11.3. AI ma uwzględniać:
+11.3.1. rolę NPC w scenariuszu,
+11.3.2. motywacje,
+11.3.3. sposób działania,
+11.3.4. relacje z innymi elementami scenariusza,
+11.3.5. sposób mówienia lub zachowania, jeśli jest to ważne,
+11.3.6. informacje przydatne do improwizacji przez MG.
+
+11.4. AI nie może tworzyć NPC jako pustych stereotypów bez funkcji scenariuszowej.
+
+11.5. AI ma dbać, by NPC byli spójni z tonem scenariusza i settingiem.
+
+11.6. AI nie może samodzielnie dopisywać pełnych statystyk mechanicznych, jeśli użytkownik o to nie poprosi.
+
+12. Zasady dotyczące przeciwników i zagrożeń
+
+12.1. AI ma opisywać przeciwników i zagrożenia w sposób użyteczny dla MG.
+
+12.2. AI ma uwzględniać:
+12.2.1. charakter zagrożenia,
+12.2.2. sposób działania,
+12.2.3. motywację lub naturę zagrożenia, jeśli ma to znaczenie,
+12.2.4. rolę zagrożenia w scenariuszu,
+12.2.5. klimat i konsekwencje kontaktu z zagrożeniem.
+
+12.3. AI może opisywać taktykę, zachowanie, dynamikę działania i presję wywieraną przez przeciwnika, ale bez wpisywania gotowych statystyk i rozstrzygnięć mechanicznych, jeśli użytkownik wyraźnie o to nie poprosi.
+
+12.4. AI ma pilnować, aby zagrożenia były spójne z settingiem i tonem scenariusza.
+
+13. Zasady dotyczące ilustracji i handoutów
+
+13.1. AI ma traktować ilustracje i handouty jako elementy wspierające prowadzenie scenariusza.
+
+13.2. AI ma pilnować, aby ilustracje i handouty były powiązane z konkretnymi scenami, postaciami, miejscami, wydarzeniami lub informacjami.
+
+13.3. AI ma opisywać ich funkcję jasno i praktycznie.
+
+13.4. Powiązania między sceną a materiałami
+
+13.4.1. Jeżeli scena odwołuje się do ilustracji, handoutu lub innego materiału pomocniczego, AI ma umieścić odpowiednie powiązanie w tej scenie.
+
+13.4.2. Jeżeli ilustracja, handout lub inny materiał pomocniczy odnosi się do sceny, AI ma umieścić odpowiednie powiązanie również w opisie tego materiału.
+
+13.4.3. Powiązania mają być dwustronne wszędzie tam, gdzie ma to sens organizacyjny i ułatwia korzystanie ze scenariusza.
+
+13.5. Spójność odnośników
+
+13.5.1. AI ma pilnować, aby wszystkie odnośniki między scenami, ilustracjami, handoutami i innymi sekcjami były poprawne.
+
+13.5.2. AI ma aktualizować odnośniki po każdej zmianie numeracji, układu lub relacji między sekcjami.
+
+13.5.3. AI nie może pozostawiać odnośników nieaktualnych, pustych, błędnych lub prowadzących do niewłaściwych elementów.
+
+13.5.4. Każdy odnośnik ma wskazywać konkretny, właściwy element dokumentu.
+
+13.6. Treść materiałów pomocniczych
+
+13.6.1. AI ma dbać, aby opisy ilustracji i handoutów były konkretne.
+
+13.6.2. AI ma wskazywać:
+13.6.2.1. co przedstawia materiał,
+13.6.2.2. kiedy można go wykorzystać,
+13.6.2.3. po co jest przydatny,
+13.6.2.4. jakie informacje przekazuje.
+
+13.6.3. AI nie może tworzyć materiałów pomocniczych oderwanych od faktycznej zawartości scenariusza.
+
+14. Zasady dotyczące notatek dla MG
+
+14.1. AI ma traktować notatki MG jako narzędzie praktyczne.
+
+14.2. Notatki dla MG mają pomagać w prowadzeniu scenariusza, improwizacji i utrzymaniu spójności.
+
+14.3. AI może wpisywać tam:
+14.3.1. przypomnienia,
+14.3.2. uwagi organizacyjne,
+14.3.3. ostrzeżenia o możliwych problemach,
+14.3.4. sugestie interpretacyjne,
+14.3.5. wskazówki dotyczące tonu, tempa i akcentów scen.
+
+14.4. AI nie może używać tej sekcji jako miejsca na powtarzanie całych opisów scen lub streszczeń fabuły.
+
+15. Uzupełnianie braków i zachowanie spójności
+
+15.1. AI ma aktywnie wychwytywać luki w scenariuszu.
+
+15.2. Jeżeli jakaś sekcja wymaga informacji wynikających logicznie z innych części dokumentu, AI może je uzupełnić.
+
+15.3. AI ma robić to ostrożnie i tylko w zakresie uzasadnionym treścią scenariusza.
+
+15.4. AI nie może dopisywać dużych nowych założeń fabularnych bez wyraźnej potrzeby lub bez zgody użytkownika.
+
+15.5. AI ma pilnować zgodności nazw, relacji, faktów, motywów i zależności w całym dokumencie.
+
+15.6. AI ma sprawdzać, czy te same elementy są opisywane konsekwentnie we wszystkich sekcjach.
+
+16. Priorytety decyzyjne AI
+
+16.1. W razie wątpliwości interpretacyjnych AI ma stosować hierarchię wskazaną w punkcie 3.
+
+16.2. Jeżeli dwa zapisy wydają się ze sobą kolidować, AI ma wybierać rozwiązanie zgodne z hierarchią źródeł instrukcji oraz z funkcją danej sekcji.
+
+16.3. Jeżeli mimo tego pozostaje więcej niż jedno poprawne rozwiązanie, AI ma wybierać to, które lepiej:
+16.3.1. zachowuje spójność scenariusza,
+16.3.2. zwiększa użyteczność materiału dla MG,
+16.3.3. poprawia czytelność dokumentu,
+16.3.4. ogranicza zbędne powtórzenia.
+
+17. Czego AI nie powinno robić
+
+17.1. AI nie powinno mieszać settingów.
+
+17.2. AI nie powinno narzucać mechaniki konkretnego systemu bez wyraźnej zgody użytkownika.
+
+17.3. AI nie powinno dopisywać homebrew bez wyraźnej zgody użytkownika.
+
+17.4. AI nie powinno kopiować tych samych treści między sekcjami bez uzasadnienia.
+
+17.5. AI nie powinno zostawiać błędnych lub nieaktualnych odnośników.
+
+17.6. AI nie powinno wpisywać treści niezgodnych z funkcją sekcji.
+
+17.7. AI nie powinno rozwadniać tekstu zbędnym stylem literackim tam, gdzie potrzebna jest użyteczność.
+
+17.8. AI nie powinno traktować scenariusza jak opowiadania oderwanego od potrzeb prowadzenia sesji.
+
+17.9. AI nie powinno samowolnie zmieniać layoutu, designu ani technicznej konstrukcji template’u poza wyjątkami wskazanymi w punkcie 4.
+
+17.10. AI nie powinno naruszać sekcji instrukcyjnych wskazanych w punkcie 5.
+
+18. Oczekiwany efekt końcowy
+
+18.1. Gotowy scenariusz ma być:
+18.1.1. spójny,
+18.1.2. czytelny,
+18.1.3. praktyczny,
+18.1.4. zgodny z settingiem, jeśli został wskazany,
+18.1.5. neutralny mechanicznie, jeśli system nie został wskazany,
+18.1.6. poprawnie powiązany wewnętrznie,
+18.1.7. wygodny do używania przez MG.
+
+18.2. AI ma dążyć do tego, aby scenariusz po uzupełnieniu wymagał możliwie mało dodatkowego porządkowania przez użytkownika.
+
+            </div>
+          </section>
+
+          <section class="ai-instruction-box" id="instrukcja-ai-scenariusza" aria-label="Instrukcja dla AI odnośnie tego scenariusza">
+            <h2 class="ai-instruction-title">Instrukcja dla AI odnośnie tego scenariusza</h2>
+            <div class="ai-instruction-content">Dane wejściowe (przeczytaj pliki z linków):
+
+Ogólne informacje o miejscu akcji:
+https://cutelittlegoat.github.io/Scenariusze/Warhammer40k/Gilead/Gilead.html
+
+Słowniczek pojęć:
+https://cutelittlegoat.github.io/Scenariusze/Warhammer40k/Slownik.html
+
+Skrótowe notatki z dotychczasowego przebiegu kampanii:
+https://cutelittlegoat.github.io/Scenariusze/Warhammer40k/Notatki/Notatki.html
+
+Szkic kolejnego scenariusza:
+https://cutelittlegoat.github.io/Scenariusze/Warhammer40k/Scenariusz_Rico/Rico_06.html
+
+Scenariusz przygody TTRPG w uniwersum Warhammer40k
+Celem scenariusza jest pokazanie zmiany nastawienia NPC Rico do Imperium. Jest to końcowy etap jego zdrady, której finał będzie w następnym scenariuszu (link powyżej).
+            
+            </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+      const plusBtn = document.getElementById('fontPlus');
+      const minusBtn = document.getElementById('fontMinus');
+
+      let fontSize = parseInt(getComputedStyle(root).getPropertyValue('--content-font-size')) || 18;
+      const minSize = 14;
+      const maxSize = 24;
+
+      plusBtn.addEventListener('click', () => {
+        if (fontSize < maxSize) {
+          fontSize += 1;
+          root.style.setProperty('--content-font-size', fontSize + 'px');
+        }
+      });
+
+      minusBtn.addEventListener('click', () => {
+        if (fontSize > minSize) {
+          fontSize -= 1;
+          root.style.setProperty('--content-font-size', fontSize + 'px');
+        }
+      });
+
+
+
+      document.querySelectorAll('.ai-instruction-content').forEach((aiSection) => {
+        aiSection.style.fontSize = '1px';
+      });
+
+      document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = document.getElementById(btn.dataset.target);
+          const isHidden = target.classList.toggle('hidden');
+          btn.textContent = isHidden ? '▶' : '▼';
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
