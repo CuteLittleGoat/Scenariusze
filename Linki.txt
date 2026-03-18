@@ -1,5 +1,5 @@
 Szablon scenariusza (kod strony HTML):
-https://raw.githubusercontent.com/cutelittlegoat/Scenariusze/main/template.md
+https://raw.githubusercontent.com/cutelittlegoat/Scenariusze/main/template.txt
 
 Szablon scenariusza (gotowy HTML):
 https://cutelittlegoat.github.io/Scenariusze/template.html
