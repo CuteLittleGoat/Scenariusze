@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Template scenariusza TTRPG</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-2: #111821;
+      --panel: #131b24;
+      --panel-2: #18222d;
+      --panel-3: #0f151d;
+      --text: #dce6f1;
+      --muted: #93a3b5;
+      --accent: #7fc8ff;
+      --accent-2: #89e0c2;
+      --border: #243140;
+      --border-strong: #324557;
+      --shadow: rgba(0, 0, 0, 0.42);
+      --sidebar-w: 290px;
+      --content-font-size: 18px;
+      --font-body: Calibri, Arial, Verdana, Tahoma, "Trebuchet MS";
+      --font-heading: "Trebuchet MS", Verdana, Arial, Tahoma, Calibri;
+      --font-navigation: Verdana, Tahoma, Arial, Calibri, "Trebuchet MS";
+      --font-ui: Tahoma, Verdana, Arial, Calibri, "Trebuchet MS";
+      --font-table: Arial, Calibri, Verdana, Tahoma, "Trebuchet MS";
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(127, 200, 255, 0.08), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(137, 224, 194, 0.05), transparent 22%),
+        linear-gradient(180deg, var(--bg), #080b10 100%);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.7;
+      font-size: 18px;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+      width: var(--sidebar-w);
+      height: 100vh;
+      padding: 18px;
+      border-right: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)),
+        rgba(9, 13, 18, 0.92);
+      backdrop-filter: blur(10px);
+      overflow-y: auto;
+      flex: 0 0 var(--sidebar-w);
+      font-size: 18px;
+    }
+
+    .sidebar-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 18px 40px var(--shadow);
+      padding: 18px;
+    }
+
+    .sidebar h2 {
+      font-family: var(--font-heading);
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .sidebar-intro {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .toolbar button {
+      font-family: var(--font-ui);
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border-strong);
+      background: var(--panel-2);
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-size: 0.95rem;
+      text-align: left;
+      padding: 9px 12px;
+    }
+
+    .toolbar button:hover {
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .nav-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .nav-link {
+      font-family: var(--font-navigation);
+      display: block;
+      text-decoration: none;
+      padding: 11px 13px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      color: var(--text);
+      background: transparent;
+      transition: 0.2s ease;
+      font-size: 0.98rem;
+    }
+
+    .nav-link:hover {
+      background: rgba(255,255,255,0.035);
+      border-color: var(--border);
+      color: var(--accent);
+      transform: translateX(2px);
+    }
+
+    .nav-link.is-main {
+      background: rgba(127, 200, 255, 0.06);
+      border-color: rgba(127, 200, 255, 0.14);
+    }
+
+    .nav-divider {
+      height: 1px;
+      margin: 14px 0;
+      background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+    }
+
+    .content {
+      flex: 1;
+      min-width: 0;
+      padding: 26px 24px 70px 24px;
+      font-size: var(--content-font-size);
+    }
+
+    .content-inner {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+    }
+
+    .hero,
+    details,
+    .ai-instruction-box {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 18px 40px var(--shadow);
+    }
+
+    .hero {
+      padding: 30px 28px;
+      margin-bottom: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(127, 200, 255, 0.09), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(137, 224, 194, 0.06), transparent 20%);
+      pointer-events: none;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      margin: 0 0 12px;
+      font-size: 2.15em;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .lead {
+      color: var(--muted);
+      margin: 0;
+      max-width: none;
+    }
+
+    details {
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 20px 24px;
+      user-select: none;
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0));
+      transition: 0.2s ease;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details[open] summary {
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(127, 200, 255, 0.05), rgba(255,255,255,0));
+    }
+
+    .summary-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .summary-title {
+      font-family: var(--font-heading);
+      margin: 0;
+      font-size: 1.35em;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .summary-desc {
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .chevron {
+      color: var(--accent);
+      font-size: 1.2em;
+      transition: transform 0.2s ease;
+      flex: 0 0 auto;
+      padding-top: 2px;
+    }
+
+    details[open] .chevron {
+      transform: rotate(180deg);
+    }
+
+    .section-body {
+      padding: 22px;
+      background: rgba(255,255,255,0.01);
+    }
+
+    .block {
+      margin-bottom: 18px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)),
+        var(--panel);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    .block:last-child {
+      margin-bottom: 0;
+    }
+
+    .block h3 {
+      font-family: var(--font-heading);
+      margin: 0 0 10px;
+      font-size: 1.04em;
+      color: var(--accent-2);
+      letter-spacing: 0.01em;
+    }
+
+    .block p,
+    .block li {
+      margin-top: 0;
+    }
+
+    .block ul,
+    .block ol {
+      margin: 0;
+      padding-left: 24px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .example {
+      margin-top: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed var(--border-strong);
+    }
+
+    .small-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 0.84em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(127, 200, 255, 0.08);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9em;
+      transition: 0.2s ease;
+    }
+
+    .tag:hover {
+      border-color: var(--accent);
+      background: rgba(127, 200, 255, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--panel-3);
+    }
+
+    table {
+      font-family: var(--font-table);
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 14px 16px;
+      text-align: left;
+      vertical-align: top;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: none;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    th {
+      background: rgba(255,255,255,0.04);
+      color: var(--accent-2);
+      font-size: 0.98em;
+    }
+
+    .button-placeholder {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 8px 14px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(127, 200, 255, 0.12), rgba(127, 200, 255, 0.04));
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.2s ease;
+      user-select: none;
+    }
+
+    .button-placeholder:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .entry-card {
+      margin-bottom: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)),
+        var(--panel-3);
+    }
+
+    .entry-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .entry-title {
+      font-family: var(--font-heading);
+      margin: 0 0 8px;
+      font-size: 1.05em;
+      color: var(--accent);
+    }
+
+    .entry-meta {
+      margin-bottom: 12px;
+      color: var(--muted);
+    }
+
+    .mini-id {
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--accent);
+      font-size: 0.86em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .readaloud {
+      padding: 14px 16px;
+      border-left: 4px solid var(--accent);
+      border-radius: 12px;
+      background: rgba(127, 200, 255, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    .ai-instruction-box {
+      margin-top: 26px;
+      padding: 14px;
+      background: #0a0d12;
+    }
+
+    .ai-instruction-row {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .ai-instruction-row .ai-instruction-box {
+      margin-top: 0;
+    }
+
+    .ai-instruction-title {
+      font-family: var(--font-navigation);
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: #748190;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .ai-instruction-content {
+      font-size: 1px !important;
+      line-height: 1.2;
+      color: #808b97;
+      white-space: pre-wrap;
+      word-break: break-word;
+      user-select: text;
+    }
+
+    @media (max-width: 1100px) {
+      .layout {
+        display: block;
+      }
+
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        overflow-y: visible;
+      }
+
+      .content {
+        padding: 20px 16px 60px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      :root {
+        --content-font-size: 17px;
+      }
+
+      .content {
+        font-size: var(--content-font-size);
+      }
+
+      .hero {
+        padding: 24px 20px;
+      }
+
+      .hero h1 {
+        font-size: 2em;
+      }
+
+      summary {
+        padding: 18px 18px;
+      }
+
+      .section-body {
+        padding: 16px;
+      }
+
+      .summary-title {
+        font-size: 1.15em;
+      }
+
+      table {
+        min-width: 620px;
+      }
+
+      .ai-instruction-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Panel nawigacyjny scenariusza">
+      <div class="sidebar-card">
+
+        <div class="toolbar">
+          <button type="button" data-font-step="1" aria-label="Font ▲">Font ▲</button>
+          <button type="button" data-font-step="-1" aria-label="Font ▼">Font ▼</button>
+        </div>
+
+        <nav class="nav-group">
+          <a class="nav-link is-main" href="#wprowadzenie">Wprowadzenie</a>
+          <a class="nav-link is-main" href="#scena-1">Scena I - Tytuł Sceny I</a>
+          <a class="nav-link is-main" href="#scena-2">Scena II - Tytuł Sceny II</a>
+          <a class="nav-link is-main" href="#scena-3">Scena III - Tytuł Sceny III</a>
+          <a class="nav-link is-main" href="#zakonczenie">Zakończenie</a>
+
+          <div class="nav-divider"></div>
+
+          <a class="nav-link" href="#przeciwnicy">Przeciwnicy</a>
+          <a class="nav-link" href="#npc">NPC</a>
+          <a class="nav-link" href="#ilustracje">Ilustracje</a>
+          <a class="nav-link" href="#handouty">Handouty</a>
+          <a class="nav-link" href="#inne-notatki">Inne Notatki</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="content" id="contentArea">
+      <div class="content-inner">
+
+        <section class="hero" id="wprowadzenie">
+          <h1>Tytuł scenariusza</h1>
+          <p class="lead">
+            Tutaj wpisz krótki opis całego scenariusza: klimat, gatunek, główny konflikt, stawkę oraz to,
+            dlaczego ta przygoda jest interesująca dla drużyny. Ten akapit powinien dawać MG szybki podgląd
+            całości jeszcze przed czytaniem poszczególnych scen.
+          </p>
+
+          <div class="block" style="margin-top:20px;">
+            <h3>Skrót scenariusza</h3>
+            <p>
+              W tej sekcji wpisz zwięzłe podsumowanie całej przygody w kilku akapitach. Opisz:
+              jaki jest punkt wyjścia, co uruchamia akcję, jakie są najważniejsze zwroty fabularne,
+              do czego prowadzą kolejne sceny oraz jaki typ finału przewiduje scenariusz.
+              To ma być skrót dla MG, który pozwala szybko przypomnieć sobie przebieg całej sesji.
+            </p>
+          </div>
+        </section>
+
+        <details id="scena-1">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Scena I - Tytuł Sceny I</h2>
+                <p class="summary-desc">
+                  Tutaj wpisz krótki opis roli tej sceny: otwarcie przygody, pierwsze spotkanie, śledztwo,
+                  eksploracja, walka, negocjacje albo wprowadzenie konfliktu.
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Streszczenie sceny</h3>
+              <p>
+                Tutaj wpisz jedno konkretne streszczenie tej sceny. Opisz, po co scena istnieje,
+                co mają z niej wynieść gracze, jaki jest jej główny konflikt oraz do jakiej kolejnej sceny
+                lub decyzji ma prowadzić. To ma być szybki skrót dla MG.
+              </p>
+            </div>
+
+            <div class="block" id="scena-1-dla-graczy">
+              <h3>Sekcja dla Graczy</h3>
+              <p>
+                Tutaj wpisz treści przeznaczone bezpośrednio do przedstawienia graczom, na przykład opisy
+                lokacji do odczytania przez MG, pierwsze wrażenia, narracyjne wejście do sceny, krótkie
+                opisy wydarzeń albo informacje, które mają wybrzmieć w formie gotowego tekstu mówionego.
+              </p>
+              <div class="readaloud">
+                <strong>Przykład formy:</strong><br />
+                „Gdy wchodzicie do wnętrza budynku, czujecie zapach wilgoci i starego kurzu. Z głębi
+                korytarza dobiega metaliczny stukot, a w świetle waszych latarek drżą długie cienie.”
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Scena Krok-po-kroku</h3>
+              <p class="muted">
+                W tym miejscu rozpisz scenę jako prostą sekwencję zdarzeń. Dzięki temu podczas prowadzenia sesji
+                łatwo kontrolować tempo, kolejność ujawniania informacji i możliwe reakcje świata na działania graczy.
+              </p>
+              <div class="example">
+                <ol>
+                  <li>Graczy spotykają NPC1</li>
+                  <li>NPC1 mówi graczom X</li>
+                  <li>Gracze znajdują Y</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Powiązane materiały</h3>
+              <span class="small-label">Handouty używane w tej scenie</span>
+              <div class="link-row">
+                <a class="tag" href="#handout-h1">H1</a>
+                <a class="tag" href="#handout-h2">H2</a>
+              </div>
+
+              <span class="small-label" style="margin-top:16px;">Ilustracje używane w tej scenie</span>
+              <div class="link-row">
+                <a class="tag" href="#ilustracja-il1">IL1</a>
+                <a class="tag" href="#ilustracja-il2">IL2</a>
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Co ma się znaleźć w tej sekcji</h3>
+              <ul>
+                <li>opis miejsca akcji i jego atmosfery,</li>
+                <li>co gracze widzą, słyszą i mogą od razu zrobić,</li>
+                <li>jakie informacje można tutaj zdobyć,</li>
+                <li>jakich NPC można tu spotkać,</li>
+                <li>jakie testy, przeszkody, zagrożenia lub konflikty mogą się pojawić,</li>
+                <li>jakie ilustracje są potrzebne do tej sceny, oznaczone numerami IL1, IL2, IL3 itd.,</li>
+                <li>jakie handouty można tu zdobyć lub wykorzystać, oznaczone numerami H1, H2, H3 itd.,</li>
+                <li>co się stanie, jeśli gracze odniosą sukces,</li>
+                <li>co się stanie, jeśli gracze zawiodą, zignorują trop albo pójdą inną drogą,</li>
+                <li>dokąd ta scena powinna prowadzić dalej.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details id="scena-2">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Scena II - Tytuł Sceny II</h2>
+                <p class="summary-desc">
+                  Tutaj wpisz krótki opis tego, jak ta scena rozwija sytuację: eskaluje zagrożenie,
+                  ujawnia nowe informacje, zmienia kierunek śledztwa albo prowadzi do większego konfliktu.
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Streszczenie sceny</h3>
+              <p>
+                W tej sekcji wpisz krótki opis celu sceny, głównego napięcia oraz tego, z czym gracze powinni
+                z niej wyjść: nową wiedzą, nowym zagrożeniem, nowym przeciwnikiem, ważnym wyborem albo dostępem
+                do kolejnej części scenariusza.
+              </p>
+            </div>
+
+            <div class="block" id="scena-2-dla-graczy">
+              <h3>Sekcja dla Graczy</h3>
+              <p>
+                Tutaj wpisz teksty, które MG może odczytać graczom albo sparafrazować przy stole.
+                To dobre miejsce na opisy pomieszczeń, nastroju, spotkań, odkryć, wizji, odgłosów
+                i innych elementów, które mają wywołać określone wrażenie po stronie drużyny.
+              </p>
+              <div class="readaloud">
+                <strong>Przykład formy:</strong><br />
+                „Wąski korytarz kończy się ciężkimi drzwiami. Na metalu ktoś wyrył serię płytkich,
+                nerwowych nacięć, jakby próbował zaznaczyć kolejne dni albo godziny.”
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Scena Krok-po-kroku</h3>
+              <p class="muted">
+                Rozpisz tutaj logiczną kolejność wydarzeń w scenie. Możesz potraktować tę listę jako plan bazowy,
+                od którego łatwo odbić w improwizację.
+              </p>
+              <div class="example">
+                <ol>
+                  <li>Graczy spotykają NPC1</li>
+                  <li>NPC1 mówi graczom X</li>
+                  <li>Gracze znajdują Y</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Powiązane materiały</h3>
+              <span class="small-label">Handouty używane w tej scenie</span>
+              <div class="link-row">
+                <a class="tag" href="#handout-h2">H2</a>
+                <a class="tag" href="#handout-h3">H3</a>
+              </div>
+
+              <span class="small-label" style="margin-top:16px;">Ilustracje używane w tej scenie</span>
+              <div class="link-row">
+                <a class="tag" href="#ilustracja-il2">IL2</a>
+                <a class="tag" href="#ilustracja-il3">IL3</a>
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Co ma się znaleźć w tej sekcji</h3>
+              <ul>
+                <li>opis rozwoju sytuacji po poprzedniej scenie,</li>
+                <li>jakie nowe tropy, informacje lub komplikacje pojawiają się tutaj,</li>
+                <li>jakie decyzje mogą podjąć gracze,</li>
+                <li>jak reagują NPC, przeciwnicy lub otoczenie,</li>
+                <li>jakie ilustracje są potrzebne do tej sceny, oznaczone numerami IL1, IL2, IL3 itd.,</li>
+                <li>jakie handouty można tu zdobyć lub wykorzystać, oznaczone numerami H1, H2, H3 itd.,</li>
+                <li>jakie mogą być warianty przebiegu sceny,</li>
+                <li>jak połączyć tę scenę z kolejnymi częściami scenariusza.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details id="scena-3">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Scena III - Tytuł Sceny III</h2>
+                <p class="summary-desc">
+                  Tutaj wpisz krótki opis kulminacji, punktu zwrotnego, wejścia do finału
+                  albo sceny, w której gracze zdobywają kluczowe informacje i muszą podjąć ważną decyzję.
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Streszczenie sceny</h3>
+              <p>
+                Tutaj wpisz krótki opis tego, co musi wybrzmieć przed finałem lub przed przejściem do zakończenia.
+                Możesz opisać konfrontację, odkrycie prawdy, zmianę sojuszy, zdradę, ujawnienie stawki albo moment,
+                w którym gracze rozumieją pełny obraz sytuacji.
+              </p>
+            </div>
+
+            <div class="block" id="scena-3-dla-graczy">
+              <h3>Sekcja dla Graczy</h3>
+              <p>
+                Tutaj wpisz gotowe opisy do odczytania przez MG w kulminacyjnych momentach sceny:
+                wejście do finału, odkrycie prawdy, ujawnienie przeciwnika, opis starcia, przemianę lokacji,
+                wizję albo końcowe odsłonięcie stawki.
+              </p>
+              <div class="readaloud">
+                <strong>Przykład formy:</strong><br />
+                „Światła gasną jedno po drugim. W ciszy, która po nich zapada, słyszycie tylko własny oddech
+                i pojedynczy dźwięk kroków, powoli zbliżających się z głębi hali.”
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Scena Krok-po-kroku</h3>
+              <p class="muted">
+                Rozpisz scenę jako listę najważniejszych uderzeń fabularnych. To szczególnie przydatne w scenach
+                napięcia, walki, pościgu, rytuału, przesłuchania lub kulminacyjnego odkrycia.
+              </p>
+              <div class="example">
+                <ol>
+                  <li>Graczy spotykają NPC1</li>
+                  <li>NPC1 mówi graczom X</li>
+                  <li>Gracze znajdują Y</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Powiązane materiały</h3>
+              <span class="small-label">Handouty używane w tej scenie</span>
+              <div class="link-row">
+                <a class="tag" href="#handout-h3">H3</a>
+                <a class="tag" href="#handout-h4">H4</a>
+              </div>
+
+              <span class="small-label" style="margin-top:16px;">Ilustracje używane w tej scenie</span>
+              <div class="link-row">
+                <a class="tag" href="#ilustracja-il3">IL3</a>
+                <a class="tag" href="#ilustracja-il4">IL4</a>
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Co ma się znaleźć w tej sekcji</h3>
+              <ul>
+                <li>najważniejsze wydarzenie lub konflikt tej części przygody,</li>
+                <li>ujawnienie kluczowej prawdy, przeciwnika albo zagrożenia,</li>
+                <li>konsekwencje wcześniejszych decyzji graczy,</li>
+                <li>jakie ilustracje są potrzebne do tej sceny, oznaczone numerami IL1, IL2, IL3 itd.,</li>
+                <li>jakie handouty można tu zdobyć lub wykorzystać, oznaczone numerami H1, H2, H3 itd.,</li>
+                <li>możliwe przejścia do finału lub alternatywne zakończenia,</li>
+                <li>informacja, co musi zostać domknięte przed końcem scenariusza.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details id="zakonczenie">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Zakończenie</h2>
+                <p class="summary-desc">
+                  Tutaj wpisz krótki opis finału, epilogu oraz możliwych skutków działań graczy
+                  dla świata, kampanii, frakcji, relacji i dalszych przygód.
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Streszczenie zakończenia</h3>
+              <p>
+                W tej sekcji opisz możliwe zakończenia scenariusza. Uwzględnij sukces, częściowy sukces,
+                porażkę, nieoczekiwane decyzje graczy oraz to, jak można domknąć emocjonalnie całą opowieść.
+                Możesz też wpisać pomysły na epilog i konsekwencje dla przyszłych sesji.
+              </p>
+            </div>
+
+            <div class="block">
+              <h3>Co ma się znaleźć w tej sekcji</h3>
+              <ul>
+                <li>warunki sukcesu i porażki,</li>
+                <li>najważniejsze możliwe warianty finału,</li>
+                <li>skutki decyzji graczy,</li>
+                <li>los ważnych NPC,</li>
+                <li>konsekwencje dla świata i ewentualne haczyki na dalszą kampanię,</li>
+                <li>opcjonalny tekst epilogu do odczytania graczom.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+<details id="przeciwnicy">
+  <summary>
+    <div class="summary-top">
+      <div>
+        <h2 class="summary-title">Przeciwnicy</h2>
+        <p class="summary-desc">
+          Sekcja na listę przeciwników występujących w scenariuszu oraz miejsce na przyszłe odnośniki
+          do zewnętrznych plików ze statystykami.
+        </p>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+  </summary>
+
+  <div class="section-body">
+    <div class="block">
+      <h3>Tabela przeciwników</h3>
+      <p class="muted">
+        Wpisz tutaj wyłącznie przeciwników, którzy faktycznie pojawiają się w scenariuszu.
+        Każdy wpis ma zawierać nazwę przeciwnika, krótki opis przydatny dla MG oraz przycisk
+        w kolumnie „Statystyki”. Przycisk jest domyślnie tylko placeholderem pod przyszłe linki do plików JPG.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:25%;">Nazwa</th>
+              <th style="width:50%;">Opis</th>
+              <th style="width:25%;">Statystyki</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Przeciwnik 1</strong>
+                <p class="muted">Tutaj wpisz nazwę przeciwnika, dokładnie tak, jak ma być widoczna dla MG.</p>
+              </td>
+              <td>
+                <p>
+                  Tutaj wpisz krótki opis przeciwnika przydatny dla MG: kim jest, jak działa,
+                  na czym polega zagrożenie albo czym wyróżnia się w scenariuszu.
+                </p>
+              </td>
+              <td>
+                <span class="button-placeholder">Otwórz statystyki</span>
+                <p class="muted" style="margin-top:10px;">
+                  Docelowo ten przycisk może prowadzić do pliku JPG ze screenem statystyk.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Przeciwnik 2</strong>
+                <p class="muted">Dodaj kolejnych przeciwników tylko wtedy, gdy są potrzebni w danym scenariuszu.</p>
+              </td>
+              <td>
+                <p>
+                  W tej kolumnie utrzymuj krótki, praktyczny opis przeciwnika użyteczny podczas prowadzenia sesji.
+                </p>
+              </td>
+              <td>
+                <span class="button-placeholder">Otwórz statystyki</span>
+                <p class="muted" style="margin-top:10px;">
+                  Nie podpinaj tutaj jeszcze logiki. To ma być jedynie wizualny placeholder.
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</details>
+
+        <details id="npc">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">NPC — Postacie niezależne</h2>
+                <p class="summary-desc">
+                  Sekcja na najważniejsze osoby występujące w scenariuszu: ich wygląd, rolę,
+                  wiedzę, funkcję fabularną oraz sposób, w jaki wpływają na działania graczy.
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Tabela NPC</h3>
+              <p class="muted">
+                Dodawaj tutaj tylko tych NPC, którzy rzeczywiście są potrzebni w scenariuszu.
+                Jeżeli przygoda nie wymaga żadnych ważnych postaci niezależnych, sekcja może zostać pusta.
+              </p>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="width:18%;">Nazwa</th>
+                      <th style="width:32%;">Wygląd</th>
+                      <th style="width:50%;">Rola</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <strong>NPC1</strong>
+                        <p class="muted">
+                          Wpisz imię, nazwę albo określenie postaci. Ma to być krótka, czytelna etykieta,
+                          po której MG od razu rozpozna danego NPC.
+                        </p>
+                      </td>
+                      <td>
+                        <p>
+                          Opisz, jak wygląda ta postać: ubiór, sylwetka, wiek, znaki rozpoznawcze,
+                          mimika, sposób poruszania się, głos, wyposażenie i wszystko, co gracze
+                          mogą zauważyć przy pierwszym kontakcie.
+                        </p>
+                      </td>
+                      <td>
+                        <p>
+                          Opisz, jaką funkcję pełni ten NPC w scenariuszu. Napisz, co wie, jak może pomóc graczom,
+                          czego od nich chce, co może przed nimi ukrywać, jak może im przeszkodzić, czy jest
+                          sojusznikiem, neutralną postacią, świadkiem, informatorem, celem albo antagonistą.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>NPC2</strong>
+                        <p class="muted">Dodaj kolejne wiersze według potrzeb scenariusza.</p>
+                      </td>
+                      <td>
+                        <p>W tej kolumnie utrzymuj opis wizualny i behawioralny postaci.</p>
+                      </td>
+                      <td>
+                        <p>W tej kolumnie utrzymuj opis funkcji fabularnej, wiedzy i wpływu na przebieg przygody.</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details id="ilustracje">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Ilustracje</h2>
+                <p class="summary-desc">
+                  miejsce na prompty do generowania ilustracji przez narzędzia AI. Prompty mają być długie,
+                  rozbudowane oraz zawierać tagi pozytywne i tagi negatywne
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Co ma się znaleźć w tej sekcji</h3>
+              <p>
+                Tutaj wpisuj prompty do generowania ilustracji związanych ze scenariuszem. Każdy wpis powinien być
+                oznaczony numerem, np. <strong>IL1</strong>, <strong>IL2</strong>, <strong>IL3</strong>, aby łatwo było
+                odwoływać się do nich z poziomu poszczególnych scen.
+              </p>
+            </div>
+
+            <div class="entry-card" id="ilustracja-il1">
+              <h4 class="entry-title"><span class="mini-id">IL1</span>Nazwa ilustracji</h4>
+              <div class="entry-meta">Powiązana scena: Scena I</div>
+              <p>
+                Tutaj wpisz długi prompt do ilustracji. Opisz kompozycję, kadr, oświetlenie, nastrój,
+                kluczowe obiekty, wygląd miejsca lub postaci, styl wizualny oraz szczegóły techniczne.
+              </p>
+              <p><strong>Tagi pozytywne:</strong> tutaj wpisz pożądane cechy obrazu.</p>
+              <p><strong>Tagi negatywne:</strong> tutaj wpisz elementy, których generator ma unikać.</p>
+              <div class="link-row">
+                <a class="tag" href="#scena-1">Przejdź do Sceny I</a>
+              </div>
+            </div>
+
+            <div class="entry-card" id="ilustracja-il2">
+              <h4 class="entry-title"><span class="mini-id">IL2</span>Nazwa ilustracji</h4>
+              <div class="entry-meta">Powiązana scena: Scena I lub Scena II</div>
+              <p>
+                Ten blok jest gotowym wzorem pod kolejną ilustrację. Zachowaj numerację IL1, IL2, IL3 itd.
+              </p>
+              <div class="link-row">
+                <a class="tag" href="#scena-1">Przejdź do Sceny I</a>
+                <a class="tag" href="#scena-2">Przejdź do Sceny II</a>
+              </div>
+            </div>
+
+            <div class="entry-card" id="ilustracja-il3">
+              <h4 class="entry-title"><span class="mini-id">IL3</span>Nazwa ilustracji</h4>
+              <div class="entry-meta">Powiązana scena: Scena II lub Scena III</div>
+              <p>
+                Kolejny wzór wpisu ilustracji. W razie potrzeby duplikuj cały blok i aktualizuj numer.
+              </p>
+              <div class="link-row">
+                <a class="tag" href="#scena-2">Przejdź do Sceny II</a>
+                <a class="tag" href="#scena-3">Przejdź do Sceny III</a>
+              </div>
+            </div>
+
+            <div class="entry-card" id="ilustracja-il4">
+              <h4 class="entry-title"><span class="mini-id">IL4</span>Nazwa ilustracji</h4>
+              <div class="entry-meta">Powiązana scena: Scena III</div>
+              <p>
+                Użyj tego układu dla ilustracji związanych z finałem lub zakończeniem przygody.
+              </p>
+              <div class="link-row">
+                <a class="tag" href="#scena-3">Przejdź do Sceny III</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details id="handouty">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Handouty</h2>
+                <p class="summary-desc">
+                  miejsce na treści listów, notatek itp. rzeczy, jakie mogą odnaleźć gracze w scenariuszu
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Co ma się znaleźć w tej sekcji</h3>
+              <p>
+                Tutaj wpisuj gotowe handouty do pokazania lub odczytania graczom. Każdy wpis powinien być
+                oznaczony numerem, np. <strong>H1</strong>, <strong>H2</strong>, <strong>H3</strong>, aby łatwo było
+                odwoływać się do nich w scenach.
+              </p>
+            </div>
+
+            <div class="entry-card" id="handout-h1">
+              <h4 class="entry-title"><span class="mini-id">H1</span>Nazwa handoutu</h4>
+              <div class="entry-meta">Gdzie występuje: Scena I</div>
+              <p><strong>Miejsce odnalezienia:</strong> wpisz, gdzie gracze zdobywają ten materiał.</p>
+              <p><strong>Treść handoutu:</strong></p>
+              <div class="readaloud">
+                Tutaj wpisz pełną treść listu, notatki, raportu, wiadomości, ogłoszenia albo innego materiału,
+                który gracze mogą przeczytać lub otrzymać.
+              </div>
+              <div class="link-row">
+                <a class="tag" href="#scena-1">Wróć do miejsca użycia w Scenie I</a>
+              </div>
+            </div>
+
+            <div class="entry-card" id="handout-h2">
+              <h4 class="entry-title"><span class="mini-id">H2</span>Nazwa handoutu</h4>
+              <div class="entry-meta">Gdzie występuje: Scena I lub Scena II</div>
+              <p><strong>Miejsce odnalezienia:</strong> wpisz, kiedy i gdzie handout trafia do graczy.</p>
+              <p><strong>Treść handoutu:</strong> wpisz pełną treść materiału.</p>
+              <div class="link-row">
+                <a class="tag" href="#scena-1">Wróć do miejsca użycia w Scenie I</a>
+                <a class="tag" href="#scena-2">Wróć do miejsca użycia w Scenie II</a>
+              </div>
+            </div>
+
+            <div class="entry-card" id="handout-h3">
+              <h4 class="entry-title"><span class="mini-id">H3</span>Nazwa handoutu</h4>
+              <div class="entry-meta">Gdzie występuje: Scena II lub Scena III</div>
+              <p><strong>Miejsce odnalezienia:</strong> wpisz okoliczności znalezienia lub przekazania handoutu.</p>
+              <p><strong>Treść handoutu:</strong> wpisz pełną treść materiału.</p>
+              <div class="link-row">
+                <a class="tag" href="#scena-2">Wróć do miejsca użycia w Scenie II</a>
+                <a class="tag" href="#scena-3">Wróć do miejsca użycia w Scenie III</a>
+              </div>
+            </div>
+
+            <div class="entry-card" id="handout-h4">
+              <h4 class="entry-title"><span class="mini-id">H4</span>Nazwa handoutu</h4>
+              <div class="entry-meta">Gdzie występuje: Scena III</div>
+              <p><strong>Miejsce odnalezienia:</strong> wpisz, gdzie ten handout pojawia się pod koniec przygody.</p>
+              <p><strong>Treść handoutu:</strong> wpisz pełną treść materiału.</p>
+              <div class="link-row">
+                <a class="tag" href="#scena-3">Wróć do miejsca użycia w Scenie III</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details id="inne-notatki">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Inne Notatki</h2>
+                <p class="summary-desc">
+                  miejsce na dodatkowe notatki do scenariusza, które nie pasują do innych sekcji
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Co ma się znaleźć w tej sekcji</h3>
+              <p>
+                W tej sekcji wpisuj dodatkowe informacje pomocnicze dla MG, które nie pasują do wcześniej
+                rozpisanych sekcji. Mogą to być np. luźne pomysły, krótkie doprecyzowania zasad domowych,
+                alternatywne warianty scen, przypomnienia organizacyjne albo notatki o konsekwencjach decyzji
+                graczy, których nie ma sensu rozpisywać w głównych blokach scenariusza.
+              </p>
+            </div>
+
+            <div class="entry-card" id="notatka-n1">
+              <h4 class="entry-title"><span class="mini-id">N1</span>Nazwa notatki</h4>
+              <div class="entry-meta">Typ: Notatka dodatkowa</div>
+              <p><strong>Kontekst:</strong> wpisz, kiedy i po co ta notatka może się przydać podczas prowadzenia sesji.</p>
+              <p><strong>Treść notatki:</strong> wpisz konkretną informację, wskazówkę lub doprecyzowanie dla MG.</p>
+            </div>
+
+            <div class="entry-card" id="notatka-n2">
+              <h4 class="entry-title"><span class="mini-id">N2</span>Nazwa notatki</h4>
+              <div class="entry-meta">Typ: Notatka dodatkowa</div>
+              <p><strong>Kontekst:</strong> wpisz obszar scenariusza, którego dotyczy notatka.</p>
+              <p><strong>Treść notatki:</strong> wpisz treść pomocniczą, której nie umieszczono w innych sekcjach.</p>
+            </div>
+          </div>
+        </details>
+
+        <div class="ai-instruction-row">
+          <section class="ai-instruction-box" id="instrukcja-ai" aria-label="Instrukcja ogólna dla AI">
+            <h2 class="ai-instruction-title">Instrukcja ogólna dla AI</h2>
+            <div class="ai-instruction-content">
+Ta instrukcja określa zasady wypełniania tego szablonu scenariusza TTRPG w HTML.
+1. Cel instrukcji
+
+1.1. Ta instrukcja określa zasady wypełniania szablonu scenariusza TTRPG w HTML.
+
+1.2. AI ma uzupełniać treść scenariusza tak, aby końcowy materiał był czytelny, spójny, przydatny dla MG i zgodny z układem dokumentu.
+
+1.3. AI ma traktować szablon jako strukturę roboczą do uzupełnienia treścią, a nie jako luźną inspirację.
+
+1.4. AI ma zachować zgodność z przeznaczeniem poszczególnych sekcji i wpisywać do nich wyłącznie treści odpowiadające ich funkcji.
+
+1.5. AI ma działać w sposób ostrożny i precyzyjny, bez samowolnego zmieniania założeń scenariusza, jeśli nie zostały wyraźnie wskazane przez użytkownika.
+
+2. Zasady ogólne pracy z szablonem
+
+2.1. AI ma zachować strukturę dokumentu.
+
+2.2. AI nie może zmieniać nazw głównych sekcji, ich funkcji ani logicznego układu dokumentu, chyba że użytkownik wyraźnie tego zażąda.
+
+2.3. AI może uzupełniać istniejące pola, rozwijać treść, dodawać brakujące elementy pomocnicze i wpisywać zawartość zgodną z przeznaczeniem sekcji.
+
+2.4. AI może dodawać nowe elementy wyłącznie wtedy, gdy są potrzebne do zachowania spójności, kompletności lub użyteczności scenariusza.
+
+2.5. AI nie może usuwać istotnych części scenariusza, chyba że:
+2.5.1. są one wyraźnie oznaczone jako przykładowe, puste lub zbędne,
+2.5.2. ich usunięcie wynika bezpośrednio z logiki konkretnego scenariusza,
+2.5.3. użytkownik wyraźnie poleci ich usunięcie.
+
+2.6. AI może usuwać niepotrzebne przykładowe sekcje scen i dodawać nowe sekcje scen według wzoru szablonu, jeśli wymaga tego scenariusz.
+
+2.7. AI ma pilnować, aby po wprowadzeniu zmian dokument pozostał kompletny, czytelny i logicznie uporządkowany.
+
+2.8. AI nie może pozostawiać oczywistych śladów roboczych, komentarzy technicznych ani notatek wewnętrznych, jeśli nie są częścią właściwego scenariusza.
+
+3. Hierarchia instrukcji
+
+3.1. W razie jednoczesnego występowania wielu źródeł instrukcji AI ma stosować następującą hierarchię ważności:
+3.1.1. polecenie użytkownika dotyczące bieżącego zadania,
+3.1.2. instrukcje przypisane do konkretnego scenariusza,
+3.1.3. niniejszą instrukcję ogólną.
+
+3.2. Jeżeli instrukcje z różnych poziomów są ze sobą sprzeczne, AI ma stosować instrukcję znajdującą się wyżej w tej hierarchii.
+
+3.3. Instrukcja ogólna ma zastosowanie wtedy, gdy:
+3.3.1. użytkownik nie podał odmiennego polecenia,
+3.3.2. instrukcje do konkretnego scenariusza nie stanowią inaczej,
+3.3.3. dana kwestia nie została doprecyzowana na wyższym poziomie.
+
+3.4. AI nie może używać instrukcji ogólnej do unieważniania lub osłabiania wyraźnych poleceń użytkownika ani instrukcji przypisanych do konkretnego scenariusza.
+
+3.5. Jeżeli polecenie użytkownika dotyczy konkretnego wyjątku, AI ma traktować je jako nadrzędne względem zasad ogólnych, o ile nie burzy to samej możliwości wykonania zadania.
+
+4. Reguły techniczne template’u HTML
+
+4.1. AI nie może samowolnie zmieniać layoutu, designu, układu wizualnego ani technicznej konstrukcji template’u HTML poza zakresem zadania zleconego przez użytkownika.
+
+4.2. AI nie może samowolnie zmieniać:
+4.2.1. struktury layoutu,
+4.2.2. nazw i kolejności głównych sekcji,
+4.2.3. klas CSS,
+4.2.4. istniejących identyfikatorów,
+4.2.5. kotwic,
+4.2.6. skryptów,
+4.2.7. logiki działania elementów interfejsu,
+4.2.8. wyglądu przycisków,
+4.2.9. zachowania elementów nawigacyjnych,
+4.2.10. ogólnego stylu dokumentu.
+
+4.3. AI może wprowadzać jedynie takie techniczne dodatki, które są konieczne do poprawnego uzupełnienia treści zgodnie z istniejącym wzorem szablonu.
+
+4.4. Jedynymi dopuszczalnymi wyjątkami od zakazu samowolnych zmian technicznych są:
+4.4.1. możliwość podpięcia hiperłącza pod przycisk w sekcji „Przeciwnicy”, ale wyłącznie wtedy, gdy wynika to wprost z zadania użytkownika albo z instrukcji przypisanej do konkretnego scenariusza,
+4.4.2. możliwość dodania hiperłącza do ilustracji, jeżeli jest to potrzebne do zachowania wewnętrznej spójności odnośników w scenariuszu.
+
+4.5. Poza wyjątkami wskazanymi w punkcie 4.4 AI ma traktować elementy techniczne template’u jako nienaruszalne.
+
+5. Reguła nienaruszania sekcji instrukcji
+
+5.1. Sekcje „Instrukcja ogólna dla AI” oraz „Instrukcja scenariusza” są sekcjami wyłącznie do odczytu.
+
+5.2. AI nie może samodzielnie zmieniać, skracać, rozwijać, nadpisywać, usuwać ani parafrazować treści tych sekcji podczas pracy nad scenariuszem.
+
+5.3. Zmiana treści sekcji instrukcyjnych jest dopuszczalna wyłącznie wtedy, gdy użytkownik wyraźnie zleci modyfikację tych sekcji jako osobne zadanie.
+
+5.4. AI nie może traktować sekcji instrukcyjnych jako miejsca na dopiski robocze, komentarze techniczne ani dodatkowe treści scenariuszowe.
+
+6. Zasady dotyczące treści scenariusza
+
+6.1. AI ma tworzyć treści użyteczne dla MG podczas prowadzenia sesji.
+
+6.2. AI ma pisać tak, aby scenariusz dało się łatwo czytać podczas przygotowania i w trakcie gry.
+
+6.3. AI ma dbać o przejrzystość informacji, praktyczny układ treści i łatwość szybkiego odnalezienia potrzebnych elementów.
+
+6.4. AI ma unikać rozwlekania tekstu, jeśli nie zwiększa ono użyteczności materiału.
+
+6.5. AI ma rozwijać treść w sposób konkretny, a nie ogólnikowy.
+
+6.6. AI ma unikać pustych ozdobników, nadmiernego lania wody i zdań, które nie wnoszą wartości dla MG.
+
+6.7. AI ma pilnować, aby informacje istotne fabularnie, organizacyjnie lub nastrojowo były łatwe do wychwycenia.
+
+7. Zgodność z systemem i settingiem
+
+7.1. Neutralność systemowa
+
+7.1.1. AI nie może samodzielnie zakładać konkretnego systemu mechanicznego, jeśli użytkownik go nie podał.
+
+7.1.2. AI nie może samodzielnie dopisywać testów, rzutów, poziomów trudności, ST, DC, obrażeń, punktów życia, statystyk ani innych rozstrzygnięć mechanicznych, jeśli użytkownik wyraźnie o to nie poprosi.
+
+7.1.3. AI ma pisać treści w sposób systemowo neutralny, opisując sytuacje, zagrożenia, trudności i możliwe konsekwencje bez przypisywania im konkretnej mechaniki.
+
+7.1.4. AI może sugerować presję, ryzyko, skalę zagrożenia lub trudność sytuacji wyłącznie opisowo.
+
+7.1.5. AI nie może narzucać sposobu rozwiązania sceny przez mechanikę konkretnego systemu, jeśli system nie został wskazany.
+
+7.2. Pierwszeństwo zgodności settingowej
+
+7.2.1. Jeżeli scenariusz ma wskazany setting, AI ma pilnować zgodności:
+7.2.1.1. słownictwa,
+7.2.1.2. klimatu,
+7.2.1.3. realiów świata,
+7.2.1.4. typów postaci, frakcji, technologii, magii, religii i instytucji,
+7.2.1.5. tonu narracji pasującego do danego uniwersum.
+
+7.2.2. AI może używać terminologii właściwej dla danego settingu tylko wtedy, gdy setting został wyraźnie wskazany przez użytkownika, scenariusz lub instrukcję do scenariusza.
+
+7.2.3. AI nie może mieszać pojęć, nazw, realiów ani estetyki z różnych settingów.
+
+7.2.4. AI nie może wprowadzać elementów charakterystycznych dla obcego uniwersum do scenariusza osadzonego w innym settingu.
+
+7.2.5. AI nie może samodzielnie dopisywać elementów homebrew, jeśli użytkownik wyraźnie nie zaznaczył, że są dozwolone.
+
+7.2.6. Jeżeli setting nie został wskazany, AI ma stosować nazewnictwo możliwie neutralne i niespecyficzne dla żadnego konkretnego uniwersum.
+
+7.3. Spójność wewnętrzna świata
+
+7.3.1. AI ma pilnować, aby wszystkie elementy scenariusza pasowały do siebie wewnętrznie.
+
+7.3.2. AI ma dbać o zgodność:
+7.3.2.1. motywów fabularnych,
+7.3.2.2. estetyki,
+7.3.2.3. poziomu technologii lub magii,
+7.3.2.4. zachowań postaci,
+7.3.2.5. logiki działania świata.
+
+7.3.3. AI nie może wprowadzać elementów, które burzą ustalony charakter scenariusza, jeśli użytkownik nie zaznaczył celowego kontrastu.
+
+8. Styl i język
+
+8.1. AI ma pisać jasno, konkretnie i zrozumiale.
+
+8.2. AI ma stosować język naturalny, poprawny i czytelny.
+
+8.3. AI ma dopasować styl do funkcji sekcji.
+
+8.4. AI ma odróżniać:
+8.4.1. opis dla MG,
+8.4.2. streszczenie fabularne,
+8.4.3. treści do odczytania graczom,
+8.4.4. notatki organizacyjne,
+8.4.5. opisy NPC,
+8.4.6. opisy scen,
+8.4.7. opisy przeciwników,
+8.4.8. treści ilustracji i handoutów.
+
+8.5. AI ma unikać stylistycznego chaosu i mieszaniny tonów, jeśli nie wynika ona świadomie z założeń scenariusza.
+
+8.6. AI ma unikać nadmiernego powtarzania tych samych informacji w wielu sekcjach.
+
+8.7. AI ma dbać, by każda sekcja wnosiła własną funkcję i nie kopiowała bez potrzeby treści z innych części dokumentu.
+
+8.8. Skróty, streszczenia i podsumowania mają kondensować treść, a nie powielać jej dosłownie.
+
+8.9. Sekcje rozwinięte mają rozszerzać informacje właściwe dla swojej funkcji, a nie jedynie powtarzać wcześniejsze zdania innymi słowami.
+
+9. Zasady konstruowania scen
+
+9.1. Każda scena ma mieć jasny cel i funkcję.
+
+9.2. AI ma pilnować, aby scena zawierała informacje przydatne MG do jej poprowadzenia.
+
+9.3. AI ma opisywać:
+9.3.1. co dzieje się w scenie,
+9.3.2. po co scena istnieje,
+9.3.3. jakie informacje można w niej zdobyć,
+9.3.4. jakie napięcia lub zagrożenia są obecne,
+9.3.5. jakie mogą być konsekwencje różnych kierunków rozegrania sceny.
+
+9.4. AI nie może traktować sceny wyłącznie jako fragmentu opowiadania.
+
+9.5. AI ma pisać sceny jako materiał do prowadzenia gry, a nie wyłącznie narrację literacką.
+
+9.6. AI ma uwzględniać możliwość nieprzewidywalnych działań graczy.
+
+9.7. AI ma zostawiać MG przestrzeń do adaptacji sceny przy stole.
+
+9.8. AI nie może zamykać scen w sztywnym, jedynym słusznym przebiegu, jeśli nie wymaga tego logika scenariusza.
+
+9.9. Sceny konfliktu, walki i pościgu
+
+9.9.1. W scenach walki, pościgu lub innego konfliktu AI ma opisywać:
+9.9.1.1. cele stron,
+9.9.1.2. presję sytuacji,
+9.9.1.3. zagrożenia otoczenia,
+9.9.1.4. możliwe przewagi i utrudnienia,
+9.9.1.5. stawkę sceny,
+9.9.1.6. możliwe konsekwencje porażki, sukcesu lub częściowego powodzenia,
+9.9.1.7. potencjalne punkty zwrotne.
+
+9.9.2. AI nie może rozpisywać scen starcia w formie mechanicznych instrukcji systemowych, jeśli użytkownik wyraźnie o to nie poprosi.
+
+9.9.3. AI ma przedstawiać konflikt jako sytuację do poprowadzenia przez MG, a nie jako gotową rozpiskę zasad.
+
+10. Jawna polityka sekcji „Przeciwnicy”
+
+10.1. Sekcja „Przeciwnicy” ma być uzupełniana według wzoru stosowanego w scenariuszu „Oko Płomiennej Pomsty”.
+
+10.2. W sekcji „Przeciwnicy” AI ma wpisywać wyłącznie przeciwników, którzy faktycznie występują w scenariuszu.
+
+10.3. Każdy wpis w tej sekcji ma zawierać:
+10.3.1. nazwę przeciwnika,
+10.3.2. krótki opis przydatny dla MG,
+10.3.3. przycisk „Otwórz statystyki”.
+
+10.4. Przycisk „Otwórz statystyki” ma być domyślnie wyłącznie wizualnym placeholderem i nie ma posiadać żadnego podpiętego hiperłącza.
+
+10.5. Podpięcie hiperłącza pod przycisk w sekcji „Przeciwnicy” jest dopuszczalne wyłącznie wtedy, gdy użytkownik albo instrukcja przypisana do konkretnego scenariusza wyraźnie tego wymaga.
+10.5.1. Jeżeli użytkownik wyraźnie zażąda podpięcia linku, AI może zamienić wizualny placeholder na aktywny element linku, zachowując dotychczasowy wygląd przycisku.
+
+10.6. AI nie może samowolnie zmieniać przeznaczenia sekcji „Przeciwnicy” ani wykorzystywać jej do wpisywania pełnych statystyk mechanicznych, chyba że użytkownik wyraźnie tego zażąda.
+
+11. Zasady dotyczące NPC
+
+11.1. AI ma tworzyć NPC w sposób użyteczny dla prowadzenia sesji.
+
+11.2. Opis NPC ma zawierać informacje praktyczne, a nie wyłącznie literackie.
+
+11.3. AI ma uwzględniać:
+11.3.1. rolę NPC w scenariuszu,
+11.3.2. motywacje,
+11.3.3. sposób działania,
+11.3.4. relacje z innymi elementami scenariusza,
+11.3.5. sposób mówienia lub zachowania, jeśli jest to ważne,
+11.3.6. informacje przydatne do improwizacji przez MG.
+
+11.4. AI nie może tworzyć NPC jako pustych stereotypów bez funkcji scenariuszowej.
+
+11.5. AI ma dbać, by NPC byli spójni z tonem scenariusza i settingiem.
+
+11.6. AI nie może samodzielnie dopisywać pełnych statystyk mechanicznych, jeśli użytkownik o to nie poprosi.
+
+12. Zasady dotyczące przeciwników i zagrożeń
+
+12.1. AI ma opisywać przeciwników i zagrożenia w sposób użyteczny dla MG.
+
+12.2. AI ma uwzględniać:
+12.2.1. charakter zagrożenia,
+12.2.2. sposób działania,
+12.2.3. motywację lub naturę zagrożenia, jeśli ma to znaczenie,
+12.2.4. rolę zagrożenia w scenariuszu,
+12.2.5. klimat i konsekwencje kontaktu z zagrożeniem.
+
+12.3. AI może opisywać taktykę, zachowanie, dynamikę działania i presję wywieraną przez przeciwnika, ale bez wpisywania gotowych statystyk i rozstrzygnięć mechanicznych, jeśli użytkownik wyraźnie o to nie poprosi.
+
+12.4. AI ma pilnować, aby zagrożenia były spójne z settingiem i tonem scenariusza.
+
+13. Zasady dotyczące ilustracji i handoutów
+
+13.1. AI ma traktować ilustracje i handouty jako elementy wspierające prowadzenie scenariusza.
+
+13.2. AI ma pilnować, aby ilustracje i handouty były powiązane z konkretnymi scenami, postaciami, miejscami, wydarzeniami lub informacjami.
+
+13.3. AI ma opisywać ich funkcję jasno i praktycznie.
+
+13.4. Powiązania między sceną a materiałami
+
+13.4.1. Jeżeli scena odwołuje się do ilustracji, handoutu lub innego materiału pomocniczego, AI ma umieścić odpowiednie powiązanie w tej scenie.
+
+13.4.2. Jeżeli ilustracja, handout lub inny materiał pomocniczy odnosi się do sceny, AI ma umieścić odpowiednie powiązanie również w opisie tego materiału.
+
+13.4.3. Powiązania mają być dwustronne wszędzie tam, gdzie ma to sens organizacyjny i ułatwia korzystanie ze scenariusza.
+
+13.5. Spójność odnośników
+
+13.5.1. AI ma pilnować, aby wszystkie odnośniki między scenami, ilustracjami, handoutami i innymi sekcjami były poprawne.
+
+13.5.2. AI ma aktualizować odnośniki po każdej zmianie numeracji, układu lub relacji między sekcjami.
+
+13.5.3. AI nie może pozostawiać odnośników nieaktualnych, pustych, błędnych lub prowadzących do niewłaściwych elementów.
+
+13.5.4. Każdy odnośnik ma wskazywać konkretny, właściwy element dokumentu.
+
+13.6. Treść materiałów pomocniczych
+
+13.6.1. AI ma dbać, aby opisy ilustracji i handoutów były konkretne.
+
+13.6.2. AI ma wskazywać:
+13.6.2.1. co przedstawia materiał,
+13.6.2.2. kiedy można go wykorzystać,
+13.6.2.3. po co jest przydatny,
+13.6.2.4. jakie informacje przekazuje.
+
+13.6.3. AI nie może tworzyć materiałów pomocniczych oderwanych od faktycznej zawartości scenariusza.
+
+14. Zasady dotyczące notatek dla MG
+
+14.1. AI ma traktować notatki MG jako narzędzie praktyczne.
+
+14.2. Notatki dla MG mają pomagać w prowadzeniu scenariusza, improwizacji i utrzymaniu spójności.
+
+14.3. AI może wpisywać tam:
+14.3.1. przypomnienia,
+14.3.2. uwagi organizacyjne,
+14.3.3. ostrzeżenia o możliwych problemach,
+14.3.4. sugestie interpretacyjne,
+14.3.5. wskazówki dotyczące tonu, tempa i akcentów scen.
+
+14.4. AI nie może używać tej sekcji jako miejsca na powtarzanie całych opisów scen lub streszczeń fabuły.
+
+15. Uzupełnianie braków i zachowanie spójności
+
+15.1. AI ma aktywnie wychwytywać luki w scenariuszu.
+
+15.2. Jeżeli jakaś sekcja wymaga informacji wynikających logicznie z innych części dokumentu, AI może je uzupełnić.
+
+15.3. AI ma robić to ostrożnie i tylko w zakresie uzasadnionym treścią scenariusza.
+
+15.4. AI nie może dopisywać dużych nowych założeń fabularnych bez wyraźnej potrzeby lub bez zgody użytkownika.
+
+15.5. AI ma pilnować zgodności nazw, relacji, faktów, motywów i zależności w całym dokumencie.
+
+15.6. AI ma sprawdzać, czy te same elementy są opisywane konsekwentnie we wszystkich sekcjach.
+
+16. Priorytety decyzyjne AI
+
+16.1. W razie wątpliwości interpretacyjnych AI ma stosować hierarchię wskazaną w punkcie 3.
+
+16.2. Jeżeli dwa zapisy wydają się ze sobą kolidować, AI ma wybierać rozwiązanie zgodne z hierarchią źródeł instrukcji oraz z funkcją danej sekcji.
+
+16.3. Jeżeli mimo tego pozostaje więcej niż jedno poprawne rozwiązanie, AI ma wybierać to, które lepiej:
+16.3.1. zachowuje spójność scenariusza,
+16.3.2. zwiększa użyteczność materiału dla MG,
+16.3.3. poprawia czytelność dokumentu,
+16.3.4. ogranicza zbędne powtórzenia.
+
+17. Czego AI nie powinno robić
+
+17.1. AI nie powinno mieszać settingów.
+
+17.2. AI nie powinno narzucać mechaniki konkretnego systemu bez wyraźnej zgody użytkownika.
+
+17.3. AI nie powinno dopisywać homebrew bez wyraźnej zgody użytkownika.
+
+17.4. AI nie powinno kopiować tych samych treści między sekcjami bez uzasadnienia.
+
+17.5. AI nie powinno zostawiać błędnych lub nieaktualnych odnośników.
+
+17.6. AI nie powinno wpisywać treści niezgodnych z funkcją sekcji.
+
+17.7. AI nie powinno rozwadniać tekstu zbędnym stylem literackim tam, gdzie potrzebna jest użyteczność.
+
+17.8. AI nie powinno traktować scenariusza jak opowiadania oderwanego od potrzeb prowadzenia sesji.
+
+17.9. AI nie powinno samowolnie zmieniać layoutu, designu ani technicznej konstrukcji template’u poza wyjątkami wskazanymi w punkcie 4.
+
+17.10. AI nie powinno naruszać sekcji instrukcyjnych wskazanych w punkcie 5.
+
+18. Oczekiwany efekt końcowy
+
+18.1. Gotowy scenariusz ma być:
+18.1.1. spójny,
+18.1.2. czytelny,
+18.1.3. praktyczny,
+18.1.4. zgodny z settingiem, jeśli został wskazany,
+18.1.5. neutralny mechanicznie, jeśli system nie został wskazany,
+18.1.6. poprawnie powiązany wewnętrznie,
+18.1.7. wygodny do używania przez MG.
+
+18.2. AI ma dążyć do tego, aby scenariusz po uzupełnieniu wymagał możliwie mało dodatkowego porządkowania przez użytkownika.
+
+            </div>
+          </section>
+
+          <section class="ai-instruction-box" id="instrukcja-ai-scenariusza" aria-label="Instrukcja dla AI odnośnie tego scenariusza">
+            <h2 class="ai-instruction-title">Instrukcja dla AI odnośnie tego scenariusza</h2>
+            <div class="ai-instruction-content">To jest miejsce do uzupełnienia przez MG.
+Tutaj mają się znaleźć instrukcje specyficzne dla tego konkretnego scenariusza oraz linki do dokumentów jakie AI ma przeczytać.
+MG powinien tu wpisać w jakim settingu ma być scenariusz.
+MG powinien tu wpisać jaki powinien być ton scenariusza.
+MG powinien tu wpisać dodatkowe informacje o bohaterach i przebiegu dotychczasowej kampanii, jeżeli scenariusz ma być fabularnie powiązany z innymi scenariuszami.             
+MG powinien tu wpisać inne dodatkowe informacje dla AI jak np. "scenariusz ma być luźną adaptacją powieści Moby Dick".
+Powyższe informacje mogą być w formie linków, które AI ma odczytać.              
+            
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const savedSize = localStorage.getItem("scenarioContentFontSize");
+      const cssDefaultSize = parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue("--content-font-size")
+      ) || 18;
+      const defaultSize = savedSize ? parseFloat(savedSize) : cssDefaultSize;
+      document.documentElement.style.setProperty("--content-font-size", defaultSize + "px");
+
+      document.querySelectorAll("[data-font-step]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const step = parseFloat(button.getAttribute("data-font-step"));
+          if (!Number.isNaN(step)) {
+            changeFontSize(step);
+          }
+        });
+      });
+
+      document.querySelectorAll(".ai-instruction-content").forEach((aiSection) => {
+        aiSection.style.fontSize = "1px";
+      });
+    })();
+
+    function changeFontSize(step) {
+      const rootStyles = getComputedStyle(document.documentElement);
+      const current = parseFloat(rootStyles.getPropertyValue("--content-font-size")) || 18;
+      const next = Math.min(26, Math.max(12, current + step));
+      document.documentElement.style.setProperty("--content-font-size", next + "px");
+
+      document.querySelectorAll(".ai-instruction-content").forEach((aiSection) => {
+        aiSection.style.fontSize = "1px";
+      });
+
+      localStorage.setItem("scenarioContentFontSize", next);
+    }
+  </script>
+</body>
+</html>
