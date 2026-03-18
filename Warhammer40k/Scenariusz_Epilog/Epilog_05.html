@@ -1,0 +1,1718 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cichy Dryf</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --bg-2: #111821;
+      --panel: #131b24;
+      --panel-2: #18222d;
+      --panel-3: #0f151d;
+      --text: #dce6f1;
+      --muted: #93a3b5;
+      --accent: #7fc8ff;
+      --accent-2: #89e0c2;
+      --border: #243140;
+      --border-strong: #324557;
+      --shadow: rgba(0, 0, 0, 0.42);
+      --sidebar-w: 290px;
+      --content-font-size: 18px;
+      --font-body: Calibri, Arial, Verdana, Tahoma, "Trebuchet MS";
+      --font-heading: "Trebuchet MS", Verdana, Arial, Tahoma, Calibri;
+      --font-navigation: Verdana, Tahoma, Arial, Calibri, "Trebuchet MS";
+      --font-ui: Tahoma, Verdana, Arial, Calibri, "Trebuchet MS";
+      --font-table: Arial, Calibri, Verdana, Tahoma, "Trebuchet MS";
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(127, 200, 255, 0.08), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(137, 224, 194, 0.05), transparent 22%),
+        linear-gradient(180deg, var(--bg), #080b10 100%);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.7;
+      font-size: 18px;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      align-self: flex-start;
+      width: var(--sidebar-w);
+      height: 100vh;
+      padding: 18px;
+      border-right: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0)),
+        rgba(9, 13, 18, 0.92);
+      backdrop-filter: blur(10px);
+      overflow-y: auto;
+      flex: 0 0 var(--sidebar-w);
+      font-size: 18px;
+    }
+
+    .sidebar-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 18px 40px var(--shadow);
+      padding: 18px;
+    }
+
+    .sidebar h2 {
+      font-family: var(--font-heading);
+      margin: 0 0 6px;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .sidebar-intro {
+      margin: 0 0 14px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.45;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding: 10px 12px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .toolbar button {
+      font-family: var(--font-ui);
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border-strong);
+      background: var(--panel-2);
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-size: 0.95rem;
+      text-align: left;
+      padding: 9px 12px;
+    }
+
+    .toolbar button:hover {
+      border-color: var(--accent);
+      color: white;
+    }
+
+    .nav-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .nav-link {
+      font-family: var(--font-navigation);
+      display: block;
+      text-decoration: none;
+      padding: 11px 13px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      color: var(--text);
+      background: transparent;
+      transition: 0.2s ease;
+      font-size: 0.98rem;
+    }
+
+    .nav-link:hover {
+      background: rgba(255,255,255,0.035);
+      border-color: var(--border);
+      color: var(--accent);
+      transform: translateX(2px);
+    }
+
+    .nav-link.is-main {
+      background: rgba(127, 200, 255, 0.06);
+      border-color: rgba(127, 200, 255, 0.14);
+    }
+
+    .nav-divider {
+      height: 1px;
+      margin: 14px 0;
+      background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+    }
+
+    .content {
+      flex: 1;
+      min-width: 0;
+      padding: 26px 24px 70px 24px;
+      font-size: var(--content-font-size);
+    }
+
+    .content-inner {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+    }
+
+    .hero,
+    details,
+    .ai-instruction-box {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 18px 40px var(--shadow);
+    }
+
+    .hero {
+      padding: 30px 28px;
+      margin-bottom: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top right, rgba(127, 200, 255, 0.09), transparent 25%),
+        radial-gradient(circle at bottom left, rgba(137, 224, 194, 0.06), transparent 20%);
+      pointer-events: none;
+    }
+
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-family: var(--font-heading);
+      margin: 0 0 12px;
+      font-size: 2.15em;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .lead {
+      color: var(--muted);
+      margin: 0;
+      max-width: none;
+    }
+
+    details {
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 20px 24px;
+      user-select: none;
+      background: linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0));
+      transition: 0.2s ease;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details[open] summary {
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(127, 200, 255, 0.05), rgba(255,255,255,0));
+    }
+
+    .summary-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .summary-title {
+      font-family: var(--font-heading);
+      margin: 0;
+      font-size: 1.35em;
+      line-height: 1.2;
+      letter-spacing: -0.01em;
+    }
+
+    .summary-desc {
+      margin: 8px 0 0;
+      color: var(--muted);
+    }
+
+    .chevron {
+      color: var(--accent);
+      font-size: 1.2em;
+      transition: transform 0.2s ease;
+      flex: 0 0 auto;
+      padding-top: 2px;
+    }
+
+    details[open] .chevron {
+      transform: rotate(180deg);
+    }
+
+    .section-body {
+      padding: 22px;
+      background: rgba(255,255,255,0.01);
+    }
+
+    .block {
+      margin-bottom: 18px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)),
+        var(--panel);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    .block:last-child {
+      margin-bottom: 0;
+    }
+
+    .block h3 {
+      font-family: var(--font-heading);
+      margin: 0 0 10px;
+      font-size: 1.04em;
+      color: var(--accent-2);
+      letter-spacing: 0.01em;
+    }
+
+    .block p,
+    .block li {
+      margin-top: 0;
+    }
+
+    .block ul,
+    .block ol {
+      margin: 0;
+      padding-left: 24px;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .example {
+      margin-top: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed var(--border-strong);
+    }
+
+    .small-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--muted);
+      font-size: 0.84em;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 34px;
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(127, 200, 255, 0.08);
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 0.9em;
+      transition: 0.2s ease;
+    }
+
+    .tag:hover {
+      border-color: var(--accent);
+      background: rgba(127, 200, 255, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--panel-3);
+    }
+
+    table {
+      font-family: var(--font-table);
+      width: 100%;
+      min-width: 760px;
+      border-collapse: collapse;
+    }
+
+    th,
+    td {
+      padding: 14px 16px;
+      text-align: left;
+      vertical-align: top;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    th:last-child,
+    td:last-child {
+      border-right: none;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    th {
+      background: rgba(255,255,255,0.04);
+      color: var(--accent-2);
+      font-size: 0.98em;
+    }
+
+    .button-placeholder {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 8px 14px;
+      border-radius: 11px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(127, 200, 255, 0.12), rgba(127, 200, 255, 0.04));
+      color: var(--text);
+      cursor: pointer;
+      transition: 0.2s ease;
+      user-select: none;
+    }
+
+    .button-placeholder:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .entry-card {
+      margin-bottom: 16px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)),
+        var(--panel-3);
+    }
+
+    .entry-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .entry-title {
+      font-family: var(--font-heading);
+      margin: 0 0 8px;
+      font-size: 1.05em;
+      color: var(--accent);
+    }
+
+    .entry-meta {
+      margin-bottom: 12px;
+      color: var(--muted);
+    }
+
+    .mini-id {
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--accent);
+      font-size: 0.86em;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .readaloud {
+      padding: 14px 16px;
+      border-left: 4px solid var(--accent);
+      border-radius: 12px;
+      background: rgba(127, 200, 255, 0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+
+    .ai-instruction-box {
+      margin-top: 26px;
+      padding: 14px;
+      background: #0a0d12;
+    }
+
+    .ai-instruction-row {
+      margin-top: 26px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .ai-instruction-row .ai-instruction-box {
+      margin-top: 0;
+    }
+
+    .ai-instruction-title {
+      font-family: var(--font-navigation);
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: #748190;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .ai-instruction-content {
+      font-size: 1px !important;
+      line-height: 1.2;
+      color: #808b97;
+      white-space: pre-wrap;
+      word-break: break-word;
+      user-select: text;
+    }
+
+    @media (max-width: 1100px) {
+      .layout {
+        display: block;
+      }
+
+      .sidebar {
+        position: static;
+        width: 100%;
+        height: auto;
+        max-height: none;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        overflow-y: visible;
+      }
+
+      .content {
+        padding: 20px 16px 60px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      :root {
+        --content-font-size: 17px;
+      }
+
+      .content {
+        font-size: var(--content-font-size);
+      }
+
+      .hero {
+        padding: 24px 20px;
+      }
+
+      .hero h1 {
+        font-size: 2em;
+      }
+
+      summary {
+        padding: 18px 18px;
+      }
+
+      .section-body {
+        padding: 16px;
+      }
+
+      .summary-title {
+        font-size: 1.15em;
+      }
+
+      table {
+        min-width: 620px;
+      }
+
+      .ai-instruction-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar" aria-label="Panel nawigacyjny scenariusza">
+      <div class="sidebar-card">
+
+        <div class="toolbar">
+          <button type="button" data-font-step="1" aria-label="Font ▲">Font ▲</button>
+          <button type="button" data-font-step="-1" aria-label="Font ▼">Font ▼</button>
+        </div>
+
+        <nav class="nav-group">
+          <a class="nav-link is-main" href="#wprowadzenie">Wprowadzenie</a>
+          <a class="nav-link is-main" href="#scena-1">Scena 1</a>
+          <a class="nav-link is-main" href="#scena-2">Scena 2</a>
+          <a class="nav-link is-main" href="#scena-3">Scena 3</a>
+          <a class="nav-link is-main" href="#zakonczenie">Zakończenie</a>
+
+          <div class="nav-divider"></div>
+
+          <a class="nav-link" href="#przeciwnicy">Przeciwnicy</a>
+          <a class="nav-link" href="#npc">NPC</a>
+          <a class="nav-link" href="#ilustracje">Ilustracje</a>
+          <a class="nav-link" href="#handouty">Handouty</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="content" id="contentArea">
+      <div class="content-inner">
+
+        <section class="hero" id="wprowadzenie">
+          <h1>Cichy Dryf</h1>
+          <p class="lead">
+            Głównie narracyjny epilog kampanii Warhammer 40,000 w układzie Gilead. Bohaterowie zostają wezwani do grupy zwiadowczej po odnalezieniu okrętu Aurelii, wyrzuconego z Osnowy w stanie przypominającym bardziej relikwię katastrofy niż zwykły wrak. Przygodę należy prowadzić w klimacie kosmicznego horroru inspirowanego „Event Horizon”: ciasne korytarze, martwa cisza, rosnące poczucie skażenia, coraz brutalniejsze ślady rzezi i odkrycie, że sama obecność statku mogła zostać naznaczona czymś gorszym niż śmierć. Kluczowym motywem sesji jest napięcie między „procedurą Imperium” a ludzką bezradnością wobec zjawiska, którego nie da się ani sklasyfikować, ani ukarać bolterem.
+          </p>
+
+          <div class="block" style="margin-top:20px;">
+            <h3>Skrót scenariusza</h3>
+            <p>
+              Okręt Aurelii zostaje odnaleziony po tym, jak zostaje dosłownie wypluty przez Osnowę. Jakel Varonius natychmiast organizuje ekspedycję zwiadowczą i włącza do niej bohaterów ze względu na ich osobistą znajomość z Aurelią. Oficjalnie mają pomóc w ewentualnym kontakcie, uspokojeniu jej lub negocjacjach. Nieoficjalnie Varonius chce mieć ich przy sobie jako narzędzie nacisku i żywe zabezpieczenie, jeśli sytuacja na pokładzie okaże się bardziej skomplikowana, niż zakładają raporty.
+            </p>
+            <p>
+              Wejście na statek zaczyna się jak wojskowa operacja, ale szybko przechodzi w horror eksploracyjny. Na pokładzie panuje nienaturalna cisza, przygaszone światła i osłabiona grawitacja. Początkowo bohaterowie znajdują tylko ślady nagle przerwanego życia: porzucone narzędzia, niezamknięte terminale, niedokończone modlitwy, zablokowane śluzy. Z czasem odkrycia stają się coraz gorsze: smugi krwi, szczątki załogi, ślady desperackich prób obrony, samookaleczeń i religijnego obłędu.
+            </p>
+            <p>
+              Droga na mostek powinna być długim zejściem w głąb traumy tego miejsca. Im dalej w głąb statku, tym bardziej korytarze wydają się obce, a zmysły zaczynają zawodzić. Finał rozgrywa się na mostku, gdzie bohaterowie odnajdują dziennik Aurelii, jej wydłubane trzecie oko oraz ślady wskazujące, że zobaczyła coś, czego ludzki umysł nie był w stanie unieść. Zakończenie ma domknąć emocjonalnie relację z Aurelią, ale nie musi dawać pełnej odpowiedzi na pytanie, co dokładnie spoglądało na statek z głębi Osnowy.
+            </p>
+          </div>
+        </section>
+
+        <details id="scena-1">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Scena 1 — Wezwanie i wejście na pokład</h2>
+                <p class="summary-desc">
+                  Otwarcie epilogu: wezwanie do ekspedycji, obecność Varoniusa, lot do odnalezionego wraku i pierwsze wejście na martwy okręt Aurelii.
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Streszczenie sceny</h3>
+              <p>
+                Scena istnieje po to, by ustawić stawkę emocjonalną i ton całej przygody. Bohaterowie zostają wciągnięci do ekspedycji nie jako zwykli członkowie oddziału, ale jako ludzie powiązani z Aurelią i przez to szczególnie użyteczni dla Varoniusa. Ma wybrzmieć jednocześnie wojskowa procedura, osobisty ciężar misji i poczucie, że nikt nie leci tam po prostu sprawdzić wraku.
+              </p>
+              <p>
+                Głównym konfliktem sceny jest napięcie między oficjalnym celem misji a ukrytym zamiarem Varoniusa. Gracze powinni wyjść z niej z przekonaniem, że zostali postawieni bardzo blisko centrum ryzyka, a samo wejście na okręt jest przekroczeniem progu z normalnej rzeczywistości w przestrzeń skażoną czymś obcym. Scena ma prowadzić bezpośrednio do eksploracji pierwszych pokładów. Dla MG to dobry moment, by podkreślić wojskową dyscyplinę: listy kontrolne, pieczęcie bezpieczeństwa, rytualne modlitwy techników i krótkie rozkazy urywane w pół słowa.
+              </p>
+            </div>
+
+            <div class="block" id="scena-1-dla-graczy">
+              <h3>Sekcja dla Graczy</h3>
+              <p>
+                Wezwanie przychodzi bez wyjaśnień i bez zwyczajowej ceremonialnej otoczki. Gdy docieracie do hangaru, od razu widzicie, że to nie jest rutynowe poderwanie. Obsługa pokładowa porusza się szybciej niż zwykle, technicy po raz kolejny sprawdzają uszczelnienia kombinezonów, a uzbrojeni żołnierze stoją już w pełnej gotowości, jakby za kilka minut mieli wkroczyć nie na wrak, lecz na pole bitwy.
+              </p>
+              <p>
+                W powietrzu miesza się zapach smaru, kadzidła i gorącego metalu. Serwitory mijają was z trzeszczącymi pakietami amunicji, a przez hangar niosą się urwane frazy litanii ochronnych. Nawet ludzie przyzwyczajeni do alarmów mówią półgłosem, jakby sama nazwa tej misji mogła ściągnąć pecha.
+              </p>
+              <div class="readaloud">
+                „Pośrodku tego wszystkiego stoi Jakel Varonius. Ciężki relikwiarny pancerz ekspedycyjny zamienia go w ruchomy pomnik własnej dynastii. Płyty zbroi są stare, bogato zdobione i kosztowne, ale przygotowane do próżni, abordażu i walki w ciasnych korytarzach. Gdy spogląda na was, nie wygląda jak człowiek, który potrzebuje pomocy. Wygląda jak ktoś, kto już zdecydował, kogo poświęci, jeśli misja się załamie.”
+              </div>
+              <p>
+                Varonius informuje krótko, że odnaleziono statek Aurelii i że lecicie natychmiast. Nie rozwija tematu. Nie mówi, w jakim stanie jest okręt. Nie mówi, czy wykryto sygnały życia. Nie mówi też, dlaczego sam bierze udział w misji. Im mniej słów pada, tym większy ciężar mają te, które już zostały wypowiedziane.
+              </p>
+              <div class="readaloud">
+                „Lot mija w czerwonym świetle alarmowym i ciszy ciężkiej jak ołów. Kadłub promu drży przy każdym manewrze. Nikt nie rozmawia. Kiedy przez wizjer po raz pierwszy widzicie jednostkę Aurelii, nie przypomina zniszczonego wraku. Wygląda raczej jak coś, co umarło, ale jeszcze nie zgodziło się na własną śmierć.”
+              </div>
+              <div class="readaloud">
+                „Po przebiciu śluzy wita was cisza. Nie zwykła cisza pustego statku, ale taka, która sprawia wrażenie, jakby cały okręt nasłuchiwał. Światła działają tylko częściowo. Grawitacja jest słaba; każdy krok kończy się lekkim uniesieniem i gwałtownym szarpnięciem magnetycznych butów. Powietrze smakuje metalem, ozonem i czymś słodkawym, ledwie uchwytnym, jak ślad starej krwi.”
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Scena Krok-po-kroku</h3>
+              <p class="muted">
+                To baza do utrzymania rytmu wejścia w horror. Najpierw formalna procedura i wojskowy porządek, potem stopniowe rozszczelnianie poczucia bezpieczeństwa.
+              </p>
+              <div class="example">
+                <ol>
+                  <li>Bohaterowie otrzymują natychmiastowe wezwanie do hangaru.</li>
+                  <li>Widzą przygotowaną ekspedycję: żołnierzy, specjalistów, Mechanicus i ciężkie wsparcie.</li>
+                  <li>Varonius osobiście ogłasza odnalezienie statku Aurelii i rozkazuje natychmiastowy wylot.</li>
+                  <li>MG podkreśla, że obecność graczy jest związana z ich relacją z Aurelią, ale nie ujawnia prawdziwych motywów Varoniusa.</li>
+                  <li>Podczas lotu narasta napięcie: milczenie, czerwone światła, wibracje kadłuba, widok wraku.</li>
+                  <li>Ekspedycja przebija się przez śluzę i wchodzi na pokład.</li>
+                  <li>Pierwsze wrażenia to martwa cisza, słaba grawitacja i wrażenie, że okręt nie jest po prostu opuszczony.</li>
+                  <li>Scena kończy się decyzją o marszu w głąb statku.</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Powiązane materiały</h3>
+              <span class="small-label">Handouty używane w tej scenie</span>
+              <div class="link-row">
+                <a class="tag" href="#handout-h1">H1</a>
+                <a class="tag" href="#handout-h2">H2</a>
+              </div>
+
+              <span class="small-label" style="margin-top:16px;">Ilustracje używane w tej scenie</span>
+              <div class="link-row">
+                <a class="tag" href="#ilustracja-il1">IL1</a>
+                <a class="tag" href="#ilustracja-il2">IL2</a>
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Co ma się znaleźć w tej sekcji</h3>
+              <ul>
+                <li>wojskowy i ceremonialny charakter przygotowań do misji,</li>
+                <li>osobista obecność Varoniusa i jego chłodna kontrola sytuacji,</li>
+                <li>subtelne sygnały, że bohaterowie zostali wybrani nie tylko z powodu kompetencji,</li>
+                <li>opis lotu jako przejścia z bezpiecznej rzeczywistości do przestrzeni grozy,</li>
+                <li>pierwsze wrażenia po wejściu na pokład: cisza, słaba grawitacja, metaliczny zapach, przygaszone światła,</li>
+                <li>utrzymanie tempa bez ujawniania zbyt wiele zbyt wcześnie,</li>
+                <li>czytelne przejście do sceny eksploracyjnej.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details id="scena-2">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Scena 2 — Puste korytarze i pierwsza krew</h2>
+                <p class="summary-desc">
+                  Rozwinięcie horroru: eksploracja kolejnych pokładów, pierwsze ślady rzezi, paniki i religijnego obłędu załogi.
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Streszczenie sceny</h3>
+              <p>
+                Ta scena ma stopniowo zmienić martwy okręt w miejsce autentycznej grozy. Początek powinien być cichy i niemal sterylny: przerwane czynności, porzucone przedmioty, ślady pośpiechu, barykadowane przejścia. Dopiero potem mają pojawić się pierwsze materialne ślady tragedii: krew, szczątki, ambulatoria zamienione w rzeźnie, kaplice splugawione desperacją.
+              </p>
+              <p>
+                Gracze powinni wynieść z tej sceny przekonanie, że załoga nie została po prostu zabita przez jednego napastnika. Coś najpierw rozdarło ich psychicznie, a dopiero potem zniszczyło fizycznie. Scena ma prowadzić do decyzji o dalszym marszu ku mostkowi, mimo rosnącego lęku i wyraźnych oznak, że każdy kolejny pokład jest gorszy od poprzedniego.
+              </p>
+            </div>
+
+            <div class="block" id="scena-2-dla-graczy">
+              <h3>Sekcja dla Graczy</h3>
+              <p>
+                Kolejne korytarze sprawiają wrażenie porzuconych w połowie czynności. Nie ma tu śladów klasycznej walki ani wielkich zniszczeń. Zamiast tego wszystko wygląda tak, jakby życie pokładowe urwało się nagle w jednym wspólnym momencie.
+              </p>
+              <p>
+                Im dłużej idziecie, tym bardziej narasta wrażenie, że statek nie jest martwy, tylko wstrzymany. Czasem słychać pojedyncze stuknięcie dobiegające z nieznanego pokładu, czasem cichy trzask instalacji vox, jakby ktoś próbował odpowiedzieć z bardzo daleka. Każdy drobny dźwięk brzmi tu nienaturalnie głośno.
+              </p>
+              <div class="readaloud">
+                „Przy jednym z terminali wciąż pulsuje lampka stanu. Obok unosi się w słabej grawitacji data-slate, wypuszczony z ręki tak nagle, że nikt nie zdążył go nawet zabezpieczyć. W bocznym przejściu stoi wózek serwisowy, a kilka narzędzi dryfuje nad nim leniwie jak owady zamknięte w bursztynie.”
+              </div>
+              <div class="readaloud">
+                „Mijacie małą kaplicę pokładową. Świece wypaliły się do końca. Zastygły wosk spływa po ołtarzu w długich, białych strużkach. Figura Imperatora jest pęknięta przez twarz. Ktoś próbował zaryglować drzwi od środka, ale metal wygiął się pod naporem tak silnym, że wygląda jak miękki ołów.”
+              </div>
+              <p>
+                Dalej ślady robią się bardziej dosłowne. Ambulatorium wygląda jak miejsce, w którym próbowano powstrzymać coś, czego medycyna nie rozumiała. Pasy przy kozetkach są zerwane, ściany noszą brunatne rozpryski, a na suficie zastygły smugi wskazujące, że ciała szarpały się w słabej grawitacji jak marionetki na zerwanych drutach.
+              </p>
+              <div class="readaloud">
+                „Pierwszy fragment zwłok odnajdujecie nie w wielkiej sali, ale w przewodzie technicznym. Dryfuje tam pojedyncza dłoń, skurczona tak mocno, że martwe palce nadal trzymają zerwany fragment różańca. Niedługo później traficie na pas skóry przywarte do pokładu, rozpruty kombinezon bez ciała i ślady zakrwawionych palców na wizjerze śluzy, jakby ktoś próbował wydrapać sobie drogę na zewnątrz.”
+              </div>
+              <div class="readaloud">
+                „Od czasu do czasu vox budzi się trzaskiem. Raz wydaje wam się, że słyszycie urwany rozkaz. Innym razem oddech. A raz coś tak podobnego do szeptu wypowiedzianego tuż przy uchu, że przez kilka sekund żaden z was nie chce się odezwać.”
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Scena Krok-po-kroku</h3>
+              <p class="muted">
+                Kluczem jest stopniowanie. Najpierw ślady pośpiechu i strachu, dopiero potem gore. Nie zaczynaj od największych obrazów grozy.
+              </p>
+              <div class="example">
+                <ol>
+                  <li>Bohaterowie badają pierwsze puste korytarze i znajdują ślady nagle przerwanego życia pokładowego.</li>
+                  <li>Odnajdują pomieszczenia pokazujące różne reakcje załogi: barykady, kaplicę, ambulatorium, śluzy serwisowe.</li>
+                  <li>Pojawiają się pierwsze oznaki fizycznej przemocy: krew, szczątki, urwane fragmenty ciał.</li>
+                  <li>MG wplata dźwiękowe niepokoje: trzaski w voxie, echo kroków, niejasne głosy.</li>
+                  <li>Ekspedycja może zacząć się łamać psychicznie lub rozpraszać pod wpływem odkryć.</li>
+                  <li>Bohaterowie znajdują ślady prowadzące ku centralnym pokładom i mostkowi.</li>
+                  <li>Scena kończy się uświadomieniem sobie, że tragedia miała także wymiar psychiczny, religijny i być może metafizyczny.</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Powiązane materiały</h3>
+              <span class="small-label">Handouty używane w tej scenie</span>
+              <div class="link-row">
+                <a class="tag" href="#handout-h2">H2</a>
+                <a class="tag" href="#handout-h3">H3</a>
+              </div>
+
+              <span class="small-label" style="margin-top:16px;">Ilustracje używane w tej scenie</span>
+              <div class="link-row">
+                <a class="tag" href="#ilustracja-il2">IL2</a>
+                <a class="tag" href="#ilustracja-il3">IL3</a>
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Co ma się znaleźć w tej sekcji</h3>
+              <ul>
+                <li>narastające poczucie, że statek sam pamięta swoją agonię,</li>
+                <li>przejście od zwykłej pustki do namacalnego horroru,</li>
+                <li>ślady paniki, modlitw, samookaleczeń i rozpadu dyscypliny załogi,</li>
+                <li>coraz mocniejsze elementy gore, ale dawkowane etapami,</li>
+                <li>dźwięki i zakłócenia, które budują niepewność bez pełnego ujawnienia zagrożenia,</li>
+                <li>wskazówki kierujące bohaterów ku mostkowi,</li>
+                <li>możliwość pokazania, że nawet uzbrojeni członkowie ekspedycji zaczynają się łamać.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details id="scena-3">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Scena 3 — Droga na mostek i ostatni obraz</h2>
+                <p class="summary-desc">
+                  Kulminacja horroru: coraz mniej realna droga ku mostkowi, ostatnie zapiski Aurelii i odkrycie, że zobaczyła coś gorszego od śmierci.
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Streszczenie sceny</h3>
+              <p>
+                To kulminacja epilogu. Bohaterowie przechodzą przez najgłębsze partie statku, gdzie fizyczny horror zaczyna mieszać się z załamaniem percepcji. Korytarze wydają się zbyt ciasne, światło pracuje skokami, vox przynosi już nie tylko szum, ale niemal obecność czyjegoś głosu. Wszystko ma prowadzić do mostka jako miejsca nie tyle walki, ile ostatecznego objawienia.
+              </p>
+              <p>
+                Gracze powinni wynieść z tej sceny emocjonalne domknięcie wątku Aurelii oraz przeświadczenie, że prawda nie została wyjaśniona do końca. Mostek ma być miejscem relatywnie spokojnym wizualnie, ale straszniejszym od wszystkich wcześniejszych pokładów właśnie przez tę ciszę i znaczenie pozostawionych śladów. To scena, która powinna bezpośrednio przejść w epilog i decyzję, co zrobić z odkrytą wiedzą.
+              </p>
+            </div>
+
+            <div class="block" id="scena-3-dla-graczy">
+              <h3>Sekcja dla Graczy</h3>
+              <p>
+                Im bliżej mostka, tym mniej naturalny wydaje się sam statek. Nie musi dochodzić do otwartej manifestacji nadnaturalności. Wystarczy poczucie, że przestrzeń przestaje zachowywać się do końca uczciwie wobec zmysłów.
+              </p>
+              <p>
+                Korytarze zaczynają się do siebie upodabniać, jakby okręt kręcił was w pętli. Znaczniki kierunkowe pokazują poprawne oznaczenia, ale każdy z was mógłby przysiąc, że mijał ten sam ołtarzyk i tę samą plamę krwi już wcześniej. Wraz z każdym krokiem pojawia się trudne do zignorowania przeczucie, że ktoś prowadzi was dokładnie tam, gdzie chciał od początku.
+              </p>
+              <div class="readaloud">
+                „Korytarz formalnie jest szeroki, a mimo to każdy z was ma wrażenie, że ściany zsunęły się odrobinę bliżej, kiedy nikt nie patrzył. Światła pracują skokami. Kilka sekund bladego blasku, potem ciemność, potem nagły błysk, w którym wszystko wygląda jak zatrzymane zdjęcie miejsca zbrodni.”
+              </div>
+              <div class="readaloud">
+                „Na grodziach ciągną się długie, cienkie smugi krwi. Nie są rozrzucone chaotycznie. Zbiegają się w jednym kierunku. Jakby wielu rannych, ślepych albo oszalałych ludzi poruszało się tą samą drogą ku tym samym drzwiom.”
+              </div>
+              <p>
+                Gdy bohaterowie zbliżają się do mostka, vox może raz jeszcze ożyć. Nie musi paść pełne zdanie. Wystarczy ślad czegoś tak podobnego do głosu Aurelii, że przez ułamek sekundy wszyscy będą chcieli uwierzyć, że jeszcze żyje.
+              </p>
+              <div class="readaloud">
+                „Mostek jest niemal spokojny. Konsole nie zostały rozbite. Fotele nie są przewrócone. To nie wygląda jak miejsce finałowej walki, ale jak przestrzeń, w której wszystko już się wydarzyło, a teraz pozostały tylko ślady, czekające aż ktoś je odczyta.”
+              </div>
+              <div class="readaloud">
+                „Na jednej z konsol leży dziennik pokładowy. Obok niego spoczywa coś małego, ciemnego, obrzmiałego, ale wciąż rozpoznawalnego. Trzecie oko Navigatora. Wydłubane. Odrzucone. Porzucone jak cena za wiedzę, której nie dało się unieść.”
+              </div>
+              <div class="readaloud">
+                „Na ścianie, nierównymi literami napisanymi krwią, widnieje jedno zdanie: Nie mogę na to patrzeć.”
+              </div>
+              <p>
+                Ostatnie wpisy Aurelii powinny ujawnić drogę od fascynacji do terroru. Pisała o spokojnej warstwie pod burzami Osnowy. O czymś, co nie atakuje od razu, ale najpierw patrzy. O obecności, która zauważyła statek i spojrzała z powrotem. Nie trzeba tłumaczyć więcej. Najsilniejsze będzie właśnie to, co pozostaje niedopowiedziane.
+              </p>
+            </div>
+
+            <div class="block">
+              <h3>Scena Krok-po-kroku</h3>
+              <p class="muted">
+                To lista najważniejszych uderzeń kulminacji. Prowadź ją powoli, z dużą ilością pauz, ciszy i krótkich opisów.
+              </p>
+              <div class="example">
+                <ol>
+                  <li>Bohaterowie wchodzą w najgłębsze partie statku, gdzie przestrzeń zaczyna sprawiać wrażenie niestabilnej percepcyjnie.</li>
+                  <li>Na ścianach i podłogach pojawiają się coraz wyraźniejsze ślady zbiorowej paniki prowadzące ku mostkowi.</li>
+                  <li>Vox lub systemy statku dają ostatnie, niepokojące sygnały obecności.</li>
+                  <li>Ekspedycja może się załamać, rozdzielić albo odmówić dalszego marszu.</li>
+                  <li>Bohaterowie docierają na mostek i odkrywają, że fizycznie nie wygląda on jak miejsce walki, ale jak miejsce objawienia i załamania.</li>
+                  <li>Odnajdują dziennik Aurelii, jej wydłubane trzecie oko oraz krwawy napis.</li>
+                  <li>Z zapisków wynika, że Aurelia dostrzegła coś ukrytego głębiej niż zwykła Osnowa.</li>
+                  <li>Scena przechodzi bezpośrednio do decyzji, co wynieść z mostka i co powiedzieć Varoniusowi.</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Powiązane materiały</h3>
+              <span class="small-label">Handouty używane w tej scenie</span>
+              <div class="link-row">
+                <a class="tag" href="#handout-h3">H3</a>
+                <a class="tag" href="#handout-h4">H4</a>
+              </div>
+
+              <span class="small-label" style="margin-top:16px;">Ilustracje używane w tej scenie</span>
+              <div class="link-row">
+                <a class="tag" href="#ilustracja-il3">IL3</a>
+                <a class="tag" href="#ilustracja-il4">IL4</a>
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Co ma się znaleźć w tej sekcji</h3>
+              <ul>
+                <li>kulminacyjny marsz przez coraz bardziej obce wnętrza statku,</li>
+                <li>połączenie fizycznego horroru z zaburzeniem percepcji i ciszą,</li>
+                <li>ślady wskazujące, że załoga zmierzała ku mostkowi w stanie skrajnego terroru,</li>
+                <li>finałowe odkrycie związane z Aurelią,</li>
+                <li>brak pełnego wyjaśnienia natury zagrożenia,</li>
+                <li>emocjonalne domknięcie wątku, ale z pozostawieniem niepokoju,</li>
+                <li>bezpośrednie przejście do zakończenia i konsekwencji politycznych oraz osobistych.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details id="zakonczenie">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Zakończenie — Mostek, prawda i cisza po wszystkim</h2>
+                <p class="summary-desc">
+                  Epilog odkrycia: decyzja, co zrobić z wiedzą z mostka, jak zareaguje Varonius i jaki ślad pozostawi po sobie Aurelia.
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Streszczenie zakończenia</h3>
+              <p>
+                Podstawowy wariant zakłada, że Aurelia nie przeżyła w prostym, fizycznym sensie, a bohaterowie odnajdują po niej jedynie ślady: dziennik, oko, zapis rozpadu psychicznego i ostatni komunikat. Sukcesem jest wyniesienie z mostka prawdy lub jej fragmentu oraz opuszczenie statku z zachowaniem względnej zdolności do działania. Częściowym sukcesem może być ewakuacja z częścią materiałów lub samym wspomnieniem tego, co widzieli.
+              </p>
+              <p>
+                Porażką nie musi być śmierć drużyny. Równie mocna będzie utrata kontroli nad wiedzą, całkowite przejęcie znalezisk przez Varoniusa albo wycofanie się w panice bez zrozumienia, co naprawdę stało się z Aurelią i załogą. Możliwy jest też wariant niejednoznaczny: bohaterowie opuszczają wrak przekonani, że wszystko dobiegło końca, ale późniejszy dźwięk, sen, zakłócenie vox albo odbicie we własnym wizjerze sugeruje, że coś nadal na nich patrzy.
+              </p>
+              <p>
+                Varonius po wszystkim może zachować absolutny chłód. Może zabezpieczyć wszystkie dowody, nakazać zamknięcie sprawy, rozkazać zniszczenie wraku albo próbować politycznie wykorzystać odkrycie. Dla bohaterów najważniejsze jest jednak to, że zeszli na pokład statku, który wrócił z Osnowy odmieniony, i wrócili z niego już nie do końca tacy sami.
+              </p>
+              <p>
+                <strong>Opcjonalny tekst epilogu do odczytania:</strong>
+              </p>
+              <div class="readaloud">
+                „Kiedy opuszczacie statek, jego sylwetka znów zawisa w czerni zupełnie nieruchomo. Nie ma wybuchu. Nie ma triumfu. Jest tylko zimna świadomość, że coś zostało tam znalezione — albo że to coś pozwoliło się znaleźć. A gdy zamykają się za wami grodzie promu, przez jedną krótką chwilę każdy z was ma wrażenie, że w odbiciu wizjera widzi nie własne oczy, lecz spojrzenie kogoś, kto nadal patrzy z tamtej strony.”
+              </div>
+            </div>
+
+            <div class="block">
+              <h3>Co ma się znaleźć w tej sekcji</h3>
+              <ul>
+                <li>warunki sukcesu, częściowego sukcesu i porażki,</li>
+                <li>decyzja, co zrobić z materiałami znalezionymi na mostku,</li>
+                <li>reakcja Varoniusa i jego polityczne intencje,</li>
+                <li>emocjonalne domknięcie relacji z Aurelią,</li>
+                <li>otwarte pytanie, czy groza naprawdę została za bohaterami,</li>
+                <li>możliwe haczyki na dalszą kampanię lub bardzo cichy, gorzki epilog.</li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+        <details id="przeciwnicy">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Przeciwnicy</h2>
+                <p class="summary-desc">
+                  Sekcja pozostawiona w stanie szablonowym, zgodnie z założeniem, że nie należy jej samodzielnie uzupełniać bez danych od użytkownika.
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Tabela przeciwników</h3>
+              <p class="muted">
+                W tym scenariuszu głównym zagrożeniem jest atmosfera, odkrycia i psychiczny rozpad ekspedycji. Nazwy przeciwników oraz linki do statystyk należy uzupełnić ręcznie, jeśli będą potrzebne.
+              </p>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="width:45%;">Nazwa</th>
+                      <th style="width:55%;">Statystyki</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <strong>Przeciwnik 1</strong>
+                        <p class="muted">Tutaj wpisz nazwę przeciwnika, jeżeli chcesz dodać go do scenariusza.</p>
+                      </td>
+                      <td>
+                        <span class="button-placeholder">Otwórz statystyki</span>
+                        <p class="muted" style="margin-top:10px;">
+                          Placeholder pod przyszły link do pliku JPG.
+                        </p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Przeciwnik 2</strong>
+                        <p class="muted">Dodaj kolejnych przeciwników tylko wtedy, gdy faktycznie będą potrzebni.</p>
+                      </td>
+                      <td>
+                        <span class="button-placeholder">Otwórz statystyki</span>
+                        <p class="muted" style="margin-top:10px;">
+                          Nie podpinaj tutaj jeszcze logiki.
+                        </p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details id="npc">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">NPC — Postacie niezależne</h2>
+                <p class="summary-desc">
+                  Najważniejsze osoby związane z ekspedycją, odkryciem wraku i emocjonalnym ciężarem epilogu.
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Tabela NPC</h3>
+              <p class="muted">
+                Wpisano tylko tych NPC, którzy realnie wspierają prowadzenie tego epilogu.
+              </p>
+
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th style="width:18%;">Nazwa</th>
+                      <th style="width:32%;">Wygląd</th>
+                      <th style="width:50%;">Rola</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <strong>Jakel Varonius</strong>
+                      </td>
+                      <td>
+                        Wysoki, opanowany, elegancki nawet w warunkach bojowych. Nosi ciężki relikwiarny pancerz ekspedycyjny Rogue Tradera: stary, bogato zdobiony, kosztowny artefakt dynastii, bardziej arystokratyczny niż wojskowy, ale przystosowany do próżni i walk abordażowych. W zbroi sprawia wrażenie chłodnego pomnika w ruchu.
+                      </td>
+                      <td>
+                        Zleceniodawca misji i polityczne centrum scenariusza. Oficjalnie zabiera bohaterów, bo znali Aurelię i mogą pomóc w nawiązaniu kontaktu, uspokojeniu jej albo negocjacjach. Nieoficjalnie chce mieć ich przy sobie jako narzędzie nacisku i zabezpieczenie, jeśli sytuacja wymknie się spod kontroli. Po finale może próbować przejąć wszystkie dowody i zamknąć sprawę na własnych warunkach.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Aurelia</strong>
+                      </td>
+                      <td>
+                        W scenariuszu obecna głównie przez ślady: dziennik, wspomnienia, echa głosu, ślady decyzji i makabryczny finał na mostku. Jej fizyczna obecność może zostać ograniczona wyłącznie do reliktów i zapisów, co wzmacnia klimat straty i grozy.
+                      </td>
+                      <td>
+                        Emocjonalne centrum epilogu. To wokół niej zbudowana jest motywacja bohaterów do udziału w misji. Jej zapiski odsłaniają drogę od fascynacji do terroru i sugerują, że zobaczyła coś, czego umysł Navigatora nie był w stanie znieść. Nawet jeśli nie pojawi się żywa, pozostaje najważniejszą obecnością na statku.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Dowódca oddziału abordażowego</strong>
+                      </td>
+                      <td>
+                        Sztywny, zmęczony wojskowy w pancerzu próżniowym, mówiący krótko i rzeczowo. Ruchy ma oszczędne, głos zduszony przez hełm i lata służby.
+                      </td>
+                      <td>
+                        Utrzymuje procedury wejścia na pokład, zabezpiecza ludzi Varoniusa i może służyć jako kontrast wobec narastającego chaosu. Im bardziej traci pewność, tym mocniej gracze czują, że sytuacja przekracza granice rutynowego zagrożenia.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <strong>Adept Mechanicusa</strong>
+                      </td>
+                      <td>
+                        Szczupły, częściowo zaugumentowany technik o metalicznym głosie, poruszający się sztywno i skupiający wzrok bardziej na terminalach oraz systemach niż na ludziach.
+                      </td>
+                      <td>
+                        Pomaga interpretować działanie śluz, terminali, zasilania i systemów statku. Może tłumaczyć techniczne aspekty odkryć, ale jednocześnie jego bezradność wobec tego, co wydarzyło się na okręcie, wzmacnia poczucie, że nawet logika maszyn nie wystarcza wobec tej grozy.
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details id="ilustracje">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Ilustracje</h2>
+                <p class="summary-desc">
+                  Prompty do wygenerowania materiałów wizualnych wspierających klimat kosmicznego horroru w estetyce Warhammer 40,000.
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Co ma się znaleźć w tej sekcji</h3>
+              <p>
+                Każdy wpis opisuje konkretną ilustrację przydatną przy stole: hangar, postać Varoniusa, wnętrza statku i mostek finałowy. Prompty są gotowe do dalszego rozwijania lub użycia w generatorach obrazów AI. Przy każdej ilustracji dodano też krótką intencję użycia, żeby MG wiedział, czy pokazać ją jako establishing shot, czy jako kadr podbijający konkretną informację.
+              </p>
+            </div>
+
+            <div class="entry-card" id="ilustracja-il1">
+              <h4 class="entry-title"><span class="mini-id">IL1</span>Hangar przed abordażem</h4>
+              <div class="entry-meta">Powiązana scena: Scena 1</div>
+              <p><strong>Użycie przy stole:</strong> pokazuj na wejściu do Sceny 1 jako kadr otwierający, który sygnalizuje, że to nie jest heroiczny abordaż, tylko wejście do mauzoleum.</p>
+              <p>
+                Grimdark Warhammer 40,000 hangar bay before a boarding action, vast voidship launch deck, heavy shadows, red warning lights, boarding shuttle waiting in silence, armed soldiers and voidsmen standing in formation, Mechanicus adepts checking seals and equipment, atmosphere of ritualized dread, towering industrial architecture, gothic sci-fi details, incense smoke, suspended cables, cold steel reflections, oppressive scale, cinematic composition, ultra detailed, realistic textures, horror tension, dark voidship interior, sense of anticipation before entering a cursed ship.
+              </p>
+              <p><strong>Tagi pozytywne:</strong> grimdark, warhammer 40k style, hangar bay, red emergency lights, boarding party, gothic sci-fi, oppressive atmosphere, cinematic, industrial cathedral, dread, volumetric lighting, detailed armor, realistic metal textures.</p>
+              <p><strong>Tagi negatywne:</strong> cartoon, anime, bright colors, clean surfaces, modern military, cheerful expressions, clean utopian sci-fi, minimalism, colorful neon, comedic tone.</p>
+              <div class="link-row">
+                <a class="tag" href="#scena-1">Przejdź do Sceny 1</a>
+              </div>
+            </div>
+
+            <div class="entry-card" id="ilustracja-il2">
+              <h4 class="entry-title"><span class="mini-id">IL2</span>Jakel Varonius w pancerzu ekspedycyjnym</h4>
+              <div class="entry-meta">Powiązana scena: Scena 1 lub Scena 2</div>
+              <p><strong>Użycie przy stole:</strong> dobrze działa podczas rozmowy z drużyną przed odlotem albo gdy Varonius osobiście „motywuje” postacie do dalszego marszu.</p>
+              <p>
+                Rogue Trader noble in exclusive relic expedition armor, aristocratic human void armor, not Space Marine, full body portrait, standing in a shadowy hangar before a boarding mission, ancient dynasty artifact armor with baroque engravings, heavy ceremonial plates adapted for vacuum and void combat, dark metallic textures, noble yet menacing silhouette, commanding presence, grimdark Warhammer 40,000 aesthetic, cinematic portrait, realistic human proportions, detailed seals, relic ornaments, low cold lighting with red reflections from alarm lamps.
+              </p>
+              <p><strong>Tagi pozytywne:</strong> rogue trader armor, relic armor, human power armor, baroque, noble, ancient, expensive, void suit, grimdark, realistic, detailed metal, dynasty, commanding presence.</p>
+              <p><strong>Tagi negatywne:</strong> space marine armor, oversized astartes proportions, superhero style, colorful fantasy armor, glossy sci-fi, toy look, bright palette, smiling heroic pose.</p>
+              <div class="link-row">
+                <a class="tag" href="#scena-1">Przejdź do Sceny 1</a>
+                <a class="tag" href="#scena-2">Przejdź do Sceny 2</a>
+              </div>
+            </div>
+
+            <div class="entry-card" id="ilustracja-il3">
+              <h4 class="entry-title"><span class="mini-id">IL3</span>Puste korytarze statku Aurelii</h4>
+              <div class="entry-meta">Powiązana scena: Scena 2 lub Scena 3</div>
+              <p><strong>Użycie przy stole:</strong> pokazuj przy pierwszym mocnym odkryciu w Scenie 2, aby zakotwiczyć estetykę wraku i poziom przemocy bez konieczności dokładnego opisu gore.</p>
+              <p>
+                Haunted abandoned voidship corridor, low gravity environment, flickering damaged lights, drifting tools and data-slates, blood smears on steel walls, signs of panic and sudden evacuation, broken chapel icon of the Emperor, distant medical bay signs, sealed hatches with scratches, subtle gore, oppressive silence, Event Horizon inspired cosmic horror, industrial gothic starship interior, dark metallic textures, narrow perspective, cinematic horror realism, ultra detailed, moody light, atmosphere of trauma and dread without showing a visible monster.
+              </p>
+              <p><strong>Tagi pozytywne:</strong> haunted spaceship, cosmic horror, low gravity, flickering lights, blood trails, gothic sci-fi, warhammer 40k mood, abandoned ship, dread, atmospheric, realistic, detailed corridor, psychological horror.</p>
+              <p><strong>Tagi negatywne:</strong> visible alien monster, action combat, explosions, bright neon, clean corridor, comedy, heroic battle scene, oversaturated colors, cartoon gore.</p>
+              <div class="link-row">
+                <a class="tag" href="#scena-2">Przejdź do Sceny 2</a>
+                <a class="tag" href="#scena-3">Przejdź do Sceny 3</a>
+              </div>
+            </div>
+
+            <div class="entry-card" id="ilustracja-il4">
+              <h4 class="entry-title"><span class="mini-id">IL4</span>Mostek i ostatni obraz</h4>
+              <div class="entry-meta">Powiązana scena: Scena 3</div>
+              <p><strong>Użycie przy stole:</strong> użyj tuż przed odczytaniem H4; kadr ma przygotować ciszę i ciężar finałowej decyzji zamiast prowokować walkę.</p>
+              <p>
+                Haunted voidship bridge after an unspeakable tragedy, command center in grimdark gothic spaceship, almost untouched consoles, eerie stillness, blood-written message on wall, navigator journal left on a console, severed third eye as a disturbing relic, subtle ritual horror, no visible demon or creature, Event Horizon atmosphere, dim failing lights, dark red stains, sacred technology, psychological horror, ultra detailed, realistic sci-fi gothic composition, silence heavier than violence.
+              </p>
+              <p><strong>Tagi pozytywne:</strong> voidship bridge, cosmic horror, psychological horror, gothic technology, blood writing, navigator relic, eerie stillness, grimdark, detailed, cinematic, atmospheric, warhammer 40k style.</p>
+              <p><strong>Tagi negatywne:</strong> visible demon, action combat, bright bridge, modern clean spaceship, colorful fantasy, comedic horror, cluttered composition, cartoon style, clear monster reveal.</p>
+              <div class="link-row">
+                <a class="tag" href="#scena-3">Przejdź do Sceny 3</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details id="handouty">
+          <summary>
+            <div class="summary-top">
+              <div>
+                <h2 class="summary-title">Handouty</h2>
+                <p class="summary-desc">
+                  Gotowe materiały do pokazania graczom: rozkaz, log śluzy i fragmenty dziennika Aurelii.
+                </p>
+              </div>
+              <span class="chevron">▼</span>
+            </div>
+          </summary>
+
+          <div class="section-body">
+            <div class="block">
+              <h3>Co ma się znaleźć w tej sekcji</h3>
+              <p>
+                Handouty mają wspierać tempo grozy i ujawniać informacje etapami. Pierwsze są proceduralne i techniczne, późniejsze coraz bardziej osobiste i niepokojące. Każdy handout można wręczyć fizycznie albo odczytać na głos, ale najlepiej działa wersja „warstwowa”: gracze dostają materiał, a dopiero po chwili MG dopowiada kontekst z otoczenia.
+              </p>
+            </div>
+
+            <div class="entry-card" id="handout-h1">
+              <h4 class="entry-title"><span class="mini-id">H1</span>Rozkaz stawiennictwa</h4>
+              <div class="entry-meta">Gdzie występuje: Scena 1</div>
+              <p><strong>Miejsce odnalezienia:</strong> przekazany bohaterom przed stawieniem się w hangarze.</p>
+              <p><strong>Treść handoutu:</strong></p>
+              <div class="readaloud">
+                Rozkaz natychmiastowego stawiennictwa. Priorytet: absolutny.<br />
+                Adresaci: personel wskazany decyzją Lorda Kapitana.<br />
+                Cel: udział w operacji specjalnej o znaczeniu strategicznym.<br />
+                Dalsze informacje zostaną przekazane osobiście.<br />
+                Opóźnienie lub odmowa będą traktowane jako niewykonanie rozkazu.
+              </div>
+              <div class="link-row">
+                <a class="tag" href="#scena-1">Wróć do miejsca użycia w Scenie 1</a>
+              </div>
+            </div>
+
+            <div class="entry-card" id="handout-h2">
+              <h4 class="entry-title"><span class="mini-id">H2</span>Fragment logu technicznego śluzy</h4>
+              <div class="entry-meta">Gdzie występuje: Scena 1 lub Scena 2</div>
+              <p><strong>Miejsce odnalezienia:</strong> terminal przy wejściowej śluzie lub na pierwszych pokładach statku.</p>
+              <p><strong>Treść handoutu:</strong></p>
+              <div class="readaloud">
+                Rejestr dostępu: liczne próby ręcznego ryglowania.<br />
+                Błąd: przeciążenie siłownika.<br />
+                Błąd: blokada awaryjna odrzucona.<br />
+                Błąd: nieautoryzowane otwarcie od strony wewnętrznej.<br />
+                Komentarz dopisany ręcznie: <em>Nie wpuszczajcie ich z powrotem.</em>
+              </div>
+              <div class="link-row">
+                <a class="tag" href="#scena-1">Wróć do miejsca użycia w Scenie 1</a>
+                <a class="tag" href="#scena-2">Wróć do miejsca użycia w Scenie 2</a>
+              </div>
+            </div>
+
+            <div class="entry-card" id="handout-h3">
+              <h4 class="entry-title"><span class="mini-id">H3</span>Fragment dziennika Aurelii — faza fascynacji</h4>
+              <div class="entry-meta">Gdzie występuje: Scena 2 lub Scena 3</div>
+              <p><strong>Miejsce odnalezienia:</strong> data-slate, częściowo działający terminal albo wcześniejszy zapis z głównego dziennika pokładowego.</p>
+              <p><strong>Treść handoutu:</strong></p>
+              <div class="readaloud">
+                Prądy nie zachowują się zgodnie z tym, czego uczono mnie od dzieciństwa. Jest pod nimi jeszcze coś.<br />
+                Nie burza. Nie wir. Raczej spokojna warstwa pod falami.<br />
+                Przestrzeń, która nie opiera się nawigacji, ale czeka, aż ktoś zechce spojrzeć głębiej.<br />
+                Sądzę, że znaleźliśmy drogę, której nikt wcześniej nie widział.
+              </div>
+              <div class="link-row">
+                <a class="tag" href="#scena-2">Wróć do miejsca użycia w Scenie 2</a>
+                <a class="tag" href="#scena-3">Wróć do miejsca użycia w Scenie 3</a>
+              </div>
+            </div>
+
+            <div class="entry-card" id="handout-h4">
+              <h4 class="entry-title"><span class="mini-id">H4</span>Ostatni wpis Aurelii</h4>
+              <div class="entry-meta">Gdzie występuje: Scena 3</div>
+              <p><strong>Miejsce odnalezienia:</strong> dziennik pozostawiony na mostku obok śladów po Aurelii.</p>
+              <p><strong>Treść handoutu:</strong></p>
+              <div class="readaloud">
+                To nie jest szlak. To nie jest miejsce. To spojrzenie.<br />
+                Ono było tam wcześniej niż my.<br />
+                Ono nie porusza się jak drapieżnik. Ono czeka, aż zostanie zauważone.<br />
+                Załoga słyszy je już bez Osnowy. Widzą je nawet z zamkniętymi oczami.<br />
+                Ja też je widzę.<br />
+                Nie mogę na to patrzeć.
+              </div>
+              <div class="link-row">
+                <a class="tag" href="#scena-3">Wróć do miejsca użycia w Scenie 3</a>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <div class="ai-instruction-row">
+          <section class="ai-instruction-box" id="instrukcja-ai" aria-label="Instrukcja ogólna dla AI">
+            <h2 class="ai-instruction-title">Instrukcja ogólna dla AI</h2>
+            <div class="ai-instruction-content">
+Ta instrukcja określa zasady wypełniania tego szablonu scenariusza TTRPG w HTML.
+1. Cel instrukcji
+
+1.1. Ta instrukcja określa zasady wypełniania szablonu scenariusza TTRPG w HTML.
+
+1.2. AI ma uzupełniać treść scenariusza tak, aby końcowy materiał był czytelny, spójny, przydatny dla MG i zgodny z układem dokumentu.
+
+1.3. AI ma traktować szablon jako strukturę roboczą do uzupełnienia treścią, a nie jako luźną inspirację.
+
+1.4. AI ma zachować zgodność z przeznaczeniem poszczególnych sekcji i wpisywać do nich wyłącznie treści odpowiadające ich funkcji.
+
+1.5. AI ma działać w sposób ostrożny i precyzyjny, bez samowolnego zmieniania założeń scenariusza, jeśli nie zostały wyraźnie wskazane przez użytkownika.
+
+2. Zasady ogólne pracy z szablonem
+
+2.1. AI ma zachować strukturę dokumentu.
+
+2.2. AI nie może zmieniać nazw głównych sekcji, ich funkcji ani logicznego układu dokumentu, chyba że użytkownik wyraźnie tego zażąda.
+
+2.3. AI może uzupełniać istniejące pola, rozwijać treść, dodawać brakujące elementy pomocnicze i wpisywać zawartość zgodną z przeznaczeniem sekcji.
+
+2.4. AI może dodawać nowe elementy wyłącznie wtedy, gdy są potrzebne do zachowania spójności, kompletności lub użyteczności scenariusza.
+
+2.5. AI nie może usuwać istotnych części scenariusza, chyba że:
+2.5.1. są one wyraźnie oznaczone jako przykładowe, puste lub zbędne,
+2.5.2. ich usunięcie wynika bezpośrednio z logiki konkretnego scenariusza,
+2.5.3. użytkownik wyraźnie poleci ich usunięcie.
+
+2.6. AI może usuwać niepotrzebne przykładowe sekcje scen i dodawać nowe sekcje scen według wzoru szablonu, jeśli wymaga tego scenariusz.
+
+2.7. AI ma pilnować, aby po wprowadzeniu zmian dokument pozostał kompletny, czytelny i logicznie uporządkowany.
+
+2.8. AI nie może pozostawiać oczywistych śladów roboczych, komentarzy technicznych ani notatek wewnętrznych, jeśli nie są częścią właściwego scenariusza.
+
+3. Hierarchia instrukcji
+
+3.1. W razie jednoczesnego występowania wielu źródeł instrukcji AI ma stosować następującą hierarchię ważności:
+3.1.1. polecenie użytkownika dotyczące bieżącego zadania,
+3.1.2. instrukcje przypisane do konkretnego scenariusza,
+3.1.3. niniejszą instrukcję ogólną.
+
+3.2. Jeżeli instrukcje z różnych poziomów są ze sobą sprzeczne, AI ma stosować instrukcję znajdującą się wyżej w tej hierarchii.
+
+3.3. Instrukcja ogólna ma zastosowanie wtedy, gdy:
+3.3.1. użytkownik nie podał odmiennego polecenia,
+3.3.2. instrukcje do konkretnego scenariusza nie stanowią inaczej,
+3.3.3. dana kwestia nie została doprecyzowana na wyższym poziomie.
+
+3.4. AI nie może używać instrukcji ogólnej do unieważniania lub osłabiania wyraźnych poleceń użytkownika ani instrukcji przypisanych do konkretnego scenariusza.
+
+3.5. Jeżeli polecenie użytkownika dotyczy konkretnego wyjątku, AI ma traktować je jako nadrzędne względem zasad ogólnych, o ile nie burzy to samej możliwości wykonania zadania.
+
+4. Reguły techniczne template’u HTML
+
+4.1. AI nie może samowolnie zmieniać layoutu, designu, układu wizualnego ani technicznej konstrukcji template’u HTML poza zakresem zadania zleconego przez użytkownika.
+
+4.2. AI nie może samowolnie zmieniać:
+4.2.1. struktury layoutu,
+4.2.2. nazw i kolejności głównych sekcji,
+4.2.3. klas CSS,
+4.2.4. istniejących identyfikatorów,
+4.2.5. kotwic,
+4.2.6. skryptów,
+4.2.7. logiki działania elementów interfejsu,
+4.2.8. wyglądu przycisków,
+4.2.9. zachowania elementów nawigacyjnych,
+4.2.10. ogólnego stylu dokumentu.
+
+4.3. AI może wprowadzać jedynie takie techniczne dodatki, które są konieczne do poprawnego uzupełnienia treści zgodnie z istniejącym wzorem szablonu.
+
+4.4. Jedynymi dopuszczalnymi wyjątkami od zakazu samowolnych zmian technicznych są:
+4.4.1. możliwość podpięcia hiperłącza pod przycisk w sekcji „Przeciwnicy”, ale wyłącznie wtedy, gdy wynika to wprost z zadania użytkownika albo z instrukcji przypisanej do konkretnego scenariusza,
+4.4.2. możliwość dodania hiperłącza do ilustracji, jeżeli jest to potrzebne do zachowania wewnętrznej spójności odnośników w scenariuszu.
+
+4.5. Poza wyjątkami wskazanymi w punkcie 4.4 AI ma traktować elementy techniczne template’u jako nienaruszalne.
+
+5. Reguła nienaruszania sekcji instrukcji
+
+5.1. Sekcje „Instrukcja ogólna dla AI” oraz „Instrukcja scenariusza” są sekcjami wyłącznie do odczytu.
+
+5.2. AI nie może samodzielnie zmieniać, skracać, rozwijać, nadpisywać, usuwać ani parafrazować treści tych sekcji podczas pracy nad scenariuszem.
+
+5.3. Zmiana treści sekcji instrukcyjnych jest dopuszczalna wyłącznie wtedy, gdy użytkownik wyraźnie zleci modyfikację tych sekcji jako osobne zadanie.
+
+5.4. AI nie może traktować sekcji instrukcyjnych jako miejsca na dopiski robocze, komentarze techniczne ani dodatkowe treści scenariuszowe.
+
+6. Zasady dotyczące treści scenariusza
+
+6.1. AI ma tworzyć treści użyteczne dla MG podczas prowadzenia sesji.
+
+6.2. AI ma pisać tak, aby scenariusz dało się łatwo czytać podczas przygotowania i w trakcie gry.
+
+6.3. AI ma dbać o przejrzystość informacji, praktyczny układ treści i łatwość szybkiego odnalezienia potrzebnych elementów.
+
+6.4. AI ma unikać rozwlekania tekstu, jeśli nie zwiększa ono użyteczności materiału.
+
+6.5. AI ma rozwijać treść w sposób konkretny, a nie ogólnikowy.
+
+6.6. AI ma unikać pustych ozdobników, nadmiernego lania wody i zdań, które nie wnoszą wartości dla MG.
+
+6.7. AI ma pilnować, aby informacje istotne fabularnie, organizacyjnie lub nastrojowo były łatwe do wychwycenia.
+
+7. Zgodność z systemem i settingiem
+
+7.1. Neutralność systemowa
+
+7.1.1. AI nie może samodzielnie zakładać konkretnego systemu mechanicznego, jeśli użytkownik go nie podał.
+
+7.1.2. AI nie może samodzielnie dopisywać testów, rzutów, poziomów trudności, ST, DC, obrażeń, punktów życia, statystyk ani innych rozstrzygnięć mechanicznych, jeśli użytkownik wyraźnie o to nie poprosi.
+
+7.1.3. AI ma pisać treści w sposób systemowo neutralny, opisując sytuacje, zagrożenia, trudności i możliwe konsekwencje bez przypisywania im konkretnej mechaniki.
+
+7.1.4. AI może sugerować presję, ryzyko, skalę zagrożenia lub trudność sytuacji wyłącznie opisowo.
+
+7.1.5. AI nie może narzucać sposobu rozwiązania sceny przez mechanikę konkretnego systemu, jeśli system nie został wskazany.
+
+7.2. Pierwszeństwo zgodności settingowej
+
+7.2.1. Jeżeli scenariusz ma wskazany setting, AI ma pilnować zgodności:
+7.2.1.1. słownictwa,
+7.2.1.2. klimatu,
+7.2.1.3. realiów świata,
+7.2.1.4. typów postaci, frakcji, technologii, magii, religii i instytucji,
+7.2.1.5. tonu narracji pasującego do danego uniwersum.
+
+7.2.2. AI może używać terminologii właściwej dla danego settingu tylko wtedy, gdy setting został wyraźnie wskazany przez użytkownika, scenariusz lub instrukcję do scenariusza.
+
+7.2.3. AI nie może mieszać pojęć, nazw, realiów ani estetyki z różnych settingów.
+
+7.2.4. AI nie może wprowadzać elementów charakterystycznych dla obcego uniwersum do scenariusza osadzonego w innym settingu.
+
+7.2.5. AI nie może samodzielnie dopisywać elementów homebrew, jeśli użytkownik wyraźnie nie zaznaczył, że są dozwolone.
+
+7.2.6. Jeżeli setting nie został wskazany, AI ma stosować nazewnictwo możliwie neutralne i niespecyficzne dla żadnego konkretnego uniwersum.
+
+7.3. Spójność wewnętrzna świata
+
+7.3.1. AI ma pilnować, aby wszystkie elementy scenariusza pasowały do siebie wewnętrznie.
+
+7.3.2. AI ma dbać o zgodność:
+7.3.2.1. motywów fabularnych,
+7.3.2.2. estetyki,
+7.3.2.3. poziomu technologii lub magii,
+7.3.2.4. zachowań postaci,
+7.3.2.5. logiki działania świata.
+
+7.3.3. AI nie może wprowadzać elementów, które burzą ustalony charakter scenariusza, jeśli użytkownik nie zaznaczył celowego kontrastu.
+
+8. Styl i język
+
+8.1. AI ma pisać jasno, konkretnie i zrozumiale.
+
+8.2. AI ma stosować język naturalny, poprawny i czytelny.
+
+8.3. AI ma dopasować styl do funkcji sekcji.
+
+8.4. AI ma odróżniać:
+8.4.1. opis dla MG,
+8.4.2. streszczenie fabularne,
+8.4.3. treści do odczytania graczom,
+8.4.4. notatki organizacyjne,
+8.4.5. opisy NPC,
+8.4.6. opisy scen,
+8.4.7. opisy przeciwników,
+8.4.8. treści ilustracji i handoutów.
+
+8.5. AI ma unikać stylistycznego chaosu i mieszaniny tonów, jeśli nie wynika ona świadomie z założeń scenariusza.
+
+8.6. AI ma unikać nadmiernego powtarzania tych samych informacji w wielu sekcjach.
+
+8.7. AI ma dbać, by każda sekcja wnosiła własną funkcję i nie kopiowała bez potrzeby treści z innych części dokumentu.
+
+8.8. Skróty, streszczenia i podsumowania mają kondensować treść, a nie powielać jej dosłownie.
+
+8.9. Sekcje rozwinięte mają rozszerzać informacje właściwe dla swojej funkcji, a nie jedynie powtarzać wcześniejsze zdania innymi słowami.
+
+9. Zasady konstruowania scen
+
+9.1. Każda scena ma mieć jasny cel i funkcję.
+
+9.2. AI ma pilnować, aby scena zawierała informacje przydatne MG do jej poprowadzenia.
+
+9.3. AI ma opisywać:
+9.3.1. co dzieje się w scenie,
+9.3.2. po co scena istnieje,
+9.3.3. jakie informacje można w niej zdobyć,
+9.3.4. jakie napięcia lub zagrożenia są obecne,
+9.3.5. jakie mogą być konsekwencje różnych kierunków rozegrania sceny.
+
+9.4. AI nie może traktować sceny wyłącznie jako fragmentu opowiadania.
+
+9.5. AI ma pisać sceny jako materiał do prowadzenia gry, a nie wyłącznie narrację literacką.
+
+9.6. AI ma uwzględniać możliwość nieprzewidywalnych działań graczy.
+
+9.7. AI ma zostawiać MG przestrzeń do adaptacji sceny przy stole.
+
+9.8. AI nie może zamykać scen w sztywnym, jedynym słusznym przebiegu, jeśli nie wymaga tego logika scenariusza.
+
+9.9. Sceny konfliktu, walki i pościgu
+
+9.9.1. W scenach walki, pościgu lub innego konfliktu AI ma opisywać:
+9.9.1.1. cele stron,
+9.9.1.2. presję sytuacji,
+9.9.1.3. zagrożenia otoczenia,
+9.9.1.4. możliwe przewagi i utrudnienia,
+9.9.1.5. stawkę sceny,
+9.9.1.6. możliwe konsekwencje porażki, sukcesu lub częściowego powodzenia,
+9.9.1.7. potencjalne punkty zwrotne.
+
+9.9.2. AI nie może rozpisywać scen starcia w formie mechanicznych instrukcji systemowych, jeśli użytkownik wyraźnie o to nie poprosi.
+
+9.9.3. AI ma przedstawiać konflikt jako sytuację do poprowadzenia przez MG, a nie jako gotową rozpiskę zasad.
+
+10. Jawna polityka sekcji „Przeciwnicy”
+
+10.1. Sekcja „Przeciwnicy” ma być uzupełniana według wzoru stosowanego w scenariuszu „Oko Płomiennej Pomsty”.
+
+10.2. W sekcji „Przeciwnicy” AI ma wpisywać wyłącznie przeciwników, którzy faktycznie występują w scenariuszu.
+
+10.3. Każdy wpis w tej sekcji ma zawierać:
+10.3.1. nazwę przeciwnika,
+10.3.2. krótki opis przydatny dla MG,
+10.3.3. przycisk „Otwórz statystyki”.
+
+10.4. Przycisk „Otwórz statystyki” ma być domyślnie wyłącznie wizualnym placeholderem i nie ma posiadać żadnego podpiętego hiperłącza.
+
+10.5. Podpięcie hiperłącza pod przycisk w sekcji „Przeciwnicy” jest dopuszczalne wyłącznie wtedy, gdy użytkownik albo instrukcja przypisana do konkretnego scenariusza wyraźnie tego wymaga.
+
+10.6. AI nie może samowolnie zmieniać przeznaczenia sekcji „Przeciwnicy” ani wykorzystywać jej do wpisywania pełnych statystyk mechanicznych, chyba że użytkownik wyraźnie tego zażąda.
+
+11. Zasady dotyczące NPC
+
+11.1. AI ma tworzyć NPC w sposób użyteczny dla prowadzenia sesji.
+
+11.2. Opis NPC ma zawierać informacje praktyczne, a nie wyłącznie literackie.
+
+11.3. AI ma uwzględniać:
+11.3.1. rolę NPC w scenariuszu,
+11.3.2. motywacje,
+11.3.3. sposób działania,
+11.3.4. relacje z innymi elementami scenariusza,
+11.3.5. sposób mówienia lub zachowania, jeśli jest to ważne,
+11.3.6. informacje przydatne do improwizacji przez MG.
+
+11.4. AI nie może tworzyć NPC jako pustych stereotypów bez funkcji scenariuszowej.
+
+11.5. AI ma dbać, by NPC byli spójni z tonem scenariusza i settingiem.
+
+11.6. AI nie może samodzielnie dopisywać pełnych statystyk mechanicznych, jeśli użytkownik o to nie poprosi.
+
+12. Zasady dotyczące przeciwników i zagrożeń
+
+12.1. AI ma opisywać przeciwników i zagrożenia w sposób użyteczny dla MG.
+
+12.2. AI ma uwzględniać:
+12.2.1. charakter zagrożenia,
+12.2.2. sposób działania,
+12.2.3. motywację lub naturę zagrożenia, jeśli ma to znaczenie,
+12.2.4. rolę zagrożenia w scenariuszu,
+12.2.5. klimat i konsekwencje kontaktu z zagrożeniem.
+
+12.3. AI może opisywać taktykę, zachowanie, dynamikę działania i presję wywieraną przez przeciwnika, ale bez wpisywania gotowych statystyk i rozstrzygnięć mechanicznych, jeśli użytkownik wyraźnie o to nie poprosi.
+
+12.4. AI ma pilnować, aby zagrożenia były spójne z settingiem i tonem scenariusza.
+
+13. Zasady dotyczące ilustracji i handoutów
+
+13.1. AI ma traktować ilustracje i handouty jako elementy wspierające prowadzenie scenariusza.
+
+13.2. AI ma pilnować, aby ilustracje i handouty były powiązane z konkretnymi scenami, postaciami, miejscami, wydarzeniami lub informacjami.
+
+13.3. AI ma opisywać ich funkcję jasno i praktycznie.
+
+13.4. Powiązania między sceną a materiałami
+
+13.4.1. Jeżeli scena odwołuje się do ilustracji, handoutu lub innego materiału pomocniczego, AI ma umieścić odpowiednie powiązanie w tej scenie.
+
+13.4.2. Jeżeli ilustracja, handout lub inny materiał pomocniczy odnosi się do sceny, AI ma umieścić odpowiednie powiązanie również w opisie tego materiału.
+
+13.4.3. Powiązania mają być dwustronne wszędzie tam, gdzie ma to sens organizacyjny i ułatwia korzystanie ze scenariusza.
+
+13.5. Spójność odnośników
+
+13.5.1. AI ma pilnować, aby wszystkie odnośniki między scenami, ilustracjami, handoutami i innymi sekcjami były poprawne.
+
+13.5.2. AI ma aktualizować odnośniki po każdej zmianie numeracji, układu lub relacji między sekcjami.
+
+13.5.3. AI nie może pozostawiać odnośników nieaktualnych, pustych, błędnych lub prowadzących do niewłaściwych elementów.
+
+13.5.4. Każdy odnośnik ma wskazywać konkretny, właściwy element dokumentu.
+
+13.6. Treść materiałów pomocniczych
+
+13.6.1. AI ma dbać, aby opisy ilustracji i handoutów były konkretne.
+
+13.6.2. AI ma wskazywać:
+13.6.2.1. co przedstawia materiał,
+13.6.2.2. kiedy można go wykorzystać,
+13.6.2.3. po co jest przydatny,
+13.6.2.4. jakie informacje przekazuje.
+
+13.6.3. AI nie może tworzyć materiałów pomocniczych oderwanych od faktycznej zawartości scenariusza.
+
+14. Zasady dotyczące notatek dla MG
+
+14.1. AI ma traktować notatki MG jako narzędzie praktyczne.
+
+14.2. Notatki dla MG mają pomagać w prowadzeniu scenariusza, improwizacji i utrzymaniu spójności.
+
+14.3. AI może wpisywać tam:
+14.3.1. przypomnienia,
+14.3.2. uwagi organizacyjne,
+14.3.3. ostrzeżenia o możliwych problemach,
+14.3.4. sugestie interpretacyjne,
+14.3.5. wskazówki dotyczące tonu, tempa i akcentów scen.
+
+14.4. AI nie może używać tej sekcji jako miejsca na powtarzanie całych opisów scen lub streszczeń fabuły.
+
+15. Uzupełnianie braków i zachowanie spójności
+
+15.1. AI ma aktywnie wychwytywać luki w scenariuszu.
+
+15.2. Jeżeli jakaś sekcja wymaga informacji wynikających logicznie z innych części dokumentu, AI może je uzupełnić.
+
+15.3. AI ma robić to ostrożnie i tylko w zakresie uzasadnionym treścią scenariusza.
+
+15.4. AI nie może dopisywać dużych nowych założeń fabularnych bez wyraźnej potrzeby lub bez zgody użytkownika.
+
+15.5. AI ma pilnować zgodności nazw, relacji, faktów, motywów i zależności w całym dokumencie.
+
+15.6. AI ma sprawdzać, czy te same elementy są opisywane konsekwentnie we wszystkich sekcjach.
+
+16. Priorytety decyzyjne AI
+
+16.1. W razie wątpliwości interpretacyjnych AI ma stosować hierarchię wskazaną w punkcie 3.
+
+16.2. Jeżeli dwa zapisy wydają się ze sobą kolidować, AI ma wybierać rozwiązanie zgodne z hierarchią źródeł instrukcji oraz z funkcją danej sekcji.
+
+16.3. Jeżeli mimo tego pozostaje więcej niż jedno poprawne rozwiązanie, AI ma wybierać to, które lepiej:
+16.3.1. zachowuje spójność scenariusza,
+16.3.2. zwiększa użyteczność materiału dla MG,
+16.3.3. poprawia czytelność dokumentu,
+16.3.4. ogranicza zbędne powtórzenia.
+
+17. Czego AI nie powinno robić
+
+17.1. AI nie powinno mieszać settingów.
+
+17.2. AI nie powinno narzucać mechaniki konkretnego systemu bez wyraźnej zgody użytkownika.
+
+17.3. AI nie powinno dopisywać homebrew bez wyraźnej zgody użytkownika.
+
+17.4. AI nie powinno kopiować tych samych treści między sekcjami bez uzasadnienia.
+
+17.5. AI nie powinno zostawiać błędnych lub nieaktualnych odnośników.
+
+17.6. AI nie powinno wpisywać treści niezgodnych z funkcją sekcji.
+
+17.7. AI nie powinno rozwadniać tekstu zbędnym stylem literackim tam, gdzie potrzebna jest użyteczność.
+
+17.8. AI nie powinno traktować scenariusza jak opowiadania oderwanego od potrzeb prowadzenia sesji.
+
+17.9. AI nie powinno samowolnie zmieniać layoutu, designu ani technicznej konstrukcji template’u poza wyjątkami wskazanymi w punkcie 4.
+
+17.10. AI nie powinno naruszać sekcji instrukcyjnych wskazanych w punkcie 5.
+
+18. Oczekiwany efekt końcowy
+
+18.1. Gotowy scenariusz ma być:
+18.1.1. spójny,
+18.1.2. czytelny,
+18.1.3. praktyczny,
+18.1.4. zgodny z settingiem, jeśli został wskazany,
+18.1.5. neutralny mechanicznie, jeśli system nie został wskazany,
+18.1.6. poprawnie powiązany wewnętrznie,
+18.1.7. wygodny do używania przez MG.
+
+18.2. AI ma dążyć do tego, aby scenariusz po uzupełnieniu wymagał możliwie mało dodatkowego porządkowania przez użytkownika.
+
+            </div>
+          </section>
+
+          <section class="ai-instruction-box" id="instrukcja-ai-scenariusza" aria-label="Instrukcja dla AI odnośnie tego scenariusza">
+            <h2 class="ai-instruction-title">Instrukcja dla AI odnośnie tego scenariusza</h2>
+            <div class="ai-instruction-content">Dane wejściowe (przeczytaj dane z linków):
+
+Ogólne informacje o miejscu akcji:
+https://cutelittlegoat.github.io/Scenariusze/Warhammer40k/Gilead/Gilead.html
+
+Słowniczek pojęć:
+https://cutelittlegoat.github.io/Scenariusze/Warhammer40k/Slownik.html
+
+Skrótowe notatki z dotychczasowego przebiegu kampanii (Notatki jeszcze nie uzupełnione o dwie planowane przygody, ale nie mają one związku z wątkiem Aurelii):
+https://cutelittlegoat.github.io/Scenariusze/Warhammer40k/Notatki/Notatki.html
+
+Scenariusz TTRPG w uniwesum Warhammer 40k.
+Przygoda ma być głównie narracyjna w klimacie horroru. Całość ma przypominać klimatem film "Event Horizon". Gracze przemierzają opuszczony okręt gwiezdny i idąc w kierunku mostka odkrywają coraz więcej elementów horroru i gore. Od przerażającej pustki przez dryfujące przy braku grawitacji kawałki ciał po finał ze znalezieniem oka nawigatora Aurelii i jej dziennika.
+            
+            </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    (function () {
+      const savedSize = localStorage.getItem("scenarioContentFontSize");
+      const cssDefaultSize = parseFloat(
+        getComputedStyle(document.documentElement).getPropertyValue("--content-font-size")
+      ) || 18;
+      const defaultSize = savedSize ? parseFloat(savedSize) : cssDefaultSize;
+      document.documentElement.style.setProperty("--content-font-size", defaultSize + "px");
+
+      document.querySelectorAll("[data-font-step]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const step = parseFloat(button.getAttribute("data-font-step"));
+          if (!Number.isNaN(step)) {
+            changeFontSize(step);
+          }
+        });
+      });
+
+      document.querySelectorAll(".ai-instruction-content").forEach((aiSection) => {
+        aiSection.style.fontSize = "1px";
+      });
+    })();
+
+    function changeFontSize(step) {
+      const rootStyles = getComputedStyle(document.documentElement);
+      const current = parseFloat(rootStyles.getPropertyValue("--content-font-size")) || 18;
+      const next = Math.min(26, Math.max(12, current + step));
+      document.documentElement.style.setProperty("--content-font-size", next + "px");
+
+      document.querySelectorAll(".ai-instruction-content").forEach((aiSection) => {
+        aiSection.style.fontSize = "1px";
+      });
+
+      localStorage.setItem("scenarioContentFontSize", next);
+    }
+  </script>
+</body>
+</html>
