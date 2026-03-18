@@ -48,6 +48,3 @@ Pościg, niedobory paliwa, pustkowie, dziwaczne frakcje, jeden cenny transport l
 
 „Twelve Monkeys” / „Brazil” / Kafka
 Jeśli chcesz 40k bardziej administracyjne i absurdalne. Śledztwo, którego nie da się przeprowadzić normalnie, bo cały aparat urzędniczy jest chory, opresyjny i nielogiczny. To może dać świetny scenariusz bardziej dziwny niż bojowy.
-
-Najmocniejsze kierunki, które bym Ci polecił jako następne po Twoim obecnym zestawie, to:
-The Thing, The Wicker Man, Stalker / Piknik na skraju drogi, Imię róży, Dredd, Moby Dick.
