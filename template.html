@@ -902,67 +902,80 @@
           </div>
         </details>
 
-        <details id="przeciwnicy">
-          <summary>
-            <div class="summary-top">
-              <div>
-                <h2 class="summary-title">Przeciwnicy</h2>
-                <p class="summary-desc">
-                  Sekcja na listę przeciwników występujących w scenariuszu oraz miejsce na przyszłe odnośniki
-                  do zewnętrznych plików ze statystykami.
+<details id="przeciwnicy">
+  <summary>
+    <div class="summary-top">
+      <div>
+        <h2 class="summary-title">Przeciwnicy</h2>
+        <p class="summary-desc">
+          Sekcja na listę przeciwników występujących w scenariuszu oraz miejsce na przyszłe odnośniki
+          do zewnętrznych plików ze statystykami.
+        </p>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+  </summary>
+
+  <div class="section-body">
+    <div class="block">
+      <h3>Tabela przeciwników</h3>
+      <p class="muted">
+        Wpisz tutaj wyłącznie przeciwników, którzy faktycznie pojawiają się w scenariuszu.
+        Każdy wpis ma zawierać nazwę przeciwnika, krótki opis przydatny dla MG oraz przycisk
+        w kolumnie „Statystyki”. Przycisk jest domyślnie tylko placeholderem pod przyszłe linki do plików JPG.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:25%;">Nazwa</th>
+              <th style="width:50%;">Opis</th>
+              <th style="width:25%;">Statystyki</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <strong>Przeciwnik 1</strong>
+                <p class="muted">Tutaj wpisz nazwę przeciwnika, dokładnie tak, jak ma być widoczna dla MG.</p>
+              </td>
+              <td>
+                <p>
+                  Tutaj wpisz krótki opis przeciwnika przydatny dla MG: kim jest, jak działa,
+                  na czym polega zagrożenie albo czym wyróżnia się w scenariuszu.
                 </p>
-              </div>
-              <span class="chevron">▼</span>
-            </div>
-          </summary>
-
-          <div class="section-body">
-            <div class="block">
-              <h3>Tabela przeciwników</h3>
-              <p class="muted">
-                Wpisz tutaj wyłącznie przeciwników, którzy faktycznie pojawiają się w scenariuszu.
-                Przycisk w kolumnie „Statystyki” jest tylko placeholderem pod przyszłe linki do plików JPG.
-              </p>
-
-              <div class="table-wrap">
-                <table>
-                  <thead>
-                    <tr>
-                      <th style="width:45%;">Nazwa</th>
-                      <th style="width:55%;">Statystyki</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <strong>Przeciwnik 1</strong>
-                        <p class="muted">Tutaj wpisz nazwę przeciwnika, dokładnie tak, jak ma być widoczna dla MG.</p>
-                      </td>
-                      <td>
-                        <span class="button-placeholder">Otwórz statystyki</span>
-                        <p class="muted" style="margin-top:10px;">
-                          Docelowo ten przycisk będzie prowadził do pliku JPG ze screenem statystyk.
-                        </p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <strong>Przeciwnik 2</strong>
-                        <p class="muted">Dodaj kolejnych przeciwników tylko wtedy, gdy są potrzebni w danym scenariuszu.</p>
-                      </td>
-                      <td>
-                        <span class="button-placeholder">Otwórz statystyki</span>
-                        <p class="muted" style="margin-top:10px;">
-                          Nie podpinaj tutaj jeszcze logiki. To ma być jedynie wizualny placeholder.
-                        </p>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </details>
+              </td>
+              <td>
+                <span class="button-placeholder">Otwórz statystyki</span>
+                <p class="muted" style="margin-top:10px;">
+                  Docelowo ten przycisk może prowadzić do pliku JPG ze screenem statystyk.
+                </p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>Przeciwnik 2</strong>
+                <p class="muted">Dodaj kolejnych przeciwników tylko wtedy, gdy są potrzebni w danym scenariuszu.</p>
+              </td>
+              <td>
+                <p>
+                  W tej kolumnie utrzymuj krótki, praktyczny opis przeciwnika użyteczny podczas prowadzenia sesji.
+                </p>
+              </td>
+              <td>
+                <span class="button-placeholder">Otwórz statystyki</span>
+                <p class="muted" style="margin-top:10px;">
+                  Nie podpinaj tutaj jeszcze logiki. To ma być jedynie wizualny placeholder.
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</details>
 
         <details id="npc">
           <summary>
